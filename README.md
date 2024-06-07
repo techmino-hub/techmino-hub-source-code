@@ -1,6 +1,7 @@
-# Nuxt 3 Minimal Starter
+# Techmino Hub Source Code
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This repository contains the source code for the Techmino Hub website.  
+This website is built using [Nuxt.js](https://nuxt.com), unlike the previous iteration, which used plain HTML, CSS, and JS.
 
 ## Setup
 
