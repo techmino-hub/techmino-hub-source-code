@@ -19,9 +19,11 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: main.$secondary-color-alpha50;
+    background-color: main.$secondary-color-dark-alpha75;
     padding: 0.5em 1.5em;
     border-bottom: 0.15em dotted main.$secondary-color;
+    border-start-start-radius: 0.5em;
+    border-start-end-radius: 0.5em;
 
     > a {
         text-decoration: none;

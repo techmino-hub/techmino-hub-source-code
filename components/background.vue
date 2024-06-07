@@ -1,10 +1,8 @@
 <template>
-    <canvas ref="background"></canvas>
+    <canvas id="background"></canvas>
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
-
 let bgCanvas: HTMLCanvasElement;
 let bgContext: CanvasRenderingContext2D;
 let width: number; let height: number;
@@ -40,7 +38,7 @@ function init() {
     bgEnabled = isBackgroundEnabled();
     if(!bgEnabled) return;
 
-    const canvas = ref(null);
+    const canvas = document.getElementById("background");
     if(canvas === null) return;
 
     bgCanvas = canvas as HTMLCanvasElement;
@@ -98,12 +96,12 @@ function draw(timestamp) {
         const star = stars[i];
         bgContext.fillRect(star.x, star.y, star.size, star.size);
     }
-    // requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
 }
 
 export default {
-    onMounted() {
-        // init();
+    mounted() {
+        init();
     }
 }
 </script>

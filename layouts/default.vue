@@ -24,7 +24,8 @@ body {
     background-color: transparent;
 
     > .main-panel {
-        border: 1px solid white;
+        border: 0.1em solid white;
+        border-radius: 0.5rem;
         margin: 20px;
         
         @media (max-width: 700px) {

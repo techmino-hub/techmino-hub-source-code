@@ -10,6 +10,6 @@
 
 <style scoped>
 .main-inner {
-    margin: 1em;
+    padding: 1em 2em;
 }
 </style>
