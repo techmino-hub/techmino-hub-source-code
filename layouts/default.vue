@@ -1,6 +1,6 @@
 <template>
     <div class="outer">
-        <canvas id="background"></canvas>
+        <Background />
         <div class="main-panel">
             <Header />
             <main>
@@ -18,14 +18,6 @@ body {
     font-family: 'techmino-proportional', sans-serif;
     background-color: black;
     color: white;
-}
-canvas#background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
 }
 .outer {
     width: 100%;
