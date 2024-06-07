@@ -8,7 +8,7 @@
         <nav>
             <NuxtLink to="/faq">FAQ</NuxtLink>
             <NuxtLink to="/map">Map</NuxtLink>
-            <NuxtLink to="/sign-in">Sign In</NuxtLink>
+            <NuxtLink to="/sign-in" class="hide-noscript">Sign In</NuxtLink>
         </nav>
     </header>
 </template>

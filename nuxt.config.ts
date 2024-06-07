@@ -9,7 +9,14 @@ export default defineNuxtConfig({
     head: {
       meta: [
         { name: 'darkreader-lock' }
-      ]
+      ],
+      noscript: [{
+        children: 
+        `<style>
+          .hide-noscript {display: none}
+          .hide-noscript-important{display: none !important}
+        </style>`
+      }]
     }
   },
   $production: {
