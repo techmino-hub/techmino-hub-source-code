@@ -28,13 +28,15 @@
 
 <style lang="scss" scoped>
 @use "~/assets/scss/main.scss";
+@use "~/assets/scss/colors.scss";
+
 header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: main.$secondary-color-dark-alpha75;
+    background-color: colors.$secondary-color-alpha75;
     padding: 0.5em 1.5em;
-    border-bottom: 0.15em dotted main.$secondary-color;
+    border-bottom: 0.15em dotted colors.$secondary-color;
 
     @media (min-width: 700px) {
         border-start-start-radius: 0.5em;
@@ -46,15 +48,15 @@ header {
         color: white;
         font-weight: bold;
         padding-inline: 1em;
-        text-shadow: 0 0 0 main.$primary-color-alpha25;
+        text-shadow: 0 0 0 colors.$primary-color-alpha25;
         transition: text-shadow 150ms, color 200ms;
         
         &:hover {
-            color: main.$primary-color;
-            text-shadow: 0.2em 0.2em 0 main.$primary-color-alpha25;
+            color: colors.$primary-color;
+            text-shadow: 0.2em 0.2em 0 colors.$primary-color-alpha25;
         }
         &:active {
-            color: main.$primary-color-dark;
+            color: colors.$primary-color-dark;
             text-shadow: 0.2em 0.2em 0 rgb(0, 80, 0);
         }
     }
@@ -62,8 +64,8 @@ header {
         display: none;
     }
     &.error {
-        background-color: main.$error-color-dark-alpha75;
-        border-bottom-color: main.$error-color;
+        background-color: colors.$error-color-alpha75;
+        border-bottom-color: colors.$error-color;
 
         .hide-error {
             display: none;
@@ -83,18 +85,18 @@ nav {
 }
 a:not(header > a) {
     text-decoration: none;
-    color: main.$primary-color;
+    color: colors.$primary-color;
     padding: 0.15em 0.3em;
     border: 0.15em dashed transparent;
     border-radius: 0.2em;
     transition: background-color 200ms, color 200ms, border-color 200ms;
 
     &:hover {
-        background-color: main.$primary-color-alpha25;
+        background-color: colors.$primary-color-alpha25;
     }
     &:active {
-        color: main.$primary-color;
-        border: 0.15em dashed main.$primary-color-dark;
+        color: colors.$primary-color;
+        border: 0.15em dashed colors.$primary-color-dark;
     }
 }
 </style>

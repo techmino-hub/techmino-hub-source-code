@@ -68,27 +68,28 @@ const copyError = () => {
 
 <style lang="scss">
 @use "~/assets/scss/main";
+@use "~/assets/scss/colors";
 @use "~/assets/scss/index";
 
 main {
     padding: 1em 2em;
     a {
-        color: main.$primary-color;
+        color: colors.$primary-color;
         transition-duration: 200ms;
         border-radius: 0.5em;
         padding: 0.25em 0.4em;
         &:hover {
-            background-color: main.$primary-color-alpha25;
+            background-color: colors.$primary-color-alpha25;
         }
         &:active {
-            background-color: main.$primary-color-alpha50;
+            background-color: colors.$primary-color-alpha50;
         }
     }
 }
 
 code.error-code {
     display: block;
-    border: 0.15em dashed main.$error-color;
+    border: 0.15em dashed colors.$error-color;
     border-radius: 0.5em;
     background-color: black;
     padding: 1em;
@@ -114,16 +115,16 @@ code.error-details {
     flex-direction: column;
     max-width: 40em;
     gap: 1em;
-    border: 0.15em solid main.$secondary-color;
+    border: 0.15em solid colors.$secondary-color;
     border-radius: 0.5em;
-    background-color: main.$secondary-color-alpha50;
+    background-color: colors.$secondary-color-alpha50;
     padding: 1em;
 
     details {
         font-weight: bold;
         padding: 0.25em;
-        background-color: main.$error-color-alpha25;
-        border: 0.15em solid main.$error-color;
+        background-color: colors.$error-color-alpha25;
+        border: 0.15em solid colors.$error-color;
         border-radius: 0.5em;
 
         summary {
@@ -149,39 +150,39 @@ code.error-details {
     > * {
         color: white;
         padding: 0.5em 1em;
-        border: 0.15em solid main.$secondary-color;
+        border: 0.15em solid colors.$secondary-color;
         border-radius: 0.5em;
-        background-color: main.$secondary-color;
+        background-color: colors.$secondary-color;
         text-align: center;
         text-decoration: none;
         transition: background-color 200ms, color 200ms, box-shadow 200ms;
         cursor: pointer;
 
         &.home {
-            background-color: main.$primary-color-alpha25;
-            border-color: main.$primary-color;
+            background-color: colors.$primary-color-alpha25;
+            border-color: colors.$primary-color;
 
             &:hover {
-                box-shadow: 0 0 0.5em main.$primary-color;
+                box-shadow: 0 0 0.5em colors.$primary-color;
             }
             &:active {
-                box-shadow: 0 0 0.5em main.$primary-color-dark;
-                background-color: main.$primary-color-alpha50;
+                box-shadow: 0 0 0.5em colors.$primary-color-dark;
+                background-color: colors.$primary-color-alpha50;
             }
         }
 
         &.copy {
-            background-color: main.$tertiary-color-alpha25;
-            border-color: main.$tertiary-color;
+            background-color: colors.$tertiary-color-alpha25;
+            border-color: colors.$tertiary-color;
             font-family: 'techmino-proportional';
             font-size: 1em;
 
             &:hover {
-                box-shadow: 0 0 0.5em main.$tertiary-color;
+                box-shadow: 0 0 0.5em colors.$tertiary-color;
             }
             &:active {
-                box-shadow: 0 0 0.5em main.$tertiary-color-dark;
-                background-color: main.$tertiary-color-alpha75;
+                box-shadow: 0 0 0.5em colors.$tertiary-color-dark;
+                background-color: colors.$tertiary-color-alpha75;
             }
         }
 

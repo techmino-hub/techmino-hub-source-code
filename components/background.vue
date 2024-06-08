@@ -1,8 +1,13 @@
 <template>
-    <canvas id="background" title="Background with stars"></canvas>
+    <canvas id="background" title=" "></canvas>
 </template>
 
 <script lang="ts">
+const BG_TOGGLE_KEY = 'bgEnabled';
+const BG_SPEED_KEY = 'bgSpeed';
+const BG_ID = 'background';
+const STAR_COLOR = '#FFFFFFAF';
+
 let bgCanvas: HTMLCanvasElement;
 let bgContext: CanvasRenderingContext2D;
 let width: number; let height: number;
@@ -10,6 +15,7 @@ let width: number; let height: number;
 let stars: Star[] = [];
 
 let lastTimestamp: number = performance.now();
+let speedMult: number;
 
 type Star = {
     size: number;
@@ -26,19 +32,30 @@ function random(min: number, max: number): number {
 }
 
 function isBackgroundEnabled(): boolean {
-    let bgEnabled = localStorage.getItem('bgEnabled');
+    let bgEnabled = localStorage.getItem(BG_TOGGLE_KEY);
     if(bgEnabled === null) {
         bgEnabled = "true";
-        localStorage.setItem('bgEnabled', bgEnabled);
+        localStorage.setItem(BG_TOGGLE_KEY, bgEnabled);
     }
     return bgEnabled === "true";
+}
+
+function getSpeedMult(): number {
+    let speed = localStorage.getItem(BG_SPEED_KEY);
+    if(speed === null) {
+        speed = "1";
+        localStorage.setItem(BG_SPEED_KEY, speed);
+    }
+    return parseFloat(speed);
 }
 
 function init() {
     bgEnabled = isBackgroundEnabled();
     if(!bgEnabled) return;
 
-    const canvas = document.getElementById("background");
+    speedMult = getSpeedMult();
+
+    const canvas = document.getElementById(BG_ID);
     if(canvas === null) return;
 
     bgCanvas = canvas as HTMLCanvasElement;
@@ -75,6 +92,7 @@ function onResize() {
 
 function draw(timestamp: number) {
     let dt = timestamp - lastTimestamp;
+    dt *= speedMult;
     lastTimestamp = timestamp;
 
     if(width !== bgCanvas.offsetWidth || height !== bgCanvas.offsetHeight) onResize();
@@ -86,12 +104,16 @@ function draw(timestamp: number) {
         const star = stars[i];
         star.x += (star.dx * dt)
         star.y += (star.dy * dt)
-        star.x %= width
-        star.y %= height
+        
+        if(star.x < 0) star.x = width;
+        if(star.x > width) star.x = 0;
+
+        if(star.y < 0) star.y = height;
+        if(star.y > height) star.y = 0;
     }
 
     // draw stars
-    bgContext.fillStyle = "#FFFFFFAF"
+    bgContext.fillStyle = STAR_COLOR;
     for (let i = 0; i < stars.length; i++) {
         const star = stars[i];
         bgContext.fillRect(star.x, star.y, star.size, star.size);
