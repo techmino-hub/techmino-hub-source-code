@@ -1,0 +1,171 @@
+<script setup lang="ts">
+import type { NuxtError } from '#app';
+
+const props = defineProps({
+  error: Object as () => NuxtError
+});
+
+const { error } = props;
+
+const handleError = () => clearError({ redirect: '/' });
+const copyError = () => {
+    navigator.clipboard.writeText(JSON.stringify(error, null, 2));
+    const button = document.getElementById('copy-err-button');
+    if (button) {
+        button.textContent = 'Error info copied!';
+        setTimeout(() => {
+            button.textContent = 'Copy error info';
+        }, 2000);
+    }
+}
+</script>
+
+<template>
+    <div class="outer">
+        <div class="main-panel">
+            <Background />
+            <Header class="error" />
+            <main>
+                <h1>
+                    Error {{ error?.statusCode }}
+                </h1>
+                <pre><code class="error-code">{{ error?.message }}</code></pre>
+                <hr>
+                <div class="error-bottom">
+                    <menu class="error-buttons">
+                        <NuxtLink @click="handleError" to="/" class="home">
+                            Go back to home
+                        </NuxtLink>
+                        <button @click="copyError" class="copy" id="copy-err-button">
+                            Copy error info
+                        </button>
+                        <NuxtLink to="https://github.com/techmino-hub/techmino-hub-source-code/issues/new" class="report">
+                            Report error on GitHub
+                        </NuxtLink>
+                    </menu>
+                    <details>
+                        <summary>
+                            Raw error info
+                        </summary>
+                        <pre><code class="error-details">{{ error }}</code></pre>
+                    </details>
+                </div>
+            </main>
+            <Footer />
+        </div>
+    </div>
+</template>
+
+<style lang="scss">
+@use "~/assets/scss/main";
+@use "~/assets/scss/index";
+
+main {
+    padding: 1em 2em;
+}
+
+code.error-code {
+    display: block;
+    border: 0.15em dashed main.$error-color;
+    border-radius: 0.5em;
+    background-color: black;
+    padding: 1em;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 1.5em;
+}
+
+code.error-details {
+    display: block;
+    border-radius: 0.5em;
+    background-color: black;
+    padding: 1em;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-size: 1.25em;
+}
+
+.error-bottom {
+    position: relative;
+    display: flex;
+    margin-inline: auto;
+    flex-direction: column;
+    max-width: 40em;
+    gap: 1em;
+    border: 0.15em solid main.$secondary-color;
+    border-radius: 0.5em;
+    background-color: main.$secondary-color-alpha50;
+    padding: 1em;
+}
+
+.error-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    row-gap: 1em;
+    padding: 0; margin: 0;
+    flex-wrap: wrap;
+
+    > * {
+        color: white;
+        padding: 0.5em 1em;
+        border: 0.15em solid main.$secondary-color;
+        border-radius: 0.5em;
+        background-color: main.$secondary-color;
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 200ms, color 200ms, box-shadow 200ms;
+        cursor: pointer;
+
+        &.home {
+            background-color: main.$primary-color-alpha50;
+            border-color: main.$primary-color;
+
+            &:hover {
+                box-shadow: 0 0 0.5em main.$primary-color;
+            }
+            &:active {
+                box-shadow: 0 0 0.5em main.$primary-color-dark;
+                background-color: main.$primary-color-alpha75;
+            }
+        }
+
+        &.copy {
+            background-color: main.$tertiary-color-alpha50;
+            border-color: main.$tertiary-color;
+            font-family: 'techmino-proportional';
+            font-size: 1em;
+
+            &:hover {
+                box-shadow: 0 0 0.5em main.$tertiary-color;
+            }
+            &:active {
+                box-shadow: 0 0 0.5em main.$tertiary-color-dark;
+                background-color: main.$tertiary-color-alpha75;
+            }
+        }
+
+        &.report {
+            $gh-color-dark: #111;
+            $gh-color-light: #ddd;
+
+            background-color: $gh-color-dark;
+            border-color: $gh-color-light;
+            color: $gh-color-light;
+            transition-duration: 350ms;
+
+            &:hover {
+                box-shadow: 0 0 0.5em $gh-color-light;
+            }
+            &:active {
+                box-shadow: 0 0 2em $gh-color-dark;
+                background-color: $gh-color-light;
+                border-color: $gh-color-dark;
+                color: $gh-color-dark;
+            }
+        }
+    }
+}
+</style>

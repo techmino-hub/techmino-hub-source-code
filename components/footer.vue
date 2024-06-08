@@ -21,9 +21,12 @@ footer {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 0.5em 1.5em;
     border-top: 0.15em dotted grey;
-    border-end-start-radius: 0.5em;
-    border-end-end-radius: 0.5em;
     color: rgb(180,180,180);
+
+    @media (min-width: 700px) {
+        border-end-start-radius: 0.5em;
+        border-end-end-radius: 0.5em;
+    }
 
     a {
         color: rgb(180,180,180);

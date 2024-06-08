@@ -1,14 +1,27 @@
+<script lang="ts">
+
+</script>
+
 <template>
-  <header>
+    <header>
         <NuxtLink to="/">
             <h1>
                 Techmino Hub
             </h1>
         </NuxtLink>
         <nav>
-            <NuxtLink to="/faq">FAQ</NuxtLink>
-            <NuxtLink to="/map">Map</NuxtLink>
-            <NuxtLink to="/sign-in" class="hide-noscript">Sign In</NuxtLink>
+            <NuxtLink to="/" class="hide-no-error">
+                Home
+            </NuxtLink>
+            <NuxtLink to="/faq" class="hide-error">
+                FAQ
+            </NuxtLink>
+            <NuxtLink to="/map" class="hide-error">
+                Map
+            </NuxtLink>
+            <NuxtLink to="/sign-in" class="hide-noscript hide-error">
+                Sign In
+            </NuxtLink>
         </nav>
     </header>
 </template>
@@ -22,8 +35,11 @@ header {
     background-color: main.$secondary-color-dark-alpha75;
     padding: 0.5em 1.5em;
     border-bottom: 0.15em dotted main.$secondary-color;
-    border-start-start-radius: 0.5em;
-    border-start-end-radius: 0.5em;
+
+    @media (min-width: 700px) {
+        border-start-start-radius: 0.5em;
+        border-start-end-radius: 0.5em;
+    }
 
     > a {
         text-decoration: none;
@@ -40,6 +56,20 @@ header {
         &:active {
             color: main.$primary-color-dark;
             text-shadow: 0.2em 0.2em 0 rgb(0, 80, 0);
+        }
+    }
+    &:not(.error) .hide-no-error {
+        display: none;
+    }
+    &.error {
+        background-color: main.$error-color-dark-alpha75;
+        border-bottom-color: main.$error-color;
+
+        .hide-error {
+            display: none;
+        }
+        .show-error {
+            display: block;
         }
     }
 }
