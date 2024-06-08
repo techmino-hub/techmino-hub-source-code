@@ -29,6 +29,13 @@ const copyError = () => {
                 <h1>
                     Error {{ error?.statusCode }}
                 </h1>
+                <p v-if="error?.statusCode === 404">
+                    The page you are looking for does not exist. <br>
+                    You may have stumbled onto an unfinished page.
+                </p>
+                <a v-else :href="`https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/${error?.statusCode}`">
+                    Learn more about HTTP status code {{ error?.statusCode }}
+                </a>
                 <pre><code class="error-code">{{ error?.message }}</code></pre>
                 <hr>
                 <div class="error-bottom">
@@ -62,6 +69,18 @@ const copyError = () => {
 
 main {
     padding: 1em 2em;
+    a {
+        color: main.$primary-color;
+        transition-duration: 200ms;
+        border-radius: 0.5em;
+        padding: 0.25em 0.4em;
+        &:hover {
+            background-color: main.$primary-color-alpha25;
+        }
+        &:active {
+            background-color: main.$primary-color-alpha50;
+        }
+    }
 }
 
 code.error-code {
