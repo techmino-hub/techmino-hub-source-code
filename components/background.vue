@@ -1,5 +1,5 @@
 <template>
-    <canvas id="background"></canvas>
+    <canvas id="background" title="Background with stars"></canvas>
 </template>
 
 <script lang="ts">
@@ -73,7 +73,7 @@ function onResize() {
     }
 }
 
-function draw(timestamp) {
+function draw(timestamp: number) {
     let dt = timestamp - lastTimestamp;
     lastTimestamp = timestamp;
 

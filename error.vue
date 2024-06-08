@@ -22,6 +22,9 @@ const copyError = () => {
 
 <template>
     <div class="outer">
+        <Title>
+            Techmino Hub - Error {{ error?.statusCode }}
+        </Title>
         <div class="main-panel">
             <Background />
             <Header class="error" />
@@ -43,7 +46,7 @@ const copyError = () => {
                         <NuxtLink @click="handleError" to="/" class="home">
                             Go back to home
                         </NuxtLink>
-                        <button @click="copyError" class="copy" id="copy-err-button">
+                        <button @click="copyError" class="copy hide-noscript" id="copy-err-button">
                             Copy error info
                         </button>
                         <NuxtLink to="https://github.com/techmino-hub/techmino-hub-source-code/issues/new" class="report">
@@ -98,7 +101,7 @@ code.error-details {
     display: block;
     border-radius: 0.5em;
     background-color: black;
-    padding: 1em;
+    padding: 0.5em;
     white-space: pre-wrap;
     word-break: break-word;
     font-size: 1.25em;
@@ -115,6 +118,22 @@ code.error-details {
     border-radius: 0.5em;
     background-color: main.$secondary-color-alpha50;
     padding: 1em;
+
+    details {
+        font-weight: bold;
+        padding: 0.25em;
+        background-color: main.$error-color-alpha25;
+        border: 0.15em solid main.$error-color;
+        border-radius: 0.5em;
+
+        summary {
+            cursor: pointer;
+        }
+
+        pre {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .error-buttons {
@@ -139,7 +158,7 @@ code.error-details {
         cursor: pointer;
 
         &.home {
-            background-color: main.$primary-color-alpha50;
+            background-color: main.$primary-color-alpha25;
             border-color: main.$primary-color;
 
             &:hover {
@@ -147,12 +166,12 @@ code.error-details {
             }
             &:active {
                 box-shadow: 0 0 0.5em main.$primary-color-dark;
-                background-color: main.$primary-color-alpha75;
+                background-color: main.$primary-color-alpha50;
             }
         }
 
         &.copy {
-            background-color: main.$tertiary-color-alpha50;
+            background-color: main.$tertiary-color-alpha25;
             border-color: main.$tertiary-color;
             font-family: 'techmino-proportional';
             font-size: 1em;

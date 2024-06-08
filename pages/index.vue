@@ -1,4 +1,7 @@
 <template>
+    <Title>
+        Techmino Hub - Home
+    </Title>
     <div class="main-inner">
         <h1>Welcome to Techmino Hub!</h1>
         <p>
