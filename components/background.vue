@@ -104,12 +104,17 @@ function draw(timestamp: number) {
         const star = stars[i];
         star.x += (star.dx * dt)
         star.y += (star.dy * dt)
-        
-        if(star.x < 0) star.x = width;
-        if(star.x > width) star.x = 0;
 
-        if(star.y < 0) star.y = height;
-        if(star.y > height) star.y = 0;
+        if(star.x < -star.size) {
+            star.x += width + star.size;
+        } else if(star.x > width + star.size) {
+            star.x -= width + star.size;
+        }
+        if(star.y < -star.size) {
+            star.y += width + star.size;
+        } else if(star.y > height + star.size) {
+            star.y -= width + star.size;
+        }
     }
 
     // draw stars
