@@ -21,6 +21,7 @@ function submitForm() {
     for(let setting of settings.value) {
         localStorage.setItem(setting.name, setting.value.toString());
     }
+    location.reload();
 }
 
 function init() {
@@ -34,6 +35,9 @@ function init() {
             setting.value = parseFloat(value);
         }
     }
+
+    document?.getElementById("loading-text")?.classList.add("hide-important");
+    document?.getElementById("form")?.classList.remove("hide-important");
 }
 
 onMounted(init);
@@ -43,10 +47,16 @@ onMounted(init);
     <div>
         <Title>Techmino Hub - Settings</Title>
         <h1 class="hide-noscript">Settings</h1>
-        <form @submit.prevent="submitForm" class="hide-noscript-important">
+        <p class="loading" id="loading-text">
+            Loading...
+        </p>
+        <form @submit.prevent="submitForm" class="hide-important" id="form">
             <div v-for="setting of settings" :key="setting.name"
               :class="`setting${ setting.type === 'checkbox' ? ' inline' : '' }`">
-                <label :for="setting.name">{{ setting.label }}</label>
+                <span>
+                    <label :for="setting.name">{{ setting.label }}</label>
+                    <span v-if="setting.name === 'bgSpeed'">{{ (setting.value as number * 100).toFixed(0) }}%</span>
+                </span>
                 <input :type="setting.type" :id="setting.name"
                   :name="setting.name" v-model="setting.value"
                   :min="setting.min" :max="setting.max" :step="setting.step" />
@@ -65,13 +75,13 @@ onMounted(init);
 @use '~/assets/scss/main';
 @use '~/assets/scss/colors';
 
-h1 {
+h1, #loading-text {
     text-align: center;
 }
 form {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 1em;
     margin-inline: auto;
     max-width: 20em;
     background-color: colors.$primary-color-alpha10;
@@ -92,7 +102,13 @@ form {
     }
     &:not(:last-child) {
         border-bottom: 0.1em solid colors.$primary-color-alpha10;
-        padding-bottom: 0.5em;
+        padding-bottom: 1em;
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 }
 </style>
