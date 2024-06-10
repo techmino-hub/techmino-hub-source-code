@@ -3,74 +3,52 @@
 This repository contains the source code for the Techmino Hub website.  
 This website is built using [Nuxt.js](https://nuxt.com), unlike the previous iteration, which used plain HTML, CSS, and JS.
 
-## Setup
+## Internationalization
+(TODO: improve this documentation)
+- we use `nuxt-i18n`, based on `vue-i18n`
+- language entries are in markdown
+    - ...specificially [markdown-it](https://github.com/markdown-it/markdown-it) with [markdown-it-multimd-table](https://github.com/redbug312/markdown-it-multimd-table) for tables
+- language stuff in /assets/lang/
+
+
+## Running
 
 Make sure to install the dependencies:
 
 ```bash
-# npm
+# if you use npm:
 npm install
-
-# pnpm
+# if you use pnpm:
 pnpm install
-
-# yarn
+# if you use yarn:
 yarn install
-
-# bun
+# if you use bun:
 bun install
 ```
-
-## Development Server
-
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
+# if you use npm:
 npm run dev
-
-# pnpm
+# if you use pnpm:
 pnpm run dev
-
-# yarn
+# if you use yarn:
 yarn dev
-
-# bun
+# if you use bun:
 bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
+# if you use npm:
 npm run preview
-
-# pnpm
+# if you use pnpm:
 pnpm run preview
-
-# yarn
+# if you use yarn:
 yarn preview
-
-# bun
+# if you use bun:
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+See more: [Nuxt.js deployment docs](https://nuxt.com/docs/getting-started/deployment)
