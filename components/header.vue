@@ -29,7 +29,7 @@ function dbg(arg: any): typeof arg {
     </header>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @use "~/assets/scss/main.scss";
 @use "~/assets/scss/colors.scss";
 
@@ -77,30 +77,37 @@ header {
             display: block;
         }
     }
-}
-nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    align-self: center;
-    padding: 0 1em;
-    font-size: 1.2em;
-    gap: 1em;
 
-    a {
-        text-decoration: none;
-        color: colors.$primary-color;
-        padding: 0.15em 0.3em;
-        border: 0.15em dashed transparent;
-        border-radius: 0.2em;
-        transition: background-color 200ms, color 200ms, border-color 200ms;
+    nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+        padding: 0 1em;
+        font-size: 1.2em;
+        gap: 1em;
 
-        &:hover {
-            background-color: colors.$primary-color-alpha25;
-        }
-        &:active {
+        a {
+            position: relative;
+            text-decoration: none;
             color: colors.$primary-color;
-            border: 0.15em dashed colors.$primary-color-dark;
+            padding: 0.15em 0.3em;
+            border: 0.15em dashed transparent;
+            border-radius: 0.2em;
+            transition: background-color 200ms, color 200ms, border-color 200ms;
+
+            p {
+                margin-block: auto;
+            }
+
+            &:hover {
+                background-color: colors.$primary-color-alpha25;
+            }
+            &:active {
+                color: colors.$primary-color;
+                border: 0.15em dashed colors.$primary-color-dark;
+            }
         }
     }
 }
