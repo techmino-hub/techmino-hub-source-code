@@ -1,23 +1,23 @@
 <script setup lang="ts">
-const { locale, setLocale } = useI18n();
+const localePath = useLocalePath();
 </script>
 
 <template>
     <header>
-        <NuxtLink to="/">
+        <NuxtLink :to="localePath('/')">
             <h1 v-html="$t('common.appName')"></h1>
         </NuxtLink>
         <nav>
-            <NuxtLink to="/" class="hide-no-error"
+            <NuxtLink :to="localePath('/')" class="hide-no-error"
                 v-html="$t('common.nav.home')"
             />
-            <NuxtLink to="/faq" class="hide-error"
+            <NuxtLink :to="localePath('/faq')" class="hide-error"
                 v-html="$t('common.nav.faq')"
             />
-            <NuxtLink to="/map" class="hide-error"
+            <NuxtLink :to="localePath('/map')" class="hide-error"
                 v-html="$t('common.nav.map')"
             />
-            <NuxtLink to="/sign-in" class="hide-noscript hide-error"
+            <NuxtLink :to="localePath('/sign-in')" class="hide-noscript hide-error"
                 v-html="$t('common.nav.signIn')"
             />
         </nav>

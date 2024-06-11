@@ -1,19 +1,22 @@
+<script setup>
+const localePath = useLocalePath();
+</script>
 <template>
   <footer>
     <div class="left">
         <p>
-            <b>Techmino Hub</b> <br>
-            Created with ❤ by <a href="https://github.com/techmino-hub/techmino-hub-source-code">NOT_A_ROBOT and contributors</a>
+            <b v-html="$t('common.appName')"></b>
+            <p v-html="$t('common.footer.credits')"></p>
         </p>
     </div>
     <span class="right">
-        <NuxtLink to="/settings">Settings</NuxtLink>
+        <NuxtLink :to="localePath('/settings')" v-html="$t('common.nav.settings')"></NuxtLink>
         <a href="https://discord.gg/f9pUvkh">Discord</a>
     </span>
   </footer>
 </template>
 
-<style scoped>
+<style>
 footer {
     display: flex;
     flex-direction: row;

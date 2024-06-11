@@ -94,7 +94,6 @@ const WRAP_MARGIN = 1;
 function draw(timestamp: number) {
     let dt = timestamp - lastTimestamp;
     dt *= speedMult;
-    dt *= 10;
     lastTimestamp = timestamp;
 
     if(width !== bgCanvas.offsetWidth || height !== bgCanvas.offsetHeight) onResize();

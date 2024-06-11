@@ -8,22 +8,27 @@ import * as langID from '~/assets/lang/id';
 const md = markdownit();
 
 function mdToHTML(entries: LangEntriesType): LangEntriesType {
-  for (let key in entries) {
-    if (typeof entries[key] === 'object') {
-      mdToHTML(entries[key]);
+  const newEntries: LangEntriesType = {};
+
+  for(const key in entries) {
+    const entry = entries[key];
+
+    if(typeof entry === 'string') {
+        newEntries[key] = md.render(entry);
     } else {
-      entries[key] = md.render(entries[key]);
+        newEntries[key] = mdToHTML(entry);
     }
   }
 
-  return entries;
+  return newEntries;
 }
 
-// Nuxt.js i18n module configuration
 export default defineI18nConfig(() => ({
     legacy: false,
     locale: 'en',
     fallbackLocale: 'en',
+    warnHtmlMessage: false,
+    warnHtmlInMessage: 'off',
     messages: {
         en: mdToHTML(langEN.default),
         id: mdToHTML(langID.default),

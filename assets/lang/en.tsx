@@ -7,7 +7,8 @@ export default {
       home: "Home",
       faq: "FAQ",
       map: "Map",
-      signIn: "Sign In"
+      signIn: "Sign In",
+      settings: "Settings",
     },
     footer: {
       credits: "Created with ❤ by [the Techmino community](https://github.com/techmino-hub/techmino-hub-source-code)"
