@@ -24,6 +24,7 @@ function mdToHTML(entries: LangEntriesType): LangEntriesType {
 }
 
 export default defineI18nConfig(() => ({
+    missingWarn: true,
     legacy: false,
     locale: 'en',
     fallbackLocale: 'en',

@@ -4,13 +4,10 @@ const localePath = useLocalePath();
 <template>
   <footer>
     <div class="left">
-        <p>
-            <b v-html="$t('common.appName')"></b>
-            <p v-html="$t('common.footer.credits')"></p>
-        </p>
+        <p v-thtml="$t('common.appName') + $t('common.footer.credits')"></p>
     </div>
     <span class="right">
-        <NuxtLink :to="localePath('/settings')" v-html="$t('common.nav.settings')"></NuxtLink>
+        <NuxtLink :to="localePath('/settings')" v-thtml="$t('common.nav.settings')"></NuxtLink>
         <a href="https://discord.gg/f9pUvkh">Discord</a>
     </span>
   </footer>

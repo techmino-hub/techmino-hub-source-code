@@ -1,5 +1,10 @@
 <script setup lang="ts">
 const localePath = useLocalePath();
+
+function dbg(arg: any): typeof arg {
+    console.log(arg);
+    return arg;
+}
 </script>
 
 <template>
@@ -9,16 +14,16 @@ const localePath = useLocalePath();
         </NuxtLink>
         <nav>
             <NuxtLink :to="localePath('/')" class="hide-no-error"
-                v-html="$t('common.nav.home')"
+                v-thtml="$t('common.nav.home')"
             />
             <NuxtLink :to="localePath('/faq')" class="hide-error"
-                v-html="$t('common.nav.faq')"
+                v-thtml="$t('common.nav.faq')"
             />
             <NuxtLink :to="localePath('/map')" class="hide-error"
-                v-html="$t('common.nav.map')"
+                v-thtml="$t('common.nav.map')"
             />
             <NuxtLink :to="localePath('/sign-in')" class="hide-noscript hide-error"
-                v-html="$t('common.nav.signIn')"
+                v-thtml="$t('common.nav.signIn')"
             />
         </nav>
     </header>
@@ -77,24 +82,26 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-self: center;
     padding: 0 1em;
     font-size: 1.2em;
     gap: 1em;
-}
-a:not(header > a) {
-    text-decoration: none;
-    color: colors.$primary-color;
-    padding: 0.15em 0.3em;
-    border: 0.15em dashed transparent;
-    border-radius: 0.2em;
-    transition: background-color 200ms, color 200ms, border-color 200ms;
 
-    &:hover {
-        background-color: colors.$primary-color-alpha25;
-    }
-    &:active {
+    a {
+        text-decoration: none;
         color: colors.$primary-color;
-        border: 0.15em dashed colors.$primary-color-dark;
+        padding: 0.15em 0.3em;
+        border: 0.15em dashed transparent;
+        border-radius: 0.2em;
+        transition: background-color 200ms, color 200ms, border-color 200ms;
+
+        &:hover {
+            background-color: colors.$primary-color-alpha25;
+        }
+        &:active {
+            color: colors.$primary-color;
+            border: 0.15em dashed colors.$primary-color-dark;
+        }
     }
 }
 </style>
