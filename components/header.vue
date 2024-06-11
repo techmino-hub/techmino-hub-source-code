@@ -1,27 +1,25 @@
-<script lang="ts">
-
+<script setup lang="ts">
+const { locale, setLocale } = useI18n();
 </script>
 
 <template>
     <header>
         <NuxtLink to="/">
-            <h1>
-                Techmino Hub
-            </h1>
+            <h1 v-html="$t('common.appName')"></h1>
         </NuxtLink>
         <nav>
-            <NuxtLink to="/" class="hide-no-error">
-                Home
-            </NuxtLink>
-            <NuxtLink to="/faq" class="hide-error">
-                FAQ
-            </NuxtLink>
-            <NuxtLink to="/map" class="hide-error">
-                Map
-            </NuxtLink>
-            <NuxtLink to="/sign-in" class="hide-noscript hide-error">
-                Sign In
-            </NuxtLink>
+            <NuxtLink to="/" class="hide-no-error"
+                v-html="$t('common.nav.home')"
+            />
+            <NuxtLink to="/faq" class="hide-error"
+                v-html="$t('common.nav.faq')"
+            />
+            <NuxtLink to="/map" class="hide-error"
+                v-html="$t('common.nav.map')"
+            />
+            <NuxtLink to="/sign-in" class="hide-noscript hide-error"
+                v-html="$t('common.nav.signIn')"
+            />
         </nav>
     </header>
 </template>

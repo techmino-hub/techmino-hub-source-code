@@ -1,0 +1,1 @@
+export type LangEntriesType = { [key: string]: string | LangEntriesType };

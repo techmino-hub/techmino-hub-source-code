@@ -7,7 +7,7 @@ This website is built using [Nuxt.js](https://nuxt.com), unlike the previous ite
 (TODO: improve this documentation)
 - we use `nuxt-i18n`, based on `vue-i18n`
 - language entries are in markdown
-    - ...specificially [markdown-it](https://github.com/markdown-it/markdown-it) with [markdown-it-multimd-table](https://github.com/redbug312/markdown-it-multimd-table) for tables
+    - ...specificially [markdown-it](https://github.com/markdown-it/markdown-it)
 - language stuff in /assets/lang/
 
 
