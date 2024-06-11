@@ -40,6 +40,10 @@ const copyError = () => {
                     Learn more about HTTP status code {{ error?.statusCode }}
                 </a>
                 <pre><code class="error-code">{{ error?.message }}</code></pre>
+                <div v-if="error?.stack !== undefined">
+                    The call stack when the error occured is as follows:
+                    <div class="stack" v-html="error.stack"></div>
+                </div>
                 <hr>
                 <div class="error-bottom">
                     <menu class="error-buttons">
@@ -87,14 +91,18 @@ main {
     }
 }
 
+pre {
+    font-family: 'techmino-monospace', monospace, sans-serif;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
 code.error-code {
     display: block;
     border: 0.15em dashed colors.$error-color;
     border-radius: 0.5em;
     background-color: black;
     padding: 1em;
-    white-space: pre-wrap;
-    word-break: break-word;
     font-size: 1.5em;
 }
 
@@ -103,9 +111,15 @@ code.error-details {
     border-radius: 0.5em;
     background-color: black;
     padding: 0.5em;
-    white-space: pre-wrap;
-    word-break: break-word;
     font-size: 1.25em;
+}
+
+div.stack {
+    border: 0.15em solid colors.$error-color;
+    border-radius: 0.5em;
+    background-color: colors.$error-color-alpha25;
+    padding: 0.25em 1em;
+    margin-top: 1em;
 }
 
 .error-bottom {
