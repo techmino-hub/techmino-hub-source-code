@@ -90,9 +90,11 @@ function onResize() {
     }
 }
 
+const WRAP_MARGIN = 1;
 function draw(timestamp: number) {
     let dt = timestamp - lastTimestamp;
     dt *= speedMult;
+    dt *= 10;
     lastTimestamp = timestamp;
 
     if(width !== bgCanvas.offsetWidth || height !== bgCanvas.offsetHeight) onResize();
@@ -105,15 +107,15 @@ function draw(timestamp: number) {
         star.x += (star.dx * dt)
         star.y += (star.dy * dt)
 
-        if(star.x < -star.size) {
+        if(star.x < -star.size - WRAP_MARGIN) {
             star.x += width + star.size;
-        } else if(star.x > width + star.size) {
+        } else if(star.x > width + star.size + WRAP_MARGIN) {
             star.x -= width + star.size;
         }
-        if(star.y < -star.size) {
-            star.y += width + star.size;
-        } else if(star.y > height + star.size) {
-            star.y -= width + star.size;
+        if(star.y < -star.size - WRAP_MARGIN) {
+            star.y += height + star.size;
+        } else if(star.y > height + star.size + WRAP_MARGIN) {
+            star.y -= height + star.size;
         }
     }
 
@@ -123,6 +125,7 @@ function draw(timestamp: number) {
         const star = stars[i];
         bgContext.fillRect(star.x, star.y, star.size, star.size);
     }
+
     requestAnimationFrame(draw);
 }
 
