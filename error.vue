@@ -40,7 +40,7 @@ const copyError = () => {
                     Learn more about HTTP status code {{ error?.statusCode }}
                 </a>
                 <pre><code class="error-code">{{ error?.message }}</code></pre>
-                <div v-if="error?.stack !== undefined">
+                <div v-if="error?.stack !== undefined && error.statusCode !== 404">
                     The call stack when the error occured is as follows:
                     <div class="stack" v-html="error.stack"></div>
                 </div>

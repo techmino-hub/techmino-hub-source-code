@@ -2,13 +2,11 @@
 const settings = ref([
     {
         name: "bgEnabled",
-        label: "Enable background",
         type: "checkbox",
         value: true
     },
     {
         name: "bgSpeed",
-        label: "Background animation speed",
         type: "range",
         value: 1,
         min: 0,
@@ -45,28 +43,30 @@ onMounted(init);
 
 <template>
     <div>
-        <Title>Techmino Hub - Settings</Title>
-        <h1 class="hide-noscript">Settings</h1>
-        <p class="loading" id="loading-text">
-            Loading...
-        </p>
+        <Title>{{ $t('settings.tabTitle') }}</Title>
+        <h1 class="hide-noscript">{{ $t('settings.title') }}</h1>
+        <p class="loading hide-noscript" id="loading-text">{{ $t('settings.loading') }}</p>
         <form @submit.prevent="submitForm" class="hide-important" id="form">
             <div v-for="setting of settings" :key="setting.name"
               :class="`setting${ setting.type === 'checkbox' ? ' inline' : '' }`">
                 <span>
-                    <label :for="setting.name">{{ setting.label }}</label>
-                    <span v-if="setting.name === 'bgSpeed'">{{ (setting.value as number * 100).toFixed(0) }}%</span>
+                    <label :for="setting.name">
+                        {{ $t(`settings.settings.${setting.name}`) }}
+                    </label>
+                    <span v-if="setting.name === 'bgSpeed'">
+                        {{ (setting.value as number * 100).toFixed(0) }}%
+                    </span>
                 </span>
                 <input :type="setting.type" :id="setting.name"
                   :name="setting.name" v-model="setting.value"
                   :min="setting.min" :max="setting.max" :step="setting.step" />
             </div>
-            <button type="submit" class="web-btn">Save</button>
+            <button type="submit" class="web-btn">
+                {{ $t('settings.save') }}
+            </button>
         </form>
         <noscript>
-            <h1>
-                You cannot change your settings with JavaScript disabled.
-            </h1>
+            <h1>{{ $t('settings.noscriptWarn') }}</h1>
         </noscript>
     </div>
 </template>
