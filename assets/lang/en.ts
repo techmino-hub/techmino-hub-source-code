@@ -17,7 +17,7 @@ export default {
 
   home: {
     tabTitle: "Techmino Hub - Home",
-    title: "md_**Welcome to Techmino Hub!",
+    title: "Welcome to Techmino Hub!",
     article: `md_Now recreated in Nuxt.js, Techmino Hub is an unofficial website for Techmino.  
     This page is a work in progress, more things will come soon!`
   }

@@ -17,7 +17,7 @@ export default {
 
   home: {
     tabTitle: "Techmino Hub - Beranda",
-    title: "md_**Selamat datang di Techmino Hub!**",
+    title: "Selamat datang di Techmino Hub!",
     article: `md_Dibuat ulang di Nuxt.js, Techmino Hub adalah website Techmino yang dibuat oleh komunitas Techmino.  
     Website ini sedang dalam fase mula, fitur-fitur baru akan muncul pada masa depan.`
   }
