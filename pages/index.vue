@@ -4,7 +4,7 @@
     </Title>
     <div class="main-inner">
         <h1>{{ $t('home.title') }}</h1>
-        <p v-html="$t('home.article')"></p>
+        <article v-html="$t('home.article')"></article>
     </div>
 </template>
 
