@@ -1,8 +1,6 @@
 <template>
-    <Title>
-        {{ $t('home.tabTitle') }}
-    </Title>
     <div class="main-inner">
+        <Title>{{ $t('home.tabTitle') }}</Title>
         <h1>{{ $t('home.title') }}</h1>
         <article v-html="$t('home.article')"></article>
     </div>
