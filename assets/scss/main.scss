@@ -1,6 +1,14 @@
 @use '~/assets/scss/colors';
-@font-face { font-family: "techmino-proportional"; src: url('/fonts/proportional.otf') }
-@font-face { font-family: "techmino-monospace"   ; src: url('/fonts/monospaced.otf') }
+
+@font-face {
+    font-family: "techmino-proportional";
+    src: url('/fonts/proportional.otf');
+}
+@font-face {
+    font-family: "techmino-monospace";
+    src: url('/fonts/monospaced.otf');
+    font-variant-ligatures: none;
+}
 
 button.web-btn {
     margin-block-start: 1em;

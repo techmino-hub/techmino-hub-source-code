@@ -1,5 +1,5 @@
 import markdownit from 'markdown-it';
-import type { LangEntriesType } from '~/assets/types/lang';
+import { type LangEntry, MD_STRING_PREFIX } from '~/assets/types/lang';
 
 import * as langEN from '~/assets/lang/en';
 import * as langID from '~/assets/lang/id';
@@ -7,20 +7,28 @@ import * as langID from '~/assets/lang/id';
 
 const md = markdownit();
 
-function mdToHTML(entries: LangEntriesType): LangEntriesType {
-  const newEntries: LangEntriesType = {};
-
-  for(const key in entries) {
-    const entry = entries[key];
-
-    if(typeof entry === 'string') {
-        newEntries[key] = md.render(entry);
+function renderString(entry: string): string {
+    if(entry.startsWith(MD_STRING_PREFIX)) {
+        return md.render(entry.substring(MD_STRING_PREFIX.length));
     } else {
-        newEntries[key] = mdToHTML(entry);
+        return entry;
     }
-  }
+}
 
-  return newEntries;
+function processLangEntry(entries: LangEntry): LangEntry {
+    const newEntries: LangEntry = {};
+    
+    for(const key in entries) {
+        let entry = entries[key];
+        
+        if(typeof entry === 'string') {
+            newEntries[key] = renderString(entry);
+        } else {
+            newEntries[key] = processLangEntry(entry);
+        }
+    }
+    
+    return newEntries;
 }
 
 export default defineI18nConfig(() => ({
@@ -31,7 +39,7 @@ export default defineI18nConfig(() => ({
     warnHtmlMessage: false,
     warnHtmlInMessage: 'off',
     messages: {
-        en: mdToHTML(langEN.default),
-        id: mdToHTML(langID.default),
+        en: processLangEntry(langEN.default),
+        id: processLangEntry(langID.default),
     },
 }));

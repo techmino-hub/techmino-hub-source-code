@@ -1,11 +1,10 @@
 <script setup>
 const localePath = useLocalePath();
 </script>
+
 <template>
   <footer>
-    <div class="left">
-        <p v-thtml="$t('common.appName') + $t('common.footer.credits')"></p>
-    </div>
+    <div class="left" v-html="$t('common.footer.text')"></div>
     <span class="right">
         <NuxtLink :to="localePath('/settings')" v-thtml="$t('common.nav.settings')"></NuxtLink>
         <a href="https://discord.gg/f9pUvkh">Discord</a>
