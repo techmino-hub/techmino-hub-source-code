@@ -28,6 +28,9 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.ts',
     locales: ['en', 'id'],
     defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: false
+    }
   },
 
   $production: {

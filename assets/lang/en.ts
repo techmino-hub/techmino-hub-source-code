@@ -126,4 +126,18 @@ For more information, visit the Sideloadly website.`
     Although we strive for accuracy, some information in the FAQ may be out-of-date.  
     If you spot an inaccuracy, please report it on [GitHub issues](https://github.com/techmino-hub/techmino-hub-source-code/issues/new) or on [Techmino's official Discord server](https://discord.gg/f9pUvkh).`
   },
+  cookies: {
+    tabTitle: "Techmino Hub - Cookie Info",
+    title: "Cookies",
+    description: `md_
+For a very short time during development, a cookie was used to store the user's language preference.  
+However, this has found to be unnecessary and has been removed.  
+We do not expect there to be any cookies used on this site, but just to make sure, we have included a cookie detector below.`,
+    cookieDetect: {
+      none: "We have detected no cookies on your device. This is expected behavior.",
+      some: "We have detected some cookies on your device, listed below.",
+      noscript: "You cannot scan for cookies with JavaScript disabled.",
+      error: "An error occurred while scanning for cookies.",
+    }
+  }
 } as LangEntry;
