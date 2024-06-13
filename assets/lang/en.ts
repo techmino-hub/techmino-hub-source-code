@@ -39,5 +39,21 @@ export default {
     },
     save: "Save",
     noscriptWarn: "You cannot change your settings with JavaScript disabled."
-  }
+  },
+
+  faq: {
+    entries: {
+      // TODO
+    },
+    preTags: "Tags: ",
+    tags: {
+      techmino: "Techmino",
+      galaxy: "Tech. Galaxy",
+      linux: "Linux",
+      apple: "Apple",
+      multiplayer: "Multiplayer",
+      error: "Errors/Crashes",
+      bot: "Bot (ColdClear)"
+    },
+  },
 } as LangEntry;
