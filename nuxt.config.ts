@@ -37,6 +37,4 @@ export default defineNuxtConfig({
   $development: {
     devtools: { enabled: true }
   },
-
-  modules: ["@nuxtjs/i18n"]
 })

@@ -1,4 +1,4 @@
-// Question tags for FAQ entries. All lowercase, no whitespaces.
+/** Question tags for FAQ entries. All lowercase, no whitespaces. */
 export enum Tag {
     Techmino = "techmino",
     TechminoGalaxy = "galaxy",
@@ -9,10 +9,17 @@ export enum Tag {
     Bot = "bot",
 }
 
-// FAQ entry type.
+/**
+ * FAQ entry type.
+ * To get the FAQ content, use the questionID to index into the $t (translate) function.
+ * 
+ * @example
+ * const questionID = "what-is-techmino";
+ * const question = $t(`faq.${questionID}.question`);
+ * const answer = $t(`faq.${questionID}.answer`);
+ */
 export type FAQEntry = {
-    question: string;
-    answerHTML: VNode;
-    author: string | undefined;
+    id: string;
+    author: string;
     tags: Tag[];
 }
