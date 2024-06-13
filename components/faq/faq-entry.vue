@@ -31,7 +31,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 details {
-    border: 1px solid lime;
+    border: 0.1em solid lime;
     border-radius: 0.4rem;
     transition: 200ms;
     margin-bottom: 1rem;
@@ -39,6 +39,10 @@ details {
     font-size: 1.25rem;
     background-color: rgba(0,100,0,0.15);
     color: white;
+
+    &[open] > summary {
+        border-bottom: 0.1em dashed lime;
+    }
 
     > summary {
         height: min-content;
@@ -75,6 +79,11 @@ details {
             border: 1px solid lime;
             border-radius: 0.2rem;
         }
+    }
+
+    > cite {
+        margin: 0.5rem 1rem;
+        text-align: right;
     }
 }
 </style>

@@ -6,12 +6,14 @@ const faqEntries = faq.default;
 </script>
 <template>
     <div>
-        <h1>FAQ</h1>
-        <menu>
+        <Title>{{ $t('faq.tabTitle') }}</Title>
+        <h1 class="center-text">{{ $t('faq.title') }}</h1>
+        <div>
             <FaqEntry
                 v-for="faqEntry in Object.values(faqEntries)"
                 :entry="faqEntry"
             />
-        </menu>
+        </div>
+        <small v-html="$t('faq.note')"></small>
     </div>
 </template>

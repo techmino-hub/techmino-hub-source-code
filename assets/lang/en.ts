@@ -11,7 +11,8 @@ export default {
       settings: "Settings"
     },
     footer: {
-      text: `md_**Techmino Hub**  \nCreated with ❤ by [the Techmino community](https://github.com/techmino-hub/techmino-hub-source-code)`,
+      text: `md_**Techmino Hub**  
+        Created with ❤ by [the Techmino community](https://github.com/techmino-hub/techmino-hub-source-code)`,
       lang: "Language"
     }
   },
@@ -42,6 +43,8 @@ export default {
   },
 
   faq: {
+    tabTitle: "Techmino Hub - FAQ",
+    title: "FAQ",
     entries: {
       // TODO
     },
@@ -55,5 +58,10 @@ export default {
       error: "Errors/Crashes",
       bot: "Bot (ColdClear)"
     },
+    note: `md_**Note**  
+    The questions in the FAQ are originally sourced from [Techmino's official Discord server](https://discord.gg/f9pUvkh).  
+    They may have been modified for clarity and localization purposes, and may not quote the original message verbatim.  
+    Although we strive for accuracy, some information in the FAQ may be out-of-date.  
+    If you spot an inaccuracy, please report it on [GitHub issues](https://github.com/techmino-hub/techmino-hub-source-code/issues/new) or on [Techmino's official Discord server](https://discord.gg/f9pUvkh).`
   },
 } as LangEntry;
