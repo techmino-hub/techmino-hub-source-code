@@ -3,13 +3,8 @@
 This repository contains the source code for the Techmino Hub website.  
 This website is built using [Nuxt.js](https://nuxt.com), unlike the previous iteration, which used plain HTML, CSS, and JS.
 
-## Internationalization
-(TODO: improve this documentation)
-- we use `nuxt-i18n`, based on `vue-i18n`
-- language entries are in markdown
-    - ...specificially [markdown-it](https://github.com/markdown-it/markdown-it)
-- language stuff in /assets/lang/
-
+## Contributing
+See our [repository's wiki](https://github.com/techmino-hub/techmino-hub-source-code/wiki/) for information on contributing to this project.
 
 ## Running
 
@@ -37,7 +32,6 @@ yarn dev
 # if you use bun:
 bun run dev
 ```
-
 Locally preview production build:
 
 ```bash

@@ -15,7 +15,7 @@ const props = defineProps({
       :class="`question ${entry.tags.join(' ')}`"
       name="faq">
         <summary>
-            <h3>{{ $t(`faq.entries.${entry.id}.title`) }}</h3>
+            <h3>{{ $t(`faq.entries.${entry.id}.question`) }}</h3>
             <span class="tags">
                 {{ $t("faq.preTags")}}
                 <FaqTag
