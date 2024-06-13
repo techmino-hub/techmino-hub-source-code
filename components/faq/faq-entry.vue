@@ -24,8 +24,10 @@ const props = defineProps({
                 />
             </span>
         </summary>
-        <blockquote v-html="$t(`faq.entries.${entry.id}.answer`)"></blockquote>
-        <cite>{{ entry.author }}</cite>
+        <article>
+            <blockquote v-html="$t(`faq.entries.${entry.id}.answer`)"></blockquote>
+            <cite>{{ entry.author }}</cite>
+        </article>
     </details>
 </template>
 
@@ -81,9 +83,24 @@ details {
         }
     }
 
-    > cite {
-        margin: 0.5rem 1rem;
-        text-align: right;
+    article {
+        display: flex;
+        flex-direction: column;
+        padding: 1em 1.5em 0.5em;
+
+        blockquote {
+            margin: 0;
+        }
+
+        cite {
+            margin-top: 1em;
+            font-size: 0.8em;
+            text-align: right;
+
+            &::before {
+                content: "— ";
+            }
+        }
     }
 }
 </style>

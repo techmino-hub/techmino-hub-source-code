@@ -14,6 +14,7 @@ const faqEntries = faq.default;
                 :entry="faqEntry"
             />
         </div>
+        <br>
         <small v-html="$t('faq.note')"></small>
     </div>
 </template>
