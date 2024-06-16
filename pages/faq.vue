@@ -28,7 +28,7 @@ function filter(tag: Tag, mode: FilterMode) {
 }
 </script>
 <template>
-    <div>
+    <div class="faq-outer">
         <Title>{{ $t('faq.tabTitle') }}</Title>
         <h1 class="center-text">{{ $t('faq.title') }}</h1>
         <main class="entries" id="faq">
@@ -45,6 +45,11 @@ function filter(tag: Tag, mode: FilterMode) {
 
 <style scoped lang="scss">
 @use "~/assets/scss/colors";
+
+.faq-outer {
+    padding: 1em 2em;
+}
+
 .entries {
     display: flex;
     flex-direction: column;

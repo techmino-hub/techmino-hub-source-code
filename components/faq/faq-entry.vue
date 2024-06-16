@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FAQEntry, Tag } from '~/assets/types/faq';
+import { getChar } from '~/assets/chars';
 
 const props = defineProps({
     entry: {
@@ -23,6 +24,7 @@ const props = defineProps({
                     :tag="tag"
                 />
             </span>
+            <a :href="'#' + entry.id" class="question-link">#</a>
         </summary>
         <article>
             <blockquote v-html="$t(`faq.entries.${entry.id}.answer`)"></blockquote>
@@ -44,9 +46,14 @@ details.question {
 
     &[open] > summary {
         border-bottom: 0.1em dotted colors.$primary-color-alpha75;
+
+        a.question-link {
+            color: #ffffffcc;
+        }
     }
 
     > summary {
+        position: relative;
         height: min-content;
         padding: 1em;
         background-color: #002200bb;
@@ -66,7 +73,9 @@ details.question {
             height: fit-content;
             align-items: center;
             justify-items: start;
+            flex-wrap: wrap;
             margin-top: 0.5em;
+            padding-right: 2em;
             gap: 0.5em;
             font-size: 0.9em;
         }
@@ -79,6 +88,32 @@ details.question {
             align-self: center;
             border: 1px solid colors.$primary-color;
             border-radius: 0.2rem;
+        }
+
+        &:hover a.question-link {
+            color: #ffffffcc;
+        }
+
+        a.question-link {
+            position: absolute;
+            top: 0.75em; left: -1.5em;
+
+            text-decoration: none;
+            color: transparent;
+            font-size: 1.25em;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 100;
+            transition: color 250ms;
+
+            &:hover {
+                color: colors.$btn-hover-border-color;
+                text-decoration: underline;
+            }
+
+            @media (max-width: 960px) {
+                left: unset; top: unset;
+                right: 1em; bottom: 0.5em;
+            }
         }
     }
 
