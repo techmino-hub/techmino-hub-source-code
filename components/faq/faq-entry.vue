@@ -37,7 +37,7 @@ const props = defineProps({
 @use '~/assets/scss/colors';
 details.question {
     border: 0.1em solid colors.$primary-color;
-    border-radius: 0.4em;
+    border-radius: 0.5em;
     transition: 200ms;
 
     font-size: 1.25em;
@@ -46,6 +46,8 @@ details.question {
 
     &[open] > summary {
         border-bottom: 0.1em dotted colors.$primary-color-alpha75;
+        border-end-end-radius: 0;
+        border-end-start-radius: 0;
 
         a.question-link {
             color: #ffffffcc;
@@ -58,6 +60,7 @@ details.question {
         padding: 1em;
         background-color: #002200bb;
         border: 0 none transparent;
+        border-radius: 0.5em;
         color: colors.$primary-color;
         cursor: pointer;
         flex-grow: 1;

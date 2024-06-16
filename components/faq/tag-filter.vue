@@ -48,6 +48,7 @@ onMounted(function() {
 <style scoped lang="scss">
 @use '~/assets/scss/colors';
 details {
+    background-color: #00000088;
     border: 0.1em solid colors.$primary-color;
     border-radius: 0.5em;
     padding: 0.5em 1em;
