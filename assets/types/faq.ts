@@ -9,6 +9,13 @@ export enum Tag {
     Bot = "bot",
 }
 
+
+export enum FilterMode {
+    exclude = 'exclude',
+    all = 'all',
+    include = 'include',
+}
+
 /**
  * FAQ entry type.
  * To get the FAQ content, use the questionID to index into the $t (translate) function.

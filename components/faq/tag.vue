@@ -5,7 +5,7 @@ import { defineProps } from 'vue';
 
 const props = defineProps({
     tag: {
-        type: Tag,
+        type: String,
         required: true
     }
 });
@@ -23,7 +23,7 @@ const preTextMap: Record<Tag, string> = {
 
 <template>
     <span :class="tag">
-        {{ preTextMap[tag] + "  " + $t(`faq.tags.${tag}`) }}
+        {{ preTextMap[tag as Tag] + "  " + $t(`faq.tags.${tag}`) }}
     </span>
 </template>
 

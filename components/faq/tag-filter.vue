@@ -1,9 +1,25 @@
 <script setup lang="ts">
-import { Tag } from '~/assets/types/faq';
+import { Tag, FilterMode } from '~/assets/types/faq';
 
-const props = defineProps({
-    ref: {
+const emits = defineEmits<{
+    filter: [tag: Tag, mode: FilterMode]
+}>();
 
+onMounted(function() {
+    for(const tag of Object.values(Tag)) {
+        for(const mode of Object.values(FilterMode)) {
+            const id = `tag-${tag.toLowerCase()}-${mode}`;
+            const element = document.getElementById(id) as HTMLInputElement | null;
+
+            if(element === null) {
+                console.error(`Could not find element with ID ${id}`);
+                continue;
+            }
+
+            element.addEventListener('input', function() {
+                emits('filter', tag as Tag, mode as FilterMode);
+            });
+        }
     }
 })
 </script>
@@ -46,6 +62,7 @@ details {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            gap: 1em;
             flex-wrap: wrap;
             row-gap: 0.5em;
 
