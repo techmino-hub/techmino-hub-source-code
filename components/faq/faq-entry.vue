@@ -31,29 +31,28 @@ const props = defineProps({
     </details>
 </template>
 
-<style scoped lang="scss">
-details {
-    border: 0.1em solid lime;
-    border-radius: 0.4rem;
+<style lang="scss">
+@use '~/assets/scss/colors';
+details.question {
+    border: 0.1em solid colors.$primary-color;
+    border-radius: 0.4em;
     transition: 200ms;
-    margin-bottom: 1rem;
 
-    font-size: 1.25rem;
-    background-color: rgba(0,100,0,0.15);
+    font-size: 1.25em;
+    background-color: #00330022;
     color: white;
 
     &[open] > summary {
-        border-bottom: 0.1em dashed lime;
+        border-bottom: 0.1em dotted colors.$primary-color-alpha75;
     }
 
     > summary {
         height: min-content;
-        padding: 0.5rem 1rem;
-        background-color: rgba(0,100,0,0.5);
+        padding: 1em;
+        background-color: #002200bb;
         border: 0 none transparent;
-        color: lime;
+        color: colors.$primary-color;
         cursor: pointer;
-        font-size: 1.25rem;
         flex-grow: 1;
         text-align: left;
 
@@ -76,20 +75,35 @@ details {
             display: inline-block;
             text-align: center;
             margin-right: 1rem;
-            width: 2rem; height: 2rem;
+            width: 2em; height: 2em;
             align-self: center;
-            border: 1px solid lime;
+            border: 1px solid colors.$primary-color;
             border-radius: 0.2rem;
         }
     }
 
-    article {
+    > article {
         display: flex;
         flex-direction: column;
         padding: 1em 1.5em 0.5em;
 
-        blockquote {
+        > blockquote {
             margin: 0;
+            
+            a {
+                color: colors.$btn-border-color;
+                transition: 200ms;
+
+                &:hover {
+                    text-shadow: 0 0 0.15em colors.$btn-hover-border-color;
+                    color: colors.$btn-hover-border-color;
+                }
+
+                &:active {
+                    text-shadow: 0 0 0.3em colors.$btn-active-border-color;
+                    color: colors.$btn-active-border-color;
+                }
+            }
         }
 
         cite {

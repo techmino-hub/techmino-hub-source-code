@@ -29,7 +29,7 @@ function dbg(arg: any): typeof arg {
     </header>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "~/assets/scss/main.scss";
 @use "~/assets/scss/colors.scss";
 

@@ -1,3 +1,5 @@
+@use '~/assets/scss/colors' as colors;
+
 body {
     margin: 0;
     padding: 0;
@@ -23,6 +25,34 @@ body {
 
         > main {
             background-color: rgba(0, 0, 0, 0.6);
+
+            a.block-style {
+                color: colors.$primary-color;
+                transition-duration: 200ms;
+                border-radius: 0.5em;
+                padding: 0.25em 0.4em;
+                &:hover {
+                    background-color: colors.$primary-color-alpha25;
+                }
+                &:active {
+                    background-color: colors.$primary-color-alpha50;
+                }
+            }
+
+            a.glow-style {
+                color: colors.$btn-border-color;
+                transition: 200ms;
+
+                &:hover {
+                    text-shadow: 0 0 0.15em colors.$btn-hover-border-color;
+                    color: colors.$btn-hover-border-color;
+                }
+
+                &:active {
+                    text-shadow: 0 0 0.3em colors.$btn-active-border-color;
+                    color: colors.$btn-active-border-color;
+                }
+            }
         }
     }
 }

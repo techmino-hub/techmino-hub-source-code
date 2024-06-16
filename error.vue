@@ -70,13 +70,14 @@ const copyError = () => {
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use "~/assets/scss/main";
-@use "~/assets/scss/colors";
+@use "~/assets/scss/colors" as colors;
 @use "~/assets/scss/index";
 
 main {
     padding: 1em 2em;
+
     a {
         color: colors.$primary-color;
         transition-duration: 200ms;

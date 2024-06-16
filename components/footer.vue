@@ -14,7 +14,7 @@ const localePath = useLocalePath();
   </footer>
 </template>
 
-<style>
+<style lang="scss">
 footer {
     display: flex;
     flex-direction: row;
