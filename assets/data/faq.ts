@@ -183,7 +183,7 @@ export default {
     },
     'custom-skin': {
         id: 'custom-skin',
-        author: "C29H25N3O5",
+        author: "C29H25N3O5, NOT_A_ROBOT, SweetSea",
         tags: [Tag.Techmino]
     },
     'tg-unverified-dev': {

@@ -142,6 +142,37 @@ details.question {
                     color: colors.$btn-active-border-color;
                 }
             }
+
+            table, td, tr, th {
+                border: 0.08em solid white;
+                border-collapse: collapse;
+            }
+
+            td, th {
+                padding: 0.25em 0.5em;
+            }
+
+            img {
+                display: block;
+                width: fit-content;
+                max-width: 30em;
+                margin-inline: auto;
+                margin-block: 1em;
+                border: 0.1em dashed colors.$primary-color-alpha25;
+            }
+
+            code {
+                font-family: 'techmino-monospace', 'JetBrains Mono', 'Source Code Pro', monospace;
+                background-color: black;
+                border-radius: 0.5em;
+                padding: 0.1em 0.2em;
+            }
+
+            pre code {
+                display: block;
+                padding: 0.25em 0.5em;
+                width: fit-content;
+            }
         }
 
         cite {

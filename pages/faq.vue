@@ -48,31 +48,31 @@ function filter(tag: Tag, mode: FilterMode) {
 
 .faq-outer {
     padding: 1em 2em;
-}
 
-.entries {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    margin-inline: auto;
-    max-width: 50em;
-    gap: 2em;
-}
+    .entries {
+        display: flex;
+        flex-direction: column;
+        width: fit-content;
+        margin-inline: auto;
+        max-width: 50em;
+        gap: 2em;
+    }
 
-// Question tag filters
-.entries.show-techmino      .question:not(.techmino),
-.entries.show-galaxy        .question:not(.galaxy),
-.entries.show-linux         .question:not(.linux),
-.entries.show-apple         .question:not(.apple),
-.entries.show-multiplayer   .question:not(.multiplayer),
-.entries.show-error         .question:not(.error),
-.entries.show-bot           .question:not(.bot),
-.entries.hide-techmino      .question.techmino,
-.entries.hide-galaxy        .question.galaxy,
-.entries.hide-linux         .question.linux,
-.entries.hide-apple         .question.apple,
-.entries.hide-multiplayer   .question.multiplayer,
-.entries.hide-error         .question.error,
-.entries.hide-bot           .question.bot
-{ display: none }
+    // Question tag filters
+    .entries.show-techmino      .question:not(.techmino),
+    .entries.show-galaxy        .question:not(.galaxy),
+    .entries.show-linux         .question:not(.linux),
+    .entries.show-apple         .question:not(.apple),
+    .entries.show-multiplayer   .question:not(.multiplayer),
+    .entries.show-error         .question:not(.error),
+    .entries.show-bot           .question:not(.bot),
+    .entries.hide-techmino      .question.techmino,
+    .entries.hide-galaxy        .question.galaxy,
+    .entries.hide-linux         .question.linux,
+    .entries.hide-apple         .question.apple,
+    .entries.hide-multiplayer   .question.multiplayer,
+    .entries.hide-error         .question.error,
+    .entries.hide-bot           .question.bot
+    { display: none }
+}
 </style>

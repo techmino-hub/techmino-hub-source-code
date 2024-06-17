@@ -12,8 +12,10 @@
   "dependencies": {
     "@nuxtjs/i18n": "^8.3.1",
     "@supabase/supabase-js": "^2.43.4",
+    "@types/sanitize-html": "^2.11.0",
     "markdown-it": "^14.1.0",
     "nuxt": "^3.11.2",
+    "sanitize-html": "^2.13.0",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2"
   },
