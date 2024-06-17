@@ -32,7 +32,7 @@ export default {
 </script>
 
 <template>
-    <div>
+    <div class="outer-cookies">
         <Title>{{ $t('cookies.tabTitle') }}</Title>
         <h1>{{ $t('cookies.title') }}</h1>
         <div v-html="$t('cookies.description')"></div>
@@ -48,5 +48,9 @@ export default {
     display: block;
     margin-top: 10px;
     font-size: 1.2em;
+}
+
+.outer-cookies {
+    padding: 1em 2em;
 }
 </style>

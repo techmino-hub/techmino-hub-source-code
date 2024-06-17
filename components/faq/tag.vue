@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { getChar } from '~/assets/chars';
 import { Tag } from '~/assets/types/faq';
-import { defineProps } from 'vue';
 
 const props = defineProps({
     tag: {
@@ -28,8 +27,10 @@ const preTextMap: Record<Tag, string> = {
 </template>
 
 <style scoped lang="scss">
+@use '~/assets/scss/colors';
+
 span {
-    --color: lime;
+    --color: #{colors.$tag-techmino-color};
 
     display: inline-block;
     color: var(--color);
@@ -37,11 +38,11 @@ span {
     padding: 0.1em 0.5em;
     border: 1px solid var(--color);
 
-    &.galaxy { --color: #978ae7; }
-    &.linux { --color: #f1e05a; }
-    &.apple { --color: white; }
-    &.multiplayer { --color: #ff7f00; }
-    &.error { --color: #ff0000; }
-    &.bot { --color: #62c2b9; }
+    &.galaxy { --color: #{colors.$tag-galaxy-color}; }
+    &.linux { --color: #{colors.$tag-linux-color}; }
+    &.apple { --color: #{colors.$tag-apple-color}; }
+    &.multiplayer { --color: #{colors.$tag-multiplayer-color}; }
+    &.error { --color: #{colors.$tag-error-color}; }
+    &.bot { --color: #{colors.$tag-bot-color}; }
 }
 </style>
