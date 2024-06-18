@@ -424,12 +424,12 @@ If you are using older versions that don’t support M1, just use Rosetta 2
         answer: `md_
 Simply go to Statistics &gt; Data Management, and you will see these buttons.
 Then you can copy and paste the data using your clipboard.
-![Screenshot of the Data Management scene in Techmino](/img/data-management.png)`
+![Screenshot of the Data Management scene in Techmino](/img/faq/data-management.png)`
       },
       'custom-skin': {
         question: "How do I make and import my own block skin?",
         answer: `md_Here's an example block skin for reference:
-![Example skin](/img/example-skin.png)  
+![Example skin](/img/faq/example-skin.png)  
 - The block skin is a \`.png\` file with a dimension of at least 240 × 90.
 - The image is divided into a 3 ×8 array of blocks, with each block having a dimension of 30× 30.
 
@@ -448,14 +448,14 @@ TIPS:
       'tg-unverified-dev': {
         question: "Techmino Galaxy macOS error: Techmino_Galaxy.app cannot be opened because the developer cannot be verified.",
         answer: `md_
-![A popup stating the aforementioned error](/img/mac-unverified-developer.png)
+![A popup stating the aforementioned error](/img/faq/mac-unverified-developer.png)
 This is because the Gatekeeper on macOS won’t let the user open any app that is not signed or notarized on default.  
 However, there is an easy way to bypass this:  
 Control–click Techmino (Galaxy).app and select “Open” from the pop-up menu, then select “Open” from the window.`
       },
       'macos-damage-computer': {
         question: "Techmino macOS error: Techmino.app will damage your computer. You should move it to the Trash.",
-        answer: `md_![A popup stating the aforementioned error](/img/macos-big-sur-alert-malicious-app.jpg)  
+        answer: `md_![A popup stating the aforementioned error](/img/faq/macos-big-sur-alert-malicious-app.jpg)  
 If you get this message, option-click Techmino (Galaxy).app, select “Get Info” from the menu, then check the “Override Malware Protection” checkbox.  
 You should now be able to open it.
 
@@ -510,14 +510,22 @@ It will not be implemented in the “Classic” Techmino.`
       'atk-table': {
         question: "How should I calculate the attack in Techmino?",
         answer: `md_Please use this table as a reference:  
-![Techmino's attack table](/img/techmino-attack-table.jpg)`
+![Techmino's attack table](/img/faq/techmino-attack-table.jpg)`
       },
       'b3b-calc': {
         question: "How is B2B2B calculated in Techmino?",
         answer: `md_Use this table to calculate B2B2B meter (on the left of the playfield):  
-![Techmino B2B2B table](/img/b2b2b-calculator.png)`
+![Techmino B2B2B table](/img/faq/b2b2b-calculator.png)`
       }
     }
+  },
+  map: {
+    tabTitle: "Techmino Hub - Map",
+    tabTitleFS: "Techmino Hub - Map (Fullscreen)",
+    tabTitleHTML: "Techmino Hub - Map (HTML)",
+    title: "Techmino Map",
+    details: "Currently displaying '{currentMap}' map",
+    fullscreen: "Visit fullscreen map"
   },
   cookies: {
     tabTitle: "Techmino Hub - Cookie Info",
