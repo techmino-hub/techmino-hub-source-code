@@ -64,7 +64,7 @@ function getScaleFactor(width: number, height: number): number {
     const sqrtArea = Math.sqrt(width * height);
     const targetSqrtArea = Math.sqrt(1280 * 720);
 
-    return sqrtArea / targetSqrtArea * (props.fullscreen ? 2.26 : 2.62);
+    return sqrtArea / targetSqrtArea * (props.fullscreen ? 1.26 : 1.62);
 }
 
 function init() {
@@ -170,6 +170,12 @@ onMounted(mountedHook);
         z-index: -1;
         pointer-events: none;
         touch-action: none;
+        caret-color: transparent;
+    }
+
+    .modes {
+        user-select: none;
+        caret-color: transparent;
     }
 }
 
