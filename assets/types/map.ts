@@ -10,8 +10,14 @@ export type MapData = {
 
 /**
  * Checks if the given map data is valid.
- * @param mapData The candidate map data to be validated
- * @param strict Whether or not to perform additional checks. Increases the time complexity of the function from O(1) to O(n).
+ * 
+ * @param mapData
+ * The candidate map data to be validated.
+ * 
+ * @param strict
+ * Whether or not to validate each mode and the map boundary.
+ * Increases the time complexity of the function from O(1) to O(n), where n is the number of modes in the map data.
+ * 
  * @returns Whether or not the map data is valid
  */
 export function isMapDataValid(mapData: any, strict: boolean = false): mapData is MapData {
@@ -68,8 +74,8 @@ export type Mode = {
 
 /**
  * Checks if the given mode is valid.
- * @param mode The candidate mode to be validated
- * @returns Whether or not the mode is valid
+ * @param mode The candidate mode to be validated.
+ * @returns Whether or not the mode is valid.
  */
 export function isModeValid(mode: any): mode is Mode {
     if(!mode || typeof mode !== 'object') { return false; }
@@ -98,4 +104,13 @@ export enum ModeShape {
     square = 1,
     diamond = 2,
     octagon = 3
+}
+
+export enum Rank {
+    Q = 0,
+    B = 1,
+    A = 2,
+    S = 3,
+    U = 4,
+    X = 5
 }

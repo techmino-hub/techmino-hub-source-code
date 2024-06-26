@@ -1,1 +1,0 @@
-{"modes":{"sprint_10l":{"x":0,"source":"http://example.com","name":"sprint_10l","y":0,"icon":"sprint1","shape":1,"unlock":["sprint_20l"],"size":40},"sprint_20l":{"x":100,"source":"http://example.com","y":100,"icon":"sprint2","shape":2,"unlock":[],"size":50}},"starting_mode":"sprint_10l","min_x":-1470,"min_y":-1870,"max_x":1320,"max_y":1270}
