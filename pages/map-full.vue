@@ -40,7 +40,7 @@ a {
     margin-inline: auto;
 }
 
-.map {
+.map, .map-page {
     position: fixed;
     inset: 0;
     width: 100vw;

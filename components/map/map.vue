@@ -1,5 +1,10 @@
 <template>
-    <div class="map-outer" ref="mapOuterElement">
+    <div class="map-outer" ref="mapOuterElement" tabindex="0">
+        <div class="unfocused-warning" tabindex="0">
+            <div class="inner">
+                {{ $t('map.unfocused') }}
+            </div>
+        </div>
         <div v-if="mapData" class="map-elements">
             <MapEdgeSvg :mapData="mapData" />
             <div class="modes">
@@ -38,12 +43,12 @@ const props = defineProps({
     }
 });
 
-// let mapData: MapData | null = await import(`~/assets/data/maps/${props.map}.json`);
+let keyDownSet = new Set<string>();
+let prevTimestamp = performance.now();
+
 let mapData: Ref<MapData | null> = ref(
     await import(`~/assets/data/maps/${props.map}.json`)
 );
-
-let isMounted = false;
 
 const mapOuterElement = ref<HTMLDivElement | null>(null);
 const debugElement = ref<HTMLParagraphElement | null>(null);
@@ -91,11 +96,53 @@ function init() {
 function mountedHook() {
     onResize();
     addEventListeners();
-    isMounted = true;
 }
 
 function addEventListeners() {
     window.addEventListener('resize', onResize);
+    if(mapOuterElement.value) {
+        mapOuterElement.value.addEventListener('keydown', onKeyDown);
+        mapOuterElement.value.addEventListener('keyup',   onKeyUp);
+    } else {
+        console.error('mapOuterElement is null');
+    }
+}
+
+function handleKeys(dt: number) {
+    if(keyDownSet.has('ControlLeft') || keyDownSet.has('ControlRight')) {
+        // Zoom in/out
+        const zoomExp =
+            (+ keyDownSet.has("ArrowUp")) +
+            (+ keyDownSet.has("ArrowRight")) -
+            (+ keyDownSet.has("ArrowDown")) -
+            (+ keyDownSet.has("ArrowLeft")) +
+            (+ keyDownSet.has("KeyW")) +
+            (+ keyDownSet.has("KeyD")) -
+            (+ keyDownSet.has("KeyA")) -
+            (+ keyDownSet.has("KeyS"));
+    }
+}
+
+function update(curTimestamp: number) {
+    const dt = curTimestamp - prevTimestamp;
+    prevTimestamp = curTimestamp;
+
+    if(keyDownSet.size > 0) {
+        requestAnimationFrame(update);
+    }
+}
+
+function onKeyDown(this: HTMLDivElement, ev: KeyboardEvent) {
+    const startUpdate = keyDownSet.size === 0;
+
+    keyDownSet.add(ev.code);
+
+    prevTimestamp = performance.now();
+    update(performance.now());
+}
+
+function onKeyUp(this: HTMLDivElement, ev: KeyboardEvent) {
+    keyDownSet.delete(ev.code);
 }
 
 function onModeClick(name: string) {
@@ -120,6 +167,8 @@ onMounted(mountedHook);
 </script>
 
 <style scoped lang="scss">
+@use '~/assets/scss/colors';
+
 .map-outer {
     position: relative;
     inset: 0;
@@ -142,6 +191,38 @@ onMounted(mountedHook);
 
     --map-width:  calc(1px * (var(--max-x) - var(--min-x)));
     --map-height: calc(1px * (var(--max-y) - var(--min-y)));
+
+    .unfocused-warning {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &.suppress-unfocused .unfocused-warning,
+    &:focus .unfocused-warning,
+    &:focus-within .unfocused-warning {
+        display: none;
+    }
+}
+
+.unfocused-warning {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: colors.$map-unfocused-bg-color;
+    color: colors.$map-unfocused-text-color;
+
+    z-index: 100;
+
+    .inner {
+        background-color: black;
+        border: 0.1em solid colors.$map-unfocused-border-color;
+
+        padding: 0.5em 1em;
+
+    }
 }
 
 .debug {

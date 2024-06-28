@@ -525,7 +525,8 @@ It will not be implemented in the “Classic” Techmino.`
     tabTitleHTML: "Techmino Hub - Map (HTML)",
     title: "Techmino Map",
     details: "Currently displaying '{currentMap}' map",
-    fullscreen: "Visit fullscreen map"
+    fullscreen: "Visit fullscreen map",
+    unfocused: "Unfocused - click here to focus",
   },
   cookies: {
     tabTitle: "Techmino Hub - Cookie Info",
