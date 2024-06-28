@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-1 1 99 101" stroke-width="2">
+    <g fill="#DBCFCE88" transform="translate(1, -1)">
+        <rect x="15" y="20" width="8" height="2" />
+        <rect x="35" y="20" width="8" height="2" />
+        <rect x="55" y="20" width="8" height="2" />
+        <rect x="75" y="20" width="8" height="2" />
+
+        <rect x="15" y="40" width="8" height="2" />
+        <rect x="35" y="40" width="8" height="2" />
+        <rect x="55" y="40" width="8" height="2" />
+        <rect x="75" y="40" width="8" height="2" />
+
+        <rect x="15" y="60" width="8" height="2" />
+        <rect x="35" y="60" width="8" height="2" />
+        <rect x="55" y="60" width="8" height="2" />
+        <rect x="75" y="60" width="8" height="2" />
+
+        <rect x="15" y="80" width="8" height="2" />
+        <rect x="35" y="80" width="8" height="2" />
+        <rect x="55" y="80" width="8" height="2" />
+        <rect x="75" y="80" width="8" height="2" />
+
+        <rect x="18" y="17" width="2" height="8" />
+        <rect x="38" y="17" width="2" height="8" />
+        <rect x="58" y="17" width="2" height="8" />
+        <rect x="78" y="17" width="2" height="8" />
+
+        <rect x="18" y="37" width="2" height="8" />
+        <rect x="38" y="37" width="2" height="8" />
+        <rect x="58" y="37" width="2" height="8" />
+        <rect x="78" y="37" width="2" height="8" />
+
+        <rect x="18" y="57" width="2" height="8" />
+        <rect x="38" y="57" width="2" height="8" />
+        <rect x="58" y="57" width="2" height="8" />
+        <rect x="78" y="57" width="2" height="8" />
+
+        <rect x="18" y="77" width="2" height="8" />
+        <rect x="38" y="77" width="2" height="8" />
+        <rect x="58" y="77" width="2" height="8" />
+        <rect x="78" y="77" width="2" height="8" />
+    </g>
+    <g fill="#DBCFCE" stroke="#877877">
+        <rect x="0" y="80" width="20" height="20" />
+        <rect x="20" y="80" width="20" height="20" />
+        <rect x="20" y="60" width="20" height="20" />
+        <rect x="40" y="80" width="20" height="20" />
+    </g>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" stroke-width="2" stroke-linecap="square" >
+    <rect x="14" y="14" width="32" height="32" fill="#DBCFCE" />
+    <rect x="14" y="82" width="32" height="32" fill="#DBCFCE" />
+    <rect x="82" y="82" width="32" height="32" fill="#DBCFCE" />
+    <polyline points="15,49 113,49 113,79 79,79 79,113 49,113 49,79 15,79 15,49" fill="none" stroke="#DBCFCE" />
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" stroke-width="4">
+    <rect x="  4" y="  4" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x="  4" y=" 36" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x="  4" y=" 68" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x="  4" y="100" width="12" height="24" fill="none" stroke="#DBCFCE" />
+
+    <rect x=" 22" y="  4" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x=" 22" y=" 36" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x=" 22" y=" 68" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x=" 22" y="100" width="12" height="24" fill="none" stroke="#DBCFCE" />
+
+    <rect x=" 94" y="  4" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x=" 94" y=" 36" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x=" 94" y=" 68" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x=" 94" y="100" width="12" height="24" fill="none" stroke="#DBCFCE" />
+
+    <rect x="112" y="  4" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x="112" y=" 36" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x="112" y=" 68" width="12" height="24" fill="none" stroke="#DBCFCE" />
+    <rect x="112" y="100" width="12" height="24" fill="none" stroke="#DBCFCE" />
+
+    <rect x="41" y="20" width="46" height="86" fill="#DBCFCEB3" stroke="#DBCFCE" />
+</svg>

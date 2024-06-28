@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { type Mode, ModeShape, Rank } from '~/assets/types/map';
+import { getModeIconPath } from '~/assets/data/mode-icons';
 
 const props = defineProps({
     mode: {
@@ -34,16 +35,18 @@ onMounted(() => {
 </script>
 
 <template>
-    <button :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]}`" ref="modeElement" @click="$emit('click')">
+    <button :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]}`" ref="modeElement">
         <div
             v-if="mode.shape == ModeShape.square"
             class="border square"
+            @click="$emit('click')"
         ></div>
         <svg
           v-else-if="mode.shape == ModeShape.octagon"
           class="border octagon"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="-4.5 -4.5 109 109">
+          viewBox="-4.5 -4.5 109 109"
+          @click="$emit('click')">
             <polygon
                 points="100,50 85.36,85.36 50,100 14.64,85.36 0,50 14.64,14.64 50,0 85.36,14.64"
                 stroke-width="5"
@@ -53,12 +56,20 @@ onMounted(() => {
           v-else-if="mode.shape == ModeShape.diamond"
           class="border diamond"
           xmlns="http://www.w3.org/2000/svg"
-          viewBox="-4.5 -4.5 109 109">
+          viewBox="-4.5 -4.5 109 109"
+          @click="$emit('click')">
             <polygon
                 points="100,50 50,100 0,50 50,0"
                 stroke-width="5"
             />
         </svg>
+
+        <img
+            :src="getModeIconPath(mode)"
+            alt=""
+            class="icon"
+            onerror="false"
+        >
     </button>
 </template>
 
@@ -71,7 +82,6 @@ onMounted(() => {
     height: var(--size);
     border: 0 none transparent;
     background-color: transparent;
-    cursor: pointer;
     padding: 0;
 
     --size: 40px;
@@ -89,17 +99,27 @@ onMounted(() => {
     }
 
     .border {
+        position: absolute;
+        inset: 0;
+        width: var(--size);
+        height: var(--size);
         color: var(--border-color);
         border-color: var(--border-color);
         stroke: var(--border-color);
+        z-index: -1;
+        cursor: pointer;
+
+        &.square {
+            box-sizing: border-box;
+            background-color: var(--bg-color);
+            border: solid 5px;
+        }
     }
 
-    .square {
-        box-sizing: border-box;
-        width: var(--size);
-        height: var(--size);
-        background-color: var(--bg-color);
-        border: solid 5px;
+    .icon {
+        position: absolute;
+        inset: 0;
+        margin: auto;
     }
 }
 </style>

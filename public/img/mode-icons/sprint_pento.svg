@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="#DBCFCE">
+    <!-- <polygon points="0,64 128,64 128,0 196,0 196,128 128,128 128,196 64,196 64,128 0,128" transform="scale(1) rotate(-14.9) translate(0, 60)" /> -->
+    <polygon points="0,0 64,0 64,64 196,64 196,128 128,128 128,196 64,196 64,128 0,128" transform="scale(1) rotate(-14.9) translate(0, 60)" />
+</svg>

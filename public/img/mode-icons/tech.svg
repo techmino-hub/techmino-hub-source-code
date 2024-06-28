@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" stroke-width="4">
+    <polygon points="51,12 75,12 75,43 109,117 17,117 51,43" fill="none" stroke="#DBCFCE" />
+    
+    <polygon points="42,10 52,10 52,20" fill="#DBCFCE" />
+    <polygon points="74,10 84,10 74,20" fill="#DBCFCE" />
+
+    <line x1="42" y1="105" x2="62" y2="105" stroke="#DBCFCE" stroke-linecap="square" />
+    <line x1="46" y1=" 91" x2="62" y2=" 91" stroke="#DBCFCE" stroke-linecap="square" />
+    <line x1="50" y1=" 75" x2="62" y2=" 75" stroke="#DBCFCE" stroke-linecap="square" />
+    <line x1="54" y1=" 57" x2="62" y2=" 57" stroke="#DBCFCE" stroke-linecap="square" />
+</svg>

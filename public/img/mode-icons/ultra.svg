@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" stroke-width="12">
+    <rect x="46" y="0" width="36" height="12" fill="#DBCFCE" />
+    <circle cx="64" cy="72" r="48" fill="none" stroke="#DBCFCE" />
+    <rect x="58" y="42" width="12" height="38" rx="4" ry="4" fill="#DBCFCE" />
+    <rect x="58" y="68" width="24" height="12" rx="4" ry="4" fill="#DBCFCE" />
+    <rect x="110" y="64" width="24" height="16" rx="4" ry="4" fill="#DBCFCE" transform="rotate(-45,64,64)" />
+</svg>
