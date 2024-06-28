@@ -381,7 +381,7 @@ Note: L = counterclockwise, R = clockwise, F = 180° rotation
 
 Here is a useful GIF demonstrating this:  
 
-![image](img/trs-tf-ospin.gif)
+![image](img/faq/trs-tf-ospin.gif)
 
 To perform a translational O-spin, you can use the fact that some rotation systems have kicks,
 and use that to put the O-piece in a hole.
@@ -392,7 +392,7 @@ More info is available in the in-game Zictionary.
 
 Here's a demonstration of translational O-spins:  
 
-![image](img/birs-tl-ospin.gif)
+![image](img/faq/birs-tl-ospin.gif)
 `
       },
       'snapshot-version': {
