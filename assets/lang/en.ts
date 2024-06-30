@@ -526,6 +526,7 @@ It will not be implemented in the “Classic” Techmino.`
     title: "Techmino Map",
     details: "Currently displaying '{currentMap}' map",
     fullscreen: "Visit fullscreen map",
+    htmlVersion: "Visit JavaScript-free map",
     unfocused: "Unfocused - click here to focus",
   },
   cookies: {

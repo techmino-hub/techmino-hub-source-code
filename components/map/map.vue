@@ -1,11 +1,24 @@
 <template>
-    <div class="map-outer" ref="mapOuterElement" tabindex="0">
-        <div class="unfocused-warning" tabindex="0">
+    <div
+      :style="{
+        '--cam-x': camX,
+        '--cam-y': camY,
+        '--cam-zoom': camZoom,
+        '--scale-factor': scaleFactor,
+        '--min-x': mapData?.min_x ?? 0,
+        '--max-x': mapData?.max_x ?? 0,
+        '--min-y': mapData?.min_y ?? 0,
+        '--max-y': mapData?.max_y ?? 0
+      }"
+      class="map-outer"
+      ref="mapOuterElement"
+      tabindex="0">
+        <div class="unfocused-warning" v-if="!fullscreen" v-show="isFocused">
             <div class="inner">
                 {{ $t('map.unfocused') }}
             </div>
         </div>
-        <div v-if="mapData" class="map-elements">
+        <div v-if="mapData" v-show="isMounted" class="map-elements">
             <MapEdgeSvg :mapData="mapData" />
             <div class="modes">
                 <MapMode v-for="mode in Object.values(mapData.modes)"
@@ -30,6 +43,12 @@
 <script setup lang="ts">
 import { type MapData, isMapDataValid, type Mode, isModeValid, ModeShape } from '~/assets/types/map';
 
+const ZOOM_SPEED_MULT = 0.00262;
+const ZOOM_SCROLL_MULT = -0.6;
+const MIN_ZOOM = 0.126;
+const MAX_ZOOM = 1.26;
+const MAP_MARGIN = 62;
+
 const props = defineProps({
     map: {
         type: String,
@@ -52,6 +71,13 @@ let mapData: Ref<MapData | null> = ref(
 
 const mapOuterElement = ref<HTMLDivElement | null>(null);
 const debugElement = ref<HTMLParagraphElement | null>(null);
+const isMounted = ref<boolean>(false);
+const isFocused = ref<boolean>(props.fullscreen);
+
+const camX = ref<number>(0);
+const camY = ref<number>(0);
+const camZoom = ref<number>(1);
+const scaleFactor = ref<number>(1);
 
 function isDangerousFileName(fileName: string): boolean {
     if(fileName.length > 32 || fileName.length < 1) {
@@ -96,16 +122,15 @@ function init() {
 function mountedHook() {
     onResize();
     addEventListeners();
+
+    isMounted.value = true;
 }
 
 function addEventListeners() {
     window.addEventListener('resize', onResize);
-    if(mapOuterElement.value) {
-        mapOuterElement.value.addEventListener('keydown', onKeyDown);
-        mapOuterElement.value.addEventListener('keyup',   onKeyUp);
-    } else {
-        console.error('mapOuterElement is null');
-    }
+    
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup',   onKeyUp);
 }
 
 function handleKeys(dt: number) {
@@ -119,7 +144,20 @@ function handleKeys(dt: number) {
             (+ keyDownSet.has("KeyW")) +
             (+ keyDownSet.has("KeyD")) -
             (+ keyDownSet.has("KeyA")) -
-            (+ keyDownSet.has("KeyS"));
+            (+ keyDownSet.has("KeyS")) +
+            (+ keyDownSet.has("Equal")) +
+            (+ keyDownSet.has("NumpadAdd")) -
+            (+ keyDownSet.has("Minus")) -
+            (+ keyDownSet.has("NumpadSubtract"));
+        
+        const zoomMultiplier =
+            Math.exp(zoomExp * dt * ZOOM_SPEED_MULT);
+
+        camZoom.value = clamp(
+            MIN_ZOOM,
+            camZoom.value * zoomMultiplier,
+            MAX_ZOOM
+        );
     }
 }
 
@@ -127,21 +165,45 @@ function update(curTimestamp: number) {
     const dt = curTimestamp - prevTimestamp;
     prevTimestamp = curTimestamp;
 
+    handleKeys(dt);
+
     if(keyDownSet.size > 0) {
         requestAnimationFrame(update);
     }
 }
 
-function onKeyDown(this: HTMLDivElement, ev: KeyboardEvent) {
+function isTargetInMap(target: EventTarget | null): boolean {
+    if(!(target instanceof HTMLElement)) return false;
+    
+    if(props.fullscreen) return true;
+
+    return mapOuterElement.value?.contains(target) ?? false;
+}
+
+const UNPREVENTED_CODES = new Set([
+    'F5', 'F12', 'KeyR'
+])
+
+function onKeyDown(this: Window, ev: KeyboardEvent) {
+    if(!isTargetInMap(ev.target)) return;
+
     const startUpdate = keyDownSet.size === 0;
 
     keyDownSet.add(ev.code);
 
-    prevTimestamp = performance.now();
-    update(performance.now());
+    if(startUpdate) {
+        prevTimestamp = performance.now();
+        update(performance.now());
+    }
+
+    if(!UNPREVENTED_CODES.has(ev.code)) {
+        ev.preventDefault();
+    }
 }
 
-function onKeyUp(this: HTMLDivElement, ev: KeyboardEvent) {
+function onKeyUp(this: Window, ev: KeyboardEvent) {
+    if(!isTargetInMap(ev.target)) return;
+
     keyDownSet.delete(ev.code);
 }
 
@@ -157,9 +219,11 @@ function onResize() {
     const width = mapOuter.clientWidth;
     const height = mapOuter.clientHeight;
 
-    const scaleFactor = getScaleFactor(width, height);
+    scaleFactor.value = getScaleFactor(width, height);
+}
 
-    mapOuter.style.setProperty('--scale-factor', scaleFactor.toString());
+function clamp(min: number, val: number, max: number): number {
+    return Math.min(Math.max(min, val), max);
 }
 
 init();
@@ -177,7 +241,7 @@ onMounted(mountedHook);
 
     overflow: hidden;
 
-    // To be set from JavaScript
+    // To be set through refs
     --cam-x: 0px; // Camera X position
     --cam-y: 0px; // Camera Y position
     --cam-zoom: 1; // Camera zoom scale factor
@@ -244,6 +308,7 @@ onMounted(mountedHook);
 
     transform: translate(var(--cam-x), var(--cam-y)) scale(var(--total-scale));
     transform-box: view-box;
+    transform-origin: 50% 50%;
 
     .edges {
         position: absolute;
