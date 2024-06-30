@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import { type MapData, isMapDataValid, type Mode, isModeValid, ModeShape } from '~/assets/types/map';
 
+const MOVE_SPEED_MULT = 0.26;
 const ZOOM_SPEED_MULT = 0.00262;
 const ZOOM_SCROLL_MULT = -0.6;
 const MIN_ZOOM = 0.126;
@@ -173,11 +174,25 @@ function handleKeys(dt: number) {
             (+ keyDownSet.has("KeyS")) -
             (+ keyDownSet.has("KeyW"));
         
-        const dx = initialdx * dt * camZoom.value;
-        const dy = initialdy * dt * camZoom.value;
+        const dx = initialdx * dt * MOVE_SPEED_MULT / camZoom.value;
+        const dy = initialdy * dt * MOVE_SPEED_MULT / camZoom.value;
 
-        camX.value += dx;
-        camY.value += dy;
+        const minX = (mapData.value?.min_x ?? 0) - MAP_MARGIN;
+        const maxX = (mapData.value?.max_x ?? 0) + MAP_MARGIN;
+        const minY = (mapData.value?.min_y ?? 0) - MAP_MARGIN;
+        const maxY = (mapData.value?.max_y ?? 0) + MAP_MARGIN;
+
+        camX.value = clamp(
+            minX,
+            camX.value + dx,
+            maxX
+        );
+
+        camY.value = clamp(
+            minY,
+            camY.value + dy,
+            maxY
+        );
     }
 }
 
