@@ -23,19 +23,18 @@ defineEmits(['click']);
 </script>
 
 <template>
-    <button
+    <div
       :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]} ${selected ? 'selected' : ''}`"
       :style="{
         left: mode.x - mode.size + 'px',
         top: mode.y - mode.size + 'px',
         '--size': 2 * mode.size + 'px'
-      }"
-      @click="$emit('click')">
-        <div
+      }">
+        <button
             v-if="mode.shape == ModeShape.square"
             class="border square"
             @click="$emit('click')"
-        ></div>
+        ></button>
         <svg
           v-else-if="mode.shape == ModeShape.octagon"
           class="border octagon"
@@ -65,7 +64,7 @@ defineEmits(['click']);
             class="icon"
             draggable="false"
         >
-    </button>
+    </div>
 </template>
 
 <style scoped lang="scss">
@@ -82,6 +81,7 @@ defineEmits(['click']);
     --size: 40px;
     --bg-color: #{colors.$mode-bg-q};
     --border-color: #{colors.$mode-border};
+    pointer-events: none;
 
     &.rank-B { --bg-color: #{colors.$mode-bg-b}; }
     &.rank-A { --bg-color: #{colors.$mode-bg-a}; }
@@ -110,6 +110,7 @@ defineEmits(['click']);
             box-sizing: border-box;
             border: solid 5px;
             background-color: var(--bg-color);
+            pointer-events: all;
         }
 
         &.diamond {
@@ -121,6 +122,10 @@ defineEmits(['click']);
 
         &.octagon, &.diamond {
             fill: var(--bg-color);
+
+            polygon {
+                pointer-events: all;
+            }
         }
     }
 
@@ -130,6 +135,9 @@ defineEmits(['click']);
         width: calc(0.9 * var(--size));
         height: calc(0.9 * var(--size));
         margin: auto;
+        pointer-events: none;
+        user-select: none;
+        caret-color: transparent;
     }
 
     &.octagon .icon {
