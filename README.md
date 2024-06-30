@@ -6,6 +6,10 @@ This website is built using [Nuxt.js](https://nuxt.com), unlike the previous ite
 ## Contributing
 See our [repository's wiki](https://github.com/techmino-hub/techmino-hub-source-code/wiki/) for information on contributing to this project.
 
+If you trust the workspace on Visual Studio Code, `bun run dev` will automatically be executed when you open the workspace. This is so that you don't have to turn on the development server manually. By default, it starts the development server on `http://localhost:3000`.
+
+If you want to disable this, press `Ctrl + Shift + P` and type "Tasks: Manage Automatic Tasks", then disable automatic tasks.
+
 ## Running
 
 Make sure to install the dependencies:
