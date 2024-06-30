@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { type MapData, isMapDataValid, type Mode, isModeValid, ModeShape } from '~/assets/types/map';
 
-const MOVE_SPEED_MULT = 0.26;
+const MOVE_SPEED_MULT = 0.462;
 const ZOOM_SPEED_MULT = 0.00262;
 const ZOOM_SCROLL_MULT = -0.6;
 const MIN_ZOOM = 0.126;

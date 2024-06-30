@@ -15,27 +15,16 @@ const props = defineProps({
 });
 
 defineEmits(['click']);
-
-const modeElement = ref<HTMLButtonElement | null>(null);
-
-onMounted(() => {
-    const mode = props.mode;
-
-    if(modeElement.value) {
-        const style = modeElement.value.style;
-
-        const size = mode.size * 2;
-        const radius = 0.5 * size;
-
-        style.left = `${mode.x - radius}px`;
-        style.top = `${mode.y - radius}px`;
-        style.setProperty('--size', `${size}px`)
-    }
-});
 </script>
 
 <template>
-    <button :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]}`" ref="modeElement">
+    <button
+      :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]}`"
+      :style="{
+        left: mode.x - mode.size + 'px',
+        top: mode.y - mode.size + 'px',
+        '--size': 2 * mode.size + 'px'
+      }">
         <div
             v-if="mode.shape == ModeShape.square"
             class="border square"
@@ -49,7 +38,7 @@ onMounted(() => {
           @click="$emit('click')">
             <polygon
                 points="100,50 85.36,85.36 50,100 14.64,85.36 0,50 14.64,14.64 50,0 85.36,14.64"
-                stroke-width="5"
+                stroke-width="7"
             />
         </svg>
         <svg
@@ -114,11 +103,26 @@ onMounted(() => {
             background-color: var(--bg-color);
             border: solid 5px;
         }
+
+        &.diamond {
+            width: calc(1.25 * var(--size));
+            height: calc(1.25 * var(--size));
+            inset: calc(-0.125 * var(--size));
+        }
     }
 
     .icon {
         position: absolute;
-        inset: 0;
+        inset: calc(0.05 * var(--size));
+        width: calc(0.9 * var(--size));
+        height: calc(0.9 * var(--size));
+        margin: auto;
+    }
+
+    &.octagon .icon {
+        inset: calc(0.125 * var(--size));
+        width: calc(0.75 * var(--size));
+        height: calc(0.75 * var(--size));
         margin: auto;
     }
 }
