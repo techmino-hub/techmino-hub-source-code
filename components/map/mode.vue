@@ -11,6 +11,11 @@ const props = defineProps({
         type: Number as PropType<Rank>,
         required: false,
         default: Rank.Q
+    },
+    selected: {
+        type: Boolean,
+        required: false,
+        default: false
     }
 });
 
@@ -19,12 +24,13 @@ defineEmits(['click']);
 
 <template>
     <button
-      :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]}`"
+      :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]} ${selected ? 'selected' : ''}`"
       :style="{
         left: mode.x - mode.size + 'px',
         top: mode.y - mode.size + 'px',
         '--size': 2 * mode.size + 'px'
-      }">
+      }"
+      @click="$emit('click')">
         <div
             v-if="mode.shape == ModeShape.square"
             class="border square"
@@ -57,7 +63,7 @@ defineEmits(['click']);
             :src="getModeIconPath(mode)"
             alt=""
             class="icon"
-            onerror="false"
+            draggable="false"
         >
     </button>
 </template>
@@ -83,7 +89,7 @@ defineEmits(['click']);
     &.rank-U { --bg-color: #{colors.$mode-bg-u}; }
     &.rank-X { --bg-color: #{colors.$mode-bg-x}; }
 
-    &:active {
+    &.selected {
         --border-color: #{colors.$mode-border-active};
     }
 
@@ -110,6 +116,7 @@ defineEmits(['click']);
             width: calc(1.25 * var(--size));
             height: calc(1.25 * var(--size));
             inset: calc(-0.125 * var(--size));
+            fill: var(--bg-color);
         }
 
         &.octagon, &.diamond {

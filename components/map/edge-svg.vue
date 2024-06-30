@@ -38,6 +38,7 @@ const props = defineProps({
     line {
         stroke-width: 8px;
         stroke: colors.$map-edge-color;
+        stroke-linecap: round;
     }
 }
 </style>

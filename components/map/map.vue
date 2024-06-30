@@ -13,15 +13,15 @@
       class="map-outer"
       ref="mapOuterElement"
       tabindex="0">
-        <div class="debug">{{ debugText }}</div>
+        <pre class="debug">{{ debugText }}</pre>
         <div class="unfocused-warning" v-if="!fullscreen" v-show="isFocused">
             <div class="inner">
                 {{ $t('map.unfocused') }}
             </div>
         </div>
-        <svg class="crosshair" viewBox="0 0 100 100">
-            <line x1="0" y1="50" x2="100" y2="50" />
-            <line x1="50" y1="0" x2="50" y2="100" />
+        <svg class="crosshair" viewBox="0 0 10 10" v-show="showCrosshair">
+            <line x1="0" y1="5" x2="10" y2="5" />
+            <line x1="5" y1="0" x2="5" y2="10" />
         </svg>
         <div v-if="mapData" v-show="isMounted" class="map-elements">
             <MapEdgeSvg :mapData="mapData" />
@@ -30,6 +30,7 @@
                     :key="mode.name"
                     :title="mode.name"
                     :mode="mode"
+                    :selected="(!!selectedMode) && (selectedMode.name === mode.name)"
                     @click="onModeClick(mode.name)"
                 />
             </div>
@@ -71,6 +72,11 @@ const props = defineProps({
 let keyDownSet = new Set<string>();
 let prevTimestamp = performance.now();
 
+let totalMovement = 0;
+let isDragging = false;
+let pendingUnselect = false;
+let cancelNextModeSelect = false;
+
 let mapData: Ref<MapData | null> = ref(
     await import(`~/assets/data/maps/${props.map}.json`)
 );
@@ -84,6 +90,10 @@ const camX = ref<number>(0);
 const camY = ref<number>(0);
 const camZoom = ref<number>(1);
 const scaleFactor = ref<number>(1);
+
+const showCrosshair = ref<boolean>(false);
+
+const selectedMode = ref<Mode | null>(null);
 
 function isDangerousFileName(fileName: string): boolean {
     if(fileName.length > 32 || fileName.length < 1) {
@@ -113,14 +123,6 @@ function init() {
         console.error(mapData.value);
         throw new Error(`Invalid map data for map "${props.map}". An object dump is available in the console.`);
     }
-    
-    if(mapOuterElement.value) {
-        const mapStyle = mapOuterElement.value.style;
-        mapStyle.setProperty('--min-x', mapData.value?.min_x.toString() ?? '0');
-        mapStyle.setProperty('--max-x', mapData.value?.max_x.toString() ?? '0');
-        mapStyle.setProperty('--min-y', mapData.value?.min_y.toString() ?? '0');
-        mapStyle.setProperty('--max-y', mapData.value?.max_y.toString() ?? '0');
-    }
 
     onResize();
 }
@@ -137,67 +139,100 @@ function addEventListeners() {
     
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup',   onKeyUp);
+
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup',   onMouseUp);
+    window.addEventListener('wheel',     onWheel);
+}
+
+function handleZoomKeys(dt: number) {
+    const zoomExp =
+        (+ keyDownSet.has("ArrowUp")) +
+        (+ keyDownSet.has("ArrowRight")) -
+        (+ keyDownSet.has("ArrowDown")) -
+        (+ keyDownSet.has("ArrowLeft")) +
+        (+ keyDownSet.has("KeyW")) +
+        (+ keyDownSet.has("KeyD")) -
+        (+ keyDownSet.has("KeyA")) -
+        (+ keyDownSet.has("KeyS")) +
+        (+ keyDownSet.has("Equal")) +
+        (+ keyDownSet.has("NumpadAdd")) -
+        (+ keyDownSet.has("Minus")) -
+        (+ keyDownSet.has("NumpadSubtract"));
+    
+    const zoomMultiplier =
+        Math.exp(zoomExp * dt * ZOOM_SPEED_MULT);
+
+    if(zoomMultiplier === 1) return;
+
+    showCrosshair.value = false;
+
+    camZoom.value = clamp(
+        MIN_ZOOM,
+        camZoom.value * zoomMultiplier,
+        MAX_ZOOM
+    );
+}
+
+function handleMoveKeys(dt: number) {
+    const initialdx =
+        (+ keyDownSet.has("ArrowRight")) -
+        (+ keyDownSet.has("ArrowLeft")) +
+        (+ keyDownSet.has("KeyD")) -
+        (+ keyDownSet.has("KeyA"));
+    
+    const initialdy =
+        (+ keyDownSet.has("ArrowDown")) -
+        (+ keyDownSet.has("ArrowUp")) +
+        (+ keyDownSet.has("KeyS")) -
+        (+ keyDownSet.has("KeyW"));
+    
+    const dx = initialdx * dt * MOVE_SPEED_MULT / camZoom.value;
+    const dy = initialdy * dt * MOVE_SPEED_MULT / camZoom.value;
+
+    if(dx === 0 && dy === 0) return;
+
+    showCrosshair.value = true;
+
+    moveMap(dx, dy);
+
+    const modeAtCenter = getModeAtCenter();
+
+    if(modeAtCenter) {
+        selectedMode.value = modeAtCenter;
+    }
 }
 
 function handleKeys(dt: number) {
     if(keyDownSet.has('ControlLeft') || keyDownSet.has('ControlRight')) {
-        // Zoom in/out
-        const zoomExp =
-            (+ keyDownSet.has("ArrowUp")) +
-            (+ keyDownSet.has("ArrowRight")) -
-            (+ keyDownSet.has("ArrowDown")) -
-            (+ keyDownSet.has("ArrowLeft")) +
-            (+ keyDownSet.has("KeyW")) +
-            (+ keyDownSet.has("KeyD")) -
-            (+ keyDownSet.has("KeyA")) -
-            (+ keyDownSet.has("KeyS")) +
-            (+ keyDownSet.has("Equal")) +
-            (+ keyDownSet.has("NumpadAdd")) -
-            (+ keyDownSet.has("Minus")) -
-            (+ keyDownSet.has("NumpadSubtract"));
-        
-        const zoomMultiplier =
-            Math.exp(zoomExp * dt * ZOOM_SPEED_MULT);
-
-        camZoom.value = clamp(
-            MIN_ZOOM,
-            camZoom.value * zoomMultiplier,
-            MAX_ZOOM
-        );
+        handleZoomKeys(dt);
     } else {
-        // Move camera
-        const initialdx =
-            (+ keyDownSet.has("ArrowRight")) -
-            (+ keyDownSet.has("ArrowLeft")) +
-            (+ keyDownSet.has("KeyD")) -
-            (+ keyDownSet.has("KeyA"));
-        
-        const initialdy =
-            (+ keyDownSet.has("ArrowDown")) -
-            (+ keyDownSet.has("ArrowUp")) +
-            (+ keyDownSet.has("KeyS")) -
-            (+ keyDownSet.has("KeyW"));
-        
-        const dx = initialdx * dt * MOVE_SPEED_MULT / camZoom.value;
-        const dy = initialdy * dt * MOVE_SPEED_MULT / camZoom.value;
-
-        const minX = (mapData.value?.min_x ?? 0) - MAP_MARGIN;
-        const maxX = (mapData.value?.max_x ?? 0) + MAP_MARGIN;
-        const minY = (mapData.value?.min_y ?? 0) - MAP_MARGIN;
-        const maxY = (mapData.value?.max_y ?? 0) + MAP_MARGIN;
-
-        camX.value = clamp(
-            minX,
-            camX.value + dx,
-            maxX
-        );
-
-        camY.value = clamp(
-            minY,
-            camY.value + dy,
-            maxY
-        );
+        handleMoveKeys(dt);
     }
+
+    if(keyDownSet.has('Escape')) {
+        selectedMode.value = null;
+    }
+}
+
+function moveMap(dx: number, dy: number) {
+    const minX = (mapData.value?.min_x ?? 0) - MAP_MARGIN;
+    const maxX = (mapData.value?.max_x ?? 0) + MAP_MARGIN;
+    const minY = (mapData.value?.min_y ?? 0) - MAP_MARGIN;
+    const maxY = (mapData.value?.max_y ?? 0) + MAP_MARGIN;
+
+    camX.value = clamp(
+        minX,
+        camX.value + dx,
+        maxX
+    );
+
+    camY.value = clamp(
+        minY,
+        camY.value + dy,
+        maxY
+    );
 }
 
 function update(curTimestamp: number) {
@@ -206,7 +241,7 @@ function update(curTimestamp: number) {
 
     handleKeys(dt);
 
-    debugText.value = `dt: ${dt.toFixed(0)} ms`;
+    debugText.value = `dt: ${dt.toFixed(0)} ms\nsel: ${selectedMode.value?.name ?? 'none'}`;
 
     if(keyDownSet.size > 0) {
         requestAnimationFrame(update);
@@ -224,34 +259,109 @@ function isTargetInMap(target: EventTarget | null): boolean {
 }
 
 const UNPREVENTED_CODES = new Set([
-    'F5', 'F11', 'F12', 'KeyR'
-])
+    'KeyR', 'KeyI'
+]);
 
-function onKeyDown(this: Window, ev: KeyboardEvent) {
+function onKeyDown(ev: KeyboardEvent) {
     if(!isTargetInMap(ev.target)) return;
 
     const startUpdate = keyDownSet.size === 0;
 
     keyDownSet.add(ev.code);
 
+    // console.debug('keydown', ev.code);
+
     if(startUpdate) {
         prevTimestamp = performance.now();
         update(performance.now());
     }
 
-    if(!UNPREVENTED_CODES.has(ev.code)) {
+    if(
+        (ev.code.includes("Key") || ev.code.includes("Arrow"))
+        && !UNPREVENTED_CODES.has(ev.code)
+    ) {
         ev.preventDefault();
     }
 }
 
-function onKeyUp(this: Window, ev: KeyboardEvent) {
+function onKeyUp(ev: KeyboardEvent) {
     if(!isTargetInMap(ev.target)) return;
 
     keyDownSet.delete(ev.code);
 }
 
+function onMouseDown(ev: MouseEvent) {
+    if(!isTargetInMap(ev.target)) return;
+
+    totalMovement = 0;
+
+    if(ev.button === 0) {
+        isDragging = true;
+        showCrosshair.value = false;
+    }
+
+    if(ev.target === mapOuterElement.value) {
+        pendingUnselect = true;
+    }
+    cancelNextModeSelect = false;
+}
+
+function onMouseMove(ev: MouseEvent) {
+    if(!isTargetInMap(ev.target)) return;
+
+    if(isDragging) {
+        let totalScale = scaleFactor.value * camZoom.value;
+        moveMap(-ev.movementX / totalScale, -ev.movementY / totalScale);
+
+        let movement = Math.hypot(ev.movementX, ev.movementY);
+        totalMovement += movement;
+
+        if(totalMovement > 10) cancelNextModeSelect = true;
+    }
+
+    pendingUnselect = false;
+}
+
+function onMouseUp(ev: MouseEvent) {
+    if(!isTargetInMap(ev.target)) return;
+
+    if(pendingUnselect) {
+        pendingUnselect = false;
+        selectedMode.value = null;
+    }
+    isDragging = false;
+}
+
+function onWheel(ev: WheelEvent) {
+    if(!isTargetInMap(ev.target)) return;
+
+    ev.preventDefault();
+
+    const dZoom = ev.deltaY * ZOOM_SCROLL_MULT * ZOOM_SPEED_MULT * camZoom.value;
+
+    camZoom.value = clamp(
+        MIN_ZOOM,
+        camZoom.value + dZoom,
+        MAX_ZOOM
+    );
+}
+
 function onModeClick(name: string) {
-    // TODO
+    if(cancelNextModeSelect) {
+        cancelNextModeSelect = false;
+        return;
+    }
+
+    const mode = mapData.value?.modes[name];
+
+    if(!isModeValid(mode)) {
+        console.error(mode);
+        throw new Error(`Invalid mode data for mode "${name}". An object dump is available in the console.`);
+    }
+
+    selectedMode.value = mode;
+
+    console.debug(`Selected mode "${name}"`); // DEBUG
 }
 
 function onResize() {
@@ -263,6 +373,68 @@ function onResize() {
     const height = mapOuter.clientHeight;
 
     scaleFactor.value = getScaleFactor(width, height);
+}
+
+function getModeAtCenter(): Mode | null {
+    const map = mapData.value;
+
+    if(!map) {
+        return null;
+    }
+
+    const isSquareInCenter = (cx: number, cy: number, size: number) => {
+        const L = cx - size; const R = cx + size;
+        const U = cy - size; const D = cy + size;
+        
+        return (
+            L < camX.value && camX.value < R &&
+            U < camY.value && camY.value < D
+        );
+    }
+
+    const isCircleInCenter = (cx: number, cy: number, radius: number) => {
+        const maxDistSq = radius * radius;
+        const dx = cx - camX.value;
+        const dy = cy - camY.value;
+        const distSq = dx * dx + dy * dy;
+
+        return distSq < maxDistSq;
+    }
+
+    const isDiamondInCenter = (cx: number, cy: number, maxManhDist: number) => {
+        const dx = Math.abs(cx - camX.value);
+        const dy = Math.abs(cy - camY.value);
+
+        return dx + dy < maxManhDist;
+    }
+
+    const isModeInCenter = (mode: Mode) => {
+        const x = mode.x; const y = mode.y;
+
+        switch(mode.shape) {
+            case ModeShape.square:
+                return isSquareInCenter(x, y, mode.size);
+            case ModeShape.octagon:
+                return isCircleInCenter(x, y, mode.size);
+            case ModeShape.diamond:
+                return isDiamondInCenter(x, y, mode.size);
+            default:
+                return false;
+        }
+    }
+
+    // Small optimization if cursor moved a little
+    if(selectedMode.value && isModeInCenter(selectedMode.value)) {
+        return selectedMode.value;
+    }
+
+    for(const mode of Object.values(map.modes)) {
+        if(isModeInCenter(mode)) {
+            return mode;
+        }
+    }
+
+    return null;
 }
 
 function clamp(min: number, val: number, max: number): number {
@@ -338,16 +510,18 @@ onMounted(mountedHook);
     font-family: monospace;
     font-size: 1.1em;
     z-index: 4000;
+    user-select: none;
+    pointer-events: none;
 }
 
 .crosshair {
     position: absolute;
-    top: calc(50% - 25px * var(--total-scale));
-    left: calc(50% - 25px * var(--total-scale));
-    width: calc(50px * var(--total-scale));
-    height: calc(50px * var(--total-scale));
+    top: calc(50% - 25px * var(--scale-factor));
+    left: calc(50% - 25px * var(--scale-factor));
+    width: calc(50px * var(--scale-factor));
+    height: calc(50px * var(--scale-factor));
     stroke: white;
-    stroke-width: 8;
+    stroke-width: 0.6;
 
     z-index: 1;
 
