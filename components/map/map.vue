@@ -151,7 +151,7 @@ function addEventListeners() {
     window.addEventListener('mousedown', onMouseDown);
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup',   onMouseUp);
-    window.addEventListener('wheel',     onWheel);
+    window.addEventListener('wheel',     onWheel, { passive: false });
 }
 
 function handleZoomKeys(dt: number) {
