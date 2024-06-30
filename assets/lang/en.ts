@@ -2323,7 +2323,7 @@ It will not be implemented in the “Classic” Techmino.`
       rank_reqs: [
         "5 Techrashes",
         "15 Techrashes",
-        "Exactly 30 Techrashes",
+        "30 Techrashes",
         "50 Techrashes",
         "75 Techrashes",
         "100 Techrashes"
@@ -2338,7 +2338,7 @@ It will not be implemented in the “Classic” Techmino.`
       rank_reqs: [
         "2 Techrashes",
         "4 Techrashes",
-        "Exactly 8 Techrashes (bug?)",
+        "8 Techrashes",
         "12 Techrashes",
         "16 Techrashes",
         "20 Techrashes"
