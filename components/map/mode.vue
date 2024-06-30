@@ -92,22 +92,28 @@ defineEmits(['click']);
         inset: 0;
         width: var(--size);
         height: var(--size);
+
         color: var(--border-color);
         border-color: var(--border-color);
         stroke: var(--border-color);
+
         z-index: -1;
         cursor: pointer;
 
         &.square {
             box-sizing: border-box;
-            background-color: var(--bg-color);
             border: solid 5px;
+            background-color: var(--bg-color);
         }
 
         &.diamond {
             width: calc(1.25 * var(--size));
             height: calc(1.25 * var(--size));
             inset: calc(-0.125 * var(--size));
+        }
+
+        &.octagon, &.diamond {
+            fill: var(--bg-color);
         }
     }
 

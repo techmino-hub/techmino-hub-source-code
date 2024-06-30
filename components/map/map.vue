@@ -202,7 +202,7 @@ function update(curTimestamp: number) {
 
     handleKeys(dt);
 
-    debugText.value = `dt: ${dt.toFixed(2)}ms`;
+    debugText.value = `dt: ${dt.toFixed(0)} ms`;
 
     if(keyDownSet.size > 0) {
         requestAnimationFrame(update);
@@ -332,6 +332,8 @@ onMounted(mountedHook);
     position: absolute;
     top: 1em; left: 1em;
     font-family: monospace;
+    font-size: 1.1em;
+    z-index: 4000;
 }
 
 .map-elements {
