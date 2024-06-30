@@ -1,8 +1,8 @@
 <template>
     <div
       :style="{
-        '--cam-x': camX,
-        '--cam-y': camY,
+        '--cam-x': -camX + 'px',
+        '--cam-y': -camY + 'px',
         '--cam-zoom': camZoom,
         '--scale-factor': scaleFactor,
         '--min-x': mapData?.min_x ?? 0,
@@ -301,14 +301,14 @@ onMounted(mountedHook);
     width: var(--map-width);
     height: var(--map-height);
 
-    left: 50%;
     top: 50%;
+    left: 50%;
 
     overflow: visible;
 
     transform: translate(var(--cam-x), var(--cam-y)) scale(var(--total-scale));
     transform-box: view-box;
-    transform-origin: 50% 50%;
+    transform-origin: calc(-1 * var(--cam-x)) calc(-1 * var(--cam-y));
 
     .edges {
         position: absolute;
