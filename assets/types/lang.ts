@@ -1,6 +1,6 @@
 /** Language entry type. */
 export type LangEntry = {
-    [key: string]: string | LangEntry
+    [key: string]: string | string[] | LangEntry
 };
 
 /** The prefix of a string if it should be processed in Markdown */
