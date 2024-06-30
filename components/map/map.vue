@@ -220,7 +220,7 @@ function isTargetInMap(target: EventTarget | null): boolean {
 }
 
 const UNPREVENTED_CODES = new Set([
-    'F5', 'F12', 'KeyR'
+    'F5', 'F11', 'F12', 'KeyR'
 ])
 
 function onKeyDown(this: Window, ev: KeyboardEvent) {
