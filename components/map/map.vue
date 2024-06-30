@@ -13,6 +13,7 @@
       class="map-outer"
       ref="mapOuterElement"
       tabindex="0">
+        <div class="debug">{{ debugText }}</div>
         <div class="unfocused-warning" v-if="!fullscreen" v-show="isFocused">
             <div class="inner">
                 {{ $t('map.unfocused') }}
@@ -70,7 +71,7 @@ let mapData: Ref<MapData | null> = ref(
 );
 
 const mapOuterElement = ref<HTMLDivElement | null>(null);
-const debugElement = ref<HTMLParagraphElement | null>(null);
+const debugText = ref<string>('Update loop halted.');
 const isMounted = ref<boolean>(false);
 const isFocused = ref<boolean>(props.fullscreen);
 
@@ -158,6 +159,25 @@ function handleKeys(dt: number) {
             camZoom.value * zoomMultiplier,
             MAX_ZOOM
         );
+    } else {
+        // Move camera
+        const initialdx =
+            (+ keyDownSet.has("ArrowRight")) -
+            (+ keyDownSet.has("ArrowLeft")) +
+            (+ keyDownSet.has("KeyD")) -
+            (+ keyDownSet.has("KeyA"));
+        
+        const initialdy =
+            (+ keyDownSet.has("ArrowDown")) -
+            (+ keyDownSet.has("ArrowUp")) +
+            (+ keyDownSet.has("KeyS")) -
+            (+ keyDownSet.has("KeyW"));
+        
+        const dx = initialdx * dt * camZoom.value;
+        const dy = initialdy * dt * camZoom.value;
+
+        camX.value += dx;
+        camY.value += dy;
     }
 }
 
@@ -167,8 +187,12 @@ function update(curTimestamp: number) {
 
     handleKeys(dt);
 
+    debugText.value = `dt: ${dt.toFixed(2)}ms`;
+
     if(keyDownSet.size > 0) {
         requestAnimationFrame(update);
+    } else {
+        debugText.value = "Update loop halted."
     }
 }
 
