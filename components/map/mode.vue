@@ -146,5 +146,11 @@ defineEmits(['click']);
         height: calc(0.75 * var(--size));
         margin: auto;
     }
+
+    &:hover {
+        transform: scale(1.062);
+    }
+
+    transition: transform 100ms;
 }
 </style>

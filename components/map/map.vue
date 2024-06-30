@@ -35,9 +35,15 @@
                 />
             </div>
         </div>
-        <aside class="panel">
+        <aside
+          v-if="!!lastSelectedMode"
+          :class="{
+            'panel': true,
+            'open': !!selectedMode && !isPanelExpanded,
+            'expanded': !!selectedMode && isPanelExpanded
+          }">
             <div class="small">
-
+                <!-- TODO: Add elements -->
             </div>
             <div class="wide">
 
@@ -92,8 +98,10 @@ const camZoom = ref<number>(1);
 const scaleFactor = ref<number>(1);
 
 const showCrosshair = ref<boolean>(false);
+const isPanelExpanded = ref<boolean>(false);
 
 const selectedMode = ref<Mode | null>(null);
+const lastSelectedMode = ref<Mode | null>(null);
 
 function isDangerousFileName(fileName: string): boolean {
     if(fileName.length > 32 || fileName.length < 1) {
@@ -200,7 +208,7 @@ function handleMoveKeys(dt: number) {
     const modeAtCenter = getModeAtCenter();
 
     if(modeAtCenter) {
-        selectedMode.value = modeAtCenter;
+        selectMode(modeAtCenter);
     }
 }
 
@@ -212,7 +220,7 @@ function handleKeys(dt: number) {
     }
 
     if(keyDownSet.has('Escape')) {
-        selectedMode.value = null;
+        selectMode(null);
     }
 }
 
@@ -327,7 +335,7 @@ function onMouseUp(ev: MouseEvent) {
 
     if(pendingUnselect) {
         pendingUnselect = false;
-        selectedMode.value = null;
+        selectMode(null);
     }
     isDragging = false;
 }
@@ -359,7 +367,7 @@ function onModeClick(name: string) {
         throw new Error(`Invalid mode data for mode "${name}". An object dump is available in the console.`);
     }
 
-    selectedMode.value = mode;
+    selectMode(mode);
 
     console.debug(`Selected mode "${name}"`); // DEBUG
 }
@@ -439,6 +447,16 @@ function getModeAtCenter(): Mode | null {
 
 function clamp(min: number, val: number, max: number): number {
     return Math.min(Math.max(min, val), max);
+}
+
+function selectMode(mode: Mode | null) {
+    selectedMode.value = mode;
+
+    if(mode) {
+        lastSelectedMode.value = mode;
+    } else {
+        isPanelExpanded.value = false;
+    }
 }
 
 init();
@@ -569,6 +587,9 @@ onMounted(mountedHook);
     height: 100%;
     transform: translateX(0);
     transition: transform 500ms;
+
+    background-color: colors.$map-panel-bg-color;
+    font-size: calc(var(--scale-factor) * 0.426em);
 
     &.open { transform: translateX(-30%) }
     &.expanded { transform: translateX(-130%) }
