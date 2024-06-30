@@ -19,6 +19,10 @@
                 {{ $t('map.unfocused') }}
             </div>
         </div>
+        <svg class="crosshair" viewBox="0 0 100 100">
+            <line x1="0" y1="50" x2="100" y2="50" />
+            <line x1="50" y1="0" x2="50" y2="100" />
+        </svg>
         <div v-if="mapData" v-show="isMounted" class="map-elements">
             <MapEdgeSvg :mapData="mapData" />
             <div class="modes">
@@ -334,6 +338,23 @@ onMounted(mountedHook);
     font-family: monospace;
     font-size: 1.1em;
     z-index: 4000;
+}
+
+.crosshair {
+    position: absolute;
+    top: calc(50% - 25px * var(--total-scale));
+    left: calc(50% - 25px * var(--total-scale));
+    width: calc(50px * var(--total-scale));
+    height: calc(50px * var(--total-scale));
+    stroke: white;
+    stroke-width: 8;
+
+    z-index: 1;
+
+    pointer-events: none;
+    touch-action: none;
+    user-select: none;
+    caret-color: transparent;
 }
 
 .map-elements {
