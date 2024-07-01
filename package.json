@@ -13,6 +13,7 @@
     "@nuxtjs/i18n": "^8.3.1",
     "@supabase/supabase-js": "^2.43.4",
     "@types/sanitize-html": "^2.11.0",
+    "@vercel/speed-insights": "^1.0.12",
     "markdown-it": "^14.1.0",
     "nuxt": "^3.11.2",
     "sanitize-html": "^2.13.0",
