@@ -14,11 +14,6 @@
       ref="mapOuterElement"
       tabindex="0">
         <pre class="debug">{{ debugText }}</pre>
-        <div class="unfocused-warning" v-if="!fullscreen" v-show="isFocused">
-            <div class="inner">
-                {{ $t('map.unfocused') }}
-            </div>
-        </div>
         <svg class="crosshair" viewBox="0 0 10 10" v-show="showCrosshair">
             <line x1="0" y1="5" x2="10" y2="5" />
             <line x1="5" y1="0" x2="5" y2="10" />
@@ -36,14 +31,33 @@
             </div>
         </div>
         <aside
-          v-if="!!lastSelectedMode"
           :class="{
             'panel': true,
             'open': !!selectedMode && !isPanelExpanded,
             'expanded': !!selectedMode && isPanelExpanded
           }">
             <div class="small">
-                <!-- TODO: Add elements -->
+                <div class="top">
+                    <h1
+                        class="title"
+                        v-t="`modes.${lastSelectedMode.name}.title`"
+                    ></h1>
+                    <h2
+                        class="subtitle"
+                        v-t="`modes.${lastSelectedMode.name}.subtitle`"
+                    ></h2>
+                    <h4
+                        class="version-info"
+                        v-t="`modes.${lastSelectedMode.name}.version_info`"
+                    ></h4>
+                    <p
+                        class="description"
+                        v-t="`modes.${lastSelectedMode.name}.description`"
+                    ></p>
+                </div>
+                <div class="bottom">
+
+                </div>
             </div>
             <div class="wide">
 
@@ -83,7 +97,7 @@ let isDragging = false;
 let pendingUnselect = false;
 let cancelNextModeSelect = false;
 
-let mapData: Ref<MapData | null> = ref(
+let mapData: Ref<MapData> = ref(
     await import(`~/assets/data/maps/${props.map}.json`)
 );
 
@@ -101,7 +115,7 @@ const showCrosshair = ref<boolean>(false);
 const isPanelExpanded = ref<boolean>(false);
 
 const selectedMode = ref<Mode | null>(null);
-const lastSelectedMode = ref<Mode | null>(null);
+const lastSelectedMode = ref<Mode>(Object.values(mapData.value.modes)[0]);
 
 function isDangerousFileName(fileName: string): boolean {
     if(fileName.length > 32 || fileName.length < 1) {
@@ -581,6 +595,8 @@ onMounted(mountedHook);
 
 .panel {
     position: absolute;
+    display: grid;
+    grid-template-columns: 3fr 10fr;
     top: 0;
     left: 100%;
     width: 130%;
@@ -589,18 +605,45 @@ onMounted(mountedHook);
     transition: transform 500ms;
 
     background-color: colors.$map-panel-bg-color;
-    font-size: calc(var(--scale-factor) * 0.426em);
+    font-size: calc(var(--scale-factor) * 0.826em);
 
-    &.open { transform: translateX(-30%) }
-    &.expanded { transform: translateX(-130%) }
+    &.open { transform: translateX(-23.0769231%) } // ~ 3/13
+    &.expanded { transform: translateX(-100%) }
 
     .small {
-        width: 30%;
-        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+            box-sizing: border-box;
+            width: 100%;
+            height: fit-content;
+            padding: 1em 2em;
+
+            &.top {
+                * {
+                    margin-block: 0;
+                    text-align: center;
+                }
+
+                .title {
+                    font-size: 2.26em;
+                    margin-bottom: -0.1em;
+                }
+
+                .subtitle {
+                    margin-bottom: 0.1em;
+                }
+
+                .version-info {
+                    margin-bottom: 1em;
+                }
+            }
+        }
     }
     .wide {
-        width: 100%;
-        height: 100%;
     }
 }
 </style>
