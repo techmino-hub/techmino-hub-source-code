@@ -23,7 +23,6 @@
             <div class="modes">
                 <MapMode v-for="mode in Object.values(mapData.modes)"
                     :key="mode.name"
-                    :title="mode.name"
                     :mode="mode"
                     :selected="(!!selectedMode) && (selectedMode.name === mode.name)"
                     @click="onModeClick(mode.name)"
@@ -56,7 +55,20 @@
                     ></p>
                 </div>
                 <div class="bottom">
-                    <p v-t="'map.rankReqs'"></p>
+                    <p v-t="'map.rankReqs'" class="rank-req-text"></p>
+                    <MapModeRanks :mode="lastSelectedMode" />
+                    <menu>
+                        <button
+                          type="button"
+                          @click="isPanelExpanded = true">
+                            &#xF0085;
+                        </button>
+                        <button
+                          type="button"
+                          @click="selectMode(null)">
+                            &#xF0083;
+                        </button>
+                    </menu>
                 </div>
             </div>
             <div class="wide">
@@ -263,7 +275,7 @@ function update(curTimestamp: number) {
 
     handleKeys(dt);
 
-    debugText.value = `dt: ${dt.toFixed(0)} ms\nsel: ${selectedMode.value?.name ?? 'none'}`;
+    debugText.value = `dt: ${dt.toFixed(0)} ms`;
 
     if(keyDownSet.size > 0) {
         requestAnimationFrame(update);
@@ -605,7 +617,7 @@ onMounted(mountedHook);
     transition: transform 500ms;
 
     background-color: colors.$map-panel-bg-color;
-    font-size: calc(var(--scale-factor) * 0.826em);
+    font-size: calc(var(--scale-factor) * 0.862em);
 
     &.open { transform: translateX(-23.0769231%) } // ~ 3/13
     &.expanded { transform: translateX(-100%) }
@@ -616,11 +628,13 @@ onMounted(mountedHook);
         justify-content: space-between;
         align-items: center;
 
+        border-inline-start: 0.2em dashed colors.$map-panel-border-color;
+
         div {
             box-sizing: border-box;
             width: 100%;
             height: fit-content;
-            padding: 1em 2em;
+            padding-block: 1em;
 
             &.top {
                 * {
@@ -640,6 +654,55 @@ onMounted(mountedHook);
                 .version-info {
                     margin-bottom: 1em;
                 }
+            }
+
+            &.bottom {
+                .rank-req-text {
+                    font-size: 1.25em;
+                    font-weight: bold;
+                    text-align: center;
+                    margin-block: 0.5em;
+                }
+
+                .rank-reqs {
+                    margin-inline: 1em;
+                }
+
+                menu {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    margin: 1em 1em 0;
+                    gap: 1em;
+                    padding: 0;
+
+                    button {
+                        font-size: 1.5em;
+                        width: 100%;
+                        height: 2em;
+                    }
+                }
+            }
+        }
+
+        button {
+            color: colors.$map-panel-button-text-color;
+            border: 0.1em solid colors.$map-panel-button-border-color;
+            border-radius: 0.25em;
+            background-color: colors.$map-panel-button-bg-color;
+            cursor: pointer;
+            font-family: 'techmino-proportional';
+            text-align: center;
+            transition: 150ms;
+
+            &:hover {
+                background-color: colors.$map-panel-button-hover-bg-color;
+                transform: scale(1.05);
+            }
+
+            &:active {
+                background-color: colors.$map-panel-button-active-bg-color;
+                box-shadow: 0 0 0.5em 0.25em colors.$map-panel-button-active-bg-color;
             }
         }
     }

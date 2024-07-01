@@ -528,6 +528,15 @@ It will not be implemented in the “Classic” Techmino.`
     fullscreen: "Visit fullscreen map",
     htmlVersion: "Visit JavaScript-free map",
     rankReqs: "Rank requirements:",
+    rankXTooltip: "X rank",
+    rankUTooltip: "U rank",
+    rankSTooltip: "S rank",
+    rankATooltip: "A rank",
+    rankBTooltip: "B rank (minimum to unlock other modes)",
+    rankQTooltip: "Qualification requirement (minimum needed for your score to be listed on the leaderboards)",
+    expandTooltip: "View extended info",
+    closeTooltip: "Close",
+    backTooltip: "Back",
   },
   modes: {
     sprint_10l: {
