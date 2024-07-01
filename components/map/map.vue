@@ -48,7 +48,7 @@
                     ></h2>
                     <h4
                         class="version-info"
-                        v-t="`modes.${lastSelectedMode.name}.version_info`"
+                        v-t="`modes.${lastSelectedMode.name}.versionInfo`"
                     ></h4>
                     <p
                         class="description"
@@ -56,7 +56,7 @@
                     ></p>
                 </div>
                 <div class="bottom">
-
+                    <p v-t="'map.rankReqs'"></p>
                 </div>
             </div>
             <div class="wide">

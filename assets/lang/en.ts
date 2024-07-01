@@ -527,15 +527,15 @@ It will not be implemented in the “Classic” Techmino.`
     details: "Currently displaying '{currentMap}' map",
     fullscreen: "Visit fullscreen map",
     htmlVersion: "Visit JavaScript-free map",
-    unfocused: "Unfocused - click here to focus",
+    rankReqs: "Rank requirements:",
   },
   modes: {
     sprint_10l: {
       title: "Sprint",
       subtitle: "10L",
       description: "Clear 10 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "1′02″",
         "40 sec",
@@ -550,8 +550,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "20L",
       description: "Clear 20 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "2′06″",
         "1′02.6″",
@@ -566,8 +566,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "40L",
       description: "Clear 40 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "3′03″",
         "1′32.9″",
@@ -582,8 +582,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "100L",
       description: "Clear 100 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "4′20″",
         "2′42″",
@@ -598,8 +598,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "400L",
       description: "Clear 400 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "13′20″",
         "10′26″",
@@ -614,8 +614,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "1000L",
       description: "Clear 1000 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "33′20″",
         "27′00″",
@@ -630,8 +630,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "PENTOMINO",
       description: "40L with 18 pentominoes",
-      version_info: "",
-     rank_reqs: [
+      versionInfo: "",
+     rankReqs: [
         "---",
         "8′20″",
         "4′20″",
@@ -646,8 +646,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "MPH",
       description: "Memoryless\nPreviewless\nHoldless",
-      version_info: "",
-     rank_reqs: [
+      versionInfo: "",
+     rankReqs: [
         "---",
         "2′20″",
         "1′50″",
@@ -662,8 +662,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "M123",
       description: "40L with only monominoes, dominoes, and triminoes",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "2′40″",
         "2′10″",
@@ -678,8 +678,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Construct",
       subtitle: "SECRET GRADE",
       description: "Build a zigzag pattern by following the guide!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "7 lines (Grade 3)",
         "11 lines (S1)",
         "15 lines (S5)",
@@ -689,14 +689,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Tricky",
       length: "Medium (~6 min)",
-      featured_video: "https://www.youtube.com/embed/i31ku9TaV9w"
+      featuredVideo: "https://www.youtube.com/embed/i31ku9TaV9w"
     },
     construct_checker: {
       title: "Construct",
       subtitle: "CHECKERBOARD",
       description: "Build a checkerboard pattern!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line (Grade 9)",
         "(impossible)",
         "2 lines (Grade 8)",
@@ -706,14 +706,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Tricky",
       length: "Long (~15 min)",
-      featured_video: "https://www.youtube.com/embed/3hgPj0jnsIU"
+      featuredVideo: "https://www.youtube.com/embed/3hgPj0jnsIU"
     },
     construct_invsg: {
       title: "Construct",
       subtitle: "INV. SG",
       description: "Build an inverted zigzag pattern!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line (Grade 9)",
         "(impossible)",
         "2 lines (Grade 8)",
@@ -723,14 +723,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Very Tricky",
       length: "Very Long (~30 min)",
-      featured_video: "https://www.youtube.com/embed/dUGELBQ-tp4"
+      featuredVideo: "https://www.youtube.com/embed/dUGELBQ-tp4"
     },
     dig_10l: {
       title: "Dig",
       subtitle: "10L",
       description: "Dig 10 garbage lines as fast as you can!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "1′00″",
         "40 sec",
@@ -745,8 +745,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Dig",
       subtitle: "40L",
       description: "Dig 40 garbage lines as fast as you can!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "3′00″",
         "2′00″",
@@ -761,8 +761,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Dig",
       subtitle: "100L",
       description: "Dig 100 garbage lines as fast as you can!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "8′00″",
         "6′00″",
@@ -777,8 +777,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Dig",
       subtitle: "400L",
       description: "Dig 400 garbage lines as fast as you can!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "30′00″",
         "25′00″",
@@ -793,8 +793,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Dig",
       subtitle: "EFFICIENCY 10L",
       description: "Dig 10 garbage lines with the least pieces!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "40 pieces",
         "30 pieces",
@@ -809,8 +809,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Dig",
       subtitle: "EFFICIENCY 40L",
       description: "Dig 40 garbage lines with the least pieces!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "200 pieces",
         "160 pieces",
@@ -825,8 +825,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Dig",
       subtitle: "EFFICIENCY 100L",
       description: "Dig 100 garbage lines with the least pieces!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "550 pieces",
         "450 pieces",
@@ -841,8 +841,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Dig",
       subtitle: "EFFICIENCY 400L",
       description: "Dig 400 garbage lines with the least pieces!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "1800 pieces",
         "1600 pieces",
@@ -857,8 +857,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Dig",
       subtitle: "TECHRASH 10L",
       description: "Dig 10 garbage lines using only techrash!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "2 lines",
         "3 lines",
@@ -873,8 +873,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Drought",
       subtitle: "100L",
       description: "100L but without I pieces",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "10 lines",
         "50 lines",
         "100 lines in 3′30″",
@@ -889,8 +889,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Drought+",
       subtitle: "100L",
       description: "100L but the randomizer hates you",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "10 lines",
         "50 lines",
         "100 lines in 4′00″",
@@ -905,8 +905,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Marathon",
       subtitle: "NORMAL",
       description: "200-line marathon with increasing speed",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "20 lines",
         "100 lines",
         "150 lines",
@@ -921,8 +921,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Marathon",
       subtitle: "HARD",
       description: "200-line high-speed marathon",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "10 lines",
         "50 lines",
         "100 lines",
@@ -937,8 +937,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Battle",
       subtitle: "EASY",
       description: "Defeat the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "Win the battle",
         "Win in 3′00″",
@@ -953,8 +953,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Battle",
       subtitle: "NORMAL",
       description: "Defeat the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "Win the battle",
         "Win in 3′00″",
@@ -969,8 +969,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Battle",
       subtitle: "HARD",
       description: "Defeat the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "Win the battle",
         "Win in 3′00″",
@@ -985,8 +985,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Battle",
       subtitle: "LUNATIC",
       description: "Defeat the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "(impossible)",
         "(impossible)",
@@ -1001,8 +1001,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Battle",
       subtitle: "ULTIMATE",
       description: "Defeat the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "(impossible)",
         "(impossible)",
@@ -1017,8 +1017,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech VS 49",
       subtitle: "EASY",
       description: "49-player battle.\nThe last one standing wins!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Get 45th place",
         "Get 15th place",
         "Get 10th place",
@@ -1033,8 +1033,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech VS 49",
       subtitle: "HARD",
       description: "49-player battle.\nThe last one standing wins!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Get 45th place",
         "Get 8th place",
         "Get 6th place",
@@ -1049,8 +1049,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech VS 49",
       subtitle: "ULTIMATE",
       description: "49-player battle.\nThe last one standing wins!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Get 45th place",
         "Get 6th place",
         "Get 4th place",
@@ -1065,8 +1065,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech VS 99",
       subtitle: "EASY",
       description: "99-player battle.\nThe last one standing wins!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Get 90th place",
         "Get 20th place",
         "Get 10th place",
@@ -1081,8 +1081,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech VS 99",
       subtitle: "HARD",
       description: "99-player battle.\nThe last one standing wins!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Get 90th place",
         "Get 10th place",
         "Get 8th place",
@@ -1097,8 +1097,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech VS 99",
       subtitle: "ULTIMATE",
       description: "99-player battle.\nThe last one standing wins!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Get 90th place",
         "Get 7th place",
         "Get 5th place",
@@ -1113,8 +1113,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Turn-Based",
       subtitle: "EASY",
       description: "Take turns to play against the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "Win",
         "Win in 182 pieces",
@@ -1129,8 +1129,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Turn-Based",
       subtitle: "NORMAL",
       description: "Take turns to play against the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "Win",
         "Win in 182 pieces",
@@ -1145,8 +1145,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Turn-Based",
       subtitle: "HARD",
       description: "Take turns to play against the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "Win",
         "Win in 182 pieces",
@@ -1161,8 +1161,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Turn-Based",
       subtitle: "LUNATIC",
       description: "Take turns to play against the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "Win",
         "Win in 182 pieces",
@@ -1177,8 +1177,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Turn-Based",
       subtitle: "ULTIMATE",
       description: "Take turns to play against the AI!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "Win",
         "Win in 182 pieces",
@@ -1193,8 +1193,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Big",
       subtitle: "NORMAL",
       description: "Play in a 5×10 field!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "20 lines",
         "100 lines",
         "150 lines",
@@ -1209,8 +1209,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Big",
       subtitle: "HARD",
       description: "Play in a 5×10 field!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "10 lines",
         "50 lines",
         "100 lines",
@@ -1225,8 +1225,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Master",
       subtitle: "NORMAL",
       description: "For 20G beginners",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Level 60",
         "Level 100",
         "Level 300",
@@ -1241,8 +1241,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Master",
       subtitle: "HARD",
       description: "For 20G pros",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Level 60",
         "Level 100",
         "Level 300",
@@ -1257,8 +1257,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Master",
       subtitle: "M21",
       description: "For 20G masters",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 lines",
         "30 lines",
         "70 lines",
@@ -1273,8 +1273,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Master",
       subtitle: "FINAL",
       description: "20G and beyond",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Level 50",
         "Level 200",
         "Level 400",
@@ -1284,14 +1284,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Insane",
       length: "Medium (5 min)",
-      featured_video: "https://www.youtube.com/embed/xdhs0WA4A4k"
+      featuredVideo: "https://www.youtube.com/embed/xdhs0WA4A4k"
     },
     master_ph: {
       title: "Master",
       subtitle: "PHANTASM",
       description: "???",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "26 pts. (Clear stage 2)",
         "42 pts. (Clear stage 3)",
         "62 pts. (Clear stage 4)",
@@ -1301,14 +1301,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Insane",
       length: "Medium (7 min)",
-      featured_video: "https://www.youtube.com/embed/9pLw_LqAErg"
+      featuredVideo: "https://www.youtube.com/embed/9pLw_LqAErg"
     },
     master_g: {
       title: "Master",
       subtitle: "GRADED",
       description: "Get the highest grade you can!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "---",
         "S1",
         "m1",
@@ -1323,8 +1323,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "GrandMaster",
       subtitle: "EXTRA",
       description: "An eternity shorter than an instant",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1.0 (C grade)",
         "3.0 (A grade)",
         "5.0 (S- grade)",
@@ -1339,8 +1339,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Master",
       subtitle: "INSTINCT",
       description: "What if the active piece becomes invisible?",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Level 60",
         "Level 100",
         "Level 300",
@@ -1350,14 +1350,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Medium",
       length: "Medium (10 min)",
-      featured_video: "https://www.youtube.com/embed/oaglL91j0DY"
+      featuredVideo: "https://www.youtube.com/embed/oaglL91j0DY"
     },
     strategy_e: {
       title: "Strategy",
       subtitle: "EASY",
       description: "Fast 20G decisions",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "26 lines",
         "60 lines",
         "120 lines",
@@ -1372,8 +1372,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Strategy",
       subtitle: "HARD",
       description: "Fast 20G decisions",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "16 lines",
         "40 lines",
         "70 lines",
@@ -1388,8 +1388,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Strategy",
       subtitle: "ULTIMATE",
       description: "Fast 20G decisions",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "10 lines",
         "20 lines",
         "40 lines",
@@ -1404,8 +1404,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Strategy",
       subtitle: "EASY+",
       description: "Holdless Strategy!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "26 lines",
         "60 lines",
         "120 lines",
@@ -1420,8 +1420,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Strategy",
       subtitle: "HARD+",
       description: "Holdless Strategy!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "16 lines",
         "40 lines",
         "70 lines",
@@ -1436,8 +1436,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Strategy",
       subtitle: "ULTIMATE+",
       description: "Holdless Strategy!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "10 lines",
         "20 lines",
         "40 lines",
@@ -1452,8 +1452,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Invisible",
       subtitle: "SLOW",
       description: "For beginners",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line",
         "40 lines",
         "100 lines",
@@ -1468,8 +1468,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Invisible",
       subtitle: "FAST",
       description: "For intermediates",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line",
         "40 lines",
         "80 lines",
@@ -1484,8 +1484,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Invisible",
       subtitle: "INSTANT",
       description: "For the experienced",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line",
         "40 lines",
         "90 lines",
@@ -1500,8 +1500,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Invisible",
       subtitle: "NO GHOST",
       description: "For professionals",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line",
         "40 lines",
         "100 lines",
@@ -1516,8 +1516,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Invisible",
       subtitle: "NO FIELD",
       description: "Are you ready?",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line",
         "10 lines",
         "26 lines",
@@ -1532,8 +1532,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Invisible",
       subtitle: "VOID",
       description: "You're not ready.",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "2 lines",
         "5 lines",
         "10 lines",
@@ -1548,8 +1548,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Classic",
       subtitle: "EASY",
       description: "A low-speed recreation of the game from the 80s",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "10 lines",
         "30 lines",
         "60 lines",
@@ -1564,8 +1564,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Classic",
       subtitle: "NORMAL",
       description: "A medium-speed recreation of the game from the 80s",
-      version_info: "Commit 30ed417",
-      rank_reqs: [
+      versionInfo: "Commit 30ed417",
+      rankReqs: [
         "1 line",
         "10 lines",
         "30 lines",
@@ -1580,8 +1580,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Classic",
       subtitle: "HARD",
       description: "A medium-speed recreation of the game from the 80s",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line",
         "30 lines",
         "60 lines",
@@ -1596,8 +1596,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Classic",
       subtitle: "LUNATIC",
       description: "A high-speed recreation of the game from the 80s",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 line",
         "30 lines",
         "60 lines",
@@ -1612,8 +1612,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Classic",
       subtitle: "ULTIMATE",
       description: "An extreme-speed recreation of the game from the 80s",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         null,
         "1 line",
         "3 lines",
@@ -1628,8 +1628,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Survival",
       subtitle: "EASY",
       description: "How long can you survive?",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 waves",
         "15 waves",
         "30 waves",
@@ -1644,8 +1644,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Survival",
       subtitle: "NORMAL",
       description: "How long can you survive?",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 waves",
         "15 waves",
         "30 waves",
@@ -1660,8 +1660,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Survival",
       subtitle: "HARD",
       description: "How long can you survive?",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 waves",
         "15 waves",
         "30 waves",
@@ -1676,8 +1676,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Survival",
       subtitle: "LUNATIC",
       description: "How long can you survive?",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 waves",
         "15 waves",
         "30 waves",
@@ -1692,8 +1692,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Survival",
       subtitle: "ULTIMATE",
       description: "How long can you survive?",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 wave",
         "5 waves",
         "10 waves",
@@ -1708,8 +1708,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Attacker",
       subtitle: "HARD",
       description: "Practice your attacking skills!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 waves",
         "10 waves",
         "20 waves",
@@ -1724,8 +1724,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Attacker",
       subtitle: "ULTIMATE",
       description: "Practice your attacking skills!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 waves",
         "10 waves",
         "20 waves",
@@ -1740,8 +1740,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Defender",
       subtitle: "NORMAL",
       description: "Practice your defending skills!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "3 waves",
         "10 waves",
         "40 waves",
@@ -1756,8 +1756,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Defender",
       subtitle: "LUNATIC",
       description: "Practice your defending skills!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 waves",
         "20 waves",
         "30 waves",
@@ -1772,8 +1772,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Driller",
       subtitle: "HARD",
       description: "Digging practice!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 lines",
         "20 waves",
         "50 waves",
@@ -1788,8 +1788,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Driller",
       subtitle: "ULTIMATE",
       description: "Digging practice!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 lines",
         "20 waves",
         "50 waves",
@@ -1804,8 +1804,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "C4W Training",
       subtitle: "NORMAL",
       description: "Infinite combos",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "10 lines",
         "30 lines",
         "60 lines",
@@ -1820,8 +1820,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "C4W Training",
       subtitle: "LUNATIC",
       description: "Infinite combos",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 lines",
         "20 lines",
         "40 lines",
@@ -1836,8 +1836,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "PC Training",
       subtitle: "NORMAL",
       description: "Perfect Clear practice",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "2 PCs",
         "10 PCs",
         "18 PCs",
@@ -1852,8 +1852,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "PC Training",
       subtitle: "LUNATIC",
       description: "A harder Perfect Clear practice",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "3 PCs",
         "10 PCs",
         "18 PCs",
@@ -1863,14 +1863,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Very Tricky",
       length: "Medium (10 min)",
-      featured_video: "https://www.youtube.com/embed/XoNR8v6GL10"
+      featuredVideo: "https://www.youtube.com/embed/XoNR8v6GL10"
     },
     pc_n: {
       title: "PC Challenge",
       subtitle: "NORMAL",
       description: "Get PCs within 100 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 PC",
         "8 PCs",
         "12 PCs",
@@ -1885,8 +1885,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "PC Challenge",
       subtitle: "HARD",
       description: "Get PCs within 100 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 PC",
         "8 PCs",
         "12 PCs",
@@ -1901,8 +1901,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "PC Challenge",
       subtitle: "LUNATIC",
       description: "Get PCs within 100 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 PC",
         "8 PCs",
         "12 PCs",
@@ -1917,8 +1917,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "PC Challenge",
       subtitle: "INFINITE",
       description: "Get as many PCs as you can!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 PCs",
         "10 PCs",
         "20 PCs",
@@ -1933,8 +1933,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech B2B",
       subtitle: "NORMAL",
       description: "Try to keep the Back-to-Back chain!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -1949,8 +1949,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech B2B",
       subtitle: "NORMAL+",
       description: "Spins & PCs only",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -1965,8 +1965,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech B2B",
       subtitle: "HARD",
       description: "Try to keep the Back-to-Back chain!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -1981,8 +1981,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech B2B",
       subtitle: "HARD+",
       description: "Spins & PCs only",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -1997,8 +1997,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech B2B",
       subtitle: "LUNATIC",
       description: "Try to keep the Back-to-Back chain!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -2013,8 +2013,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech B2B",
       subtitle: "LUNATIC+",
       description: "Spins & PCs only",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -2029,8 +2029,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech Finesse",
       subtitle: "",
       description: "No finesse errors allowed!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -2045,8 +2045,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech Finesse",
       subtitle: "PLUS",
       description: "No normal clears nor finesse errors allowed!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -2061,8 +2061,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "TSD Challenge",
       subtitle: "EASY",
       description: "T-Spin Doubles only!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "1 TSD",
         "4 TSDs",
         "10 TSDs",
@@ -2072,14 +2072,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Tricky",
       length: "Medium (5 min)",
-      featured_video: "https://www.youtube.com/embed/Dxh9WglgIiw"
+      featuredVideo: "https://www.youtube.com/embed/Dxh9WglgIiw"
     },
     tsd_h: {
       title: "TSD Challenge",
       subtitle: "HARD",
       description: "T-Spin Doubles only!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "3 TSDs",
         "7 TSDs",
         "11 TSDs",
@@ -2094,8 +2094,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "TSD Challenge",
       subtitle: "ULTIMATE",
       description: "T-Spin Doubles only!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "4 TSDs",
         "10 TSDs",
         "13 TSDs",
@@ -2105,14 +2105,14 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Extremely Tricky",
       length: "Medium (5 min)",
-      featured_video: "https://www.youtube.com/embed/BWlD4Kzk7B4"
+      featuredVideo: "https://www.youtube.com/embed/BWlD4Kzk7B4"
     },
     backfire_n: {
       title: "Backfire",
       subtitle: "NORMAL",
       description: "Hold back the backfiring garbage lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 50 lines",
         "Send 100 lines",
         "Send 100 lines in 2′00″",
@@ -2127,8 +2127,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Backfire",
       subtitle: "HARD",
       description: "Hold back the backfiring garbage lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 50 lines",
         "Send 100 lines",
         "Send 100 lines in 2′10″",
@@ -2143,8 +2143,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Backfire",
       subtitle: "LUNATIC",
       description: "Hold back the backfiring garbage lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 50 lines",
         "Send 100 lines",
         "Send 100 lines in 2′30″",
@@ -2159,8 +2159,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Backfire",
       subtitle: "ULTIMATE",
       description: "Hold back the backfiring garbage lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 50 lines",
         "Send 100 lines",
         "Send 100 lines in 3′00″",
@@ -2175,8 +2175,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "100 ATTACK",
       description: "Send 100 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Send 100 lines",
         "2′30″",
         "1′40″",
@@ -2191,8 +2191,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "EFFICIENCY",
       description: "Send as much attack as you can in 40 lines!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Clear 40 lines",
         "1 atk/line (~0.4 APP)",
         "2 atk/line (~0.8 APP)",
@@ -2207,8 +2207,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Zen",
       subtitle: "200L",
       description: "A 200-line run with no time limit",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "10,000 score",
         "30,000 score",
@@ -2223,8 +2223,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Ultra",
       subtitle: "EXTRA",
       description: "A 2-minute score attack",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "(impossible)",
         "6,200 score",
         "10,000 score",
@@ -2234,7 +2234,7 @@ It will not be implemented in the “Classic” Techmino.`
       ],
       difficulty: "Easy to clear, very hard to master",
       length: "Constant, Short (120 sec)",
-      featured_video: "https://www.youtube.com/embed/6NHaGcdDqFo"
+      featuredVideo: "https://www.youtube.com/embed/6NHaGcdDqFo"
     },
     infinite: {
       title: "Infinite",
@@ -2254,8 +2254,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Marathon",
       subtitle: "INFINITE",
       description: "Infinite marathon.",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "26 lines",
         "(impossible)",
         "(impossible)",
@@ -2272,8 +2272,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "NO LEFT/RIGHT",
       description: "40L with no left/right movement",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 lines",
         "10 lines",
         "25 lines",
@@ -2288,8 +2288,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "NO ROTATIONS",
       description: "40L but you can't rotate the pieces",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 lines",
         "10 lines",
         "16 lines",
@@ -2304,8 +2304,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "NO FRICTION",
       description: "40L with zero DAS and ARR",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Clear 40 lines",
         "2′30″",
         "1′30″",
@@ -2320,8 +2320,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "SYMMETRY",
       description: "40L but your field must be symmetrical",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Clear 40 lines",
         "4′00″",
         "2′30″",
@@ -2336,8 +2336,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "MISDROP",
       description: "40L but random inputs happen",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "Clear 40 lines",
         "3′30″",
         "2′30″",
@@ -2352,8 +2352,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Marathon",
       subtitle: "ULTIMATE",
       description: "200-line marathon, but you can only do non-combo singles",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "20 lines",
         "80 lines",
         "150 lines",
@@ -2368,8 +2368,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Clear Rush",
       subtitle: "NORMAL",
       description: "All-spin tutorial!\n(scrapped mode)",
-      version_info: "v0.17.0 - v0.17.3",
-      rank_reqs: [
+      versionInfo: "v0.17.0 - v0.17.3",
+      rankReqs: [
         "(impossible)",
         "Drop 1 piece",
         "(impossible)",
@@ -2384,8 +2384,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Rhythm",
       subtitle: "EASY",
       description: "200-line low-tempo rhythmic marathon",
-      version_info: "v0.13.2 - v0.16.4",
-      rank_reqs: [
+      versionInfo: "v0.13.2 - v0.16.4",
+      rankReqs: [
         "20 lines",
         "50 lines",
         "100 lines",
@@ -2400,8 +2400,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Rhythm",
       subtitle: "HARD",
       description: "200-line medium-tempo rhythmic marathon",
-      version_info: "v0.13.2 - v0.16.4",
-      rank_reqs: [
+      versionInfo: "v0.13.2 - v0.16.4",
+      rankReqs: [
         "20 lines",
         "50 lines",
         "100 lines",
@@ -2416,8 +2416,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Rhythm",
       subtitle: "ULTIMATE",
       description: "200-line high-tempo rhythmic marathon",
-      version_info: "v0.13.2 - v0.16.4",
-      rank_reqs: [
+      versionInfo: "v0.13.2 - v0.16.4",
+      rankReqs: [
         "20 lines",
         "50 lines",
         "100 lines",
@@ -2432,8 +2432,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Techrash",
       subtitle: "NORMAL",
       description: "Maintain your Techrash streak!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "5 Techrashes",
         "15 Techrashes",
         "30 Techrashes",
@@ -2448,8 +2448,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Techrash",
       subtitle: "ULTIMATE",
       description: "Maintain your Techrash streak!",
-      version_info: "",
-      rank_reqs: [
+      versionInfo: "",
+      rankReqs: [
         "2 Techrashes",
         "4 Techrashes",
         "8 Techrashes",
@@ -2467,8 +2467,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech Finesse",
       subtitle: "LOCK",
       description: "No finesse errors, combined with limited inputs!",
-      version_info: "9769b33 - d3e4d7e",
-      rank_reqs: [
+      versionInfo: "9769b33 - d3e4d7e",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -2483,8 +2483,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Tech Finesse",
       subtitle: "LOCK PLUS",
       description: "No normal clears nor finesse errors combined with limited inputs!",
-      version_info: "9769b33 - d3e4d7e",
-      rank_reqs: [
+      versionInfo: "9769b33 - d3e4d7e",
+      rankReqs: [
         "Send 30 lines",
         "Send 60 lines",
         "Send 100 lines",
@@ -2499,8 +2499,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v1)",
       subtitle: "20L",
       description: "Pack them!",
-      version_info: "v0.16.0",
-      rank_reqs: [
+      versionInfo: "v0.16.0",
+      rankReqs: [
         "---",
         "44 pieces",
         "47 pieces",
@@ -2515,8 +2515,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v1)",
       subtitle: "40L",
       description: "Pack them!",
-      version_info: "v0.16.0",
-      rank_reqs: [
+      versionInfo: "v0.16.0",
+      rankReqs: [
         "---",
         "70 pieces",
         "78 pieces",
@@ -2531,8 +2531,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v1)",
       subtitle: "100L",
       description: "Pack them!",
-      version_info: "v0.16.0",
-      rank_reqs: [
+      versionInfo: "v0.16.0",
+      rankReqs: [
         "---",
         "180 pieces",
         "190 pieces",
@@ -2547,8 +2547,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v2)",
       subtitle: "EASY",
       description: "Pack them!",
-      version_info: "v0.16.1 - v0.16.2",
-      rank_reqs: [
+      versionInfo: "v0.16.1 - v0.16.2",
+      rankReqs: [
         "26 holes or less",
         "10 holes or less",
         "5 holes or less",
@@ -2563,8 +2563,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v2)",
       subtitle: "HARD",
       description: "Pack them!",
-      version_info: "v0.16.1 - v0.16.2",
-      rank_reqs: [
+      versionInfo: "v0.16.1 - v0.16.2",
+      rankReqs: [
         "62 holes or less",
         "26 holes or less",
         "10 holes or less",
@@ -2579,8 +2579,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v2)",
       subtitle: "ULTIMATE",
       description: "Pack them!",
-      version_info: "v0.16.1 - v0.16.2",
-      rank_reqs: [
+      versionInfo: "v0.16.1 - v0.16.2",
+      rankReqs: [
         "126 holes or less",
         "62 holes or less",
         "26 holes or less",
@@ -2595,8 +2595,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v3)",
       subtitle: "EASY",
       description: "Pack them!",
-      version_info: "v0.16.4",
-      rank_reqs: [
+      versionInfo: "v0.16.4",
+      rankReqs: [
         "30 lines",
         "90 lines",
         "120 lines",
@@ -2611,8 +2611,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v3)",
       subtitle: "HARD",
       description: "Pack them!",
-      version_info: "v0.16.4",
-      rank_reqs: [
+      versionInfo: "v0.16.4",
+      rankReqs: [
         "20 lines",
         "35 lines",
         "50 lines",
@@ -2627,8 +2627,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v3)",
       subtitle: "ULTIMATE",
       description: "Pack them!",
-      version_info: "v0.16.4",
-      rank_reqs: [
+      versionInfo: "v0.16.4",
+      rankReqs: [
         "10 lines",
         "20 lines",
         "30 lines",
@@ -2643,8 +2643,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v4)",
       subtitle: "EASY",
       description: "Pack them!",
-      version_info: "v0.16.5 - v0.17.4",
-      featured_video: "https://www.youtube.com/embed/gheifZQt6tk",
+      versionInfo: "v0.16.5 - v0.17.4",
+      featuredVideo: "https://www.youtube.com/embed/gheifZQt6tk",
       difficulty: "Medium",
       length: "Unbounded, usually medium (~10 min)"
     },
@@ -2652,7 +2652,7 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v4)",
       subtitle: "ULTIMATE",
       description: "Pack them!",
-      version_info: "v0.16.5 - v0.17.4",
+      versionInfo: "v0.16.5 - v0.17.4",
       difficulty: "Very Tricky",
       length: "Unbounded, usually short (~5 min)"
     },
@@ -2660,7 +2660,7 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v5)",
       subtitle: "EASY",
       description: "Pack them!",
-      version_info: "v0.17.5+",
+      versionInfo: "v0.17.5+",
       difficulty: "Medium",
       length: "Unbounded, usually medium (~10 min)"
     },
@@ -2668,7 +2668,7 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack (v5)",
       subtitle: "ULTIMATE",
       description: "Pack them!",
-      version_info: "v0.17.5+",
+      versionInfo: "v0.17.5+",
       difficulty: "Very Tricky",
       length: "Unbounded, usually short (~5 min)"
     },
@@ -2679,8 +2679,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Master",
       subtitle: "DEATH",
       description: "Fast speed mode! Can you break the lv500 barrier?",
-      version_info: "Unofficial Expansion",
-      rank_reqs: [
+      versionInfo: "Unofficial Expansion",
+      rankReqs: [
         "Level 120",
         "Level 200",
         "Level 300",
@@ -2695,8 +2695,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Master",
       subtitle: "PHANTOM",
       description: "The locked blocks are invisible. What will you do?",
-      version_info: "Unofficial Expansion",
-      rank_reqs: [
+      versionInfo: "Unofficial Expansion",
+      rankReqs: [
         "Level 100",
         "Level 200",
         "Level 300",
@@ -2714,8 +2714,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Sprint",
       subtitle: "40L MATH",
       description: "Clear 40 lines while doing math!",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "Clear 40 lines",
         "3′20″",
         "2′15″",
@@ -2730,8 +2730,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "wtf",
       subtitle: "",
       description: "Flashing lights warning!",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "(impossible)",
         "1 Rank",
         "2 Rank",
@@ -2746,8 +2746,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "wtf",
       subtitle: "v2",
       description: "Flashing lights warning! (unfinished mode)",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "(impossible)",
         "1 Rank",
         "2 Rank",
@@ -2762,8 +2762,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Stack",
       subtitle: "WTF",
       description: "Minimum zone requirement increases every zone!",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "18 lines",
         "36 lines",
         "59 lines",
@@ -2778,8 +2778,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Lockout",
       subtitle: "",
       description: "Clear randomly-selected types of clears quickly!",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "Complete all objectives in 2′00″",
         "1′40″",
         "1′30″",
@@ -2794,8 +2794,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Turn-Based",
       subtitle: "WTF",
       description: "Only 4 pieces per turn!",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "(impossible)",
         "Win the battle",
         "Win the battle in 182 pieces",
@@ -2810,8 +2810,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Scanner",
       subtitle: "LUNATIC",
       description: "Zone lines clear away after a set number of pieces! Originally by hanamielle.",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "(impossible)",
         "Clear 40 lines in 1′10″",
         "Clear 40 lines in 1′00″",
@@ -2826,8 +2826,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Battle",
       subtitle: "WTF",
       description: "Send as many lines as you can!",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "---",
         "Send 50 lines",
         "Send 65 lines",
@@ -2842,8 +2842,8 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Backfire",
       subtitle: "WTF",
       description: "Multiplied backfire!",
-      version_info: "Techmino WTF mod",
-      rank_reqs: [
+      versionInfo: "Techmino WTF mod",
+      rankReqs: [
         "Send 50 lines",
         "Send 100 lines",
         "Send 100 lines in 3′00″",
@@ -2858,7 +2858,7 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Confusion",
       subtitle: "",
       description: "?????",
-      version_info: "Techmino WTF mod",
+      versionInfo: "Techmino WTF mod",
       difficulty: "Very Hard",
       length: "Unbounded, usually short (~3 min)"
     },
@@ -2866,7 +2866,7 @@ It will not be implemented in the “Classic” Techmino.`
       title: "Cascade",
       subtitle: "",
       description: "On death, individual minos fall!",
-      version_info: "Techmino WTF mod",
+      versionInfo: "Techmino WTF mod",
       difficulty: "Medium",
       length: "Unbounded, usually short (~3 min)"
     },
