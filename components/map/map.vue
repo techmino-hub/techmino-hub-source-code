@@ -180,7 +180,7 @@ const props = defineProps({
 
 let keyDownSet = new Set<string>();
 let prevTimestamp = performance.now();
-let prevTouches: TouchList = new TouchList();
+let prevTouches: TouchList | Touch[] = [];
 
 let totalMovement = 0;
 let lagCounter = 0;
