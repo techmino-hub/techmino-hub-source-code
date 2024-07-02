@@ -5,11 +5,11 @@ import { type LangEntry, MD_STRING_PREFIX } from '~/assets/types/lang';
 import * as langEN from '~/assets/lang/en';
 import * as langID from '~/assets/lang/id';
 
-const md = markdownit({
+export const md = markdownit({
     html: false
 });
 
-const htmlSanitizerOptions = {
+export const htmlSanitizerOptions = {
     allowedTags: [
         "address", "article", "aside", "footer", "header", "h1", "h2", "h3", "h4",
         "h5", "h6", "hgroup", "main", "nav", "section", "blockquote", "dd", "div",
@@ -19,6 +19,11 @@ const htmlSanitizerOptions = {
         "small", "span", "strong", "sub", "sup", "time", "u", "var", "wbr", "caption",
         "col", "colgroup", "table", "tbody", "td", "tfoot", "th", "thead", "tr"
     ],
+    allowedAttributes: {
+        a: [ 'href', 'name', 'target' ],
+        img: [ 'src', 'srcset', 'alt', 'title', 'width', 'height', 'loading' ],
+        td: [ 'rowspan', 'colspan' ]
+    },
 }
 
 function renderString(entry: string): string {
@@ -38,7 +43,7 @@ function processLangEntry(entries: LangEntry): LangEntry {
         if(typeof entry === 'string') {
             newEntries[key] = renderString(entry);
         } else {
-            newEntries[key] = processLangEntry(entry);
+            newEntries[key] = processLangEntry(entry as LangEntry);
         }
     }
     

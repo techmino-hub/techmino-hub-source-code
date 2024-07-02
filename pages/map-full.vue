@@ -26,7 +26,7 @@ definePageMeta({
         <Title>{{ $t('map.tabTitleFS') }}</Title>
         <Map :map="currentMap" class="map hide-noscript-important" :fullscreen="true" />
         <noscript>
-            <NuxtLink class="block-style center-text" :to="localePath('/map-html')">{{ $t('map.htmlVersion') }}</NuxtLink>
+            <NuxtLink class="block-style center-text" :to="localePath('/map-lite')">{{ $t('map.htmlVersion') }}</NuxtLink>
         </noscript>
     </div>
 </template>

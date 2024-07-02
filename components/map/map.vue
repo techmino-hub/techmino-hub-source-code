@@ -13,7 +13,11 @@
       class="map-outer"
       ref="mapOuterElement"
       tabindex="0">
-        <pre class="debug" v-show="debugMode">{{ debugText }}</pre>
+        <pre class="debug" v-show="debugMode" v-text="debugText"></pre>
+        <div class="lag-warn" v-show="showLagMessage">
+            <span v-t="'map.lagWarnPre'"></span>
+            <NuxtLink to="/map-lite" v-t="'map.lagWarnLink'" />
+        </div>
         <svg class="crosshair" viewBox="0 0 10 10" v-show="showCrosshair">
             <line x1="0" y1="5" x2="10" y2="5" />
             <line x1="5" y1="0" x2="5" y2="10" />
@@ -65,7 +69,7 @@
                     <menu>
                         <button
                           type="button"
-                          @click="isPanelExpanded = true"
+                          @click="expandPanel()"
                           :title="$t('map.tooltip.expand')">
                             &#xF0085;
                         </button>
@@ -82,7 +86,7 @@
                 <header>
                     <button
                       type="button"
-                      @click="isPanelExpanded = false"
+                      @click="collapsePanel()"
                       :title="$t('map.tooltip.back')">
                         &#xF0083;
                     </button>
@@ -113,6 +117,9 @@
                                     v-t="'map.info.source'"></a>
                             </li>
                         </ul>
+                        <article ref="articleElement">
+
+                        </article>
                     </main>
                     <aside>
                         <div
@@ -124,6 +131,8 @@
                             <div class="video-outer">
                                 <iframe
                                     :src="$t(`modes.${lastSelectedMode.name}.featuredVideo`)"
+                                    loading="lazy"
+                                    frameborder="0"
                                 ></iframe>
                             </div>
                         </div>
@@ -145,6 +154,9 @@ import {
     ModeShape
 } from '~/assets/types/map';
 import { getModeI18nString } from '~/assets/scripts/modes';
+import { getArticle } from '~/assets/scripts/articles';
+
+const i18n = useI18n();
 
 const MOVE_SPEED_MULT = 0.462;
 const ZOOM_SPEED_MULT = 0.00262;
@@ -170,9 +182,11 @@ let keyDownSet = new Set<string>();
 let prevTimestamp = performance.now();
 
 let totalMovement = 0;
+let lagCounter = 0;
 let isDragging = false;
 let pendingUnselect = false;
 let cancelNextModeSelect = false;
+let isUpdateRunning = false;
 
 let mapData: Ref<MapData> = ref(
     await import(`~/assets/data/maps/${props.map}.json`)
@@ -180,9 +194,11 @@ let mapData: Ref<MapData> = ref(
 
 const mapOuterElement = ref<HTMLDivElement | null>(null);
 const panelElement = ref<HTMLElement | null>(null);
-const debugText = ref<string>('Update loop halted.');
+const articleElement = ref<HTMLElement | null>(null);
+const debugText = ref<string>('Update loop uninitialized.');
 const isMounted = ref<boolean>(false);
 const debugMode = ref<boolean>(false);
+const showLagMessage = ref<boolean>(false);
 
 const camX = ref<number>(0);
 const camY = ref<number>(0);
@@ -232,6 +248,8 @@ function mountedHook() {
     addEventListeners();
 
     isMounted.value = true;
+
+    setInterval(() => lagCounter = Math.max(0, lagCounter - 250), 1000);
 }
 
 function addEventListeners() {
@@ -316,14 +334,14 @@ function handleMapKeys(dt: number) {
     }
 
     if(keyDownSet.has('Enter')) {
-        isPanelExpanded.value = true;
+        expandPanel();
     }
 }
 
 function handleKeys(dt: number) {
     if(isPanelExpanded.value) {
         if(keyDownSet.has('Escape')) {
-            isPanelExpanded.value = false;
+            collapsePanel();
             keyDownSet.delete('Escape');
         }
     } else {
@@ -351,22 +369,33 @@ function moveMap(dx: number, dy: number) {
 }
 
 function update(curTimestamp: number) {
+    isUpdateRunning = true;
     const dt = curTimestamp - prevTimestamp;
     prevTimestamp = curTimestamp;
 
     handleKeys(dt);
 
-    debugText.value = `dt: ${dt.toFixed(0)} ms`;
+    if(debugMode.value) {
+        debugText.value = `dt: ${dt.toFixed(0)} ms\nlag: ${lagCounter}`;
+    }
+
+    if(dt > 250 || dt < 0) {
+        lagCounter += Math.abs(dt);
+    }
+    if(lagCounter > 1000) {
+        showLagMessage.value = true;
+    }
 
     if(keyDownSet.size > 0) {
         requestAnimationFrame(update);
     } else {
+        isUpdateRunning = false;
         debugText.value = "Update loop halted."
     }
 }
 
 function isTargetInMap(target: EventTarget | null): boolean {
-    if(!(target instanceof HTMLElement)) return false;
+    if(!(target instanceof HTMLElement) && !(target instanceof SVGElement)) return false;
     
     if(props.fullscreen) return true;
 
@@ -380,13 +409,15 @@ const UNPREVENTED_CODES = new Set([
 function onKeyDown(ev: KeyboardEvent) {
     if(!isTargetInMap(ev.target)) return;
 
+    if(ev.repeat) return;
+
     if(ev.code === 'F3') {
         debugMode.value = !debugMode.value;
         ev.preventDefault();
         return;
     }
 
-    const startUpdate = keyDownSet.size === 0;
+    const startUpdate = keyDownSet.size === 0 && !isUpdateRunning;
 
     keyDownSet.add(ev.code);
 
@@ -394,7 +425,7 @@ function onKeyDown(ev: KeyboardEvent) {
 
     if(startUpdate) {
         prevTimestamp = performance.now();
-        update(performance.now());
+        update(prevTimestamp);
     }
 
     if(
@@ -412,7 +443,7 @@ function onKeyUp(ev: KeyboardEvent) {
 }
 
 function onMouseDown(ev: MouseEvent) {
-    if(!isTargetInMap(ev.target)) return;
+    if(!isTargetInMap(ev.target) || isPanelExpanded.value) return;
 
     totalMovement = 0;
 
@@ -428,11 +459,6 @@ function onMouseDown(ev: MouseEvent) {
 }
 
 function onMouseMove(ev: MouseEvent) {
-    if(!isTargetInMap(ev.target)) return;
-
-    if(panelElement.value?.contains(ev.target as Node)) return;
-    if(isPanelExpanded.value) return;
-
     if(isDragging) {
         let totalScale = scaleFactor.value * camZoom.value;
         moveMap(-ev.movementX / totalScale, -ev.movementY / totalScale);
@@ -448,9 +474,6 @@ function onMouseMove(ev: MouseEvent) {
 
 function onMouseUp(ev: MouseEvent) {
     if(!isTargetInMap(ev.target)) return;
-
-    if(panelElement.value?.contains(ev.target as Node)) return;
-    if(isPanelExpanded.value) return;
 
     if(pendingUnselect) {
         pendingUnselect = false;
@@ -490,7 +513,7 @@ function onModeClick(name: string) {
     }
 
     if(mode.name === selectedMode.value?.name) {
-        isPanelExpanded.value = true;
+        expandPanel();
         return;
     }
 
@@ -579,9 +602,31 @@ function selectMode(mode: Mode | null) {
 
     if(mode) {
         lastSelectedMode.value = mode;
-    } else {
-        isPanelExpanded.value = false;
     }
+}
+
+function expandPanel() {
+    isPanelExpanded.value = true;
+
+    if(articleElement.value) {
+        articleElement.value.innerHTML = "";
+        articleElement.value.textContent = i18n.t("map.loadingArticle");
+
+        getArticle(`mode.${lastSelectedMode.value.name}`, i18n.locale.value)
+            .then(article => {
+                if(!articleElement.value) return;
+                
+                if(article) {
+                    articleElement.value.innerHTML = article;
+                } else {
+                    articleElement.value.textContent = i18n.t("map.noArticle");
+                }
+            });
+    }
+}
+
+function collapsePanel() {
+    isPanelExpanded.value = false;
 }
 
 init();
@@ -655,6 +700,29 @@ onMounted(mountedHook);
     z-index: 4000;
     user-select: none;
     pointer-events: none;
+}
+
+.lag-warn {
+    position: absolute;
+    inset: 1em 1em auto 1em;
+    text-align: center;
+    color: orange;
+    font-size: 1.5em;
+
+    a {
+        color: colors.$btn-border-color;
+        transition: 200ms;
+
+        &:hover {
+            text-shadow: 0 0 0.15em colors.$btn-hover-border-color;
+            color: colors.$btn-hover-border-color;
+        }
+
+        &:active {
+            text-shadow: 0 0 0.3em colors.$btn-active-border-color;
+            color: colors.$btn-active-border-color;
+        }
+    }
 }
 
 .crosshair {
@@ -826,7 +894,7 @@ onMounted(mountedHook);
             inset: 6em 1.862em 1.5em 1.862em;
             display: flex;
             overflow-y: auto;
-            padding-right: 1em;
+            padding-inline-end: 1em;
 
             main {
                 display: flex;
@@ -843,6 +911,8 @@ onMounted(mountedHook);
                     overflow-x: auto;
                     flex-shrink: 0;
                     font-size: 1.2em;
+                    padding-block-end: 1em;
+                    border-block-end: 0.1em solid colors.$map-panel-border-color;
 
                     li {
                         display: flex;
@@ -889,32 +959,26 @@ onMounted(mountedHook);
 
                 article {
                     text-align: start;
-                    border-top: 0.1em dotted #FFFFFF44;
                     padding-top: 1em;
 
-                    h1, h2, h3, h4, h5, h6 {
-                        text-align: start !important;
-                        margin: 1em 0 !important;
-                    }
-
-                    table {
+                    :deep(table) {
                         display: block;
                         max-width: fit-content;
                         border-collapse: collapse;
                         overflow-x: auto;
-
-                        th {
-                            text-align: start;
-                            font-weight: bold;
-                            font-size: 1.1em;
-                        }
-
-                        th, td {
-                            padding: 0.5em 1em;
-                        }
                     }
 
-                    table, th, td {
+                    :deep(th) {
+                        text-align: start;
+                        font-weight: bold;
+                        font-size: 1.1em;
+                    }
+
+                    :deep(th), :deep(td) {
+                        padding: 0.5em 1em;
+                    }
+
+                    :deep(table), :deep(th), :deep(td) {
                         border: 0.1em solid white;
                     }
                 }
@@ -922,13 +986,13 @@ onMounted(mountedHook);
 
             aside {
                 height: fit-content;
+
                 .video-outer {
                     position: relative;
                     width: 100%;
                     height: 0;
                     margin: 1em 0;
                     padding-bottom: 56.25%;
-                    border-bottom: 0.1em dotted #FFFFFF44;
 
                     iframe {
                         position: absolute;

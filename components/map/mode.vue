@@ -84,6 +84,7 @@ defineEmits(['click']);
     --bg-color: #{colors.$mode-bg-q};
     --border-color: #{colors.$mode-border};
     pointer-events: none;
+    user-select: none;
 
     &.rank-B { --bg-color: #{colors.$mode-bg-b}; }
     &.rank-A { --bg-color: #{colors.$mode-bg-a}; }

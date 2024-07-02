@@ -522,11 +522,12 @@ It will not be implemented in the “Classic” Techmino.`
   map: {
     tabTitle: "Techmino Hub - Map",
     tabTitleFS: "Techmino Hub - Map (Fullscreen)",
-    tabTitleHTML: "Techmino Hub - Map (HTML)",
+    tabTitleLite: "Techmino Hub - Map (Lite)",
     title: "Techmino Map",
     details: "Currently displaying '{currentMap}' map",
     fullscreen: "Visit fullscreen map",
-    htmlVersion: "Visit JavaScript-free map",
+    noscriptWarn: "It looks like JavaScript is disabled.",
+    liteVersion: "Visit lite map",
     rankReqs: "Rank requirements:",
     tooltip: {
       rank: {
@@ -550,6 +551,8 @@ It will not be implemented in the “Classic” Techmino.`
     loadingArticle: "Loading article...",
     noArticle: "Article unavailable",
     featuredVideo: "Featured video",
+    lagWarnPre: "Lagging? ",
+    lagWarnLink: "Lite version",
   },
   modes: {
     sprint_10l: {
