@@ -117,18 +117,27 @@ export default {
       'testflight-full': {
         question: "I want to play Techmino on iOS or iPadOS without jailbreaking, but the TestFlight limit is full or the TestFlight build has expired. What should I do?",
         answer:
-          `md_You can try to manually install the \`.ipa\` files from GitHub using Sideloadly:
-1. Get the \`.ipa\` files from [the GitHub releases page](https://github.com/26F-Studio/Techmino/releases).  
-   Find the version you want to install on this page, and then download “Techmino_iOS.ipa”.
-2. [Download and install Sideloadly](https://sideloadly.io/). This application is available for Microsoft Windows and macOS.
-3. Connect your iPhone/iPad/iPod touch to your computer with a USB cable.
-4. Drag the downloaded \`.ipa\` file into the Sideloadly window.
-5. Select your device, enter your Apple ID email address, and click “Start”.
-6. Once the application is installed, go to Settings on your device, then General → VPN & Device Management (or Profiles & Device Management), and trust the profile you just installed.
+          `md_We previously had a build for iOS and iPadOS devices on the App Store, but it was unfortunately removed by the Tetris Company via a DMCA request.  
+We do have a TestFlight link, but it is currently full and we cannot add more spots as of now.  
+However, there is an alternative to run Techmino on iOS and iPadOS via Love2D Studio.  
+To run Techmino on your iOS or iPadOS devices (iPhones, iPads, iPod Touches) via Love2D Studio:
 
-If you are using Microsoft Windows, make sure you have iTunes installed on your computer.  
-You can download it from the Apple’s official website.  
-For more information, visit the Sideloadly website.`
+1. [Download and install Love2D Studio from the App Store](https://apps.apple.com/us/app/love2d-studio/id6474188075).
+2. Download the **\`.love\`** file of the desired version of Techmino on your Apple device. Save the file on your device or iCloud Drive. All stable builds of Techmino are available [here](https://github.com/26F-Studio/Techmino/releases).
+3. Launch Love2D Studio, tap the **＋** button on the top right of the sidebar, then tap “Import .love file”.
+4. Locate and select the \`.love\` file you have downloaded.
+5. You should now see “Techmino_Bare” in your sidebar. Tap on it to expand, then tap \`main.lua\`.
+6. Tap the ▶︎ button in the top right of the screen to start the game.
+
+**We have not yet fully tested the stability of Love2D Studio, so there is a possibility that the game may crash during gameplay\\*.**  
+**We also don’t know whether the game data would be lost after a certain amount of time of inactivity or for other reasons.**
+**To ensure the security of your data, we strongly recommend exporting the game data via the clipboard regularly to prevent data loss.**
+
+*This procedure can also be used for testing Techmino Galaxy.*
+
+\\*We did not encounter this during the limited testing, but Love2D Studio tends to crash when exiting Techmino and then relaunching it.
+
+*This is not an advertisement or endorsement of Love2D Studio.*`
       },
       'no-ipa': {
         question: "I want to play Techmino on iOS or iPadOS without jailbreaking, but I don't see an .ipa download on the latest release.",
