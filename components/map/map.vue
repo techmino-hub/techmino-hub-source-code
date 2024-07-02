@@ -228,7 +228,7 @@ function getScaleFactor(width: number, height: number): number {
     const sqrtArea = Math.sqrt(width * height);
     const targetSqrtArea = Math.sqrt(1280 * 720);
 
-    return sqrtArea / targetSqrtArea * (props.fullscreen ? 1.26 : 1.62);
+    return sqrtArea / targetSqrtArea * (props.fullscreen ? 1.26 : 1.42);
 }
 
 function init() {
@@ -856,7 +856,7 @@ onMounted(mountedHook);
     transition: transform 500ms, background-color 750ms;
     z-index: 2;
 
-    font-size: calc(var(--scale-factor) * 0.696em);
+    font-size: calc(var(--scale-factor) * 0.762em);
 
     &.open {
         transform: translateX(-23.0769231%); // ~ 3/13
@@ -912,7 +912,7 @@ onMounted(mountedHook);
                     font-weight: bold;
                     text-align: center;
                     margin-block: 0.5em;
-                    
+
                     @media (min-aspect-ratio: 5) {
                         display: none;
                     }
