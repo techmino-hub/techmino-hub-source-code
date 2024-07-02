@@ -180,6 +180,7 @@ const props = defineProps({
 
 let keyDownSet = new Set<string>();
 let prevTimestamp = performance.now();
+let prevTouches: TouchList = new TouchList();
 
 let totalMovement = 0;
 let lagCounter = 0;
@@ -262,6 +263,10 @@ function addEventListeners() {
     window.addEventListener('mousemove', onMouseMove);
     window.addEventListener('mouseup',   onMouseUp);
     window.addEventListener('wheel',     onWheel, { passive: false });
+
+    window.addEventListener('touchstart', onTouchStart);
+    window.addEventListener('touchmove',  onTouchMove);
+    window.addEventListener('touchend',   onTouchEnd);
 }
 
 function handleZoomKeys(dt: number) {
@@ -436,34 +441,34 @@ function onKeyDown(ev: KeyboardEvent) {
     }
 }
 
-function onKeyUp(ev: KeyboardEvent) {
-    if(!isTargetInMap(ev.target)) return;
+function onKeyUp(event: KeyboardEvent) {
+    if(!isTargetInMap(event.target)) return;
 
-    keyDownSet.delete(ev.code);
+    keyDownSet.delete(event.code);
 }
 
-function onMouseDown(ev: MouseEvent) {
-    if(!isTargetInMap(ev.target) || isPanelExpanded.value) return;
+function onMouseDown(event: MouseEvent) {
+    if(!isTargetInMap(event.target) || isPanelExpanded.value) return;
 
     totalMovement = 0;
 
-    if(ev.button === 0) {
+    if(event.button === 0) {
         isDragging = true;
         showCrosshair.value = false;
     }
 
-    if(ev.target === mapOuterElement.value) {
+    if(event.target === mapOuterElement.value) {
         pendingUnselect = true;
     }
     cancelNextModeSelect = false;
 }
 
-function onMouseMove(ev: MouseEvent) {
+function onMouseMove(event: MouseEvent) {
     if(isDragging) {
         let totalScale = scaleFactor.value * camZoom.value;
-        moveMap(-ev.movementX / totalScale, -ev.movementY / totalScale);
+        moveMap(-event.movementX / totalScale, -event.movementY / totalScale);
 
-        let movement = Math.hypot(ev.movementX, ev.movementY);
+        let movement = Math.hypot(event.movementX, event.movementY);
         totalMovement += movement;
 
         if(totalMovement > 10) cancelNextModeSelect = true;
@@ -472,8 +477,8 @@ function onMouseMove(ev: MouseEvent) {
     pendingUnselect = false;
 }
 
-function onMouseUp(ev: MouseEvent) {
-    if(!isTargetInMap(ev.target)) return;
+function onMouseUp(event: MouseEvent) {
+    if(!isTargetInMap(event.target)) return;
 
     if(pendingUnselect) {
         pendingUnselect = false;
@@ -482,21 +487,87 @@ function onMouseUp(ev: MouseEvent) {
     isDragging = false;
 }
 
-function onWheel(ev: WheelEvent) {
-    if(!isTargetInMap(ev.target)) return;
+function onWheel(event: WheelEvent) {
+    if(!isTargetInMap(event.target)) return;
 
-    if(panelElement.value?.contains(ev.target as Node)) return;
+    if(panelElement.value?.contains(event.target as Node)) return;
     if(isPanelExpanded.value) return;
 
-    ev.preventDefault();
+    event.preventDefault();
 
-    const dZoom = ev.deltaY * ZOOM_SCROLL_MULT * ZOOM_SPEED_MULT * camZoom.value;
+    const dZoom = event.deltaY * ZOOM_SCROLL_MULT * ZOOM_SPEED_MULT * camZoom.value;
 
     camZoom.value = clamp(
         MIN_ZOOM,
         camZoom.value + dZoom,
         MAX_ZOOM
     );
+}
+
+function onTouchStart(event: TouchEvent) {
+    if(event.touches.length === 1 && isTargetInMap(event.target)) {
+        isDragging = true;
+        showCrosshair.value = false;
+    }
+    if(event.target === mapOuterElement.value && event.touches.length === 1) {
+        pendingUnselect = true;
+    }
+    if(event.touches.length > 1) {
+        isDragging = false;
+    }
+    cancelNextModeSelect = false;
+
+    prevTouches = event.touches;
+
+    totalMovement = 0;
+}
+
+function onTouchMove(event: TouchEvent) {
+    if(isDragging) {
+        const totalScale = scaleFactor.value * camZoom.value;
+        const dx = event.touches[0].clientX - prevTouches[0].clientX;
+        const dy = event.touches[0].clientY - prevTouches[0].clientY;
+
+        moveMap(dx / totalScale, dy / totalScale);
+
+        totalMovement += Math.hypot(dx, dy);
+
+        if(totalMovement > 10) cancelNextModeSelect = true;
+    } else if(event.touches.length >= 2) {
+        event.preventDefault();
+
+        const prevTouchA = prevTouches[0];
+        const prevTouchB = prevTouches[1];
+        const touchA = event.touches[0];
+        const touchB = event.touches[1];
+
+        const prevTouchDist = 
+            Math.hypot(prevTouchA.clientX - prevTouchB.clientX,
+                prevTouchA.clientY - prevTouchB.clientY);
+        
+        const touchDist =
+            Math.hypot(touchA.clientX - touchB.clientX,
+                touchA.clientY - touchB.clientY);
+        
+        const zoomFactor = touchDist / prevTouchDist;
+
+        camZoom.value *= zoomFactor;
+    }
+
+    if(totalMovement > 10) pendingUnselect = false;
+
+    prevTouches = event.touches;
+}
+
+function onTouchEnd(event: TouchEvent) {
+    if(pendingUnselect) {
+        pendingUnselect = false;
+        selectMode(null);
+    }
+
+    isDragging = event.touches.length === 1;
+
+    prevTouches = event.touches;
 }
 
 function onModeClick(name: string) {
