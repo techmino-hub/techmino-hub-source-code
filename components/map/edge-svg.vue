@@ -31,6 +31,7 @@ const props = defineProps({
     position: absolute;
     z-index: -1;
     user-select: none;
+    touch-action: none;
     pointer-events: none;
     caret-color: transparent;
     overflow: visible;
