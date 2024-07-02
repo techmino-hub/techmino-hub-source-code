@@ -9,7 +9,7 @@
             'rank': true
         }"
         v-text="RANK_TO_CHAR_MAP[rank]"
-        :title="$t(`map.rank${Rank[rank]}Tooltip`)"
+        :title="$t(`map.tooltip.rank.${Rank[rank]}`)"
     ></span>
 </template>
 

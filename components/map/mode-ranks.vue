@@ -56,6 +56,7 @@ const props = defineProps({
 ul.rank-reqs {
     display: flex;
     flex-direction: column;
+    max-height: fit-content;
     gap: 0.3em;
     list-style-type: none;
     padding: 0.3em 0.5em;

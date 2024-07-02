@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { type Mode, ModeShape, Rank } from '~/assets/types/map';
+import { getModeI18nString } from '~/assets/scripts/modes';
 import { getModeIconPath } from '~/assets/data/mode-icons';
 
 const props = defineProps({
@@ -20,19 +21,6 @@ const props = defineProps({
 });
 
 defineEmits(['click']);
-
-const i18n = useI18n();
-
-function getTitle(): string {
-    const title = i18n.t(`modes.${props.mode.name}.title`);
-    const subtitle = i18n.t(`modes.${props.mode.name}.subtitle`);
-
-    if(subtitle.length > 0) {
-        return `${title} ${subtitle}`;
-    }
-
-    return title;
-}
 </script>
 
 <template>
@@ -43,7 +31,7 @@ function getTitle(): string {
         top: mode.y - mode.size + 'px',
         '--size': 2 * mode.size + 'px'
       }"
-      :title="getTitle()">
+      :title="getModeI18nString(mode.name, $t)">
         <button
             v-if="mode.shape == ModeShape.square"
             class="border square"

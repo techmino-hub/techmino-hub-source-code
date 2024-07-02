@@ -13,7 +13,7 @@
       class="map-outer"
       ref="mapOuterElement"
       tabindex="0">
-        <pre class="debug">{{ debugText }}</pre>
+        <pre class="debug" v-show="debugMode">{{ debugText }}</pre>
         <svg class="crosshair" viewBox="0 0 10 10" v-show="showCrosshair">
             <line x1="0" y1="5" x2="10" y2="5" />
             <line x1="5" y1="0" x2="5" y2="10" />
@@ -34,7 +34,8 @@
             'panel': true,
             'open': !!selectedMode && !isPanelExpanded,
             'expanded': !!selectedMode && isPanelExpanded
-          }">
+          }"
+          ref="panelElement">
             <div class="small">
                 <div class="top">
                     <h1
@@ -43,14 +44,18 @@
                     ></h1>
                     <h2
                         class="subtitle"
+                        v-if="$te(`modes.${lastSelectedMode.name}.subtitle`)"
                         v-t="`modes.${lastSelectedMode.name}.subtitle`"
                     ></h2>
+                    <br>
                     <h4
                         class="version-info"
+                        v-if="$te(`modes.${lastSelectedMode.name}.versionInfo`)"
                         v-t="`modes.${lastSelectedMode.name}.versionInfo`"
                     ></h4>
                     <p
                         class="description"
+                        v-if="$te(`modes.${lastSelectedMode.name}.description`)"
                         v-t="`modes.${lastSelectedMode.name}.description`"
                     ></p>
                 </div>
@@ -60,26 +65,86 @@
                     <menu>
                         <button
                           type="button"
-                          @click="isPanelExpanded = true">
+                          @click="isPanelExpanded = true"
+                          :title="$t('map.tooltip.expand')">
                             &#xF0085;
                         </button>
                         <button
                           type="button"
-                          @click="selectMode(null)">
+                          @click="selectMode(null)"
+                          :title="$t('map.tooltip.close')">
                             &#xF0083;
                         </button>
                     </menu>
                 </div>
             </div>
             <div class="wide">
-
+                <header>
+                    <button
+                      type="button"
+                      @click="isPanelExpanded = false"
+                      :title="$t('map.tooltip.back')">
+                        &#xF0083;
+                    </button>
+                    <h1>
+                        {{ getModeI18nString(lastSelectedMode.name, $t) }}
+                    </h1>
+                </header>
+                <div class="bottom">
+                    <main>
+                        <ul class="mode-info-list">
+                            <li v-if="$te(`modes.${lastSelectedMode.name}.difficulty`)">
+                                <h4 v-t="'map.info.difficulty'"></h4>
+                                <p v-t="`modes.${lastSelectedMode.name}.difficulty`"></p>
+                            </li>
+                            <li v-if="$te(`modes.${lastSelectedMode.name}.length`)">
+                                <h4 v-t="'map.info.length'"></h4>
+                                <p v-t="`modes.${lastSelectedMode.name}.length`"></p>
+                            </li>
+                            <li
+                              v-if="$te(`modes.${lastSelectedMode.name}.versionInfo`)">
+                                <h4 v-t="'map.info.difficulty'"></h4>
+                                <p v-t="`modes.${lastSelectedMode.name}.difficulty`"></p>
+                            </li>
+                            <li>
+                                <a :href="lastSelectedMode.source"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    v-t="'map.info.source'"></a>
+                            </li>
+                        </ul>
+                    </main>
+                    <aside>
+                        <div
+                          v-if="$te(`modes.${lastSelectedMode.name}.featuredVideo`)">
+                            <h3
+                                class="center-text"
+                                v-t="'map.featuredVideo'"
+                            ></h3>
+                            <div class="video-outer">
+                                <iframe
+                                    :src="$t(`modes.${lastSelectedMode.name}.featuredVideo`)"
+                                ></iframe>
+                            </div>
+                        </div>
+                        <h3 v-t="'map.rankReqs'" class="center-text"></h3>
+                        <MapModeRanks :mode="lastSelectedMode" />
+                    </aside>
+                </div>
             </div>
         </aside>
     </div>
 </template>
 
 <script setup lang="ts">
-import { type MapData, isMapDataValid, type Mode, isModeValid, ModeShape } from '~/assets/types/map';
+import {
+    type MapData,
+    type Mode,
+    isMapDataValid,
+    isModeValid,
+    ModeShape
+} from '~/assets/types/map';
+import { getModeI18nString } from '~/assets/scripts/modes';
 
 const MOVE_SPEED_MULT = 0.462;
 const ZOOM_SPEED_MULT = 0.00262;
@@ -114,9 +179,10 @@ let mapData: Ref<MapData> = ref(
 );
 
 const mapOuterElement = ref<HTMLDivElement | null>(null);
+const panelElement = ref<HTMLElement | null>(null);
 const debugText = ref<string>('Update loop halted.');
 const isMounted = ref<boolean>(false);
-const isFocused = ref<boolean>(props.fullscreen);
+const debugMode = ref<boolean>(false);
 
 const camX = ref<number>(0);
 const camY = ref<number>(0);
@@ -238,7 +304,7 @@ function handleMoveKeys(dt: number) {
     }
 }
 
-function handleKeys(dt: number) {
+function handleMapKeys(dt: number) {
     if(keyDownSet.has('ControlLeft') || keyDownSet.has('ControlRight')) {
         handleZoomKeys(dt);
     } else {
@@ -247,6 +313,21 @@ function handleKeys(dt: number) {
 
     if(keyDownSet.has('Escape')) {
         selectMode(null);
+    }
+
+    if(keyDownSet.has('Enter')) {
+        isPanelExpanded.value = true;
+    }
+}
+
+function handleKeys(dt: number) {
+    if(isPanelExpanded.value) {
+        if(keyDownSet.has('Escape')) {
+            isPanelExpanded.value = false;
+            keyDownSet.delete('Escape');
+        }
+    } else {
+        handleMapKeys(dt);
     }
 }
 
@@ -299,6 +380,12 @@ const UNPREVENTED_CODES = new Set([
 function onKeyDown(ev: KeyboardEvent) {
     if(!isTargetInMap(ev.target)) return;
 
+    if(ev.code === 'F3') {
+        debugMode.value = !debugMode.value;
+        ev.preventDefault();
+        return;
+    }
+
     const startUpdate = keyDownSet.size === 0;
 
     keyDownSet.add(ev.code);
@@ -343,6 +430,9 @@ function onMouseDown(ev: MouseEvent) {
 function onMouseMove(ev: MouseEvent) {
     if(!isTargetInMap(ev.target)) return;
 
+    if(panelElement.value?.contains(ev.target as Node)) return;
+    if(isPanelExpanded.value) return;
+
     if(isDragging) {
         let totalScale = scaleFactor.value * camZoom.value;
         moveMap(-ev.movementX / totalScale, -ev.movementY / totalScale);
@@ -359,6 +449,9 @@ function onMouseMove(ev: MouseEvent) {
 function onMouseUp(ev: MouseEvent) {
     if(!isTargetInMap(ev.target)) return;
 
+    if(panelElement.value?.contains(ev.target as Node)) return;
+    if(isPanelExpanded.value) return;
+
     if(pendingUnselect) {
         pendingUnselect = false;
         selectMode(null);
@@ -368,6 +461,9 @@ function onMouseUp(ev: MouseEvent) {
 
 function onWheel(ev: WheelEvent) {
     if(!isTargetInMap(ev.target)) return;
+
+    if(panelElement.value?.contains(ev.target as Node)) return;
+    if(isPanelExpanded.value) return;
 
     ev.preventDefault();
 
@@ -393,9 +489,12 @@ function onModeClick(name: string) {
         throw new Error(`Invalid mode data for mode "${name}". An object dump is available in the console.`);
     }
 
-    selectMode(mode);
+    if(mode.name === selectedMode.value?.name) {
+        isPanelExpanded.value = true;
+        return;
+    }
 
-    console.debug(`Selected mode "${name}"`); // DEBUG
+    selectMode(mode);
 }
 
 function onResize() {
@@ -614,23 +713,31 @@ onMounted(mountedHook);
     width: 130%;
     height: 100%;
     transform: translateX(0);
-    transition: transform 500ms;
-
     background-color: colors.$map-panel-bg-color;
+    transition: transform 500ms, background-color 750ms;
+    z-index: 2;
+
     font-size: calc(var(--scale-factor) * 0.862em);
 
-    &.open { transform: translateX(-23.0769231%) } // ~ 3/13
-    &.expanded { transform: translateX(-100%) }
+    &.open {
+        transform: translateX(-23.0769231%); // ~ 3/13
+    }
+    &.expanded {
+        transform: translateX(-100%);
+        background-color: colors.$map-panel-expanded-bg-color;
+    }
 
-    .small {
+    > .small {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        overflow-y: auto;
+        height: 100%;
 
         border-inline-start: 0.2em dashed colors.$map-panel-border-color;
 
-        div {
+        > div {
             box-sizing: border-box;
             width: 100%;
             height: fit-content;
@@ -684,29 +791,210 @@ onMounted(mountedHook);
                 }
             }
         }
+    }
+    > .wide {
+        position: relative;
 
-        button {
-            color: colors.$map-panel-button-text-color;
-            border: 0.1em solid colors.$map-panel-button-border-color;
-            border-radius: 0.25em;
-            background-color: colors.$map-panel-button-bg-color;
-            cursor: pointer;
-            font-family: 'techmino-proportional';
-            text-align: center;
-            transition: 150ms;
+        > header {
+            position: absolute;
+            inset: 1.5em 1.5em auto 1.5em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.2em;
+            padding-bottom: 0.5em;
+            border-bottom: 0.1em solid colors.$map-panel-border-color;
+            box-sizing: border-box;
+            height: 3em;
 
-            &:hover {
-                background-color: colors.$map-panel-button-hover-bg-color;
-                transform: scale(1.05);
+            button {
+                width: 5em;
+                height: 100%;
+                margin-block: 0;
+                font-size: 1.25em;
+                transform-origin: center;
             }
 
-            &:active {
-                background-color: colors.$map-panel-button-active-bg-color;
-                box-shadow: 0 0 0.5em 0.25em colors.$map-panel-button-active-bg-color;
+            h1 {
+                margin-block: 0.25em;
+            }
+        }
+
+        > .bottom {
+            position: absolute;
+            inset: 6em 1.862em 1.5em 1.862em;
+            display: flex;
+            overflow-y: auto;
+            padding-right: 1em;
+
+            main {
+                display: flex;
+                flex-direction: column;
+                padding-top: 1em;
+                height: fit-content;
+
+                .mode-info-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5em;
+                    justify-content: space-evenly;
+                    padding: 0 0 1em 0;
+                    overflow-x: auto;
+                    flex-shrink: 0;
+                    font-size: 1.2em;
+
+                    li {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        color: white;
+                        text-decoration: none;
+                        align-items: center;
+
+                        &:not(:last-child) {
+                            border-bottom: 0.1em dashed colors.$primary-color;
+                        }
+
+                        h4, p {
+                            margin: 0 0 0.5em 0;
+                        }
+                    }
+
+                    a {
+                        width: 100%;
+                        text-align: center;
+                        text-decoration: none;
+                        padding: 0.25em 0.5em;
+                        border-radius: 5em;
+                        color: var(--color);
+                        border: 0.1em solid var(--color);
+                        background-color: transparent;
+
+                        transition: color 500ms, background-color 500ms;
+
+                        --color: #{colors.$btn-border-color};
+
+                        &:hover {
+                            --color: #{colors.$btn-hover-border-color};
+                            background-color: colors.$btn-hover-bg-color;
+                        }
+
+                        &:active {
+                            --color: #{colors.$btn-active-border-color};
+                            background-color: colors.$btn-active-bg-color;
+                        }
+                    }
+                }
+
+                article {
+                    text-align: start;
+                    border-top: 0.1em dotted #FFFFFF44;
+                    padding-top: 1em;
+
+                    h1, h2, h3, h4, h5, h6 {
+                        text-align: start !important;
+                        margin: 1em 0 !important;
+                    }
+
+                    table {
+                        display: block;
+                        max-width: fit-content;
+                        border-collapse: collapse;
+                        overflow-x: auto;
+
+                        th {
+                            text-align: start;
+                            font-weight: bold;
+                            font-size: 1.1em;
+                        }
+
+                        th, td {
+                            padding: 0.5em 1em;
+                        }
+                    }
+
+                    table, th, td {
+                        border: 0.1em solid white;
+                    }
+                }
+            }
+
+            aside {
+                height: fit-content;
+                .video-outer {
+                    position: relative;
+                    width: 100%;
+                    height: 0;
+                    margin: 1em 0;
+                    padding-bottom: 56.25%;
+                    border-bottom: 0.1em dotted #FFFFFF44;
+
+                    iframe {
+                        position: absolute;
+                        inset: 0 0 1em 0;
+                        width: 100%;
+                        height: calc(100% - 1em);
+                    }
+                }
+                
+                .rank-reqs {
+                    margin-top: 1em;
+                }
+            }
+
+            @media (min-aspect-ratio: 4/3) {
+                flex-direction: row;
+                justify-content: space-between;
+                min-height: 0;
+
+                main {
+                    width: 57.5%;
+                    overflow-y: auto;
+                }
+
+                aside {
+                    width: 37.5%;
+                    padding: 1em 0;
+                    overflow-y: auto;
+                }
+            }
+            @media (max-aspect-ratio: 4/3) {
+                flex-direction: column-reverse;
+                overflow-y: auto;
+
+                main {
+                    flex-shrink: 0;
+                    overflow-y: hidden;
+                }
+
+                .rank-reqs {
+                    max-width: 50%;
+                    margin-inline: auto;
+                }
             }
         }
     }
-    .wide {
+
+    button {
+        color: colors.$map-panel-button-text-color;
+        border: 0.1em solid colors.$map-panel-button-border-color;
+        border-radius: 0.25em;
+        background-color: colors.$map-panel-button-bg-color;
+        cursor: pointer;
+        font-family: 'techmino-proportional';
+        text-align: center;
+        transition: 150ms;
+
+        &:hover {
+            background-color: colors.$map-panel-button-hover-bg-color;
+            transform: scale(1.05);
+        }
+
+        &:active {
+            background-color: colors.$map-panel-button-active-bg-color;
+            box-shadow: 0 0 0.5em 0.25em colors.$map-panel-button-active-bg-color;
+        }
     }
 }
 </style>
