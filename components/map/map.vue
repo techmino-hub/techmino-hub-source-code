@@ -44,23 +44,23 @@
                 <div class="top">
                     <h1
                         class="title"
-                        v-t="`modes.${lastSelectedMode.name}.title`"
+                        v-html="$t(`modes.${lastSelectedMode.name}.title`)"
                     ></h1>
                     <h2
                         class="subtitle"
                         v-if="$te(`modes.${lastSelectedMode.name}.subtitle`)"
-                        v-t="`modes.${lastSelectedMode.name}.subtitle`"
+                        v-html="$t(`modes.${lastSelectedMode.name}.subtitle`)"
                     ></h2>
                     <br>
                     <h4
                         class="version-info"
                         v-if="$te(`modes.${lastSelectedMode.name}.versionInfo`)"
-                        v-t="`modes.${lastSelectedMode.name}.versionInfo`"
+                        v-html="$t(`modes.${lastSelectedMode.name}.versionInfo`)"
                     ></h4>
                     <p
                         class="description"
                         v-if="$te(`modes.${lastSelectedMode.name}.description`)"
-                        v-t="`modes.${lastSelectedMode.name}.description`"
+                        v-html="$t(`modes.${lastSelectedMode.name}.description`)"
                     ></p>
                 </div>
                 <div class="bottom">
@@ -99,16 +99,16 @@
                         <ul class="mode-info-list">
                             <li v-if="$te(`modes.${lastSelectedMode.name}.difficulty`)">
                                 <h4 v-t="'map.info.difficulty'"></h4>
-                                <p v-t="`modes.${lastSelectedMode.name}.difficulty`"></p>
+                                <p v-html="$t(`modes.${lastSelectedMode.name}.difficulty`)"></p>
                             </li>
                             <li v-if="$te(`modes.${lastSelectedMode.name}.length`)">
                                 <h4 v-t="'map.info.length'"></h4>
-                                <p v-t="`modes.${lastSelectedMode.name}.length`"></p>
+                                <p v-html="$t(`modes.${lastSelectedMode.name}.length`)"></p>
                             </li>
                             <li
                               v-if="$te(`modes.${lastSelectedMode.name}.versionInfo`)">
                                 <h4 v-t="'map.info.difficulty'"></h4>
-                                <p v-t="`modes.${lastSelectedMode.name}.difficulty`"></p>
+                                <p v-html="$t(`modes.${lastSelectedMode.name}.difficulty`)"></p>
                             </li>
                             <li>
                                 <a :href="lastSelectedMode.source"
@@ -856,7 +856,7 @@ onMounted(mountedHook);
     transition: transform 500ms, background-color 750ms;
     z-index: 2;
 
-    font-size: calc(var(--scale-factor) * 0.862em);
+    font-size: calc(var(--scale-factor) * 0.696em);
 
     &.open {
         transform: translateX(-23.0769231%); // ~ 3/13
@@ -867,10 +867,8 @@ onMounted(mountedHook);
     }
 
     > .small {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-rows: 3fr 7fr;
         overflow-y: auto;
         height: 100%;
 
@@ -879,10 +877,10 @@ onMounted(mountedHook);
         > div {
             box-sizing: border-box;
             width: 100%;
-            height: fit-content;
-            padding-block: 1em;
 
             &.top {
+                padding-block-start: 1em;
+
                 * {
                     margin-block: 0;
                     text-align: center;
@@ -903,15 +901,31 @@ onMounted(mountedHook);
             }
 
             &.bottom {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: end;
+                padding-block-end: 1em;
+
                 .rank-req-text {
                     font-size: 1.25em;
                     font-weight: bold;
                     text-align: center;
                     margin-block: 0.5em;
+                    
+                    @media (min-aspect-ratio: 5) {
+                        display: none;
+                    }
                 }
 
                 .rank-reqs {
+                    display: flex;
+                    flex-shrink: 1;
                     margin-inline: 1em;
+
+                    @media (min-aspect-ratio: 5) {
+                        display: none;
+                    }
                 }
 
                 menu {

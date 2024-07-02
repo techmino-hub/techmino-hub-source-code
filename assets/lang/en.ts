@@ -1581,7 +1581,7 @@ It will not be implemented in the “Classic” Techmino.`
       subtitle: "ULTIMATE",
       description: "An extreme-speed recreation of the game from the 80s",
       rankReqs: [
-        null,
+        "(impossible)",
         "1 line",
         "3 lines",
         "6 lines",
