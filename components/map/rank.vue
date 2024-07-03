@@ -40,7 +40,7 @@ const RANK_TO_CHAR_MAP = {
     width: fit-content;
     height: fit-content;
     font-family: 'techmino-proportional';
-    text-shadow: 0.1ch 0.1em colors.$rank-shadow-color;
+    text-shadow: -0.082ch 0.0462em colors.$rank-shadow-color;
     color: white;
 
     user-select: none;
