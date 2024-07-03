@@ -21,13 +21,14 @@ const localePath = useLocalePath();
     <div class="map-page">
         <Title>{{ $t('map.tabTitle') }}</Title>
         <h1 class="center-text">{{ $t('map.title') }}</h1>
-        <p class="center-text">{{ $t('map.details', { currentMap: currentMap }) }}</p>
+        <p class="center-text hide-noscript">{{ $t('map.details', { currentMap: currentMap }) }}</p>
         <NuxtLink class="block-style center-text hide-noscript-important" :to="localePath('/map-full')">{{ $t('map.fullscreen') }}</NuxtLink>
         <div class="map-wrapper hide-noscript-important">
             <Map :map="currentMap" />
         </div>
         <noscript>
-            <NuxtLink class="block-style center-text" :to="localePath('/map-lite')">{{ $t('map.htmlVersion') }}</NuxtLink>
+            <p class="center-text">{{ $t('map.noscriptWarn') }}</p>
+            <NuxtLink class="block-style center-text" :to="localePath('/map-lite')">{{ $t('map.liteVersion') }}</NuxtLink>
         </noscript>
     </div>
 </template>

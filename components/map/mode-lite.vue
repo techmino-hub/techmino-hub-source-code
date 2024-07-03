@@ -16,6 +16,7 @@ const props = defineProps({
 });
 
 const localePath = useLocalePath();
+const localizedName = getModeI18nString(props.mode.name, useI18n().t);
 </script>
 
 <template>
@@ -27,7 +28,7 @@ const localePath = useLocalePath();
         top: mode.y - mode.size + 'px',
         '--size': 2 * mode.size + 'px'
       }"
-      :title="getModeI18nString(mode.name, $t)">
+      :title="localizedName">
         <svg
           v-if="mode.shape == ModeShape.octagon"
           class="border octagon"
@@ -57,6 +58,8 @@ const localePath = useLocalePath();
             class="icon"
             draggable="false"
         >
+
+        <label>{{ localizedName }}</label>
     </NuxtLink>
 </template>
 
@@ -75,6 +78,7 @@ const localePath = useLocalePath();
     --bg-color: #{colors.$mode-bg-q};
     --border-color: #{colors.$mode-border};
     user-select: none;
+    overflow: visible;
 
     &.rank-B { --bg-color: #{colors.$mode-bg-b}; }
     &.rank-A { --bg-color: #{colors.$mode-bg-a}; }
@@ -84,6 +88,7 @@ const localePath = useLocalePath();
 
     &:hover {
         --border-color: #{colors.$mode-border-active};
+        transform: scale(1.062);
     }
 
     &.square {
@@ -132,15 +137,20 @@ const localePath = useLocalePath();
         caret-color: transparent;
     }
 
+    label {
+        position: absolute;
+        left: -75%;
+        top: 105%;
+        width: 250%;
+        text-align: center;
+        color: white;
+    }
+
     &.octagon .icon {
         inset: calc(0.125 * var(--size));
         width: calc(0.75 * var(--size));
         height: calc(0.75 * var(--size));
         margin: auto;
-    }
-
-    &:hover {
-        transform: scale(1.062);
     }
 
     transition: transform 100ms;

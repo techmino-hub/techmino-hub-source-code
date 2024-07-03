@@ -585,7 +585,7 @@ It will not be implemented in the “Classic” Techmino.`,
     title: "Techmino Map",
     details: "Currently displaying '{currentMap}' map",
     fullscreen: "Visit fullscreen map",
-    noscriptWarn: "It looks like JavaScript is disabled.",
+    noscriptWarn: "It looks like JavaScript is disabled. Although the regular map is unavailable, you can instead visit the lite map.",
     liteVersion: "Visit lite map",
     rankReqs: "Rank requirements:",
     tooltip: {
