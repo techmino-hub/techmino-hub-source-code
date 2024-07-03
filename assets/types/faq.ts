@@ -27,6 +27,5 @@ export enum FilterMode {
  */
 export type FAQEntry = {
     id: string;
-    author: string;
     tags: Tag[];
 }

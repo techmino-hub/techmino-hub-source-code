@@ -73,21 +73,25 @@ export default {
           `md_Techmino is a block-stacking game originally made by MrZ, along with
           several improvements by the open-source community. The game is made
           using Love2D. It has many game modes, including Sprint, Marathon,
-          VS, a fully-customizable custom mode, and more!`
+          VS, a fully-customizable custom mode, and more!`,
+          credit: "NOT_A_ROBOT"
       },
       'is-techmino-open-source': {
         question: "Is Techmino open-source?",
         answer:
           `md_Yes. Techmino is licensed under the LGPL-3.0 license.
-          You can find the source code [here](https://github.com/26F-Studio/Techmino).`
+          You can find the source code [here](https://github.com/26F-Studio/Techmino).`,
+        credit: "NOT_A_ROBOT"
       },
       'how-to-download': {
         question: "How do I get/download the game?",
         answer:
-          `md_1. Get the game [from GitHub releases](https://github.com/26F-Studio/Techmino/releases).  
+          `md_
+1. Get the game [from GitHub releases](https://github.com/26F-Studio/Techmino/releases).  
 2. Download the correct file based on your OS.  
 3. Extract compressed files as necessary.  
-4. Run the executable.`
+4. Run the executable.`,
+        credit: "NOT_A_ROBOT"
       },
       'supported-os': {
         question: "Which OSes are supported?",
@@ -101,7 +105,8 @@ export default {
 - Probably other platforms, if they support [LÖVE](https://love2d.org/), the game engine used by Techmino.
 (Someone in the Discord had limited success with a Nintendo Switch.)
          
-*see the next FAQ entry for details.`
+*see the next FAQ entry for details.`,
+        credit: "NOT_A_ROBOT"
       },
       'cant-find-app-store': {
         question: "Why can't I find Techmino in the App Store (iOS)?",
@@ -112,7 +117,8 @@ export default {
           had been reached, and therefore, you can't download Techmino on iOS anymore.  
           We apologize for the inconvenience. If it says the beta isn't accepting more testers,
           unfortunately, it is not available at this time.  
-          You may want to check the next FAQ entry for more information.`
+          You may want to check the next FAQ entry for more information.`,
+        credit: "nekonaomii"
       },
       'testflight-full': {
         question: "I want to play Techmino on iOS or iPadOS without jailbreaking, but the TestFlight limit is full or the TestFlight build has expired. What should I do?",
@@ -137,7 +143,8 @@ To run Techmino on your iOS or iPadOS devices (iPhones, iPads, iPod Touches) via
 
 \\*We did not encounter this during the limited testing, but Love2D Studio tends to crash when exiting Techmino and then relaunching it.
 
-*This is not an advertisement or endorsement of Love2D Studio.*`
+*This is not an advertisement or endorsement of Love2D Studio.*`,
+        credit: "C29H25N3O5"
       },
       'no-ipa': {
         question: "I want to play Techmino on iOS or iPadOS without jailbreaking, but I don't see an .ipa download on the latest release.",
@@ -151,7 +158,8 @@ To run Techmino on your iOS or iPadOS devices (iPhones, iPads, iPod Touches) via
 6. Compress the Techmino iOS file into a \`.zip\` file again. Please choose the “no compression” option in your archive app when creating this zip file.
 7. Change the extension of the new \`.zip\` file back into \`.ipa\`.
 8. Follow the instructions of the previous FAQ entry.  
-Note that builds that are too far back in time may use a different build of LÖVE and may not work properly with this method.`
+Note that builds that are too far back in time may use a different build of LÖVE and may not work properly with this method.`,
+        credit: "C29H25N3O5"
       },
       'cc-error': {
         question: "Why am I getting errors related to the Cold Clear bot? How do I fix it?",
@@ -172,14 +180,16 @@ Below are instructions on how to fix this issue.
 2. Download [Techmino's source code](https://github.com/26F-Studio/Techmino). (click the green Code button and click Download ZIP)
 3. Extract the downloaded files to seperate folders (Techmino source code to a folder, CCloader files to another folder)
 4. Copy the necessary files from the CCloader folder into Techmino's source code, based on the path in the above table.
-5. Build Techmino. Instructions can be found [here](https://love2d.org/wiki/Game_Distribution).`
+5. Build Techmino. Instructions can be found [here](https://love2d.org/wiki/Game_Distribution).`,
+        credit: "SweetSea"
       },
       'remake': {
         question: "I heard Techmino is being remade. What's going on?",
         answer:
           `md_On 15 Jan, 2022, MrZ (the main dev of Techmino) opened an issue named “REMAKE NOW” on the GitHub page.  
 According to MrZ himself, the current Techmino contains too many bugs that he needs to remake the whole game from scratch in order to resolve them.  
-Although it's still far from complete, you can view the source code [here](https://github.com/26F-Studio/Techmino_Galaxy).`
+Although it's still far from complete, you can view the source code [here](https://github.com/26F-Studio/Techmino_Galaxy).`,
+        credit: "C29H25N3O5"
       },
       'how-to-play-tg': {
         question: "How can I play Techmino Galaxy (the remake)?",
@@ -205,13 +215,15 @@ To do this, follow these instructions:
 
 If you often update the game, consider following [this guide made by SweetSea](https://github.com/26F-Studio/Techmino_Galaxy/discussions/26).  
 Note: MrZ does not recommend talking about Techmino Galaxy's contents, especially things that can still change a lot, in public places.  
-Unless you have an otherwise good reason, you should respect his recommendation. Thank you!`
+Unless you have an otherwise good reason, you should respect his recommendation. Thank you!`,
+        credit: "C29H25N3O5"
       },
       'sprint-only': {
         question: "Why does this game only have Sprint?",
         answer: `md_You need to play it in order to unlock the other modes.  
 Lines coming out from mode icons indicate whether this mode can unlock other modes.  
-To unlock subsequent modes, you need to reach at least B rank on the mode — this would be 1m 2s for Sprint 10L, or 3m 3s for Sprint 40L.`
+To unlock subsequent modes, you need to reach at least B rank on the mode — this would be 1m 2s for Sprint 10L, or 3m 3s for Sprint 40L.`,
+        credit: "User670"
       },
       'unlockall': {
         question: "But I don't want to have to unlock all the modes!",
@@ -219,7 +231,8 @@ To unlock subsequent modes, you need to reach at least B rank on the mode — th
 Here are the instructions:  
 1. Go to the main menu.
 2. Open the terminal by pressing on the Techmino logo 4 times.
-3. Type in \`unlockall\` and press Enter. Follow the instructions that the command gives you.`
+3. Type in \`unlockall\` and press Enter. Follow the instructions that the command gives you.`,
+        credit: "NOT_A_ROBOT"
       },
       'is-guideline': {
         question: "Is this Guideline?",
@@ -227,27 +240,32 @@ Here are the instructions:
 Some important differences from Guideline are:
 - It defaults to a custom rotation system based on SRS but has more kicks and O-spin.
 - The game has allspin.
-- The game uses a different attack table.`
+- The game uses a different attack table.`,
+        credit: "User670"
       },
       'ai-list': {
         question: "What are the AI players?",
         answer: `md_The game uses two AIs: ColdClear and 9Stacker.  
 - [Cold Clear is developed by MinusKelvin](https://github.com/MinusKelvin/cold-clear). It is capable of performing T-Spins, Back-to-Backs and Perfect Clears. It is reported to be laggy on low-end devices when playing Battle Royale modes.  
-- 9Stacker is a more "stupid" algorithm, capable of only finesse and hard dropping.`
+- 9Stacker is a more "stupid" algorithm, capable of only finesse and hard dropping.`,
+        credit: "User670"
       },
       'controller-support': {
         question: "Does this game support controllers?",
-        answer: `md_Yes! Feel free to adjust button mappings in Settings → Key Settings.`
+        answer: `md_Yes! Feel free to adjust button mappings in Settings → Key Settings.`,
+        credit: "User670"
       },
       'how-to-multiplayer': {
         question: "How do I play multiplayer? / I can't sign up for an account!",
         answer: `md_Unfortunately, as of December 2023, the server is down.
 The server maintainer, Particle_G, has not been active for quite a while.
-It's recommended that you treat this game as a single-player game until this problem is resolved.`
+It's recommended that you treat this game as a single-player game until this problem is resolved.`,
+        credit: "NOT_A_ROBOT"
       },
       'change-language': {
         question: "How do I change the game's language?",
-        answer: `md_In the main menu, click the button with a globe icon. That's the select language button.`
+        answer: `md_In the main menu, click the button with a globe icon. That's the select language button.`,
+        credit: "User670"
       },
       'voice-actors': {
         question: "Who are the voice actors for the voice packs? What are the voice languages?",
@@ -265,14 +283,16 @@ It's recommended that you treat this game as a single-player game until this pro
 6. [Zundamon](https://vocalsynth.fandom.com/wiki/Zundamon) is a voice bank for various voice synthesizer programs.
   Voice language: Japanese
 
-While MrZ does not have a voice pack, there used to be a "Welcome to Tech" voice clip that was recorded by MrZ himself.`
+While MrZ does not have a voice pack, there used to be a "Welcome to Tech" voice clip that was recorded by MrZ himself.`,
+        credit: "User670"
       },
       'mod-assets': {
         question: "How do I extract, view, or replace the game's assets and code?",
         answer: `md_
 The Techmino.exe file (Windows) or game.love file (anything else) are valid zip archives.  
 Using a software like 7-Zip, you can view, extract or replace any file(s) in it, including assets and Lua scripts.  
-Alternatively, you can check out the game's [source code on GitHub](https://github.com/26F-Studio/Techmino).`
+Alternatively, you can check out the game's [source code on GitHub](https://github.com/26F-Studio/Techmino).`,
+        credit: "User670"
       },
       'anti-addiction': {
         question: "Anti-addiction system?",
@@ -281,7 +301,8 @@ It only takes into effect if you're playing the game in Chinese with a Sprint 10
 a Sprint 40L time of over 32.6s, and you have been playing for 4 hours.  
 The timer resets at midnight.  
 Although this feature isn't required because the game hasn't been registered in China,
-it's still a pretty cool Easter egg.`
+it's still a pretty cool Easter egg.`,
+        credit: "NOT_A_ROBOT"
       },
       'can-record': {
         question: "Can I upload a video of Techmino, or livestream me playing it?",
@@ -291,24 +312,28 @@ but the legality of such requirement has been questioned.
 
 *However*, we do beg you that, if you decide to share any screenshots,
 videos or live streams of Techmino, please keep them within the Tetris community.  
-We do not want too much publicity for the time being.`
+We do not want too much publicity for the time being.`,
+        credit: "User670"
       },
       'mrz-voice-pack': {
         question: "MrZ voice pack when?",
-        answer: "md_Probably never."
+        answer: "md_Probably never.",
+        credit: "NOT_A_ROBOT (information from User670)"
       },
       'crash-no-bluescreen': {
         question: "My game crashed/closed without a bluescreen!",
         answer: `md_If the crash happened while an AI player is loaded (eg, in a VS mode game or on the title screen),
 it is likely an issue of Cold Clear, the bot AI we use.  
 **We can't do much about it.**  
-You can still try to ask around about the crash, especially when it happens without an AI on screen.`
+You can still try to ask around about the crash, especially when it happens without an AI on screen.`,
+        credit: "User670"
       },
       'access-terminal': {
         question: "How do I access the in-game console/terminal?",
         answer: `md_You can do it by clicking or pressing the “TECHMINO” icon on the home page
 or pressing the “C” key on your keyboard several times.  
-Note that [external keyboards may not work correctly on iOS and iPadOS](https://github.com/26F-Studio/Techmino/issues/330).`
+Note that [external keyboards may not work correctly on iOS and iPadOS](https://github.com/26F-Studio/Techmino/issues/330).`,
+        credit: "C29H25N3O5"
       },
       'ext-kbd-not-working': {
         question: "My external keyboard isn’t working with Techmino!",
@@ -316,7 +341,8 @@ Note that [external keyboards may not work correctly on iOS and iPadOS](https://
 This kind of issue typically only happens on mobile devices.  
 For iOS and iPadOS users, that is an issue we cannot fix for now.  
 This might be related to the iOS distro of LÖVE or how iOS recognises external keyboards.  
-At the same time, you can still use the on-screen virtual keys.`
+At the same time, you can still use the on-screen virtual keys.`,
+        credit: "C29H25N3O5"
       },
       'cant-install-macos': {
         question: "Why can't I install Techmino on macOS?",
@@ -324,33 +350,40 @@ At the same time, you can still use the on-screen virtual keys.`
 To fix this issue, go to System Preferences → Security & Privacy.  
 Click on the lock icon on the lower-left corner and enter your password (or use Touch ID).  
 Then, select “App Store and identified developers” under the “Allow apps downloaded from” menu.  
-Reopen the app and you are all set.`
+Reopen the app and you are all set.`,
+        credit: "C29H25N3O5"
       },
       'simplistic-mode': {
         question: "My main menu only has big buttons for Sprint and Marathon. (simplistic mode)",
         answer: `md_You probably have enabled “Simplistic Mode.”  
 In this mode, only a few essentials modes and functions are available.  
-Simply go to the settings and uncheck the “Simplistic Mode” to fix it.`
+Simply go to the settings and uncheck the “Simplistic Mode” to fix it.`,
+        credit: "C29H25N3O5"
       },
       'thinkz': {
         question: "I see an icon that is like the \"thinking\" emoji, but with a Z tetromino. What is this?",
         answer: `md_It means “Tetris”!
 Due to possible risk of receiving DMCAs from TTC, we have decided
-to replace all instances of the word “Tetris” in the game with 󰀕.`
+to replace all instances of the word “Tetris” in the game with 󰀕.`,
+        credit: "C29H25N3O5"
       },
       'purple-screen-of-death': {
         question: "I got a purple screen of death, what does that mean?",
-        answer: `md_It's the same as a blue screen crash. It may occasionally appear as a small easter egg.`
+        answer: `md_It's the same as a blue screen crash. It may occasionally appear as a small easter egg.`,
+        credit: "C29H25N3O5"
       },
       'download-soundtrack': {
         question: "How can I download the in-game soundtracks?",
         answer: `md_The Techmino OST is now available on SoundCloud!  
-You can download the full soundtracks [here](https://soundcloud.com/michael-gu-102967376/sets/techmino-the-ost-v2) free of charge (with a CC BY 3.0 License).`
+You can download the full soundtracks [here](https://soundcloud.com/michael-gu-102967376/sets/techmino-the-ost-v2) free of charge (with a CC BY 3.0 License).`,
+        credit: "C29H25N3O5"
       },
       'rank-reqs': {
         question: "How can I view the rank requirements for each mode?",
-        answer: `md_
-First, go to our [GitHub repo](https://github.com/26F-Studio/Techmino),
+        answer: `md_We list the rank requirements for each mode in [our map](/map)!  
+It's usually pretty accurate - especially since game updates have slowed down recently.  
+If you want to look at the game's source code to find the requirements, here's how you can do it:  
+First, go to Techmino's [GitHub repo](https://github.com/26F-Studio/Techmino),
 then navigate to \`/parts/modes\` to find the mode file (\`.lua\`) you want to open.  
 After that, look for a piece of the code that looks like this (this will going to be different for each mode; this example uses \`sprint_40l.lua\`):
 \`\`\`
@@ -368,7 +401,8 @@ end,
 The first line means that if \`P.stat.row\` is less than 40 (which means that you didn’t finish the 40L sprint), your grade is not recorded.  
 The variable’s name that goes after \`local\` is the category of the requirement (in this example, time (in seconds)).  
 The \`5\`, \`4\`, \`3\`, \`2\`, and \`1\` correspond to \`X\`, \`U\`, \`S\`, \`A\`, and \`B\` grades in the game.  
-\`0\` also means your grade is not recorded (in this example, when your time exceeds 183 seconds).`
+\`0\` also means your grade is not recorded (in this example, when your time exceeds 183 seconds).`,
+        credit: "C29H25N3O5 (map section by NOT_A_ROBOT)"
       },
       'o-spins': {
         question: "How can I perform O-Spins?",
@@ -402,7 +436,8 @@ More info is available in the in-game Zictionary.
 Here's a demonstration of translational O-spins:  
 
 ![image](img/faq/birs-tl-ospin.gif)
-`
+`,
+        credit: "C29H25N3O5"
       },
       'snapshot-version': {
         question: "How can I download the latest snapshot (dev) version of Techmino?",
@@ -411,7 +446,8 @@ If you really want to test out the latest features of Techmino, the [GitHub CI](
 would generate a snapshot version of the app for every commit.  
 Note that the snapshot versions might be unstable and contain many bugs,
 and that you need to be logged in to your GitHub account to download the artifacts (game builds).  
-If you want to test them out on iOS devices, you need to install the the artifacts (game builds) manually.`
+If you want to test them out on iOS devices, you need to install the the artifacts (game builds) manually.`,
+        credit: "C29H25N3O5"
       },
       'linux-arm': {
         question: "I am using an ARM version of Linux. Why can’t I play Techmino on my device?",
@@ -420,20 +456,23 @@ Unfortunately, the ARM distros of Linux are not yet supported by LÖVE, so you c
 If you really want to play it on your device, we recommend you to use box64/box86 with Wine
 to run the Windows distro of the game.
 Note that you cannot open .AppImage files using box64/86 directly.
-`
+`,
+        credit: "C29H25N3O5"
       },
       'm1-mac': {
         question: "I am using an M1 Mac. Can I play Techmino on my device?",
         answer: `md_Yes! LÖVE supports M1 Macs.  
 If you are using older versions that don’t support M1, just use Rosetta 2
-(which is built within the system so you don’t have to do anything).`
+(which is built within the system so you don’t have to do anything).`,
+        credit: "C29H25N3O5"
       },
       'data-transfer': {
         question: "How can I transfer my data from one device to another?",
         answer: `md_
 Simply go to Statistics &gt; Data Management, and you will see these buttons.
 Then you can copy and paste the data using your clipboard.
-![Screenshot of the Data Management scene in Techmino](/img/faq/data-management.png)`
+![Screenshot of the Data Management scene in Techmino](/img/faq/data-management.png)`,
+        credit: "C29H25N3O5"
       },
       'custom-skin': {
         question: "How do I make and import my own block skin?",
@@ -452,7 +491,8 @@ To import your skin into the game:
 
 TIPS:
 - \`<Skin name>\` allows almost any character, so you can set your skin's name something like: \`Diệt Slime suốt 300 năm, tôi level MAX lúc nào chẳng hay\`.
-- \`<Skin name>\` should only contain ~15 characters max! So don't use the example above or if you don't want to see your skin's name go out of selector's box`
+- \`<Skin name>\` should only contain ~15 characters max! So don't use the example above or if you don't want to see your skin's name go out of selector's box`,
+        credit: "C29H25N3O5 (reworded by NOT_A_ROBOT and SweetSea)"
       },
       'tg-unverified-dev': {
         question: "Techmino Galaxy macOS error: Techmino_Galaxy.app cannot be opened because the developer cannot be verified.",
@@ -460,7 +500,8 @@ TIPS:
 ![A popup stating the aforementioned error](/img/faq/mac-unverified-developer.png)
 This is because the Gatekeeper on macOS won’t let the user open any app that is not signed or notarized on default.  
 However, there is an easy way to bypass this:  
-Control–click Techmino (Galaxy).app and select “Open” from the pop-up menu, then select “Open” from the window.`
+Control–click Techmino (Galaxy).app and select “Open” from the pop-up menu, then select “Open” from the window.`,
+        credit: "C29H25N3O5"
       },
       'macos-damage-computer': {
         question: "Techmino macOS error: Techmino.app will damage your computer. You should move it to the Trash.",
@@ -469,7 +510,8 @@ If you get this message, option-click Techmino (Galaxy).app, select “Get Info�
 You should now be able to open it.
 
 Techmino is not malware and will not damage your computer.  
-As far as we know, this issue only appears on the dev and snapshot versions that are not signed.`
+As far as we know, this issue only appears on the dev and snapshot versions that are not signed.`,
+        credit: "C29H25N3O5"
       },
       'ios-portrait-mode': {
         question: "Why Techmino is displayed in portrait mode on iOS (especially on iPhone)?",
@@ -481,7 +523,8 @@ Therefore, the only solution is to enter Techmino in landscape mode:
 3. Rotate your device to landscape mode. It is okay if the contents on the home screen don’t seem to be rotated to landscape view — this is normal as long as you hold the device in a landscape manner.
 4. Enter Techmino. Everything should be okay now.
 
-Note that if you “swipe quit” the app again, you may need to repeat the procedure above.`
+Note that if you “swipe quit” the app again, you may need to repeat the procedure above.`,
+        credit: "C29H25N3O5"
       },
       'tg-touch-controls': {
         question: "How do I configure touch screen controls in Techmino Galaxy?",
@@ -489,20 +532,24 @@ Note that if you “swipe quit” the app again, you may need to repeat the proc
 1. Turn on the "Enable touch controls" switch and click the "Touch controls..." button.
 2. On this screen, you can add, remove, move, and resize buttons, but they don't have actions assigned to them yet.
 3. Go back, and enter "Key mappings...".
-4. On this screen, click an action, then click a button to assign the button an action.`
+4. On this screen, click an action, then click a button to assign the button an action.`,
+        credit: "C29H25N3O5"
       },
       'tg-interior': {
         question: "The Techmino Galaxy UI looks different from some other people's screenshots! Are there only three modes (Dig Practice, 40 Lines and Marathon)?",
-        answer: `md_The other interface, along with other modes, are unlockable! Poke around.`
+        answer: `md_The other interface, along with other modes, are unlockable! Poke around.`,
+        credit: "C29H25N3O5"
       },
       'tg-unlockall-music': {
         question: "In Techmino Galaxy, how do I unlock all the music tracks?",
         answer: `md_In the music room, turn off the BGM volume on the bottom right, stop the music in bottom middle, and spam click "full band" on the bottom left.  
-Alternatively, press alt+\` (backtick) to unlock them temporarily.`
+Alternatively, press alt+\` (backtick) to unlock them temporarily.`,
+        credit: "nekonaomii"
       },
       'tg-terminal': {
         question: "In Techmino Galaxy, how do I access the Zenitha console?",
-        answer: `md_After you unlock the Exterior, go back to the Interior and spam-click the now-disabled Settings button.`
+        answer: `md_After you unlock the Exterior, go back to the Interior and spam-click the now-disabled Settings button.`,
+        credit: "nekonaomii"
       },
       'tech-league': {
         question: "When will Tech League (ranked matchmaking) come out?",
@@ -514,17 +561,20 @@ According to MrZ:
 > When I finish that, [I] will change the old button to an ad [for Techmino Galaxy’s “League”].
 
 Key takeaway: Tech League will be implemented in Techmino Galaxy in the future.  
-It will not be implemented in the “Classic” Techmino.`
+It will not be implemented in the “Classic” Techmino.`,
+        credit: "C29H25N3O5"
       },
       'atk-table': {
         question: "How should I calculate the attack in Techmino?",
         answer: `md_Please use this table as a reference:  
-![Techmino's attack table](/img/faq/techmino-attack-table.jpg)`
+![Techmino's attack table](/img/faq/techmino-attack-table.jpg)`,
+        credit: "C29H25N3O5"
       },
       'b3b-calc': {
         question: "How is B2B2B calculated in Techmino?",
         answer: `md_Use this table to calculate B2B2B meter (on the left of the playfield):  
-![Techmino B2B2B table](/img/faq/b2b2b-calculator.png)`
+![Techmino B2B2B table](/img/faq/b2b2b-calculator.png)`,
+        credit: "nekonaomii"
       }
     }
   },
