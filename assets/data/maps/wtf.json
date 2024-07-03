@@ -1,0 +1,139 @@
+{
+    "modes": {
+        "sprint_10l": {
+            "name": "sprint_10l",
+            "x": 0,
+            "y": 0,
+            "size": 40,
+            "shape": 1,
+            "icon": "sprint1",
+            "unlock": [
+                "sprint_40l_math",
+                "lockout",
+                "stack_wtf",
+                "scanner_l"
+            ]
+        },
+        "sprint_40l_math": {
+            "name": "sprint_40l_math",
+            "x": 0,
+            "y": -300,
+            "size": 40,
+            "shape": 1,
+            "icon": "sprint2",
+            "unlock": ["wtf"]
+        },
+        "wtf": {
+            "name": "wtf",
+            "x": 0,
+            "y": -600,
+            "size": 40,
+            "shape": 1,
+            "icon": "master_ex",
+            "unlock": []
+        },
+        "lockout": {
+            "name": "lockout",
+            "x": 0,
+            "y": 300,
+            "size": 40,
+            "shape": 1,
+            "icon": "bigbang",
+            "unlock": [
+                "construct_invsg",
+                "round_wtf"
+            ]
+        },
+        "construct_invsg": {
+            "name": "construct_invsg",
+            "x": -150,
+            "y": 600,
+            "size": 40,
+            "shape": 1,
+            "icon": "secret_grade",
+            "unlock": []
+        },
+        "round_wtf": {
+            "name": "round_wtf",
+            "x": 150,
+            "y": 600,
+            "size": 40,
+            "shape": 1,
+            "icon": "round",
+            "unlock": []
+        },
+        "scanner_l": {
+            "name": "scanner_l",
+            "x": -300,
+            "y": 0,
+            "size": 40,
+            "shape": 1,
+            "icon": "sprint3",
+            "unlock": [
+                "solo_wtf",
+                "backfire_wtf"
+            ]
+        },
+        "solo_wtf": {
+            "name": "solo_wtf",
+            "x": -600,
+            "y": 150,
+            "size": 40,
+            "shape": 1,
+            "icon": "solo",
+            "unlock": []
+        },
+        "backfire_wtf": {
+            "name": "backfire_wtf",
+            "x": -600,
+            "y": -150,
+            "size": 40,
+            "shape": 1,
+            "icon": "backfire",
+            "unlock": []
+        },
+        "stack_wtf": {
+            "name": "stack_wtf",
+            "x": 300,
+            "y": 0,
+            "size": 40,
+            "shape": 1,
+            "icon": "mess",
+            "unlock": [
+                "rhythm_u"
+            ]
+        },
+        "rhythm_u": {
+            "name": "rhythm_u",
+            "x": 600,
+            "y": 0,
+            "size": 40,
+            "shape": 1,
+            "icon": "rhythm",
+            "unlock": []
+        },
+        "confusion": {
+            "name": "confusion",
+            "x": -600,
+            "y": -600,
+            "size": 40,
+            "shape": 1,
+            "icon": "confusion",
+            "unlock": []
+        },
+        "cascade": {
+            "name": "cascade",
+            "x": 600,
+            "y": -600,
+            "size": 40,
+            "shape": 1,
+            "icon": "tech",
+            "unlock": []
+        }
+    },
+    "starting_mode": "sprint_10l",
+    "min_x": -600,
+    "max_x": 600,
+    "min_y": -600,
+    "max_y": 600
+}
