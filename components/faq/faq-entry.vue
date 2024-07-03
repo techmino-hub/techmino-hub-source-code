@@ -18,17 +18,18 @@ const props = defineProps({
         <summary>
             <h3>{{ $t(`faq.entries.${entry.id}.question`) }}</h3>
             <span class="tags">
-                {{ $t("faq.preTags")}}
+                {{ $t("faq.preTags") }}
                 <FaqTag
                     v-for="tag in entry.tags"
+                    :key="tag"
                     :tag="tag"
                 />
             </span>
-            <a :href="'#' + entry.id" class="question-link">#</a>
+            <a :href="'#' + entry.id" class="question-link" aria-hidden="true">#</a>
         </summary>
         <article>
             <blockquote v-html="$t(`faq.entries.${entry.id}.answer`)"></blockquote>
-            <cite>{{ entry.author }}</cite>
+            <cite>{{ $t(`faq.entries.${entry.id}.credit`) }}</cite>
         </article>
     </details>
 </template>

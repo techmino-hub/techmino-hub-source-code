@@ -74,7 +74,7 @@ export default {
           several improvements by the open-source community. The game is made
           using Love2D. It has many game modes, including Sprint, Marathon,
           VS, a fully-customizable custom mode, and more!`,
-          credit: "NOT_A_ROBOT"
+        credit: "NOT_A_ROBOT"
       },
       'is-techmino-open-source': {
         question: "Is Techmino open-source?",
