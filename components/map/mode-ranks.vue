@@ -2,39 +2,27 @@
     <ul class="rank-reqs">
         <li>
             <MapRank :rank="Rank.X" />
-            <span
-                v-t="`modes.${mode.name}.rankReqs.5`"
-            ></span>
+            <span>{{ $tf(`modes.${mode.name}.rankReqs.5`, "map.impossibleRankReq") }}</span>
         </li>
         <li>
             <MapRank :rank="Rank.U" />
-            <span
-                v-t="`modes.${mode.name}.rankReqs.4`"
-            ></span>
+            <span>{{ $tf(`modes.${mode.name}.rankReqs.4`, "map.impossibleRankReq") }}</span>
         </li>
         <li>
             <MapRank :rank="Rank.S" />
-            <span
-                v-t="`modes.${mode.name}.rankReqs.3`"
-            ></span>
+            <span>{{ $tf(`modes.${mode.name}.rankReqs.3`, "map.impossibleRankReq") }}</span>
         </li>
         <li>
             <MapRank :rank="Rank.A" />
-            <span
-                v-t="`modes.${mode.name}.rankReqs.2`"
-            ></span>
+            <span>{{ $tf(`modes.${mode.name}.rankReqs.2`, "map.impossibleRankReq") }}</span>
         </li>
         <li>
             <MapRank :rank="Rank.B" />
-            <span
-                v-t="`modes.${mode.name}.rankReqs.1`"
-            ></span>
+            <span>{{ $tf(`modes.${mode.name}.rankReqs.1`, "map.impossibleRankReq") }}</span>
         </li>
         <li>
             <MapRank :rank="Rank.Q" />
-            <span
-                v-t="`modes.${mode.name}.rankReqs.0`"
-            ></span>
+            <span>{{ $tf(`modes.${mode.name}.rankReqs.0`, "map.impossibleRankReq") }}</span>
         </li>
     </ul>
 </template>

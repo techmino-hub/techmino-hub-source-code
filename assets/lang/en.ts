@@ -562,6 +562,7 @@ It will not be implemented in the “Classic” Techmino.`
     featuredVideo: "Featured video",
     lagWarnPre: "Lagging? ",
     lagWarnLink: "Lite version",
+    impossibleRankReq: "(impossible)",
   },
   modes: {
     sprint_10l: {
