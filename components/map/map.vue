@@ -64,8 +64,9 @@
                     ></p>
                 </div>
                 <div class="bottom">
-                    <p v-t="'map.rankReqs'" class="rank-req-text"></p>
-                    <MapModeRanks :mode="lastSelectedMode" />
+                    <i18n-t keypath="map.rankReqs" tag="p" class="rank-req-text">
+                        <MapModeRanks :mode="lastSelectedMode" />
+                    </i18n-t>
                     <menu>
                         <button
                           type="button"
@@ -124,20 +125,19 @@
                     <aside>
                         <div
                           v-if="$te(`modes.${lastSelectedMode.name}.featuredVideo`)">
-                            <h3
-                                class="center-text"
-                                v-t="'map.featuredVideo'"
-                            ></h3>
-                            <div class="video-outer">
-                                <iframe
-                                    :src="$t(`modes.${lastSelectedMode.name}.featuredVideo`)"
-                                    loading="lazy"
-                                    frameborder="0"
-                                ></iframe>
-                            </div>
+                            <i18n-t keypath="map.featuredVideo" tag="h3" class="video-outer">
+                                <div class="video-wrapper">
+                                    <iframe
+                                        :src="$t(`modes.${lastSelectedMode.name}.featuredVideo`)"
+                                        loading="lazy"
+                                        frameborder="0"
+                                    ></iframe>
+                                </div>
+                            </i18n-t>
                         </div>
-                        <h3 v-t="'map.rankReqs'" class="center-text"></h3>
-                        <MapModeRanks :mode="lastSelectedMode" />
+                        <i18n-t keypath="map.rankReqs" tag="h3" class="center-text">
+                            <MapModeRanks :mode="lastSelectedMode" />
+                        </i18n-t>
                     </aside>
                 </div>
             </div>
@@ -916,15 +916,11 @@ onMounted(mountedHook);
                     @media (min-aspect-ratio: 5) {
                         display: none;
                     }
-                }
 
-                .rank-reqs {
-                    display: flex;
-                    flex-shrink: 1;
-                    margin-inline: 1em;
-
-                    @media (min-aspect-ratio: 5) {
-                        display: none;
+                    .rank-reqs {
+                        font-size: 0.9em;
+                        margin-block-start: 1em;
+                        margin-inline: 1em;
                     }
                 }
 
@@ -1073,17 +1069,21 @@ onMounted(mountedHook);
                 height: fit-content;
 
                 .video-outer {
-                    position: relative;
-                    width: 100%;
-                    height: 0;
-                    margin: 1em 0;
-                    padding-bottom: 56.25%;
-
-                    iframe {
-                        position: absolute;
-                        inset: 0 0 1em 0;
+                    text-align: center;
+                    
+                    .video-wrapper {
+                        position: relative;
                         width: 100%;
-                        height: calc(100% - 1em);
+                        height: 0;
+                        margin: 1em 0;
+                        padding-bottom: 56.25%;
+
+                        iframe {
+                            position: absolute;
+                            inset: 0 0 1em 0;
+                            width: 100%;
+                            height: calc(100% - 1em);
+                        }
                     }
                 }
                 

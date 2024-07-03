@@ -25,13 +25,13 @@ export default {
   },
 
   lang: {
-    tabTitle: "Techmino Hub - Language Settings",
+    tabTitle: "Language Settings - Techmino Hub",
     title: "Choose your preferred language",
     setLang: "Set language"
   },
 
   settings: {
-    tabTitle: "Techmino Hub - Settings",
+    tabTitle: "Settings - Techmino Hub",
     title: "Settings",
     loading: "Loading...",
     settings: {
@@ -43,7 +43,7 @@ export default {
   },
 
   faq: {
-    tabTitle: "Techmino Hub - FAQ",
+    tabTitle: "FAQ - Techmino Hub",
     title: "Frequently Asked Questions",
     filter: {
       title: "Tag Filters",
@@ -579,15 +579,14 @@ It will not be implemented in the “Classic” Techmino.`,
     }
   },
   map: {
-    tabTitle: "Techmino Hub - Map",
-    tabTitleFS: "Techmino Hub - Map (Fullscreen)",
-    tabTitleLite: "Techmino Hub - Map (Lite)",
+    tabTitle: "Map - Techmino Hub",
+    tabTitleFS: "Map (Fullscreen) - Techmino Hub",
     title: "Techmino Map",
     details: "Currently displaying '{currentMap}' map",
     fullscreen: "Visit fullscreen map",
     noscriptWarn: "It looks like JavaScript is disabled. Although the regular map is unavailable, you can instead visit the lite map.",
     liteVersion: "Visit lite map",
-    rankReqs: "Rank requirements:",
+    rankReqs: "Rank requirements: {0}",
     tooltip: {
       rank: {
         X: "X rank",
@@ -609,10 +608,16 @@ It will not be implemented in the “Classic” Techmino.`,
     },
     loadingArticle: "Loading article...",
     noArticle: "Article unavailable",
-    featuredVideo: "Featured video",
+    featuredVideo: "Featured video: {0}",
     lagWarnPre: "Lagging? ",
     lagWarnLink: "Lite version",
     impossibleRankReq: "(impossible)",
+  },
+  mapLite: {
+    tabTitle: "Map (Lite) - Techmino Hub",
+    tabTitleModeDetail: "About {modeName} Mode - Techmino Hub",
+    backToMap: "Back to Lite Map",
+    modeDesc: "Description: {0}",
   },
   modes: {
     sprint_10l: {

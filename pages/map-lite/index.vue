@@ -1,7 +1,7 @@
 <template>
     <div>
         <Title>
-            {{ $t('map.tabTitleLite')}}
+            {{ $t('mapLite.tabTitle')}}
         </Title>
         <div
           v-if="mapData"
