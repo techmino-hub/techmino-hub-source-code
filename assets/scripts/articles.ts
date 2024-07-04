@@ -3,9 +3,17 @@ import sanitizeHtml from 'sanitize-html';
 
 /**
  * Gets an article as an HTML string.
- * @param name The name of the article.
- * @param locale The locale of the article.
- * @returns The article as an HTML string. Null if the article is unavailable.
+ * @param name
+ * The name of the article.
+ * 
+ * @param locale
+ * The locale of the article.
+ * In `<script>`s, you should pass in `useI18n().locale`.
+ * In Vue components, you should pass in `$i18n.locale`.
+ * 
+ * @returns
+ * The article as an HTML string.
+ * If the article is unavailable or missing, this function returns null.
  */
 export async function getArticle(name: string, locale: string): Promise<string | null> {
     const [mdResult, htmlResult] = await Promise.allSettled([

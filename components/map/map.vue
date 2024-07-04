@@ -64,7 +64,7 @@
                     ></p>
                 </div>
                 <div class="bottom">
-                    <i18n-t keypath="map.rankReqs" tag="p" class="rank-req-text">
+                    <i18n-t keypath="map.rankReqs" scope="global" tag="p" class="rank-req-text">
                         <MapModeRanks :mode="lastSelectedMode" />
                     </i18n-t>
                     <menu>
@@ -123,19 +123,21 @@
                         </article>
                     </main>
                     <aside>
-                        <div
-                          v-if="$te(`modes.${lastSelectedMode.name}.featuredVideo`)">
-                            <i18n-t keypath="map.featuredVideo" tag="h3" class="video-outer">
-                                <div class="video-wrapper">
-                                    <iframe
-                                        :src="$t(`modes.${lastSelectedMode.name}.featuredVideo`)"
-                                        loading="lazy"
-                                        frameborder="0"
-                                    ></iframe>
-                                </div>
-                            </i18n-t>
-                        </div>
-                        <i18n-t keypath="map.rankReqs" tag="h3" class="center-text">
+                        <i18n-t
+                          v-if="$te(`modes.${lastSelectedMode.name}.featuredVideo`)"
+                          keypath="map.featuredVideo"
+                          scope="global"
+                          tag="h3"
+                          class="video-outer">
+                            <div class="video-wrapper">
+                                <iframe
+                                    :src="$t(`modes.${lastSelectedMode.name}.featuredVideo`)"
+                                    loading="lazy"
+                                    frameborder="0"
+                                ></iframe>
+                            </div>
+                        </i18n-t>
+                        <i18n-t keypath="map.rankReqs" scope="global" tag="h3" class="center-text">
                             <MapModeRanks :mode="lastSelectedMode" />
                         </i18n-t>
                     </aside>

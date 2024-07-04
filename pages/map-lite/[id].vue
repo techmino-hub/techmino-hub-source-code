@@ -1,41 +1,68 @@
 <template>
     <div class="page-outer">
         <Title>{{ $t('mapLite.tabTitleModeDetail', { modeName }) }}</Title>
-        <NuxtLink to="/map-lite" class="block-style">{{ $t('mapLite.backToMap') }}</NuxtLink>
+        <h1>
+            <NuxtLink to="/map-lite" class="block-style">{{ $t('mapLite.backToMap') }}</NuxtLink>
+            <span>{{ modeName }}</span>
+        </h1>
 
-        <h1>{{ modeName }}</h1>
-        <i18n-t keypath="mapLite.modeDesc" tag="p">
-            {{ $t(`modes.${modeCodeName}.description`) }}
-        </i18n-t>
-
-        <br>
-
-        <i18n-t v-if="$te(`modes.${modeCodeName}.featuredVideo`)"
-          keypath="map.featuredVideo" tag="p" class="vid-outer">
-            <iframe
-                width="560"
-                height="315"
-                :src="$t(`modes.${modeCodeName}.featuredVideo`)"
-                frameborder="0"
-                allowfullscreen
-            ></iframe>
-        </i18n-t>
-
-        <i18n-t keypath="map.rankReqs" tag="p" class="rank-req-text">
-            <MapModeRanksLite :mode="mode" />
-        </i18n-t>
+        <div class="main-wrapper">
+            <main>
+                <ul class="mode-info-list">
+                    <li v-if="$te(`modes.${modeCodeName}.difficulty`)">
+                        <h4>{{ $t('map.info.difficulty') }}</h4>
+                        <span v-html="$t(`modes.${modeCodeName}.difficulty`)"></span>
+                    </li>
+                    <li v-if="$te(`modes.${modeCodeName}.length`)">
+                        <h4>{{ $t('map.info.length') }}</h4>
+                        <span v-html="$t(`modes.${modeCodeName}.length`)"></span>
+                    </li>
+                    <li
+                        v-if="$te(`modes.${modeCodeName}.versionInfo`)">
+                        <h4>{{ $t('map.info.difficulty') }}</h4>
+                        <span v-html="$t(`modes.${modeCodeName}.difficulty`)"></span>
+                    </li>
+                    <li>
+                        <a :href="mode.source"
+                          target="_blank"
+                          rel="noopener noreferrer">
+                            {{ $t('map.info.source') }}
+                        </a>
+                    </li>
+                </ul>
+                <article v-html="articleHTML"></article>
+            </main>
+            <aside>
+                <i18n-t
+                  v-if="$te(`modes.${modeCodeName}.featuredVideo`)"
+                  keypath="map.featuredVideo"
+                  scope="global"
+                  tag="h3"
+                  class="video-outer hide-noscript-important">
+                    <div class="video-wrapper">
+                        <iframe
+                            :src="$t(`modes.${modeCodeName}.featuredVideo`)"
+                            loading="lazy"
+                            frameborder="0"
+                        ></iframe>
+                    </div>
+                </i18n-t>
+                <i18n-t
+                  keypath="map.rankReqs"
+                  scope="global"
+                  tag="h3"
+                  class="rank-req-text">
+                    <MapModeRanksLite :mode="mode" />
+                </i18n-t>
+            </aside>
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
-import {
-    type MapData,
-    isMapDataValid,
-    isModeValid
-} from '~/assets/types/map';
-import {
-    getModeI18nString
-} from '~/assets/scripts/modes';
+import { type MapData, isMapDataValid, isModeValid } from '~/assets/types/map';
+import { getModeI18nString } from '~/assets/scripts/modes';
+import { getArticle } from '~/assets/scripts/articles';
 
 const route = useRoute();
 let currentMap: string = 'vanilla';
@@ -88,38 +115,171 @@ if(!isModeValid(mode)) {
     throw new Error(`Invalid mode index "${modeIndex}"`);
 }
 
+const i18n = useI18n();
+
 const modeCodeName = mode.name;
-const modeName = getModeI18nString(mode.name, useI18n().t);
+const modeName = getModeI18nString(mode.name, i18n.t);
+
+const articleHTML = ref<string>(i18n.t('map.loadingArticle'));
+
+getArticle(`mode.${modeCodeName}`, i18n.locale.value)
+    .then((articleContent) => {
+        if(articleContent !== null) {
+            articleHTML.value = articleContent;
+        } else {
+            articleHTML.value = i18n.t('map.noArticle');
+        }
+    });
 </script>
 
 <style scoped lang="scss">
+@use '~/assets/scss/colors';
+
 .page-outer {
-    margin: 1em 2em;
+    padding: 1em 2em;
 }
 
 h1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     font-size: 1.5em;
+    padding-bottom: 0.5em;
     margin-bottom: 0.5em;
+    border-block-end: 0.1em dotted white;
+}
+
+.video-outer {
+    text-align: center;
+    
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        height: 0;
+        margin: 1em 0;
+        padding-bottom: 56.25%;
+
+        iframe {
+            position: absolute;
+            inset: 0 0 1em 0;
+            width: 100%;
+            height: calc(100% - 1em);
+        }
+    }
 }
 
 .rank-req-text {
     font-size: 1.126em;
     font-weight: bold;
+    text-align: center;
 
     .rank-reqs {
         font-size: 1em;
         margin-top: 1em;
+        margin-inline: auto;
     }
 }
 
-.vid-outer {
+.main-wrapper {
     display: flex;
     flex-direction: column;
-    font-size: 1.126em;
-    font-weight: bold;
+    gap: 2em;
 
-    iframe {
-        margin-top: 0.5em;
+    @media (min-width: 768px) {
+        flex-direction: row;
+        gap: 1em;
+
+        main {
+            flex-basis: 60%;
+            padding-inline: 1em;
+        }
+
+        aside {
+            flex-basis: 40%;
+            padding-inline: 1em;
+        }
+    }
+}
+
+.mode-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    justify-content: space-evenly;
+    padding: 0 0 1em 0;
+    overflow-x: auto;
+    flex-shrink: 0;
+    font-size: 1.2em;
+    padding-block-end: 1em;
+    border-block-end: 0.1em solid colors.$map-panel-border-color;
+
+    li {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        color: white;
+        text-decoration: none;
+        align-items: center;
+
+        &:not(:last-child) {
+            border-bottom: 0.1em dashed colors.$primary-color;
+        }
+
+        h4, p {
+            margin: 0 0 0.5em 0;
+        }
+    }
+
+    a {
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        padding: 0.25em 0.5em;
+        border-radius: 5em;
+        color: var(--color);
+        border: 0.1em solid var(--color);
+        background-color: transparent;
+
+        transition: color 250ms, background-color 250ms;
+
+        --color: #{colors.$btn-border-color};
+
+        &:hover {
+            --color: #{colors.$btn-hover-border-color};
+            background-color: colors.$btn-hover-bg-color;
+        }
+
+        &:active {
+            --color: #{colors.$btn-active-border-color};
+            background-color: colors.$btn-active-bg-color;
+        }
+    }
+}
+
+article {
+    text-align: start;
+    padding-top: 1em;
+
+    :deep(table) {
+        display: block;
+        max-width: fit-content;
+        border-collapse: collapse;
+        overflow-x: auto;
+    }
+
+    :deep(th) {
+        text-align: start;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    :deep(th), :deep(td) {
+        padding: 0.5em 1em;
+    }
+
+    :deep(table), :deep(th), :deep(td) {
+        border: 0.1em solid white;
     }
 }
 </style>
