@@ -16,7 +16,7 @@
         <pre class="debug" v-show="debugMode" v-text="debugText"></pre>
         <div class="lag-warn" v-show="showLagMessage">
             <span v-t="'map.lagWarnPre'"></span>
-            <NuxtLink to="/map-lite" v-t="'map.lagWarnLink'" />
+            <NuxtLink :to="localePath('/map-lite')" v-t="'map.lagWarnLink'" />
         </div>
         <svg class="crosshair" viewBox="0 0 10 10" v-show="showCrosshair">
             <line x1="0" y1="5" x2="10" y2="5" />
@@ -159,6 +159,7 @@ import { getModeI18nString } from '~/assets/scripts/modes';
 import { getArticle } from '~/assets/scripts/articles';
 
 const i18n = useI18n();
+const localePath = useLocalePath();
 
 const MOVE_SPEED_MULT = 0.462;
 const ZOOM_SPEED_MULT = 0.00262;

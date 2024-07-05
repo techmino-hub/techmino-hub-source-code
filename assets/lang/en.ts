@@ -2860,5 +2860,44 @@ We do not expect there to be any cookies used on this site, but just to make sur
       noscript: "You cannot scan for cookies with JavaScript disabled.",
       error: "An error occurred while scanning for cookies.",
     }
-  }
+  },
+  signIn: {
+    tabTitle: "Techmino Hub - Sign In",
+    title: "Sign In",
+    ruleNote: "By logging into our website, you agree to our {0}.",
+    ruleNoteLink: "Site Rules",
+    oauth: {
+      discord: "Sign In with Discord",
+    }
+  },
+  rules: `md_
+# Site Rules
+By making an account on this site, you agree to the rules below.
+
+## 1. **Respect everyone.**
+Be kind and respectful to everyone.  
+This means no harassment, hate speech, threats, discrimination, doxxing, and the like.
+
+## 2. **No NSFW content.**
+This applies to profile pictures, usernames, and any content you submit.
+
+## 3. **No controversial topics.**
+We want this site to be a place for submitting your best runs, not about starting arguments.
+
+## 4. **No spamming/advertising.**
+If you advertise something in your run description, we will remove it.
+
+## 5. **No cheating or spoofing runs.**
+If you use TAS tools in your runs, **please mark it as a TAS run.**  
+We value honesty and integrity in your submissions.
+
+## 6. **Use common sense.**
+Do not perform illegal activities on this site.  
+If you find a loophole in the rules, please report it to us. Do not exploit it.
+
+----------------------
+
+If you violate any of these rules, we may take appropriate action depending on the severity.  
+We reserve the right to change these rules at any time.  
+If you have any questions, contact us on the [official Techmino Discord server](https://discord.gg/f9pUvkh) or on the [GitHub discussion page](https://github.com/techmino-hub/techmino-hub-source-code/discussions).`
 } as LangEntry;

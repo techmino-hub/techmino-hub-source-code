@@ -2,7 +2,7 @@
     <div class="page-outer">
         <Title>{{ $t('mapLite.tabTitleModeDetail', { modeName }) }}</Title>
         <h1>
-            <NuxtLink to="/map-lite" class="block-style">{{ $t('mapLite.backToMap') }}</NuxtLink>
+            <NuxtLink :to="localePath('/map-lite')" class="block-style">{{ $t('mapLite.backToMap') }}</NuxtLink>
             <span>{{ modeName }}</span>
         </h1>
 
@@ -116,6 +116,7 @@ if(!isModeValid(mode)) {
 }
 
 const i18n = useI18n();
+const localePath = useLocalePath();
 
 const modeCodeName = mode.name;
 const modeName = getModeI18nString(mode.name, i18n.t);
