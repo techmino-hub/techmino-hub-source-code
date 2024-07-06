@@ -17,6 +17,7 @@
     "@types/sanitize-html": "^2.11.0",
     "markdown-it": "^14.1.0",
     "nuxt": "^3.12.3",
+    "nuxt-i18n": "^6.28.1",
     "sanitize-html": "^2.13.0",
     "vue": "^3.4.31",
     "vue-router": "^4.4.0"

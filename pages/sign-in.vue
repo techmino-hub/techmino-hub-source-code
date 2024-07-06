@@ -33,8 +33,6 @@ const supabase = useSupabase();
 const { data } = await supabase.auth.getUser();
 const user = data.user;
 
-console.debug("user:", user); // DEBUG
-
 async function oauth(provider: Provider) {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider,

@@ -8,6 +8,7 @@ export default {
       faq: "FAQ",
       map: "Map",
       signIn: "Sign In",
+      signOut: "Sign Out",
       settings: "Settings"
     },
     footer: {

@@ -2,13 +2,13 @@ import { createClient } from "@supabase/supabase-js";
 import { DBWrapper } from '~/assets/scripts/database';
 
 export const useSupabaseInfo = () => {
-    if(!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
-        throw new Error("Missing Supabase URL or Anon Key");
-    }
+    const runtimeConfig = useRuntimeConfig();
+
+    console.debug('cfg', runtimeConfig); // DEBUG
 
     return {
-        url: process.env.SUPABASE_URL,
-        key: process.env.SUPABASE_ANON_KEY
+        url: runtimeConfig.public.supabaseUrl,
+        key: runtimeConfig.public.supabaseAnonKey
     }
 }
 

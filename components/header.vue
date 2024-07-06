@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useSupabaseUser } from '#imports';
-
 const localePath = useLocalePath();
 
-const { data } = await useSupabaseUser();
-const user = data.user;
+const supabase = useSupabase();
+
+const user = ref((await supabase.auth.getUser()).data.user);
 </script>
 
 <template>
@@ -34,6 +33,12 @@ const user = data.user;
                 v-show="!user"
                 v-thtml="$t('common.nav.signIn')"
             />
+            <button
+                class="hide-noscript hide-error"
+                v-show="user"
+                @click="supabase.auth.signOut()"
+                v-thtml="$t('common.nav.signOut')"
+            ></button>
         </nav>
     </header>
 </template>
@@ -97,7 +102,7 @@ header {
         font-size: 1.2em;
         gap: 1em;
 
-        a {
+        > * {
             position: relative;
             text-decoration: none;
             color: colors.$primary-color;
