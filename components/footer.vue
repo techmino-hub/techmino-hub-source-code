@@ -30,11 +30,22 @@ footer {
         border-end-end-radius: 0.5em;
     }
 
+    @media (prefers-contrast: more) {
+        color: white;
+    }
+
     a {
         color: rgb(180,180,180);
         transition: color 200ms;
         &:hover {
             color: lightgray;
+        }
+
+        @media(prefers-contrast: more) {
+            color: white;
+            &:hover {
+                color: yellow;
+            }
         }
     }
 

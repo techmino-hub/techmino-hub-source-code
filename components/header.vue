@@ -97,6 +97,10 @@ header {
             border-radius: 0.2em;
             transition: background-color 200ms, color 200ms, border-color 200ms;
 
+            @media (prefers-contrast: more) {
+                background-color: black;
+            }
+
             p {
                 margin-block: auto;
             }
