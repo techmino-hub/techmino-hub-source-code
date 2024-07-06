@@ -26,6 +26,7 @@ import { type Provider } from '@supabase/supabase-js';
 import { useSupabase } from '~/composables/database';
 
 const localePath = useLocalePath();
+const router = useRouter();
 
 const supabase = useSupabase();
 
@@ -34,8 +35,21 @@ const user = data.user;
 
 console.debug("user:", user); // DEBUG
 
-function oauth(provider: Provider) {
-    supabase.auth.signInWithOAuth({ provider });
+async function oauth(provider: Provider) {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+            redirectTo: '/auth/oauth-callback'
+        }
+    });
+
+    if(data.url) {
+        router.push(data.url);
+    }
+
+    if(error) {
+        throw error;
+    }
 }
 </script>
 

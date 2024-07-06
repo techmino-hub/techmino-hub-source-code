@@ -2871,6 +2871,11 @@ We do not expect there to be any cookies used on this site, but just to make sur
     },
     noscriptWarn: "You cannot sign in with JavaScript disabled.",
     alreadySignedIn: "You are already signed in!",
+    error: `An error occurred while signing in:
+{error}
+
+Press OK to go to GitHub Issues, where you can report this error.
+Press Cancel to return to the homepage.`,
   },
   rules: `md_
 # Site Rules

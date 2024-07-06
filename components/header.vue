@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { useSupabaseUser } from '#imports';
+
 const localePath = useLocalePath();
 
-function dbg(arg: any): typeof arg {
-    console.log(arg);
-    return arg;
-}
+const { data } = await useSupabaseUser();
+const user = data.user;
 </script>
 
 <template>
@@ -13,16 +13,25 @@ function dbg(arg: any): typeof arg {
             <h1 v-html="$t('common.appName')"></h1>
         </NuxtLink>
         <nav>
-            <NuxtLink :to="localePath('/')" class="hide-no-error"
+            <NuxtLink
+                :to="localePath('/')"
+                class="hide-no-error"
                 v-thtml="$t('common.nav.home')"
             />
-            <NuxtLink :to="localePath('/faq')" class="hide-error"
+            <NuxtLink
+                :to="localePath('/faq')"
+                class="hide-error"
                 v-thtml="$t('common.nav.faq')"
             />
-            <NuxtLink :to="localePath('/map')" class="hide-error"
+            <NuxtLink
+                :to="localePath('/map')"
+                class="hide-error"
                 v-thtml="$t('common.nav.map')"
             />
-            <NuxtLink :to="localePath('/sign-in')" class="hide-noscript hide-error"
+            <NuxtLink
+                :to="localePath('/sign-in')"
+                class="hide-noscript hide-error"
+                v-show="!user"
                 v-thtml="$t('common.nav.signIn')"
             />
         </nav>

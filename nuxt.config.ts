@@ -1,13 +1,13 @@
+if(!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
+  throw new Error(`
+    Could not find Supabase URL or key in environment variables.
+    Are you sure you set it up right?
+    Tip: Check your .env file and refer to the README.`);
+}
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   css: ['~/assets/scss/main.scss'],
-
-  runtimeConfig: {
-    public: {
-      supabaseUrl: 'https://fohgyexhzptaxjqrrrfd.supabase.co',
-      supabaseAnonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZvaGd5ZXhoenB0YXhqcXJycmZkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDUwMjQxNTcsImV4cCI6MjAyMDYwMDE1N30.fa7XvwiBbWSe2MLIR6Wkh_OC95uV7UXxt7_25PlyAlc'
-    }
-  },
 
   app: {
     head: {
