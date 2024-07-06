@@ -4,6 +4,14 @@ const localePath = useLocalePath();
 const supabase = useSupabase();
 
 const user = ref((await supabase.auth.getUser()).data.user);
+
+async function signOut() {
+    const { error } = await supabase.auth.signOut();
+
+    if(error) {
+        console.error(error);
+    }
+}
 </script>
 
 <template>
@@ -60,6 +68,10 @@ header {
         border-start-end-radius: 0.5em;
     }
 
+    @media (max-width: 700px) {
+        flex-direction: column;
+    }
+
     > a {
         text-decoration: none;
         color: white;
@@ -75,6 +87,12 @@ header {
         &:active {
             color: colors.$primary-color-dark;
             text-shadow: 0.2em 0.2em 0 rgb(0, 80, 0);
+        }
+
+        @media (max-width: 700px) {
+            h1 {
+                margin-block: 0.5em;
+            }
         }
     }
     &:not(.error) .hide-no-error {
@@ -98,9 +116,19 @@ header {
         align-items: center;
         align-self: center;
         justify-content: center;
+        flex-wrap: wrap;
         padding: 0 1em;
         font-size: 1.2em;
         gap: 1em;
+
+        @media (max-width: 700px) {
+            width: fit-content;
+            align-self: start;
+            padding: 0.2em 0.5em;
+            gap: 0.5em;
+            row-gap: 0.5em;
+            font-size: 1.3em;
+        }
 
         > * {
             position: relative;
@@ -109,10 +137,14 @@ header {
             padding: 0.15em 0.3em;
             border: 0.15em dashed transparent;
             border-radius: 0.2em;
+            font-family: 'techmino-proportional';
+            font-size: 1em;
+            background-color: transparent;
+            cursor: pointer;
             transition: background-color 200ms, color 200ms, border-color 200ms;
 
             @media (prefers-contrast: more) {
-                background-color: black;
+                background-color: black !important;
             }
 
             p {
