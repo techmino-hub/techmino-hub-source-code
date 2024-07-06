@@ -27,30 +27,13 @@ function showError(error: Error) {
 }
 
 onMounted(async function() {
-    const searchParams = new URLSearchParams(window.location.search);
-    const code = searchParams.get('code');
-    const next = searchParams.get('next') ?? localePath('/');
-    const error = searchParams.get('error');
+    // Format, as hash:
+    // access_token, expires_at, expires_in, provider_refresh_token, provider_token, refresh_token, token_type=bearer
+    // like https://example.com/#access_token=SNIP&expires_at=SNIP&... you get the idea
 
-    if(error) {
-        showError(new Error(error));
-        return;
-    }
-
-    if(!code) {
-        showError(new Error('Code not found'));
-        return;
-    }
-
-    const { error: sessionError } =
-        await supabase.auth.exchangeCodeForSession(code);
-    
-    if(sessionError) {
-        showError(sessionError);
-        return;
-    }
-
-    router.push(next);
+    // TODO: parse URL
+    alert("This feature isn't complete.");
+    router.replace(localePath('/'));
 });
 
 definePageMeta({ layout: 'none' });

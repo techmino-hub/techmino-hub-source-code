@@ -4,8 +4,6 @@ import { DBWrapper } from '~/assets/scripts/database';
 export const useSupabaseInfo = () => {
     const runtimeConfig = useRuntimeConfig();
 
-    console.debug('cfg', runtimeConfig); // DEBUG
-
     return {
         url: runtimeConfig.public.supabaseUrl,
         key: runtimeConfig.public.supabaseAnonKey

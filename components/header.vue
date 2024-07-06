@@ -44,7 +44,7 @@ async function signOut() {
             <button
                 class="hide-noscript hide-error"
                 v-show="user"
-                @click="supabase.auth.signOut()"
+                @click="signOut()"
                 v-thtml="$t('common.nav.signOut')"
             ></button>
         </nav>

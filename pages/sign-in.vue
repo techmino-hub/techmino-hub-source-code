@@ -41,10 +41,6 @@ async function oauth(provider: Provider) {
         }
     });
 
-    if(data.url) {
-        router.push(data.url);
-    }
-
     if(error) {
         throw error;
     }
