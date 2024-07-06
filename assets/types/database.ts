@@ -1,3 +1,5 @@
+import { createClient, SupabaseClient, type SupabaseClientOptions } from "@supabase/supabase-js";
+
 /**
  * The Profile type represents a user's profile.  
  * This should be what you get from querying from the `public.profiles` table.

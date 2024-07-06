@@ -2868,7 +2868,9 @@ We do not expect there to be any cookies used on this site, but just to make sur
     ruleNoteLink: "Site Rules",
     oauth: {
       discord: "Sign In with Discord",
-    }
+    },
+    noscriptWarn: "You cannot sign in with JavaScript disabled.",
+    alreadySignedIn: "You are already signed in!",
   },
   rules: `md_
 # Site Rules
