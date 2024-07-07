@@ -15,25 +15,47 @@ const supabase = useSupabase();
 function showError(error: Error) {
     console.error(error);
 
-    // OK (Yes): Go to GitHub Issues
-    // Cancel (No): Go to homepage
-    const response = confirm(t('signIn.error', { error: error.message }));
+    alert(t('signIn.errorTimeout', { error: error.message }));
 
-    if(response) {
-        router.push("https://github.com/techmino-hub/techmino-hub-source-code/issues");
-    } else {
-        router.push(localePath('/'));
-    }
+    router.push(localePath('/'));
+}
+
+function finish() {
+    router.push(localePath('/'));
 }
 
 onMounted(async function() {
-    // Format, as hash:
-    // access_token, expires_at, expires_in, provider_refresh_token, provider_token, refresh_token, token_type=bearer
-    // like https://example.com/#access_token=SNIP&expires_at=SNIP&... you get the idea
+    const { data } = await supabase.auth.getUser();
 
-    // TODO: parse URL
-    alert("This feature isn't complete.");
-    router.replace(localePath('/'));
+    if(data.user) return finish();
+
+    let waiting = ref(true);
+
+    supabase.auth.onAuthStateChange((event, session) => {
+        if(event === 'SIGNED_IN') {
+            waiting.value = false;
+        }
+    });
+
+    const waitForAuth = new Promise<void>((resolve) => {
+        watchEffect(() => {
+            if(!waiting.value) resolve();
+        })
+    });
+
+    const timeout = new Promise<void>((resolve) => {
+        setTimeout(resolve, 5000);
+    });
+
+    await Promise.race([waitForAuth, timeout]);
+
+    if(waiting.value) {
+        showError(new Error(t('signIn.timeout')));
+        return;
+    } else {
+        finish();
+        return;
+    }
 });
 
 definePageMeta({ layout: 'none' });
