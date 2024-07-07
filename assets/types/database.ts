@@ -21,13 +21,13 @@ export type Profile = {
      * The user's account state.  
      * Postgres type: enum
      */
-    account_state: AccountState;
+    account_state: "Normal" | "Banned" | "Unverified" | AccountState;
 
     /**
      * The user's role.  
      * Postgres type: enum
      */
-    role: Role;
+    role: "User" | "Verifier" | "Administrator" | Role;
 
     /**
      * The user's bio.  
@@ -84,7 +84,7 @@ export type Submission = {
      * The validity of the submission.  
      * Postgres type: enum
      */
-    validity: SubmissionValidity;
+    validity: "Unverified" | "Verified" | "Suspicious" | "Rejected" | SubmissionValidity;
 
     /**
      * Ideally, a link proving the submission's validity, such as a video recording.  

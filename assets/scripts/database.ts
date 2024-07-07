@@ -202,7 +202,7 @@ export class DBWrapper {
 
     // #region Replays
 
-    /** @throws {PostgrestError} */
+    /** @throws {PostgrestError | Error} */
     async getReplayBySubmissionId(submissionId: string) {
         const { data, error } = await this.supabase
             .from(Table.Replays)
@@ -210,7 +210,12 @@ export class DBWrapper {
             .eq('submission_id', submissionId);
 
         if(error) throw error;
-        return data as ReplayData[];
+
+        if(data.length < 1) {
+            throw new Error('Replay not found');
+        }
+
+        return data[0] as ReplayData;
     }
 
     /** @throws {PostgrestError} */
