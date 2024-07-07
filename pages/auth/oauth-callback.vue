@@ -62,6 +62,10 @@ definePageMeta({ layout: 'none' });
 </script>
 
 <style scoped>
+body {
+    background-color: black;
+    color: white;
+}
 h1 {
     font-size: 2em;
     text-align: center;
