@@ -1,4 +1,11 @@
-import { createClient, SupabaseClient, type PostgrestError, type SupabaseClientOptions } from '@supabase/supabase-js';
+import {
+    createClient,
+    SupabaseClient,
+    type PostgrestError,
+    type SupabaseClientOptions,
+    type User
+} from '@supabase/supabase-js';
+
 import {
     type Profile,
     type Submission,
@@ -13,6 +20,7 @@ import {
  */
 export class DBWrapper {
     public supabase: SupabaseClient;
+    private userRef: Ref<User | null>;
 
     constructor(
         supabaseUrl: string,
@@ -20,6 +28,19 @@ export class DBWrapper {
         options?: SupabaseClientOptions<"public">
     ) {
         this.supabase = createClient(supabaseUrl, supabaseAnonKey, options);
+        this.userRef = ref(null);
+    }
+
+    async getUserRef() {
+        if(!this.userRef.value) {
+            this.userRef.value = (await this.supabase.auth.getUser()).data.user;
+
+            this.supabase.auth.onAuthStateChange((_, session) => {
+                this.userRef.value = session?.user ?? null;
+            });
+        }
+
+        return this.userRef;
     }
 
     // #region Profiles

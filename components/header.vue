@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const localePath = useLocalePath();
+const router = useRouter();
+const database = useDatabase();
 
-const supabase = useSupabase();
-
-const user = ref((await supabase.auth.getUser()).data.user);
+const user = await database.getUserRef();
 
 async function signOut() {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await database.supabase.auth.signOut();
 
     if(error) {
         console.error(error);
