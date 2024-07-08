@@ -2,7 +2,9 @@ if(!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
   throw new Error(
 `Could not find Supabase URL or key in environment variables.
 Are you sure you set it up right?
-Tip: Check your .env file and refer to the README.`
+Tip: Check your .env file and refer to the README.
+Environment variable keys:
+${Object.keys(process.env).join(', ')}`
   );
 }
 
