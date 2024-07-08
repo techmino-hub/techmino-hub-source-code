@@ -136,6 +136,44 @@ const constructSchema: RecordSchema = {
     order: 'score->>0 DESC, score->>1 ASC, score->>date ASC'
 };
 
+const digEffSchema: RecordSchema = {
+    entries: {
+        0: {
+            name: 'pieces',
+            type: 'number'
+        },
+        1: {
+            name: 'time',
+            type: 'number'
+        },
+        date: {
+            name: 'date',
+            type: 'string'
+        }
+    },
+
+    order: 'score->>0 ASC, score->>1 ASC, score->>date ASC'
+};
+
+const digQuadSchema: RecordSchema = {
+    entries: {
+        0: {
+            name: 'dig_quad',
+            type: 'number'
+        },
+        1: {
+            name: 'time',
+            type: 'number'
+        },
+        date: {
+            name: 'date',
+            type: 'string'
+        }
+    },
+
+    order: 'score->>0 DESC, score->>1 ASC, score->>date DESC'
+};
+
 const marathonSchema: RecordSchema = {
     entries: {
         0: {
@@ -153,6 +191,29 @@ const marathonSchema: RecordSchema = {
     },
 
     order: 'score->>0 DESC, score->>1 ASC, score->>date ASC'
+};
+
+const marathonInfSchema: RecordSchema = {
+    entries: {
+        0: {
+            name: 'score',
+            type: 'number'
+        },
+        1: {
+            name: 'lines',
+            type: 'number'
+        },
+        2: {
+            name: 'time',
+            type: 'number'
+        },
+        date: {
+            name: 'date',
+            type: 'string'
+        }
+    },
+
+    order: 'score->>0 DESC, score->>1 DESC, score->>2 ASC, score->>date ASC'
 };
 
 const sprintSchema: RecordSchema = {
@@ -203,6 +264,24 @@ export const RECORD_SCHEMAS = {
     construct_invsg: constructSchema,
     defender_n: survivorSchema,
     defender_l: survivorSchema,
+    dig_10l: sprintSchema,
+    dig_40l: sprintSchema,
+    dig_100l: sprintSchema,
+    dig_400l: sprintSchema,
+    dig_eff_10l: digEffSchema,
+    dig_eff_40l: digEffSchema,
+    dig_eff_100l: digEffSchema,
+    dig_eff_400l: digEffSchema,
+    dig_quad_10l: digQuadSchema,
+    dig_h: survivorSchema,
+    dig_u: survivorSchema,
+    drought_n: marathonSchema,
+    drought_l: marathonSchema,
+    marathon_bfmax: marathonSchema,
+    marathon_n: marathonSchema,
+    marathon_h: marathonSchema,
+    marathon_inf: marathonInfSchema,
+    
 } as {
     [modeID: string]: RecordSchema
 };
