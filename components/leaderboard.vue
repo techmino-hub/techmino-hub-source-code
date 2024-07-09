@@ -6,6 +6,13 @@
                     <th>
                         {{ $t('leaderboard.header.lbRank') }}
                     </th>
+                    <!--
+                        TODO: Make a PlayerLink component and a profile page,
+                        and replace the below element with the PlayerLink component.
+                    -->
+                    <th>
+                        {{ $t('leaderboard.header.player') }}
+                    </th>
                     <th v-for="column in recordSchema.entries" :key="column.name">
                         {{ $t(`leaderboard.header.${column.name}`) }}
                     </th>
@@ -27,12 +34,11 @@
                     <td>
                         {{ index + 1 + offset }}
                     </td>
+                    <td>
+                        {{ submission.submitted_by }}
+                    </td>
                     <td v-for="column in recordSchema.entries" :key="column.name">
-                        {{
-                            submission.score ? 
-                                (submission.score[column.name] ?? $t('leaderboard.null')) :
-                                $t('leaderboard.null')
-                        }}
+                        {{ localeScore(submission.score, column.name) }}
                     </td>
                     <td>
                         {{ new Date(submission.replay_date).toLocaleString() }}
@@ -79,6 +85,7 @@ export default defineNuxtComponent({
         }
         
         const database = useDatabase();
+        const i18n = useI18n();
 
         watchEffect(async () => {
             loading.value = true;
@@ -131,6 +138,97 @@ export default defineNuxtComponent({
                     submitted_by: 'sample',
                     validity: "Unverified"
                 },
+                {
+                    game_mode: 'sprint_10l',
+                    id: 'sample',
+                    score: {
+                        time: 123456,
+                        pieces: 123
+                    },
+                    proof: 'https://example.com',
+                    upload_date: "2021-09-01T00:00:00Z",
+                    replay_date: "2021-09-01T00:00:00Z",
+                    submitted_by: 'sample',
+                    validity: "Unverified"
+                },
+                {
+                    game_mode: 'sprint_10l',
+                    id: 'sample',
+                    score: {
+                        time: 123456,
+                        pieces: 123
+                    },
+                    proof: 'https://example.com',
+                    upload_date: "2021-09-01T00:00:00Z",
+                    replay_date: "2021-09-01T00:00:00Z",
+                    submitted_by: 'sample',
+                    validity: "Unverified"
+                },
+                {
+                    game_mode: 'sprint_10l',
+                    id: 'sample',
+                    score: {
+                        time: 123456,
+                        pieces: 123
+                    },
+                    proof: 'https://example.com',
+                    upload_date: "2021-09-01T00:00:00Z",
+                    replay_date: "2021-09-01T00:00:00Z",
+                    submitted_by: 'sample',
+                    validity: "Unverified"
+                },
+                {
+                    game_mode: 'sprint_10l',
+                    id: 'sample',
+                    score: {
+                        time: 123456,
+                        pieces: 123
+                    },
+                    proof: 'https://example.com',
+                    upload_date: "2021-09-01T00:00:00Z",
+                    replay_date: "2021-09-01T00:00:00Z",
+                    submitted_by: 'sample',
+                    validity: "Unverified"
+                },
+                {
+                    game_mode: 'sprint_10l',
+                    id: 'sample',
+                    score: {
+                        time: 123456,
+                        pieces: 123
+                    },
+                    proof: 'https://example.com',
+                    upload_date: "2021-09-01T00:00:00Z",
+                    replay_date: "2021-09-01T00:00:00Z",
+                    submitted_by: 'sample',
+                    validity: "Unverified"
+                },
+                {
+                    game_mode: 'sprint_10l',
+                    id: 'sample',
+                    score: {
+                        time: 123456,
+                        pieces: 123
+                    },
+                    proof: 'https://example.com',
+                    upload_date: "2021-09-01T00:00:00Z",
+                    replay_date: "2021-09-01T00:00:00Z",
+                    submitted_by: 'sample',
+                    validity: "Unverified"
+                },
+                {
+                    game_mode: 'sprint_10l',
+                    id: 'sample',
+                    score: {
+                        time: 123456,
+                        pieces: 123
+                    },
+                    proof: 'https://example.com',
+                    upload_date: "2021-09-01T00:00:00Z",
+                    replay_date: "2021-09-01T00:00:00Z",
+                    submitted_by: 'sample',
+                    validity: "Unverified"
+                },
             ]; // DEBUG
 
             loading.value = false;
@@ -139,7 +237,21 @@ export default defineNuxtComponent({
         return {
             submissions,
             recordSchema,
-            loading
+            loading,
+            localeScore: function(score: any, column: string) {
+                if(!score || !score[column]) {
+                    return i18n.t('leaderboard.null');
+                }
+
+                if(!i18n.te(`leaderboard.scoreDisp.${column}`)) {
+                    return score[column];
+                }
+
+                return i18n.t(
+                    `leaderboard.scoreDisp.${column}`,
+                    { value: score[column] }
+                );
+            }
         };
     },
 });
@@ -154,6 +266,35 @@ table {
     overflow: auto;
     text-align: center;
     color: white;
+    font-family: 'techmino-proportional';
+
+    thead {
+        background-color: colors.$secondary-color-alpha50;
+    }
+
+    tbody {
+        tr:nth-child(odd) {
+            background-color: colors.$lb-odd-bg-color;
+        }
+        tr:nth-child(even) {
+            background-color: colors.$lb-even-bg-color;
+        }
+        
+        tr:nth-child(1) {
+            background-color: colors.$lb-first-bg-color !important;
+            color: colors.$lb-first-text-color;
+        }
+
+        tr:nth-child(2) {
+            background-color: colors.$lb-second-bg-color !important;
+            color: colors.$lb-second-text-color;
+        }
+
+        tr:nth-child(3) {
+            background-color: colors.$lb-third-bg-color !important;
+            color: colors.$lb-third-text-color;
+        }
+    }
 
     th, td {
         border: 0.1em solid colors.$lb-border-color;

@@ -2901,8 +2901,78 @@ We do not expect there to be any cookies used on this site, but just to make sur
       wtfRank: "Rank",
   
       lbRank: "#",
+      player: "Player",
       date: "Replay Date",
       submitDate: "Submit Date",
+    },
+    scoreDisp: {
+      efficiency: ({ named }) => {
+        return `${named('value')} atk/line`;
+      },
+      height: ({ named }) => {
+        return `${named('value')} minoes`;
+      },
+      masterExGrade: ({ named }) => {
+        // TODO: convert Master grades to string
+        return named('value');
+      },
+      masterGGrade: ({ named }) => {
+        // TODO: convert Master grades to string
+        return named('value');
+      },
+      placement: ({ named }) => {
+        return `#${named('value')}`;
+      },
+      score: ({ named }) => {
+        return (named('value') as number).toLocaleString('en-US');
+      },
+      time: ({ named }) => {
+        const timeInSeconds = named('value') as number;
+        
+        const years = Math.floor(timeInSeconds / 31536000);
+        let remainderSeconds = timeInSeconds % 31536000;
+
+        const days = Math.floor(remainderSeconds / 86400);
+        remainderSeconds %= 86400;
+
+        const hours = Math.floor(remainderSeconds / 3600);
+        remainderSeconds %= 3600;
+
+        const minutes = Math.floor(remainderSeconds / 60);
+        const seconds = remainderSeconds % 60;
+
+        if(timeInSeconds < 60) {
+          // 12.345″
+
+          return `${timeInSeconds.toFixed(3)}″`;
+        } else if(timeInSeconds < 3600) {
+          // 1′23.456″
+          const paddedSecs = seconds.toFixed(3).padStart(6, '0');
+
+          return `${minutes}′${paddedSecs}″`;
+        } else if(timeInSeconds < 86400) {
+          // 12:34′56.78″
+
+          const paddedMins = minutes.toString().padStart(2, '0');
+          const paddedSecs = seconds.toFixed(2).padStart(5, '0');
+
+          return `${hours}:${paddedMins}′${paddedSecs}″`;
+        } else if(timeInSeconds < 31536000) {
+          // 1d 12:34′56″
+
+          const paddedMins = minutes.toString().padStart(2, '0');
+          const paddedSecs = seconds.toFixed(0).padStart(2, '0');
+
+          return `${days}d ${hours}:${paddedMins}′${paddedSecs}″`;
+        } else {
+          // 1y 23d 12:34′56″
+
+          const paddedMins = minutes.toString().padStart(2, '0');
+          const paddedSecs = seconds.toFixed(0).padStart(2, '0');
+
+          return `${years}y ${days}d ${hours}:${paddedMins}′${paddedSecs}″`;
+        }
+      }
     },
   },
   rules: `md_

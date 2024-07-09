@@ -42,8 +42,10 @@ function processLangEntry(entries: LangEntry): LangEntry {
         
         if(typeof entry === 'string') {
             newEntries[key] = renderString(entry);
-        } else {
+        } else if(typeof entry === 'object') {
             newEntries[key] = processLangEntry(entry as LangEntry);
+        } else {
+            newEntries[key] = entry;
         }
     }
     
