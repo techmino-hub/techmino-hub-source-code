@@ -60,7 +60,7 @@ export type Submission = {
      * It is different for each game mode, and can even be null.  
      * Postgres type: jsonb
      */
-    score: Object | null;
+    score: { [key: string | number]: any } | null;
 
     /**
      * The timestamp when the submission was uploaded.  

@@ -2874,6 +2874,37 @@ We do not expect there to be any cookies used on this site, but just to make sur
     alreadySignedIn: "You are already signed in!",
     errorTimeout: `Sign in error: Supabase authentication timed out. Press OK to return to the home page.`,
   },
+  leaderboard: {
+    noSubmissions: "No submissions found.",
+    loading: "Loading...",
+    null: "N/A",
+    header: {
+      attack: "Attack",
+      combo: "Combo",
+      dig_quad: "Lines Dug",
+      efficiency: "Efficiency",
+      height: "Height",
+      holes: "Holes",
+      ko: "Knockouts",
+      lines: "Lines",
+      masterExGrade: "Grade",
+      masterGGrade: "Grade",
+      masterLevel: "Levels",
+      masterPhPoints: "Points",
+      pc: "PCs",
+      pieces: "Pieces",
+      placement: "Placement",
+      score: "Score",
+      time: "Time",
+      tsd: "T-Spin Doubles",
+      wave: "Waves",
+      wtfRank: "Rank",
+  
+      lbRank: "#",
+      date: "Replay Date",
+      submitDate: "Submit Date",
+    },
+  },
   rules: `md_
 # Site Rules
 By making an account on this site, you agree to the rules below.

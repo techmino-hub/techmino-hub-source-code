@@ -13,6 +13,7 @@ import {
     type ReplayData,
     Table
 } from '~/assets/types/database';
+import type { TableOrder } from '../types/record';
 
 /**
  * Represents a wrapper around the Supabase client.  
@@ -113,6 +114,25 @@ export class DBWrapper {
             .select('*')
             .eq('game_mode', gameMode)
             .range(offset, offset + limit - 1);
+
+        if(error) throw error;
+        return data as Submission[];
+    }
+
+    /** @throws {PostgrestError} */
+    async getOrderedSubmissionsByGameMode(gameMode: string, order: TableOrder[], limit = 10, offset = 0) {
+        let query = this.supabase
+            .from(Table.Submissions)
+            .select('*')
+            .eq('game_mode', gameMode);
+        
+        for(const column of order) {
+            query = query.order(column.column, column.options);
+        }
+
+        query = query.range(offset, offset + limit - 1);
+
+        const { data, error } = await query;
 
         if(error) throw error;
         return data as Submission[];
