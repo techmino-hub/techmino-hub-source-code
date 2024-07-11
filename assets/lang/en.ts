@@ -2177,8 +2177,8 @@ It will not be implemented in the “Classic” Techmino.`,
       length: "Short (3 min)"
     },
     sprintEff: {
-      title: "Sprint",
-      subtitle: "EFFICIENCY",
+      title: "Efficiency",
+      subtitle: "40L",
       description: "Send as much attack as you can in 40 lines!",
       rankReqs: [
         "Clear 40 lines",

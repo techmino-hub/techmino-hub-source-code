@@ -94,7 +94,9 @@ export type Submission = {
 }
 
 /**
- * The ReplayData type represents the replay data of a run.  
+ * The ReplayData type represents the replay data of a run, as stored in the database.  
+ * The replay data is stored as a compressed base-64 string,
+ * which you can decompress using {@link /assets/scripts/replay/parser.ts}.  
  * This should be what you get from querying from the `public.replays` table.  
  */
 export type ReplayData = {
@@ -105,7 +107,9 @@ export type ReplayData = {
     submission_id: string;
 
     /**
-     * The base-64 version of the replay data.  
+     * The compressed base-64 version of the replay data.  
+     * You should decompress and parse it first using {@link /assets/scripts/replay/parser.ts}
+     * before performing any operations on it.  
      * Postgres type: text
      */
     replay_data: string;
