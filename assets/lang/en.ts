@@ -3004,5 +3004,20 @@ If you find a loophole in the rules, please report it to us. Do not exploit it.
 
 If you violate any of these rules, we may take appropriate action depending on the severity.  
 We reserve the right to change these rules at any time.  
-If you have any questions, contact us on the [official Techmino Discord server](https://discord.gg/f9pUvkh) or on the [GitHub discussion page](https://github.com/techmino-hub/techmino-hub-source-code/discussions).`
+If you have any questions, contact us on the [official Techmino Discord server](https://discord.gg/f9pUvkh) or on the [GitHub discussion page](https://github.com/techmino-hub/techmino-hub-source-code/discussions).`,
+  privacy: `md_
+# Privacy Policy
+**We will never sell your personal data to third parties.**  
+
+By querying our database, be it through using the website or calling our API,
+**you agree to [Supabase's privacy policy](https://supabase.com/privacy)**,
+as we use Supabase for our database.  
+If you disagree with this policy, **feel free to disable JavaScript**.  
+Database querying will not work, but you can still use most of the site.  
+The methods to disable JavaScript vary from browser to browser, so please look up how to do it for your specific browser.  
+
+By logging into our website through OAuth, **you agree to the OAuth provider's privacy policy**.  
+For example, if you log in through Discord, you agree to Discord's privacy policy.
+
+If you have any questions, contact us on the [official Techmino Discord server](https://discord.gg/f9pUvkh) or on the [GitHub discussion page](https://github.com/techmino-hub/techmino-hub-source-code/discussions).`,
 } as LangEntry;
