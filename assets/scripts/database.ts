@@ -11,7 +11,8 @@ import {
     type Submission,
     type SubmissionWithReplay,
     type ReplayData,
-    Table
+    Table,
+    SubmissionValidity
 } from '~/assets/types/database';
 import type { TableOrder } from '../types/record';
 
@@ -107,24 +108,20 @@ export class DBWrapper {
     // #endregion
 
     // #region Submissions
-    /** @throws {PostgrestError} */
-    async getSubmissionsByGameMode(gameMode: string, limit = 10, offset = 0) {
-        const { data, error } = await this.supabase
-            .from(Table.Submissions)
-            .select('*')
-            .eq('game_mode', gameMode)
-            .range(offset, offset + limit - 1);
-
-        if(error) throw error;
-        return data as Submission[];
-    }
 
     /** @throws {PostgrestError} */
-    async getOrderedSubmissionsByGameMode(gameMode: string, order: TableOrder[], limit = 10, offset = 0) {
+    async getSubmissionsByGameMode(
+        gameMode: string,
+        validity = SubmissionValidity.Verified,
+        limit = 10,
+        offset = 0,
+        order = [] as TableOrder[]
+    ) {
         let query = this.supabase
             .from(Table.Submissions)
             .select('*')
-            .eq('game_mode', gameMode);
+            .eq('game_mode', gameMode)
+            .eq('validity', validity);
         
         for(const column of order) {
             query = query.order(column.column, column.options);
@@ -167,11 +164,17 @@ export class DBWrapper {
     }
 
     /** @throws {PostgrestError} */
-    async getSubmissionsByUserId(userId: string, limit = 10, offset = 0) {
+    async getSubmissionsByUserId(
+        userId: string,
+        order: "NewestFirst" | "OldestFirst" = "NewestFirst",
+        limit = 10,
+        offset = 0
+    ) {
         const { data, error } = await this.supabase
             .from(Table.Submissions)
             .select('*')
             .eq('submitted_by', userId)
+            .order('upload_date', { ascending: order === 'OldestFirst' })
             .range(offset, offset + limit - 1);
 
         if(error) throw error;

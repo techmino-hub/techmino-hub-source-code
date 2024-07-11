@@ -140,6 +140,7 @@
                         <i18n-t keypath="map.rankReqs" scope="global" tag="h3" class="center-text">
                             <MapModeRanks :mode="lastSelectedMode" />
                         </i18n-t>
+                        <LeaderboardTable :gameMode="lastSelectedMode.name" />
                     </aside>
                 </div>
             </div>

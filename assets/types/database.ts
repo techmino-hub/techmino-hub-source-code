@@ -84,7 +84,7 @@ export type Submission = {
      * The validity of the submission.  
      * Postgres type: enum
      */
-    validity: "Unverified" | "Verified" | "Suspicious" | "Rejected" | SubmissionValidity;
+    validity: "Unverified" | "Verified" | "Suspicious" | "Rejected" | "Tool-assisted" | SubmissionValidity;
 
     /**
      * Ideally, a link proving the submission's validity, such as a video recording.  
@@ -164,7 +164,10 @@ export enum SubmissionValidity {
     Suspicious = "Suspicious",
 
     /** The submission has been rejected. */
-    Rejected = "Rejected"
+    Rejected = "Rejected",
+
+    /** The submission is tool-assisted, and thus is not comparable to regular submissions. */
+    ToolAssisted = "Tool-assisted",
 }
 
 
