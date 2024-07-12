@@ -54,6 +54,11 @@
                   class="rank-req-text">
                     <MapModeRanksLite :mode="mode" />
                 </i18n-t>
+                <LeaderboardWrapper
+                    :gameMode="modeCodeName"
+                    :validity="SubmissionValidity.Verified"
+                    :limit="10"
+                />
             </aside>
         </div>
     </div>
@@ -63,6 +68,7 @@
 import { type MapData, isMapDataValid, isModeValid } from '~/assets/types/map';
 import { getModeI18nString } from '~/assets/scripts/modes';
 import { getArticle } from '~/assets/scripts/articles';
+import { SubmissionValidity } from '~/assets/types/database';
 
 const route = useRoute();
 let currentMap: string = 'vanilla';

@@ -1,5 +1,5 @@
 <template>
-    <div class="lb-outer">
+    <div class="lb-outer hide-noscript">
         <table v-show="!loading">
             <thead>
                 <tr>

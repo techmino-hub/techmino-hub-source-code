@@ -137,10 +137,25 @@
                                 ></iframe>
                             </div>
                         </i18n-t>
-                        <i18n-t keypath="map.rankReqs" scope="global" tag="h3" class="center-text">
+                        <i18n-t
+                          keypath="map.rankReqs"
+                          scope="global"
+                          tag="h3"
+                          class="center-text">
                             <MapModeRanks :mode="lastSelectedMode" />
                         </i18n-t>
-                        <LeaderboardTable :gameMode="lastSelectedMode.name" />
+                        <i18n-t
+                          keypath="map.leaderboard"
+                          scope="global"
+                          tag="h3"
+                          class="center-text">
+                            <LeaderboardWrapper
+                                class="lb-wrapper"
+                                :gameMode="lastSelectedMode.name"
+                                :validity="SubmissionValidity.Verified"
+                                :limit="10"
+                            />
+                        </i18n-t>
                     </aside>
                 </div>
             </div>
@@ -158,6 +173,7 @@ import {
 } from '~/assets/types/map';
 import { getModeI18nString } from '~/assets/scripts/modes';
 import { getArticle } from '~/assets/scripts/articles';
+import { SubmissionValidity } from '~/assets/types/database';
 
 const i18n = useI18n();
 const localePath = useLocalePath();
@@ -1093,6 +1109,10 @@ onMounted(mountedHook);
                 
                 .rank-reqs {
                     margin-top: 1em;
+                }
+
+                .lb-wrapper {
+                    font-size: 0.8em;
                 }
             }
 

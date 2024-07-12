@@ -588,6 +588,7 @@ It will not be implemented in the “Classic” Techmino.`,
     noscriptWarn: "It looks like JavaScript is disabled. Although the regular map is unavailable, you can instead visit the lite map.",
     liteVersion: "Visit lite map",
     rankReqs: "Rank requirements: {0}",
+    leaderboard: "Leaderboard: {0}",
     tooltip: {
       rank: {
         X: "X rank",

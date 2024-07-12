@@ -1,5 +1,5 @@
 <template>
-  <div class="lb-wrapper">
+  <div class="lb-wrapper hide-noscript">
     <div class="filters">
         <div class="filter" v-if="!props.gameMode">
             <label for="game-mode-dropdown">
