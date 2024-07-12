@@ -195,7 +195,14 @@ Although it's still far from complete, you can view the source code [here](https
       'how-to-play-tg': {
         question: "How can I play Techmino Galaxy (the remake)?",
         answer:
-          `md_**Do understand that Techmino Galaxy is still rather early in development, and does not necessarily give the best experience.**
+          `md_
+> ***UPDATE (12/Jul/2024):*** This guide has some missing parts due to the recent release of "The Big Update" and no one has free time right now to update this guide.
+
+> Also, the game right now is failed on Android and the artifacts from GitHub commit seems to have missing libraries.
+
+> We will update this article when we have time, and, if there is something new.
+
+**Do understand that Techmino Galaxy is still rather early in development, and does not necessarily give the best experience.**
 
 The easiest way to obtain Techmino Galaxy is through GitHub Actions. You *will* need a GitHub account to download the game this way.  
 Below are steps to download Techmino Galaxy through GitHub Actions:  
@@ -265,7 +272,7 @@ It's recommended that you treat this game as a single-player game until this pro
       },
       'change-language': {
         question: "How do I change the game's language?",
-        answer: `md_In the main menu, click the button with a globe icon. That's the select language button.`,
+        answer: `md_In the main menu, click the button with this 󰂗 icon. That's the select language button.`,
         credit: "User670"
       },
       'voice-actors': {
@@ -283,6 +290,8 @@ It's recommended that you treat this game as a single-player game until this pro
   Voice language: Japanese
 6. [Zundamon](https://vocalsynth.fandom.com/wiki/Zundamon) is a voice bank for various voice synthesizer programs.
   Voice language: Japanese
+7. Neuro-sama ([Youtube](https://www.youtube.com/channel/UCLHmLrj4pHHg3-iBJn_CqxA), [Twitch](https://www.twitch.tv/vedal987)) is an AI-powered Vtuber created by vedal987
+  Voice language: English
 
 While MrZ does not have a voice pack, there used to be a "Welcome to Tech" voice clip that was recorded by MrZ himself.`,
         credit: "User670"
@@ -414,12 +423,14 @@ so make sure you have the correct rotation system.
 
 To perform a transformative O-spin, move the O block in an appropriate “hole”, then use the following rotations to do the trick:
 
+\`\`\`
 O → Z: LRL  
 O → S: RLR  
 O → J: LLR  
 O → L: RRL  
 O → T: LLL & RRR  
 O → I: FFF  
+\`\`\`
 
 Note: L = counterclockwise, R = clockwise, F = 180° rotation
 
