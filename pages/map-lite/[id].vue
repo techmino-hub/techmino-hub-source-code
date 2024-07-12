@@ -54,11 +54,18 @@
                   class="rank-req-text">
                     <MapModeRanksLite :mode="mode" />
                 </i18n-t>
-                <LeaderboardWrapper
-                    :gameMode="modeCodeName"
-                    :validity="SubmissionValidity.Verified"
-                    :limit="10"
-                />
+                <i18n-t
+                  keypath="map.leaderboard"
+                  scope="global"
+                  tag="h3"
+                  class="center-text">
+                    <LeaderboardWrapper
+                        :gameMode="modeCodeName"
+                        :validity="SubmissionValidity.Verified"
+                        :limit="5"
+                        :redirectToFull="true"
+                    />
+                </i18n-t>
             </aside>
         </div>
     </div>
@@ -186,6 +193,10 @@ h1 {
         margin-top: 1em;
         margin-inline: auto;
     }
+}
+
+.lb-wrapper {
+    font-size: 0.9em;
 }
 
 .main-wrapper {

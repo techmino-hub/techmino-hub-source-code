@@ -3,7 +3,8 @@
     <Title>{{ $t('signIn.tabTitle') }}</Title>
     <h1 v-t="'signIn.title'"></h1>
     <i18n-t keypath="signIn.ruleNote" scope="global" tag="p" class="tos-note hide-noscript">
-        <NuxtLink class="glow-style" :to="localePath('/rules')" v-t="'signIn.ruleNoteLink'"></NuxtLink>
+        <NuxtLinkLocale class="glow-style" to="/rules" v-t="'signIn.ruleNoteRule'" />
+        <NuxtLinkLocale class="glow-style" to="/privacy" v-t="'signIn.ruleNotePriv'" />
     </i18n-t>
     <div class="oauth-buttons hide-noscript" v-show="!user">
         <button

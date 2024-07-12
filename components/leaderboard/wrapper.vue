@@ -1,6 +1,6 @@
 <template>
   <div class="lb-wrapper hide-noscript">
-    <div class="filters">
+    <div class="filters" v-if="!redirectToFull">
         <div class="filter" v-if="!props.gameMode">
             <label for="game-mode-dropdown">
                 {{ $t('leaderboard.filters.gameMode') }}
@@ -50,7 +50,7 @@
         :offset="offset"
         @load="onSubmissionsLoad"
     />
-    <div class="offset-info" v-if="!props.offset">
+    <div class="offset-info" v-if="!props.offset && !redirectToFull">
         <button
           class="prev"
           type="button"
@@ -71,6 +71,12 @@
           @click="offsetSelection += limit">
             {{ $t('leaderboard.pageNext') }}
         </button>
+    </div>
+    <div class="redirect" v-else-if="redirectToFull">
+        <NuxtLinkLocale
+            to="/leaderboard"
+            v-t="'leaderboard.pageFull'"
+        />
     </div>
   </div>
 </template>
@@ -93,6 +99,10 @@ const props = defineProps({
     },
     offset: {
         type: Number as PropType<number | undefined>,
+    },
+    redirectToFull: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -197,6 +207,15 @@ function onSubmissionsLoad(submissions: Submission[]) {
                 border: 0.1em solid colors.$btn-disabled-border-color;
                 cursor: not-allowed;
             }
+        }
+    }
+
+    .redirect {
+        text-align: end;
+        margin-block-start: 0.5em;
+
+        a {
+            @extend .block-style;
         }
     }
 }

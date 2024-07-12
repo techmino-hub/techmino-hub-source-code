@@ -2866,8 +2866,9 @@ We do not expect there to be any cookies used on this site, but just to make sur
   signIn: {
     tabTitle: "Techmino Hub - Sign In",
     title: "Sign In",
-    ruleNote: "By logging into our website, you agree to our {0}.",
-    ruleNoteLink: "Site Rules",
+    ruleNote: "By logging into our website, you agree to our {0} and {1}.",
+    ruleNoteRule: "Site Rules",
+    ruleNotePriv: "Privacy Policy",
     oauth: {
       discord: "Sign In with Discord",
     },
@@ -2882,6 +2883,7 @@ We do not expect there to be any cookies used on this site, but just to make sur
     entryNumber: "Displaying entries {start} to {end}",
     pagePrev: "󰄚 Previous",
     pageNext: "Next 󰄛",
+    pageFull: "See more...",
     header: {
       attack: "Attack",
       combo: "Combo",

@@ -124,7 +124,7 @@
                     </main>
                     <aside>
                         <i18n-t
-                          v-if="$te(`modes.${lastSelectedMode.name}.featuredVideo`)"
+                          v-if="$te(`modes.${lastSelectedMode.name}.featuredVideo`) && isPanelExpanded"
                           keypath="map.featuredVideo"
                           scope="global"
                           tag="h3"
@@ -153,7 +153,8 @@
                                 class="lb-wrapper"
                                 :gameMode="lastSelectedMode.name"
                                 :validity="SubmissionValidity.Verified"
-                                :limit="10"
+                                :limit="5"
+                                :redirectToFull="true"
                             />
                         </i18n-t>
                     </aside>
@@ -1112,6 +1113,7 @@ onMounted(mountedHook);
                 }
 
                 .lb-wrapper {
+                    margin-block-start: 1em;
                     font-size: 0.8em;
                 }
             }
