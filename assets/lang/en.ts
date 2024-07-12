@@ -2456,7 +2456,7 @@ It will not be implemented in the “Classic” Techmino.`,
       difficulty: "Tricky",
       length: "Short (3 min)"
     },
-    tech_finesse_lock_plus: { // removed due to unportability
+    tech_finesse_lock_f: { // removed due to unportability
       title: "Tech Finesse",
       subtitle: "LOCK PLUS",
       description: "No normal clears nor finesse errors combined with limited inputs!",
@@ -2878,6 +2878,9 @@ We do not expect there to be any cookies used on this site, but just to make sur
     noSubmissions: "No submissions found.",
     loading: "Loading...",
     null: "N/A",
+    entryNumber: "Displaying entries {start} to {end}",
+    pagePrev: "󰄚 Previous",
+    pageNext: "Next 󰄛",
     header: {
       attack: "Attack",
       combo: "Combo",
@@ -2974,6 +2977,18 @@ We do not expect there to be any cookies used on this site, but just to make sur
         }
       }
     },
+    filters: {
+      gameMode: "Game mode",
+      validity: "Filter by validity",
+      limit: "Entries per page",
+    },
+    validity: {
+      Unverified: "Unverified",
+      Verified: "Verified",
+      Suspicious: "Suspicious",
+      Rejected: "Rejected",
+      'Tool-assisted': "Tool-assisted",
+    }
   },
   rules: `md_
 # Site Rules

@@ -30,7 +30,10 @@
                         {{ $t('leaderboard.noSubmissions') }}
                     </td>
                 </tr>
-                <tr v-for="(submission, index) in submissions" :key="submission.id">
+                <tr
+                  v-for="(submission, index) in submissions.slice(0, limit)"
+                  :key="submission.id"
+                  :class="`index-${index + 1 + offset}`">
                     <td>
                         {{ index + 1 + offset }}
                     </td>
@@ -79,7 +82,10 @@ export default defineNuxtComponent({
             default: 0
         }
     },
-    async setup(props) {
+    emits: {
+        'load': (submissions: Submission[]) => true
+    },
+    async setup(props, { emit }) {
         const loading = ref(true);
         const submissions: Ref<Submission[]> = ref([]);
         const recordSchema: Ref<RecordSchema> = ref(RECORD_SCHEMAS[props.gameMode]);
@@ -98,10 +104,12 @@ export default defineNuxtComponent({
             submissions.value = await database.getSubmissionsByGameMode(
                 props.gameMode,
                 props.validity,
-                props.limit,
+                props.limit + 1,
                 props.offset,
                 recordSchema.value.order
             );
+
+            emit('load', submissions.value);
 
             loading.value = false;
         });
@@ -152,17 +160,17 @@ table {
             background-color: colors.$lb-even-bg-color;
         }
         
-        tr:nth-child(1) {
+        tr.index-1 {
             background-color: colors.$lb-first-bg-color !important;
             color: colors.$lb-first-text-color;
         }
 
-        tr:nth-child(2) {
+        tr.index-2 {
             background-color: colors.$lb-second-bg-color !important;
             color: colors.$lb-second-text-color;
         }
 
-        tr:nth-child(3) {
+        tr.index-3 {
             background-color: colors.$lb-third-bg-color !important;
             color: colors.$lb-third-text-color;
         }

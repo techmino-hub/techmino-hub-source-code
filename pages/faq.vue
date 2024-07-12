@@ -73,6 +73,6 @@ function filter(tag: Tag, mode: FilterMode) {
     .entries.hide-multiplayer   .question.multiplayer,
     .entries.hide-error         .question.error,
     .entries.hide-bot           .question.bot
-    { display: none }
+    { display: none; }
 }
 </style>
