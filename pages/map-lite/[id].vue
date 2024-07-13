@@ -136,14 +136,16 @@ const modeName = getModeI18nString(mode.name, i18n.t);
 
 const articleHTML = ref<string>(i18n.t('map.loadingArticle'));
 
-getArticle(`mode.${modeCodeName}`, i18n.locale.value)
-    .then((articleContent) => {
-        if(articleContent !== null) {
-            articleHTML.value = articleContent;
-        } else {
-            articleHTML.value = i18n.t('map.noArticle');
-        }
-    });
+await useFetch('/api/fetch-article', {
+    method: 'GET',
+    params: {
+        id: `mode.${modeCodeName}`
+    }
+}).then(({data}) => {
+    articleHTML.value = data.value?.content ?? i18n.t('map.noArticle');
+}).catch((err) => {
+    articleHTML.value = i18n.t('map.noArticle');
+});
 </script>
 
 <style scoped lang="scss">

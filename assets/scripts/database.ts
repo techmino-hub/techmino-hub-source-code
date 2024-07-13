@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import {
     createClient,
     SupabaseClient,
@@ -5,7 +6,6 @@ import {
     type SupabaseClientOptions,
     type User
 } from '@supabase/supabase-js';
-
 import {
     type Profile,
     type Submission,
