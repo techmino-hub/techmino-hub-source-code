@@ -145,6 +145,7 @@
                             <MapModeRanks :mode="lastSelectedMode" />
                         </i18n-t>
                         <i18n-t
+                          v-if="RECORD_SCHEMAS[lastSelectedMode.name]"
                           keypath="map.leaderboard"
                           scope="global"
                           tag="h3"
@@ -175,6 +176,7 @@ import {
 import { getModeI18nString } from '~/assets/scripts/modes';
 import { getArticle } from '~/assets/scripts/articles';
 import { SubmissionValidity } from '~/assets/types/database';
+import RECORD_SCHEMAS from '~/assets/data/record-schemas';
 
 const i18n = useI18n();
 const localePath = useLocalePath();

@@ -1,6 +1,6 @@
 <template>
-  <div class="lb-wrapper hide-noscript">
-    <div class="filters" v-if="!redirectToFull">
+  <div class="lb-wrapper">
+    <div class="filters hide-noscript-important" v-if="!redirectToFull">
         <div class="filter" v-if="!props.gameMode">
             <label for="game-mode-dropdown">
                 {{ $t('leaderboard.filters.gameMode') }}
@@ -13,14 +13,16 @@
                   :key="gameMode"
                   :value="gameMode">
                     {{ getModeI18nString(gameMode, $t) }}
-                </option>=
+                </option>
             </select>
         </div>
         <div class="filter" v-if="!props.validity">
             <label for="validity-dropdown">
                 {{ $t('leaderboard.filters.validity') }}
             </label>
-            <select v-model="validitySelection" id="validity-dropdown">
+            <select
+              v-model="validitySelection"
+              id="validity-dropdown">
                 <option
                   v-for="validity in Object.values(SubmissionValidity)"
                   :key="validity"
@@ -33,7 +35,9 @@
             <label for="limit-dropdown">
                 {{ $t('leaderboard.filters.limit') }}
             </label>
-            <select v-model="limitSelection" id="limit-dropdown">
+            <select
+              v-model="limitSelection"
+              id="limit-dropdown">
                 <option
                   v-for="limit in [10, 25, 50, 100]"
                   :key="limit"
@@ -52,12 +56,21 @@
     />
     <div class="offset-info" v-if="!props.offset && !redirectToFull">
         <button
-          class="prev"
+          class="prev hide-noscript"
           type="button"
           :disabled="offsetSelection === 0"
           @click="offsetSelection = Math.max(offsetSelection - limit, 0)">
             {{ $t('leaderboard.pagePrev') }}
         </button>
+        <noscript>
+            <NuxtLinkLocale
+              v-if="onFullPage"
+              :disabled="offsetSelection === 0"
+              :to="getPageUrl('prev')"
+              class="prev">
+                {{ $t('leaderboard.pagePrev') }}
+            </NuxtLinkLocale>
+        </noscript>
         <span>
             {{ $t('leaderboard.entryNumber', {
                 start: offset + 1,
@@ -65,18 +78,26 @@
             }) }}
         </span>
         <button
-          class="next"
+          class="next hide-noscript"
           type="button"
           :disabled="isLastPage"
           @click="offsetSelection += limit">
             {{ $t('leaderboard.pageNext') }}
         </button>
+        <noscript>
+            <NuxtLinkLocale
+              v-if="onFullPage"
+              :disabled="isLastPage"
+              :to="getPageUrl('next')"
+              class="next">
+                {{ $t('leaderboard.pageNext') }}
+            </NuxtLinkLocale>
+        </noscript>
     </div>
     <div class="redirect" v-else-if="redirectToFull">
-        <NuxtLinkLocale
-            to="/leaderboard"
-            v-t="'leaderboard.pageFull'"
-        />
+        <NuxtLinkLocale :to="redirectLink">
+            {{ $t('leaderboard.pageFull') }}
+        </NuxtLinkLocale>
     </div>
   </div>
 </template>
@@ -92,24 +113,51 @@ const props = defineProps({
         required: false
     },
     validity: {
-        type: String as PropType<SubmissionValidity | undefined>
+        type: String as PropType<SubmissionValidity>,
+        required: false
     },
     limit: {
-        type: Number as PropType<number | undefined>,
+        type: Number,
+        required: false
     },
     offset: {
-        type: Number as PropType<number | undefined>,
+        type: Number,
+        required: false
     },
     redirectToFull: {
+        type: Boolean,
+        default: false
+    },
+    initGameMode: {
+        type: String,
+        default: "sprint_10l"
+    },
+    initValidity: {
+        type: String as PropType<SubmissionValidity>,
+        default: SubmissionValidity.Verified
+    },
+    initLimit: {
+        type: Number,
+        default: 10
+    },
+    initOffset: {
+        type: Number,
+        default: 0
+    },
+    onFullPage: {
         type: Boolean,
         default: false
     }
 });
 
-const gameModeSelection = ref('sprint_10l');
-const validitySelection = ref(SubmissionValidity.Verified);
-const limitSelection = ref(10);
-const offsetSelection = ref(0);
+const emits = defineEmits<{
+    load: [submission: Submission[]]
+}>();
+
+const gameModeSelection = ref(props.initGameMode);
+const validitySelection = ref(props.initValidity);
+const limitSelection = ref(props.initLimit);
+const offsetSelection = ref(props.initOffset);
 
 const gameMode = computed(() => props.gameMode ?? gameModeSelection.value);
 const validity = computed(() => props.validity ?? validitySelection.value);
@@ -123,6 +171,47 @@ function onSubmissionsLoad(submissions: Submission[]) {
     // We expect (limit + 1) submissions to be returned if there are more pages.
     // If there is less than that, it's the last page.
     isLastPage.value = submissions.length <= limit.value;
+
+    emits.call(undefined, "load", submissions);
+}
+
+const redirectLink = computed(() => {
+    let path = "/leaderboard";
+    let first = true;
+
+    function append(key: string, value: string) {
+        const firstChar = first ? "?" : "&";
+
+        path += `${firstChar}${key}=${value}`;
+        
+        first = false;
+    }
+
+    append("gameMode", gameMode.value);
+    append("validity", validity.value);
+
+    return path;
+});
+
+function getPageUrl(place: "prev" | "next") {
+    let base = redirectLink.value;
+
+    let newOffset = offset.value;
+
+    if(place == "prev") {
+        if(newOffset === 0) {
+            return;
+        }
+
+        newOffset = Math.max(newOffset - limit.value, 0);
+    } else {
+        if(isLastPage) {
+            return;
+        }
+        newOffset += limit.value;
+    }
+
+    return base + `&limit=${limit.value}&offset=${newOffset}`;
 }
 </script>
 
@@ -168,13 +257,14 @@ function onSubmissionsLoad(submissions: Submission[]) {
             margin-inline: auto;
         }
 
-        button {
+        button, a {
             color: colors.$btn-border-color;
             padding: 0.25em 1em;
             border: 0.1em none transparent;
             border-radius: 0.5em;
             background-color: transparent;
             font-family: 'techmino-proportional';
+            text-decoration: none;
             font-size: 1.1em;
             cursor: pointer;
             transition: 250ms color, 250ms transform;

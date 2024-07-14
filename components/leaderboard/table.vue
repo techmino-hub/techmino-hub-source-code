@@ -1,5 +1,5 @@
 <template>
-    <div class="lb-outer hide-noscript">
+    <div class="lb-outer">
         <table v-show="!loading">
             <thead>
                 <tr>
@@ -101,13 +101,27 @@ export default defineNuxtComponent({
             loading.value = true;
 
             recordSchema.value = RECORD_SCHEMAS[props.gameMode];
-            submissions.value = await database.getSubmissionsByGameMode(
-                props.gameMode,
-                props.validity,
-                props.limit + 1,
-                props.offset,
-                recordSchema.value.order
-            );
+            // submissions.value = await database.getSubmissionsByGameMode(
+            //     props.gameMode,
+            //     props.validity,
+            //     props.limit + 1,
+            //     props.offset,
+            //     recordSchema.value.order
+            // );
+            const { data } = await useFetch('/api/fetch-leaderboard', {
+                query: {
+                    gameMode: props.gameMode,
+                    validity: props.validity,
+                    limit: props.limit,
+                    offset: props.offset
+                }
+            });
+
+            if(!data.value?.entries) {
+                submissions.value = [];
+            } else {
+                submissions.value = data.value.entries;
+            }
 
             emit('load', submissions.value);
 

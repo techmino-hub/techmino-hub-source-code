@@ -55,6 +55,7 @@
                     <MapModeRanksLite :mode="mode" />
                 </i18n-t>
                 <i18n-t
+                  v-if="RECORD_SCHEMAS[modeCodeName]"
                   keypath="map.leaderboard"
                   scope="global"
                   tag="h3"
@@ -74,7 +75,7 @@
 <script lang="ts" setup>
 import { type MapData, isMapDataValid, isModeValid } from '~/assets/types/map';
 import { getModeI18nString } from '~/assets/scripts/modes';
-import { getArticle } from '~/assets/scripts/articles';
+import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
 import { SubmissionValidity } from '~/assets/types/database';
 
 const route = useRoute();
@@ -143,7 +144,7 @@ await useFetch('/api/fetch-article', {
     }
 }).then(({data}) => {
     articleHTML.value = data.value?.content ?? i18n.t('map.noArticle');
-}).catch((err) => {
+}).catch(() => {
     articleHTML.value = i18n.t('map.noArticle');
 });
 </script>

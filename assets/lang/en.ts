@@ -2877,6 +2877,8 @@ We do not expect there to be any cookies used on this site, but just to make sur
     errorTimeout: `Sign in error: Supabase authentication timed out. Press OK to return to the home page.`,
   },
   leaderboard: {
+    tabTitle: "Leaderboards - Techmino Hub",
+    title: "Leaderboards",
     noSubmissions: "No submissions found.",
     loading: "Loading...",
     null: "N/A",
@@ -2884,6 +2886,7 @@ We do not expect there to be any cookies used on this site, but just to make sur
     pagePrev: "󰄚 Previous",
     pageNext: "Next 󰄛",
     pageFull: "See more...",
+    go: "Go",
     header: {
       attack: "Attack",
       combo: "Combo",
