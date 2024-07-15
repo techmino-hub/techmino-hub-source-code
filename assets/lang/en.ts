@@ -2922,12 +2922,33 @@ We do not expect there to be any cookies used on this site, but just to make sur
         return `${named('value')} minoes`;
       },
       masterExGrade: ({ named }) => {
-        // TODO: convert Master grades to string
-        return named('value');
+        const val = named('value') as number;
+        const idx = Math.floor(val / 10);
+
+        return [
+          "D","C","B","A","A+","S-","S","S+","S+",
+          "SS","SS","U","U","X","X+"
+        ][idx];
       },
       masterGGrade: ({ named }) => {
-        // TODO: convert Master grades to string
-        return named('value');
+        const idx = named('value') as number;
+
+        if(idx < 10) {
+          return (10 - idx).toString();
+        } else if(idx < 19) {
+          return "S" + (idx - 9);
+        } else if(idx < 28) {
+          return "m" + (idx - 18);
+        } else if(idx < 41) {
+          return [
+            "M", "MK", "MV", "MO",
+            "MM-", "MM", "MM+",
+            "GM-", "GM", "GM+",
+            "TM-", "TM", "TM+"
+          ][idx - 27];
+        } else {
+          return "TM+" + (idx - 39);
+        }
       },
       placement: ({ named }) => {
         return `#${named('value')}`;
