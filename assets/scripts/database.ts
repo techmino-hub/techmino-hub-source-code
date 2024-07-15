@@ -276,6 +276,15 @@ export class DBWrapper {
         return data;
     }
 
+    getAvatarUrlByUserId(userId: string) {
+        const { data } = this.supabase
+            .storage
+            .from('avatars')
+            .getPublicUrl(userId);
+        
+        return data.publicUrl;
+    }
+
     /** @throws {PostgrestError} */
     async updateAvatar(userId: string, newAvatar: File) {
         const { data, error } = await this.supabase

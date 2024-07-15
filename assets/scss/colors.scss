@@ -1,3 +1,4 @@
+// Theme colors
 $primary-color:         rgb(0, 255, 0);
 $primary-color-dark:    rgb(0, 196, 0);
 $primary-color-darker:  rgb(0, 128, 0);
@@ -30,6 +31,7 @@ $error-color-alpha25:   rgba(255, 0, 0, 0.25);
 $error-color-alpha10:   rgba(255, 0, 0, 0.10);
 
 
+// Button colors
 $btn-bg-color: rgba(0, 100, 0, 0.5);
 $btn-color: white;
 $btn-border-color: lime;
@@ -46,7 +48,7 @@ $btn-disabled-bg-color: rgba(100, 0, 0, 0.25);
 $btn-disabled-color: darkgray;
 $btn-disabled-border-color: red;
 
-
+// Tags
 $tag-techmino-color: lime;
 $tag-galaxy-color: #978ae7;
 $tag-linux-color: #f1e05a;
@@ -55,11 +57,12 @@ $tag-multiplayer-color: #ff7f00;
 $tag-error-color: #ff0000;
 $tag-bot-color: #62c2b9;
 
-
+// Login
 $oauth-discord-bg-color: #7289DA66;
 $oauth-discord-border-color: #7289DABB;
 $oauth-discord-color: white;
 
+// Map
 $rank-color-b: #CCDBE6;
 $rank-color-a: #99E683;
 $rank-color-s: #EDEDA6;
@@ -95,6 +98,8 @@ $map-panel-button-hover-bg-color: #FFFFBBBB;
 $map-panel-button-active-bg-color: #FFDD99DD;
 $map-panel-button-border-color: #FFFFFFDD;
 
+
+// Leaderboard
 $lb-border-color: #66666666;
 $lb-odd-bg-color: #18181888;
 $lb-even-bg-color: #11111188;
@@ -104,3 +109,13 @@ $lb-second-bg-color: #C0C0C022;
 $lb-second-text-color: white;
 $lb-third-bg-color: #CD7F3222;
 $lb-third-text-color: orange;
+
+
+// Profile
+$pf-card-bg-color: #000000EE;
+$pf-state-banned: red;
+$pf-state-unverified: orange;
+$pf-state-normal: limegreen;
+$pf-role-user: white;
+$pf-role-verifier: limegreen;
+$pf-role-admin: rgb(196, 0, 255);

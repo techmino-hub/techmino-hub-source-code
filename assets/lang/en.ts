@@ -2996,6 +2996,18 @@ We do not expect there to be any cookies used on this site, but just to make sur
       'Tool-assisted': "Tool-assisted",
     }
   },
+  profile: {
+    state: {
+      Normal: "Normal",
+      Banned: "Banned",
+      Unverified: "Unverified"
+    },
+    role: {
+      User: "User",
+      Verifier: "Verifier",
+      Administrator: "Administrator"
+    }
+  },
   rules: `md_
 # Site Rules
 By making an account on this site, you agree to the rules below.

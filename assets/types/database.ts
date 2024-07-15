@@ -15,7 +15,7 @@ export type Profile = {
      * The user's username.  
      * Postgres type: text
      */
-    name: string;
+    username: string;
 
     /**
      * The user's account state.  
