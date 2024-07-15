@@ -34,6 +34,7 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
           class="border octagon"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="-4.5 -4.5 109 109"
+          aria-hidden="true"
           @click="$emit('click')">
             <polygon
                 points="100,50 85.36,85.36 50,100 14.64,85.36 0,50 14.64,14.64 50,0 85.36,14.64"
@@ -45,6 +46,7 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
           class="border diamond"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="-4.5 -4.5 109 109"
+          aria-hidden="true"
           @click="$emit('click')">
             <polygon
                 points="100,50 50,100 0,50 50,0"
@@ -54,7 +56,8 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
 
         <img
             :src="getModeIconPath(mode)"
-            alt=""
+            aria-hidden="true"
+            loading="lazy"
             class="icon"
             draggable="false"
         >

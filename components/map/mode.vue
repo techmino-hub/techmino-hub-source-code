@@ -35,6 +35,7 @@ defineEmits(['click']);
         <button
             v-if="mode.shape == ModeShape.square"
             class="border square"
+            aria-hidden="true"
             @click="$emit('click')"
         ></button>
         <svg
@@ -42,6 +43,7 @@ defineEmits(['click']);
           class="border octagon"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="-4.5 -4.5 109 109"
+          aria-hidden="true"
           @click="$emit('click')">
             <polygon
                 points="100,50 85.36,85.36 50,100 14.64,85.36 0,50 14.64,14.64 50,0 85.36,14.64"
@@ -53,6 +55,7 @@ defineEmits(['click']);
           class="border diamond"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="-4.5 -4.5 109 109"
+          aria-hidden="true"
           @click="$emit('click')">
             <polygon
                 points="100,50 50,100 0,50 50,0"
@@ -62,8 +65,9 @@ defineEmits(['click']);
 
         <img
             :src="getModeIconPath(mode)"
-            alt=""
+            aria-hidden="true"
             class="icon"
+            loading="lazy"
             draggable="false"
         >
     </div>

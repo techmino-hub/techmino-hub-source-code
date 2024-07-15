@@ -6,6 +6,7 @@
         />
         <img
             :src="avatarUrl"
+            loading="lazy"
             aria-hidden="true"
         />
     </div>
