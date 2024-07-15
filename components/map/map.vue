@@ -145,7 +145,7 @@
                             <MapModeRanks :mode="lastSelectedMode" />
                         </i18n-t>
                         <i18n-t
-                          v-if="RECORD_SCHEMAS[lastSelectedMode.name]"
+                          v-if="RECORD_SCHEMAS[lastSelectedMode.name] && isPanelExpanded"
                           keypath="map.leaderboard"
                           scope="global"
                           tag="h3"
