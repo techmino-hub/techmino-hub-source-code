@@ -1,6 +1,6 @@
 <template>
     <div class="profile-card">
-        <ProfileAvatar :profile="profile" />
+        <ProfileAvatar :profile-id="profile.id" />
         <div class="info">
             <h1>
                 <NuxtLinkLocale :to="`/profiles/${profile.id}`" v-if="link">
@@ -10,29 +10,11 @@
                     {{ profile.username }}
                 </span>
             </h1>
-            <span class="inline">
-                <span
-                  :class="{
-                    state: true,
-                    normal: profile.account_state === 'Normal',
-                    banned: profile.account_state === 'Banned',
-                    unverified: profile.account_state === 'Unverified'
-                  }">
-                    {{ $t(`profile.state.${profile.account_state}`) }}
-                </span>
-                <span class="separator">
-                    {{ "·" }}
-                </span>
-                <span
-                  :class="{
-                    role: true,
-                    user: profile.role === 'User',
-                    verifier: profile.role === 'Verifier',
-                    admin: profile.role === 'Administrator'
-                  }">
-                    {{ $t(`profile.role.${profile.role}`) }}
-                </span>
-            </span>
+            <ProfileRole
+                class="pf-roles"
+                :account-state="(profile.account_state as AccountState)"
+                :role="(profile.role as Role)"
+            />
             <p>
                 {{ profile.bio.slice(0, 100) }}
             </p>
@@ -41,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Profile } from '~/assets/types/database';
+import type { AccountState, Profile, Role } from '~/assets/types/database';
 
 const props = defineProps({
     profile: {
@@ -53,8 +35,6 @@ const props = defineProps({
         default: true
     }
 });
-
-const i18n = useI18n();
 </script>
 
 <style scoped lang="scss">
@@ -107,37 +87,8 @@ const i18n = useI18n();
             }
         }
 
-        .inline {
+        .pf-roles {
             margin-block-start: 0.2em;
-
-            .state {
-                &.normal {
-                    color: colors.$pf-state-normal;
-                }
-                &.banned {
-                    color: colors.$pf-state-banned;
-                }
-                &.unverified {
-                    color: colors.$pf-state-unverified;
-                }
-            }
-
-            .role {
-                &.user {
-                    color: colors.$pf-role-user;
-                }
-                &.verifier {
-                    color: colors.$pf-role-verifier;
-                }
-                &.admin {
-                    color: colors.$pf-role-admin;
-                }
-            }
-
-            .separator {
-                margin-inline: 0.5em;
-                user-select: none;
-            }
         }
     }
 }

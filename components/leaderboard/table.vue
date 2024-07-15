@@ -6,10 +6,6 @@
                     <th>
                         {{ $t('leaderboard.header.lbRank') }}
                     </th>
-                    <!--
-                        TODO: Make a PlayerLink component and a profile page,
-                        and replace the below element with the PlayerLink component.
-                    -->
                     <th>
                         {{ $t('leaderboard.header.player') }}
                     </th>
@@ -101,13 +97,7 @@ export default defineNuxtComponent({
             loading.value = true;
 
             recordSchema.value = RECORD_SCHEMAS[props.gameMode];
-            // submissions.value = await database.getSubmissionsByGameMode(
-            //     props.gameMode,
-            //     props.validity,
-            //     props.limit + 1,
-            //     props.offset,
-            //     recordSchema.value.order
-            // );
+            
             const { data } = await useFetch('/api/fetch-leaderboard', {
                 query: {
                     gameMode: props.gameMode,

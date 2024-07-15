@@ -1,7 +1,7 @@
 <template>
     <div class="avy">
         <ProfileFallbackAvatar
-            :profileId="props.profile.id"
+            :profile-id="props.profileId"
             aria-hidden="true"
         />
         <img
@@ -13,18 +13,16 @@
 </template>
 
 <script lang="ts" setup>
-import { type Profile } from '~/assets/types/database';
-
 const props = defineProps({
-    profile: {
-        type: Object as PropType<Profile>,
+    profileId: {
+        type: String,
         required: true
     }
 });
 
 const database = useDatabase();
 
-const avatarUrl = database.getAvatarUrlByUserId(props.profile.id);
+const avatarUrl = database.getAvatarUrlByUserId(props.profileId);
 </script>
 
 <style scoped lang="scss">
