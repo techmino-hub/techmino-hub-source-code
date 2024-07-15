@@ -37,9 +37,9 @@
                     <td>
                         {{ index + 1 + offset }}
                     </td>
-                    <td>
-                        {{ submission.submitted_by }}
-                    </td>
+                    <ProfileLink
+                        :profile="submission.submitted_by"
+                    />
                     <td v-for="column in recordSchema.entries" :key="column.name">
                         {{ localeScore(submission.score, column.name) }}
                     </td>

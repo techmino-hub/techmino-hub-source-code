@@ -13,11 +13,38 @@
 import type { Profile } from '~/assets/types/database';
 
 const props = defineProps({
+    /**
+     * The profile to link to.  
+     * This can be a Profile itself or one's ID.  
+     * If an ID is provided, the Profile object will be fetched from the database.
+     */
     profile: {
-        type: Object as PropType<Profile>,
-        required: true
+        type: Object as PropType<Profile | string>,
+        required: true,
     }
 });
+
+let profile: Profile;
+
+if (typeof props.profile === 'string') {
+    const { data, error } = await useFetch(`/api/fetch-profile`, {
+        query: {
+            uuid: props.profile
+        }
+    });
+
+    if (error.value) {
+        throw error.value;
+    }
+
+    if(data.value) {
+        profile = data.value.profile;
+    } else {
+        throw new Error(`Profile with ID ${props.profile} not found.`);
+    }
+} else {
+    profile = props.profile;
+}
 </script>
 
 <style scoped lang="scss">
