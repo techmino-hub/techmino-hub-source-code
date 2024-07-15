@@ -67,7 +67,7 @@ if (typeof props.profile === 'string') {
         transition-delay: 150ms;
     }
 
-    &:has(:hover) .popup {
+    &:has(a.link:hover) .popup {
         opacity: 1;
         transition-delay: 600ms;
     }
