@@ -9,7 +9,9 @@ export default {
       map: "Map",
       signIn: "Sign In",
       signOut: "Sign Out",
-      settings: "Settings"
+      settings: "Settings",
+      rules: "Site Rules",
+      privacy: "Privacy Policy",
     },
     footer: {
       text: `md_**Techmino Hub**  

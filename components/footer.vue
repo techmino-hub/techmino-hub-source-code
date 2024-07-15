@@ -7,8 +7,18 @@ const localePath = useLocalePath();
   <footer>
     <div class="left" v-html="$t('common.footer.text')"></div>
     <span class="right">
-        <NuxtLink :to="localePath('/language')">{{ getChar('icon.language') + ' ' + $t('common.footer.lang') }}</NuxtLink>
-        <NuxtLink :to="localePath('/settings')">{{ $t('common.nav.settings') }}</NuxtLink>
+        <NuxtLinkLocale to="/rules">
+            {{ $t('common.nav.rules') }}
+        </NuxtLinkLocale>
+        <NuxtLinkLocale to="/privacy">
+            {{ $t('common.nav.privacy') }}
+        </NuxtLinkLocale>
+        <NuxtLinkLocale to="/language">
+            {{ getChar('icon.language') + ' ' + $t('common.footer.lang') }}
+        </NuxtLinkLocale>
+        <NuxtLinkLocale to="/settings">
+            {{ $t('common.nav.settings') }}
+        </NuxtLinkLocale>
         <a href="https://discord.gg/f9pUvkh">Discord</a>
     </span>
   </footer>
@@ -60,6 +70,7 @@ footer {
     .right {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         gap: 1em;
         align-items: center;
     }
