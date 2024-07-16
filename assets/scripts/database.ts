@@ -174,6 +174,7 @@ export class DBWrapper {
             .from(Table.Submissions)
             .select('*')
             .eq('submitted_by', userId)
+            .eq('validity', SubmissionValidity.Verified)
             .order('upload_date', { ascending: order === 'OldestFirst' })
             .range(offset, offset + limit - 1);
 

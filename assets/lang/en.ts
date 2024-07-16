@@ -2915,6 +2915,8 @@ We do not expect there to be any cookies used on this site, but just to make sur
       player: "Player",
       date: "Replay Date",
       submitDate: "Submit Date",
+      details: "Details",
+      mode: "Game Mode"
     },
     scoreDisp: {
       efficiency: ({ named }) => {

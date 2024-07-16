@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getChar } from '~/assets/chars';
+import { getChar } from '~/assets/scripts/chars';
 import { Tag } from '~/assets/types/faq';
 
 const props = defineProps({

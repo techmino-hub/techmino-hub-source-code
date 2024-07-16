@@ -1,16 +1,10 @@
 <template>
-    <div class="lb-outer">
+    <div class="pf-sub">
         <table v-show="!loading">
             <thead>
                 <tr>
                     <th>
-                        {{ $t('leaderboard.header.lbRank') }}
-                    </th>
-                    <th>
-                        {{ $t('leaderboard.header.player') }}
-                    </th>
-                    <th v-for="column in recordSchema.entries" :key="column.name">
-                        {{ $t(`leaderboard.header.${column.name}`) }}
+                        {{ $t('leaderboard.header.mode') }}
                     </th>
                     <th>
                         {{ $t('leaderboard.header.date') }}
@@ -31,23 +25,9 @@
                 </tr>
                 <tr
                   v-for="(submission, index) in submissions.slice(0, limit)"
-                  :key="submission.id"
-                  :class="{
-                    'valid': submission.validity === 'Verified',
-                    'index-1': index + 1 + offset === 1,
-                    'index-2': index + 1 + offset === 2,
-                    'index-3': index + 1 + offset === 3
-                  }">
+                  :key="submission.id">
                     <td>
-                        {{ index + 1 + offset }}
-                    </td>
-                    <td>
-                        <ProfileLink
-                            :profile="submission.submitted_by"
-                        />
-                    </td>
-                    <td v-for="column in recordSchema.entries" :key="column.name">
-                        {{ localeScore(submission.score, column.name) }}
+                        {{ submission.game_mode }}
                     </td>
                     <td>
                         {{ new Date(submission.replay_date).toLocaleString() }}
@@ -64,6 +44,28 @@
                 </tr>
             </tbody>
         </table>
+        <div class="offset-info">
+            <button
+              class="prev hide-noscript"
+              type="button"
+              :disabled="offset === 0"
+              @click="offset = Math.max(offset - limit, 0)">
+                {{ $t('leaderboard.pagePrev') }}
+            </button>
+            <span>
+                {{ $t('leaderboard.entryNumber', {
+                    start: offset + 1,
+                    end: offset + limit
+                }) }}
+            </span>
+            <button
+              class="next hide-noscript"
+              type="button"
+              :disabled="isLastPage"
+              @click="offset += limit">
+                {{ $t('leaderboard.pageNext') }}
+            </button>
+        </div>
         <p class="loading-text" v-show="loading">
             {{ $t('leaderboard.loading') }}
         </p>
@@ -71,27 +73,17 @@
 </template>
 
 <script lang="ts" setup>
-import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
-import { SubmissionValidity, type Submission } from '~/assets/types/database';
-import type { RecordSchema, TableOrder } from '~/assets/types/record';
 import { getChar } from '~/assets/scripts/chars';
+import type { Submission } from '~/assets/types/database';
 
 const props = defineProps({
-    gameMode: {
+    userId: {
         type: String,
         required: true
-    },
-    validity: {
-        type: String as PropType<SubmissionValidity>,
-        default: SubmissionValidity.Verified
     },
     limit: {
         type: Number,
         default: 10
-    },
-    offset: {
-        type: Number,
-        default: 0
     }
 });
 
@@ -99,25 +91,17 @@ const emit = defineEmits(['load']);
 
 const loading = ref(true);
 const submissions: Ref<Submission[]> = ref([]);
-const recordSchema: Ref<RecordSchema> = ref(RECORD_SCHEMAS[props.gameMode]);
-
-if(!recordSchema.value) {
-    throw new Error(`Record schema for game mode ${props.gameMode} not found.`);
-}
-
-const i18n = useI18n();
-
+const offset = ref(0);
+const isLastPage = ref(true);
+    
 watchEffect(async () => {
     loading.value = true;
 
-    recordSchema.value = RECORD_SCHEMAS[props.gameMode];
-    
-    const { data } = await useFetch('/api/fetch-leaderboard', {
+    const { data } = await useFetch('/api/fetch-profile-submissions', {
         query: {
-            gameMode: props.gameMode,
-            validity: props.validity,
-            limit: props.limit,
-            offset: props.offset
+            id: props.userId,
+            limit: props.limit + 1,
+            offset
         }
     });
 
@@ -127,25 +111,12 @@ watchEffect(async () => {
         submissions.value = data.value.entries;
     }
 
-    emit('load', submissions.value);
+    isLastPage.value = submissions.value.length <= props.limit;
 
     loading.value = false;
 });
 
-function localeScore(score: any, column: string) {
-    if(!score || !score[column]) {
-        return i18n.t('leaderboard.null');
-    }
-
-    if(!i18n.te(`leaderboard.scoreDisp.${column}`)) {
-        return score[column];
-    }
-
-    return i18n.t(
-        `leaderboard.scoreDisp.${column}`,
-        { value: score[column] }
-    );
-}
+emit('load', submissions.value);
 </script>
 
 <style scoped lang="scss">
@@ -194,6 +165,60 @@ table {
 
     .no-records {
         font-style: italic;
+    }
+}
+
+.offset-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1em;
+
+    > * {
+        margin-inline: auto;
+    }
+
+    button, a {
+        color: colors.$btn-border-color;
+        padding: 0.25em 1em;
+        border: 0.1em none transparent;
+        border-radius: 0.5em;
+        background-color: transparent;
+        font-family: 'techmino-proportional';
+        text-decoration: none;
+        font-size: 1.1em;
+        cursor: pointer;
+        transition: 250ms color, 250ms transform;
+
+        &:hover:not([disabled]) {
+            text-shadow: 0 0 0.1ch colors.$btn-hover-border-color;
+            color: colors.$btn-hover-border-color;
+            
+            @media (prefers-reduced-motion: no-preference) {
+                transform: scale(1.026);
+
+                &.prev {
+                    transform: translateX(-0.62ch);
+                }
+
+                &.next {
+                    transform: translateX(0.62ch);
+                }
+            }
+        }
+
+        &:active:not([disabled]) {
+            text-shadow: 0 0 0.1ch colors.$btn-active-border-color;
+            color: colors.$btn-active-border-color;
+        }
+
+        &[disabled] {
+            color: colors.$btn-disabled-color;
+            background-color: colors.$btn-disabled-bg-color;
+            border: 0.1em solid colors.$btn-disabled-border-color;
+            cursor: not-allowed;
+        }
     }
 }
 

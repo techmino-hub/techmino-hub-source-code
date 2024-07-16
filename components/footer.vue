@@ -1,5 +1,5 @@
 <script setup>
-import { getChar } from '~/assets/chars';
+import { getChar } from '~/assets/scripts/chars';
 const localePath = useLocalePath();
 </script>
 

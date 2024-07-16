@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FAQEntry, Tag } from '~/assets/types/faq';
-import { getChar } from '~/assets/chars';
+import { getChar } from '~/assets/scripts/chars';
 
 const props = defineProps({
     entry: {

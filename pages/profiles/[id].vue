@@ -24,7 +24,13 @@
             </div>
         </section>
         <section>
-            <!-- TODO: Add "latest submissions" table -->
+            <h1>
+                {{ $t('profile.section.latestSubmissions') }}
+            </h1>
+            <br>
+            <ProfileSubmissions
+                :user-id="profile.id"
+            />
         </section>
     </div>
 </template>
@@ -56,7 +62,11 @@ const profile = data.value.profile;
 @use '~/assets/scss/colors';
 
 .page-outer {
+    display: flex;
+    flex-direction: column;
     padding: 2em 2em;
+    gap: 2em;
+    font-family: 'techmino-proportional';
 }
 
 .top {
@@ -64,6 +74,12 @@ const profile = data.value.profile;
     flex-direction: row;
     justify-content: start;
     gap: 3ch;
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5em;
+    }
 
     > div.avy {
         flex-grow: 0;
@@ -76,12 +92,12 @@ const profile = data.value.profile;
         width: stretch;
         gap: 0.5em;
     }
+}
 
-    h1 {
-        font-size: 2em;
-        margin-block: 0;
-        padding-block-end: 0.25em;
-        border-block-end: 0.026em solid colors.$pf-page-name-underline-color;
-    }
+h1 {
+    font-size: 2em;
+    margin-block: 0;
+    padding-block-end: 0.25em;
+    border-block-end: 0.026em solid colors.$pf-page-name-underline-color;
 }
 </style>
