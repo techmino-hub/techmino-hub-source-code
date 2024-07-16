@@ -3037,6 +3037,29 @@ We do not expect there to be any cookies used on this site, but just to make sur
       Administrator: "Administrator"
     }
   },
+  submission: {
+    tabTitle: "Submission for {mode} - Techmino Hub",
+    title: "Submission Information",
+    loading: "Loading...",
+    fields: {
+      author: "Submitted by {0}",
+      gameMode: "Game mode: {0}",
+      score: "{0}: {1}",
+      replayDate: "Played on {0}",
+      uploadDate: "Uploaded on {0}",
+      replayData: "Replay string: {0}",
+      proof: "Additional proof was provided by the submitter: {0}"
+    },
+    validityInfo: {
+      Unverified: "This submission has not been verified.",
+      Verified: "This submission has been checked and was found to be legitimate.",
+      Suspicious: "This submission has been checked and may be illegitimate.",
+      Rejected: "This submission has been deemed illegitimate by verifiers.",
+      'Tool-assisted': "This submission is a Tool-Assisted Superplay and is not comparable to human runs."
+    },
+    copyReplay: "Copy replay",
+    replayCopied: "Replay copied!"
+  },
   rules: `md_
 # Site Rules
 By making an account on this site, you agree to the rules below.

@@ -56,7 +56,6 @@ if (typeof props.profile === 'string') {
 
     a.link {
         color: colors.$tertiary-color;
-
     }
 
     .popup {
