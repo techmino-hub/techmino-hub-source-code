@@ -70,6 +70,7 @@ header {
 
     @media (max-width: 700px) {
         flex-direction: column;
+        align-items: center;
     }
 
     > a {
@@ -123,7 +124,6 @@ header {
 
         @media (max-width: 700px) {
             width: fit-content;
-            align-self: start;
             padding: 0.2em 0.5em;
             gap: 0.5em;
             row-gap: 0.5em;
