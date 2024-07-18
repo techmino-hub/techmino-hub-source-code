@@ -14,8 +14,8 @@ export default {
       privacy: "Privacy Policy",
     },
     footer: {
-      text: `md_**Techmino Hub**  
-        Created with ❤ by [the Techmino community](https://github.com/techmino-hub/techmino-hub-source-code)`,
+      text: `md_**Techmino Hub** - {commit}  
+Created with ❤ by [the Techmino community](https://github.com/techmino-hub/techmino-hub-source-code)`,
       lang: "Language"
     }
   },

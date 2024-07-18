@@ -1,11 +1,14 @@
 <script setup>
 import { getChar } from '~/assets/scripts/chars';
-const localePath = useLocalePath();
+const commitHash =
+    process.env.VERCEL_GIT_COMMIT_SHA ?
+    process.env.VERCEL_GIT_COMMIT_SHA.slice(0, 8) :
+    'dev build';
 </script>
 
 <template>
   <footer>
-    <div class="left" v-html="$t('common.footer.text')"></div>
+    <div class="left" v-html="$t('common.footer.text', { commit: commitHash })"></div>
     <span class="right">
         <NuxtLinkLocale to="/rules">
             {{ $t('common.nav.rules') }}
