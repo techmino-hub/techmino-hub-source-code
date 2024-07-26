@@ -1,6 +1,6 @@
 import pako from 'pako';
 import { Buffer } from 'buffer';
-import { type GameReplayData } from '~/assets/types/replay';
+import { InputEventType, type GameReplayData } from '~/assets/types/replay';
 
 /**
  * Decompresses a replay.  
@@ -113,7 +113,7 @@ export async function parseReplay(replayBuf: [Buffer, Buffer]): Promise<GameRepl
 
         (replayData as GameReplayData).inputs.push({
             frame: frame,
-            type: eventKey > 32 ? "Release" : "Press",
+            type: eventKey > 32 ? InputEventType.Release : InputEventType.Press,
             key: eventKey % 32
         });
     }

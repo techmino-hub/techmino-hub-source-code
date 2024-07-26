@@ -4,7 +4,7 @@
  * This should be what you get from parsing the `replay_data` field in the `public.replays` table.
  */
 export type GameReplayData = {
-    inputs: InputData[];
+    inputs: GameInputEvent[];
     tasUsed?: boolean;
     player: string;
     seed: number;
@@ -50,10 +50,16 @@ export type GameReplayData = {
 }
 
 /** Represents a single input event in a replay. */
-export type InputData = {
+export type GameInputEvent = {
     frame: number;
-    type: "Press" | "Release";
+    type: InputEventType;
     key: InputKey;
+}
+
+/** Represents the kind of input event. */
+export enum InputEventType {
+    Press = 0,
+    Release = 1
 }
 
 /** Represents the input button of an input event. */
