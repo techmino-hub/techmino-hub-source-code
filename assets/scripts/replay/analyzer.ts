@@ -145,6 +145,102 @@ export function getReplayKeyDurationStats(
 }
 
 /**
+ * Gets a player's input fingerprint from their keypress durations.  
+ * The format of the input fingerprint is as follows:  
+ * - Each input type is represented by four possibly-hexadecimal characters.
+ * - If an input type was not pressed in the entire replay, it will become "----".
+ * - The four characters represent the following:
+ *   - The first two represent the mean keypress duration, in 1/16ths of a frame, in hexadecimal.
+ *   - The third and fourth represents the standard deviation of keypress durations, in 1/16ths of a frame, in hexadecimal.
+ * - The values are rounded to the nearest 1/16th of a frame.
+ * - If the mean/standard deviation is too large to fit in two hexadecimal characters, it will be clamped to FF.
+ * 
+ * For instance, if a player's input fingerprint starts with "6A2B", it means that:
+ * - The mean keypress duration is approximately 0x6A * 1/16 frames, or 0x6A / 16 frames.  
+ *   This is approximately 6.625 frames.
+ * - The standard deviation of keypress durations is approximately 0x2B * 1/16 frames, or 0x2B / 16 frames.
+ *   This is approximately 2.8125 frames.
+ * 
+ * "Depending on the control scheme and finger layout of the player, 
+ * they are expected to have a consistent range of these lengths per in-game key
+ * across all of their relevant gameplay, as this is exactly what defines their
+ * physical playstyle or footprint."  
+ * \- [mat1jaczyyy, et al.](https://docs.google.com/document/d/1bfQFBUv85jFLSLyiyCotMBU19xeUtQb3wUEas7Zfq_Y/edit?pli=1#heading=h.qkx6lor7ba5t)
+ */
+export function getInputFingerprint(inputStats: KeyDurationStats): string {
+    let fingerprint = "";
+
+    for(const key of Object.values(InputKey) as InputKey[]) {
+        const stats = inputStats[key];
+
+        if(stats.presses === 0) {
+            fingerprint += "----";
+            continue;
+        }
+
+        const mean =
+            Math.min(
+                Math.round(
+                    stats.totalDuration / stats.presses * 16
+                ),
+                0xFF
+            );
+
+        const stdDev =
+            Math.min(
+                Math.round(
+                    stats.standardDeviation * 16
+                ),
+                0xFF
+            );
+        
+        fingerprint += mean.toString(16).padStart(2, "0");
+        fingerprint += stdDev.toString(16).padStart(2, "0");
+    }
+
+    return fingerprint;
+}
+
+/**
+ * Gets how similar two input fingerprints are to each other.  
+ * 1 means the fingerprints are identical, and lower values mean they are less similar.  
+ */
+export function getFingerprintSimilarity(fingerprint1: string, fingerprint2: string): number {
+    const similarities = [];
+
+    for(const key of Object.values(InputKey) as InputKey[]) {
+        const index = key * 4;
+
+        if(
+            fingerprint1.charAt(index) === "-" ||
+            fingerprint2.charAt(index) === "-"
+        ) {
+            continue;
+        }
+
+        const mean1 = parseInt(fingerprint1.slice(index, index + 2), 16);
+        const stdDev1 = parseInt(fingerprint1.slice(index + 2, index + 4), 16);
+        const mean2 = parseInt(fingerprint2.slice(index, index + 2), 16);
+        const stdDev2 = parseInt(fingerprint2.slice(index + 2, index + 4), 16);
+
+        const maxMean = Math.max(mean1, mean2, 1e-3);
+        const maxStdDev = Math.max(stdDev1, stdDev2, 1e-3);
+
+        const meanSimilarity = 1 - Math.abs(mean1 - mean2) / maxMean;
+        const stdDevSimilarity = 1 - Math.abs(stdDev1 - stdDev2) / maxStdDev;
+
+        similarities.push(meanSimilarity * stdDevSimilarity);
+    }
+
+    let similarity = 1;
+    for(const sim of similarities) {
+        similarity *= sim;
+    }
+
+    return similarity;
+}
+
+/**
  * Get the length of a replay in frames.
  * @param replayData The replay data to analyze.
  * @returns The length of the replay in frames.
