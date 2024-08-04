@@ -3058,7 +3058,67 @@ We do not expect there to be any cookies used on this site, but just to make sur
       'Tool-assisted': "This submission is a Tool-Assisted Superplay and is not comparable to human runs."
     },
     copyReplay: "Copy replay",
-    replayCopied: "Replay copied!"
+    replayCopied: "Replay copied!",
+    analysis: {
+      title: "Replay Analysis",
+      inputGraph: {
+        title: "Input Length Graph",
+        xAxis: "Input Type",
+        yAxis: "Input Length",
+        label: {
+          0: "?",
+          1: "L",
+          2: "R",
+          3: "CW",
+          4: "CCW",
+          5: "180",
+          6: "HD",
+          7: "SD",
+          8: "Hold",
+          9: "F1",
+          10: "F2",
+          11: "IL",
+          12: "IR",
+          13: "SnD",
+          14: "D1",
+          15: "D4",
+          16: "D10",
+          17: "LD",
+          18: "RD",
+          19: "LZ",
+          20: "RZ"
+        },
+        labelLong: {
+          0: "(invalid)",
+          1: "Move Left",
+          2: "Move Right",
+          3: "Rotate Clockwise",
+          4: "Rotate Counterclockwise",
+          5: "Rotate 180",
+          6: "Hard Drop",
+          7: "Soft Drop",
+          8: "Hold",
+          9: "Function 1",
+          10: "Function 2",
+          11: "Instant Left",
+          12: "Instant Right",
+          13: "Sonic Drop",
+          14: "Down 1",
+          15: "Down 4",
+          16: "Down 10",
+          17: "Left Drop",
+          18: "Right Drop",
+          19: "Left Zangi",
+          20: "Right Zangi"
+        }
+      }
+    },
+    actions: {
+      title: "Actions",
+      edit: "Edit Submission",
+      validate: "Validate or Reject",
+      delete: "Delete Submission",
+    }
   },
   rules: `md_
 # Site Rules

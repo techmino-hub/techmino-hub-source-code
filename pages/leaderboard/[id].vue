@@ -95,20 +95,31 @@
                 </i18n-t>
             </aside>
         </div>
+        <div class="bottom hide-noscript">
+            <SubmissionAnalysis
+                v-if="'replay_data' in submission"
+                :replay-data="submission.replay_data"
+            />
+            <SubmissionActions :submission="submission" />
+        </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import { SAMPLE_SUBMISSIONS_WITH_REPLAYS } from '~/assets/scripts/samples'; // DEBUG
 import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
 import { getModeI18nString } from '~/assets/scripts/modes';
-import type { Submission, SubmissionWithReplay } from '~/assets/types/database';
+import { AccountState, Role, type Profile, type Submission, type SubmissionWithReplay } from '~/assets/types/database';
 
+const database = useDatabase();
 const route = useRoute();
 const i18n = useI18n();
 const id = route.params.id;
 
 const copyBlocked = ref(false);
 const copyText = ref(i18n.t('submission.copyReplay'));
+const user = await database.getUserRef();
+const profile: Ref<Profile | null> = ref(null);
 
 const { data } = await useFetch('/api/fetch-submission', {
     query: {
@@ -118,6 +129,8 @@ const { data } = await useFetch('/api/fetch-submission', {
 });
 
 const submission = data.value?.data as Submission | SubmissionWithReplay;
+
+// const submission = SAMPLE_SUBMISSIONS_WITH_REPLAYS[0] as Submission | SubmissionWithReplay; // DEBUG
 
 if(!submission) {
     throw new Error('Submission not found');
@@ -136,6 +149,32 @@ function copyReplay() {
         }, 1500);
     }
 }
+
+const isModActionPanelVisible = ref(false);
+
+onMounted(async () => {
+    if(!user.value) {
+        isModActionPanelVisible.value = false;
+        return;
+    }
+
+    profile.value = await database.getProfileById(user.value.id);
+
+    if(profile.value.account_state !== AccountState.Normal) {
+        isModActionPanelVisible.value = false;
+        return;
+    }
+
+    if(user.value.id === submission.submitted_by) {
+        isModActionPanelVisible.value = true;
+        return;
+    }
+
+    if(profile.value.role === Role.Admin || profile.value.role === Role.Verifier) {
+        isModActionPanelVisible.value = true;
+        return;
+    }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -223,5 +262,13 @@ aside {
     button {
         margin-block-start: 0.75em;
     }
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2ch;
 }
 </style>

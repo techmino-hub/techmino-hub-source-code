@@ -121,6 +121,17 @@ export async function parseReplay(replayBuf: [Buffer, Buffer]): Promise<GameRepl
     return replayData as GameReplayData;
 }
 
+/**
+ * Decompresses and parses a replay from a base64-encoded string.
+ * @param replayStr The base64-encoded replay string.
+ * @returns The replay data.
+ */
+export async function parseReplayFromRepString(replayStr: string): Promise<GameReplayData> {
+    const repBuf = Buffer.from(replayStr, "base64");
+    const decompressed = await decompressReplay(repBuf);
+    return await parseReplay(decompressed);
+}
+
 if(window) {
     (window as any).TechminoReplayParser = {
         decompressReplay,
