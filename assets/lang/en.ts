@@ -614,7 +614,8 @@ It will not be implemented in the “Classic” Techmino.`,
     noArticle: "Article unavailable",
     featuredVideo: "Featured video: {0}",
     lagWarnPre: "Lagging? ",
-    lagWarnLink: "Lite version",
+    mobileWarnPre: "On mobile? ",
+    liteLink: "Lite version",
     impossibleRankReq: "(impossible)",
   },
   mapLite: {
@@ -2193,6 +2194,19 @@ It will not be implemented in the “Classic” Techmino.`,
       ],
       difficulty: "Very Tricky",
       length: "Short (3 min)"
+    },
+    spinren: {
+      title: "Spin Combo",
+      subtitle: "EFFICIENCY",
+      description: "Spike in a blink",
+      rankReqs: [
+        "Clear 10 lines",
+        "3 atk/line (~1.2 APP)",
+        "6 atk/line (~2.4 APP)",
+        "8 atk/line (~3.2 APP)",
+        "9 atk/line (~3.6 APP)",
+        "10 atk/line (~4.0 APP)"
+      ]
     },
     zen: {
       title: "Zen",

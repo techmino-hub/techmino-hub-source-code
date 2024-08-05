@@ -16,7 +16,11 @@
         <pre class="debug" v-show="debugMode" v-text="debugText"></pre>
         <div class="lag-warn" v-show="showLagMessage">
             <span v-t="'map.lagWarnPre'"></span>
-            <NuxtLink :to="localePath('/map-lite')" v-t="'map.lagWarnLink'" />
+            <NuxtLinkLocale to='/map-lite' v-t="'map.liteLink'" />
+        </div>
+        <div class="lag-warn mobile" v-show="!showLagMessage">
+            <span v-t="'map.mobileWarnPre'"></span>
+            <NuxtLinkLocale to='/map-lite' v-t="'map.liteLink'" />
         </div>
         <svg class="crosshair" viewBox="0 0 10 10" v-show="showCrosshair">
             <line x1="0" y1="5" x2="10" y2="5" />
@@ -802,6 +806,14 @@ onMounted(mountedHook);
     text-align: center;
     color: orange;
     font-size: 1.5em;
+
+    &.mobile {
+        display: none;
+
+        @media (max-aspect-ratio: 1/1) {
+            display: block;
+        }
+    }
 
     a {
         color: colors.$btn-border-color;
