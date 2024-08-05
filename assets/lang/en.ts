@@ -3075,35 +3075,14 @@ We do not expect there to be any cookies used on this site, but just to make sur
     replayCopied: "Replay copied!",
     analysis: {
       title: "Replay Analysis",
+      parsed: "Parsed replay data: {0}",
+      fingerprint: "Replay input fingerprint: {0}",
+      fingerprintDesc: "Input fingerprints are determined by the mean and standard deviation of the lengths of each input type.",
+      noCanvas: "Your browser does not support canvases.",
       inputGraph: {
         title: "Input Length Graph",
-        xAxis: "Input Type",
-        yAxis: "Input Length",
         label: {
-          0: "?",
-          1: "L",
-          2: "R",
-          3: "CW",
-          4: "CCW",
-          5: "180",
-          6: "HD",
-          7: "SD",
-          8: "Hold",
-          9: "F1",
-          10: "F2",
-          11: "IL",
-          12: "IR",
-          13: "SnD",
-          14: "D1",
-          15: "D4",
-          16: "D10",
-          17: "LD",
-          18: "RD",
-          19: "LZ",
-          20: "RZ"
-        },
-        labelLong: {
-          0: "(invalid)",
+          0: "All",
           1: "Move Left",
           2: "Move Right",
           3: "Rotate Clockwise",
@@ -3125,13 +3104,22 @@ We do not expect there to be any cookies used on this site, but just to make sur
           19: "Left Zangi",
           20: "Right Zangi"
         }
+      },
+      kpsGraph: {
+        title: "Keypress Rate Graph",
+        xAxis: "Replay time",
+        yAxis: "Keys per second"
       }
     },
     actions: {
       title: "Actions",
-      edit: "Edit Submission",
-      validate: "Validate or Reject",
-      delete: "Delete Submission",
+      edit: "Edit",
+      validate: "Set validity",
+      validateFailed: "Failed to set validity: {error}",
+      delete: "Delete submission",
+      deleteConfirm: "Click again to DELETE",
+      deleteFailed: "Failed to delete submission: {error}",
+      deleteSuccess: "Successfully deleted submission",
     }
   },
   rules: `md_

@@ -42,8 +42,9 @@ export type KeyDurationStats = {
 function getEmptyKeyDurationStats(): KeyDurationStats {
     let partial: Partial<KeyDurationStats> = {};
 
-    for(const key of Object.values(InputKey) as InputKey[]) {
-        partial[key] = {
+    for(const key of Object.values(InputKey)) {
+        if(isNaN(Number(key))) continue;
+        partial[key as InputKey] = {
             durations: {},
             presses: 0,
             min: Infinity,
@@ -94,10 +95,13 @@ export function getReplayKeyDurationStats(
     }
 
     // Process inputs for additional statistics
-    for(const key of Object.values(InputKey) as InputKey[]) {
+    for(let key of Object.values(InputKey)) {
+        if(isNaN(Number(key))) continue; // filter out enum names
+        key = key as InputKey;
+
         // Calculate the 25th, 50th (median), and 75th percentiles
         {
-            const durations = Object.keys(keyDurationStats[key]) as unknown as number[];
+            const durations = Object.keys(keyDurationStats[key].durations).map(Number);
 
             if(durations.length === 0) continue;
 
@@ -105,28 +109,71 @@ export function getReplayKeyDurationStats(
 
             const totalPresses = keyDurationStats[key].presses;
             const percentile25Index = Math.floor(totalPresses * 0.25);
+            const medianIndex = Math.floor(totalPresses * 0.5);
             const percentile75Index = Math.floor(totalPresses * 0.75);
             let currentPressIndex = 0;
 
-            for(const duration of durations) {
-                currentPressIndex += keyDurationStats[key].durations[duration] ?? 0;
+            let percentile25Set = false;
+            let medianSet = false;
+            let percentile75Set = false
 
-                if(currentPressIndex >= percentile25Index) {
-                    keyDurationStats[key].percentile25 = duration;
+            for(const duration of durations) {
+                const durationInstances = keyDurationStats[key].durations[duration] ?? 0;
+                const nextPressIndex = currentPressIndex + durationInstances;
+
+                if(
+                    !percentile25Set &&
+                    nextPressIndex >= percentile25Index
+                ) {
+                    // 25th percentile is between duration and duration+1
+                    // We'll use linear interpolation to estimate the 25th percentile if the duration isn't the max
+                    const fractional =
+                        duration !== keyDurationStats[key].max ?
+                        (percentile25Index - currentPressIndex) / durationInstances :
+                        0;
+
+                    keyDurationStats[key].percentile25 = duration + fractional;
+                    percentile25Set = true;
                 }
 
-                if(currentPressIndex >= percentile75Index) {
-                    keyDurationStats[key].percentile75 = duration;
+                if(
+                    !medianSet &&
+                    nextPressIndex >= medianIndex
+                ) {
+                    // Median is between duration and duration+1
+                    // We'll use linear interpolation to estimate the median if the duration isn't the max
+                    const fractional =
+                        duration !== keyDurationStats[key].max ?
+                        (medianIndex - currentPressIndex) / durationInstances :
+                        0;
+
+                    keyDurationStats[key].median = duration + fractional;
+                    medianSet = true;
+                }
+
+                if(
+                    !percentile75Set &&
+                    nextPressIndex >= percentile75Index
+                ) {
+                    // 75th percentile is between duration and duration+1
+                    // We'll use linear interpolation to estimate the 75th percentile if the duration isn't the max
+                    const fractional =
+                        duration !== keyDurationStats[key].max ?
+                        (percentile75Index - currentPressIndex) / durationInstances :
+                        0;
+
+                    keyDurationStats[key].percentile75 = duration + fractional;
+                    percentile75Set = true;
                     break;
                 }
-            }
 
-            keyDurationStats[key].median = durations[Math.floor(durations.length / 2)];
+                currentPressIndex = nextPressIndex;
+            }
         }
 
         // Calculate the standard deviation
         {
-            const durations = Object.keys(keyDurationStats[key]) as unknown as number[];
+            const durations = Object.keys(keyDurationStats[key].durations).map(Number);
 
             if(durations.length === 0) continue;
 
@@ -170,8 +217,10 @@ export function getReplayKeyDurationStats(
 export function getInputFingerprint(inputStats: KeyDurationStats): string {
     let fingerprint = "";
 
-    for(const key of Object.values(InputKey) as InputKey[]) {
-        const stats = inputStats[key];
+    for(const key of Object.values(InputKey)) {
+        if(isNaN(Number(key))) continue; // filter out enum names
+
+        const stats = inputStats[key as InputKey];
 
         if(stats.presses === 0) {
             fingerprint += "----";
@@ -206,7 +255,7 @@ export function getInputFingerprint(inputStats: KeyDurationStats): string {
  * 1 means the fingerprints are identical, and lower values mean they are less similar.  
  */
 export function getFingerprintSimilarity(fingerprint1: string, fingerprint2: string): number {
-    const similarities = [];
+    const similarities: number[] = [];
 
     for(const key of Object.values(InputKey) as InputKey[]) {
         const index = key * 4;
@@ -274,6 +323,76 @@ export function getReplayKps(replayData: GameReplayData) {
 
     const lengthSeconds = lengthFrames / 60;
     return keyPresses / lengthSeconds;
+}
+
+/**
+ * Get the short-term keypresses per second (KPS) of a replay.  
+ * Each entry counts the keypresses in `(is-k) < t < (is)`,  
+ * where `t` is time, `i` is the index, `s` is the step, and `k` is the keep.  
+ * @param replayData The parsed replay data to analyze.
+ * @param filter
+ * Which input key should be counted.  
+ * If undefined, all keys will count.
+ * @param step
+ * How long between each entry in the returned list, in frames.  
+ * @param keep
+ * How long to remember old inputs for, in frames.  
+ * If it's too low, you may see sharp valleys in the returned dataset when chokes occur.  
+ * If it's too high, recent spikes/chokes won't affect the dataset as much.
+ */
+export function getReplayLocalKps(replayData: GameReplayData, filter?: InputKey, step = 1, keep = 180) {
+    const replayLength = getReplayLength(replayData);
+    const totalEntries = replayLength / step;
+
+    const kpsData = [];
+    let startIndex = 0;
+    let endIndex = 0;
+
+    // Sliding window
+    for(let i = 0; i < totalEntries; i++) {
+        const high = i * step;
+        const low = high - keep;
+
+        while(replayData.inputs[startIndex].frame < low) {
+            startIndex++;
+        }
+
+        endIndex = Math.max(endIndex, startIndex);
+
+        while(replayData.inputs[endIndex].frame <= high) {
+            endIndex++;
+        }
+
+        let keyPresses = 0;
+
+        for(let j = startIndex; j < endIndex; j++) {
+            if(
+                replayData.inputs[j].type === InputEventType.Press &&
+                (filter === undefined || replayData.inputs[j].key === filter)
+            ) {
+                keyPresses++;
+            }
+        }
+
+        const effectiveKeep = Math.min(keep, high + 1);
+        kpsData.push(keyPresses / effectiveKeep * 60);
+    }
+
+    return kpsData;
+}
+
+/**
+ * Gets an array of keys used in the replay.
+ * @param replayData The replay data to analyze.
+ */
+export function getUsedKeys(replayData: GameReplayData) {
+    let usedKeys = new Set<InputKey>();
+
+    for(const input of replayData.inputs) {
+        usedKeys.add(input.key);
+    }
+
+    return Array.from(usedKeys).sort((a, b) => a - b);
 }
 
 /**

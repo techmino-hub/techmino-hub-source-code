@@ -106,7 +106,6 @@
 </template>
 
 <script lang="ts" setup>
-import { SAMPLE_SUBMISSIONS_WITH_REPLAYS } from '~/assets/scripts/samples'; // DEBUG
 import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
 import { getModeI18nString } from '~/assets/scripts/modes';
 import { AccountState, Role, type Profile, type Submission, type SubmissionWithReplay } from '~/assets/types/database';
@@ -129,8 +128,6 @@ const { data } = await useFetch('/api/fetch-submission', {
 });
 
 const submission = data.value?.data as Submission | SubmissionWithReplay;
-
-// const submission = SAMPLE_SUBMISSIONS_WITH_REPLAYS[0] as Submission | SubmissionWithReplay; // DEBUG
 
 if(!submission) {
     throw new Error('Submission not found');
@@ -188,7 +185,7 @@ onMounted(async () => {
 div.content {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-gap: 2em;
+    gap: 2em;
 
     @media (max-width: 900px) {
         display: flex;
