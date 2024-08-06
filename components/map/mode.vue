@@ -89,6 +89,7 @@ defineEmits(['click']);
     --border-color: #{colors.$mode-border};
     pointer-events: none;
     user-select: none;
+    transition: transform 100ms;
 
     &.rank-B { --bg-color: #{colors.$mode-bg-b}; }
     &.rank-A { --bg-color: #{colors.$mode-bg-a}; }
@@ -158,6 +159,5 @@ defineEmits(['click']);
         transform: scale(1.062);
     }
 
-    transition: transform 100ms;
 }
 </style>

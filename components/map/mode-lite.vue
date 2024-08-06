@@ -82,6 +82,7 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
     --border-color: #{colors.$mode-border};
     user-select: none;
     overflow: visible;
+    transition: transform 100ms;
 
     &.rank-B { --bg-color: #{colors.$mode-bg-b}; }
     &.rank-A { --bg-color: #{colors.$mode-bg-a}; }
@@ -156,6 +157,5 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
         margin: auto;
     }
 
-    transition: transform 100ms;
 }
 </style>
