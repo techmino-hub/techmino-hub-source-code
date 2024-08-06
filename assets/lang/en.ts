@@ -4,14 +4,20 @@ export default {
   common: {
     appName: "Techmino Hub",
     nav: {
+      section: {
+        pages: "Pages",
+        account: "Account",
+      },
       home: "Home",
       faq: "FAQ",
       map: "Map",
+      profile: "View Profile",
       signIn: "Sign In",
       signOut: "Sign Out",
       settings: "Settings",
       rules: "Site Rules",
       privacy: "Privacy Policy",
+      close: "Close",
     },
     footer: {
       text: `md_**Techmino Hub** - {commit}  
@@ -3037,11 +3043,12 @@ We do not expect there to be any cookies used on this site, but just to make sur
   },
   profile: {
     tabTitle: "{username}'s Profile - Techmino Hub",
+    avy: "Avatar",
     section: {
       latestSubmissions: "Latest Submissions"
     },
     state: {
-      Normal: "Normal",
+      Normal: "Good standing",
       Banned: "Banned",
       Unverified: "Unverified"
     },

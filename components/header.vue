@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { getChar } from '~/assets/scripts/chars';
 const localePath = useLocalePath();
 const router = useRouter();
 const database = useDatabase();
@@ -12,6 +13,8 @@ async function signOut() {
         console.error(error);
     }
 }
+
+const navExpanded = ref(false);
 </script>
 
 <template>
@@ -19,34 +22,94 @@ async function signOut() {
         <NuxtLink :to="localePath('/')">
             <h1 v-html="$t('common.appName')"></h1>
         </NuxtLink>
-        <nav>
-            <NuxtLink
-                :to="localePath('/')"
+        <button class="hamburger" @click="navExpanded = !navExpanded">
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+            <div aria-hidden="true"></div>
+        </button>
+        <nav class="desktop">
+            <NuxtLinkLocale
+                to="/"
                 class="hide-no-error"
                 v-thtml="$t('common.nav.home')"
             />
-            <NuxtLink
-                :to="localePath('/faq')"
+            <NuxtLinkLocale
+                to="/faq"
                 class="hide-error"
                 v-thtml="$t('common.nav.faq')"
             />
-            <NuxtLink
-                :to="localePath('/map')"
+            <NuxtLinkLocale
+                to="/map"
                 class="hide-error"
                 v-thtml="$t('common.nav.map')"
             />
-            <NuxtLink
-                :to="localePath('/sign-in')"
+            <NuxtLinkLocale
+                to="/sign-in"
                 class="hide-noscript hide-error"
-                v-show="!user"
+                v-if="!user"
                 v-thtml="$t('common.nav.signIn')"
             />
-            <button
+            <ProfileAvatar
                 class="hide-noscript hide-error"
-                v-show="user"
-                @click="signOut()"
-                v-thtml="$t('common.nav.signOut')"
-            ></button>
+                v-if="user"
+                :profile-id="user.id"
+            />
+            <!-- TODO: account actions dropdown -->
+        </nav>
+        <nav :class="{ mobile: true, expand: navExpanded }">
+            <div class="row">
+                <button class="close" @click="navExpanded = !navExpanded">
+                    {{ getChar('icon.cross_thick') }}
+                </button>
+                <ProfileAvatar
+                    class="avy hide-noscript hide-error"
+                    v-if="user"
+                    :profile-id="user.id"
+                />
+                <div v-if="!user">
+                    <!--
+                        I don't know why but v-else would break stuff here
+                        so I'm using v-if instead.
+
+                        Div intentionally left blank to keep the layout
+                    -->
+                </div>
+            </div>
+            <section>
+                <em>{{ $t('common.nav.section.pages') }}</em>
+                <NuxtLinkLocale
+                    to="/"
+                    v-thtml="$t('common.nav.home')"
+                />
+                <NuxtLinkLocale
+                    to="/faq"
+                    v-thtml="$t('common.nav.faq')"
+                />
+                <NuxtLinkLocale
+                    to="/map"
+                    v-thtml="$t('common.nav.map')"
+                />
+            </section>
+            <section class="hide-noscript">
+                <em>{{ $t('common.nav.section.account') }}</em>
+                <NuxtLinkLocale
+                    to="/sign-in"
+                    v-show="!user"
+                    v-thtml="$t('common.nav.signIn')"
+                />
+                <!-- FIXME: link goes to undefined -->
+                <NuxtLinkLocale
+                    :to="`/profile/${user?.id}`"
+                    v-show="user"
+                    v-thtml="$t('common.nav.profile')"
+                />
+                <button
+                  type="button"
+                  v-show="user"
+                  @click="signOut">
+                    {{ $t('common.nav.signOut') }}
+                </button>
+            </section>
         </nav>
     </header>
 </template>
@@ -66,11 +129,20 @@ header {
     @media (min-width: 700px) {
         border-start-start-radius: 0.5em;
         border-start-end-radius: 0.5em;
+
+        button.hamburger, nav.mobile {
+            display: none;
+        }
     }
 
     @media (max-width: 700px) {
-        flex-direction: column;
-        align-items: center;
+        nav.desktop {
+            display: none !important;
+        }
+
+        button.hamburger, nav.mobile {
+            display: flex;
+        }
     }
 
     > a {
@@ -111,7 +183,7 @@ header {
         }
     }
 
-    nav {
+    nav.desktop {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -130,7 +202,7 @@ header {
             font-size: 1.3em;
         }
 
-        > * {
+        > a {
             position: relative;
             text-decoration: none;
             color: colors.$primary-color;
@@ -158,6 +230,148 @@ header {
                 color: colors.$primary-color;
                 border: 0.15em dashed colors.$primary-color-dark;
             }
+        }
+    }
+
+    nav.mobile {
+        flex-direction: column;
+        justify-content: start;
+        text-align: start;
+
+        position: fixed;
+        top: 0; left: 100vw;
+        padding: 0.5em 1em;
+        gap: 1em;
+        
+        box-sizing: border-box;
+        min-width: min-content;
+        width: 62.6vw;
+        height: 100vh;
+        z-index: 2;
+        
+        overflow: auto;  
+        background-color: colors.$secondary-color-darker;
+        
+        transform: translateX(0);
+        transition: transform 250ms;
+
+        &.expand {
+            transform: translateX(-100%);
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+
+            button {
+                width: 2em;
+                height: 2em;
+                box-sizing: border-box;
+                font-family: 'techmino-proportional';
+                background-color: transparent;
+                color: white;
+                font-size: 1.1em;
+                border: 0.05em solid transparent;
+                border-radius: 50%;
+                cursor: pointer;
+                user-select: none;
+                transition: background-color 200ms, border-color 200ms;
+
+                &:hover {
+                    background-color: #fff2;
+                    border-color: #fff4;
+                }
+
+                &:active {
+                    background-color: #fff4;
+                    border-color: #fff6;
+                }
+            }
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        em {
+            font-weight: bold;
+            border-block-end: 0.025em solid currentColor;
+            margin-block-end: 0.5em;
+        }
+
+        a, button {
+            box-sizing: border-box;
+            width: 100%;
+            text-align: start;
+            color: white;
+            margin: 0;
+            padding: 0.25em 0.5em;
+            font-weight: light;
+            text-decoration: none;
+            border: 0.1em solid transparent;
+            border-radius: 0.5em;
+            background-color: transparent;
+            cursor: pointer;
+            font-family: 'techmino-proportional';
+            font-size: 1em;
+            -webkit-user-drag: none;
+            transition: background-color 200ms, border-color 200ms;
+
+            &:hover {
+                border-color: #fff2;
+            }
+
+            &:active {
+                background-color: #fff1;
+                border-color: #fff4;
+            }
+        }
+    }
+
+    button.hamburger {
+        $thickness: 0.125em;
+
+        flex-direction: column;
+        justify-content: space-around;
+        width: 3.5em;
+        height: 3.5em;
+        padding: 0.75em;
+        margin-block: auto;
+        border: 0.1em solid transparent;
+        border-radius: 0.5em;
+        background-color: transparent;
+        cursor: pointer;
+        transition: background-color 200ms, border-color 200ms;
+
+        &:hover {
+            background-color: #fff2;
+            border-color: #fff4;
+        }
+
+        &:active {
+            background-color: #fff4;
+            border-color: #fff6;
+        }
+
+        > div {
+            width: 100%;
+            height: $thickness;
+            background-color: white;
+            border-radius: $thickness;
+        }
+    }
+
+    .avy {
+        position: relative;
+        width: 2em;
+        height: 2em;
+        border-radius: 50%;
+
+        :deep(*) {
+            font-size: 1em;
         }
     }
 }

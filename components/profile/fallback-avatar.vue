@@ -23,7 +23,7 @@ for (let i = 0; i < props.profileId.length; i++) {
 hash = Math.abs(hash); // in case of overflow
 hash %= 29;
 
-const codePoint = 0xF0058;
+const codePoint = 0xF0040 + hash;
 const highSurrogate = 0xD800 + ((codePoint - 0x10000) >> 10);
 const lowSurrogate = 0xDC00 + ((codePoint - 0x10000) & 0x3FF);
 const char = String.fromCharCode(highSurrogate, lowSurrogate);
@@ -40,6 +40,8 @@ const char = String.fromCharCode(highSurrogate, lowSurrogate);
     user-select: none;
     pointer-events: none;
     caret-color: transparent;
+    background-color: black;
+    color: white;
 
     div {
         display: block;
