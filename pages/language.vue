@@ -28,7 +28,7 @@ function setLanguage(event: Event) {
                 <li v-for="locale in availableLocales">
                     <NuxtLinkLocale to="/language" :locale="locale">
                         {{ langNameMap[locale] ?? locale }}
-                    </NuxtLink>
+                    </NuxtLinkLocale>
                 </li>
             </menu>
         </noscript>
