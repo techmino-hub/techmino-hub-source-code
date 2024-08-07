@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { User } from '@supabase/supabase-js';
 import { getChar } from '~/assets/scripts/chars';
-const localePath = useLocalePath();
 const router = useRouter();
 const database = useDatabase();
 
-const user = await database.getUserRef();
+const user: Ref<User | null> = ref(null);
 
 async function signOut() {
     const { error } = await database.supabase.auth.signOut();
@@ -15,13 +15,17 @@ async function signOut() {
 }
 
 const navExpanded = ref(false);
+
+onMounted(async function() {
+    user.value = (await database.supabase.auth.getUser()).data.user;
+})
 </script>
 
 <template>
     <header>
-        <NuxtLink :to="localePath('/')">
+        <NuxtLinkLocale to="/">
             <h1 v-html="$t('common.appName')"></h1>
-        </NuxtLink>
+        </NuxtLinkLocale>
         <button class="hamburger" @click="navExpanded = !navExpanded">
             <div aria-hidden="true"></div>
             <div aria-hidden="true"></div>

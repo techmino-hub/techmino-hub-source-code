@@ -33,18 +33,6 @@ export class DBWrapper {
         this.userRef = ref(null);
     }
 
-    async getUserRef() {
-        if(!this.userRef.value) {
-            this.userRef.value = (await this.supabase.auth.getUser()).data.user;
-
-            this.supabase.auth.onAuthStateChange((_, session) => {
-                this.userRef.value = session?.user ?? null;
-            });
-        }
-
-        return this.userRef;
-    }
-
     // #region Profiles
 
     /** @throws {PostgrestError} */
