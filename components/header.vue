@@ -47,18 +47,41 @@ onMounted(async function() {
                 class="hide-error"
                 v-thtml="$t('common.nav.map')"
             />
-            <NuxtLinkLocale
-                to="/sign-in"
-                class="hide-noscript hide-error"
-                v-if="!user"
-                v-thtml="$t('common.nav.signIn')"
-            />
-            <ProfileAvatar
-                class="hide-noscript hide-error"
-                v-if="user"
-                :profile-id="user.id"
-            />
-            <!-- TODO: account actions dropdown -->
+            <ClientOnly>
+                <NuxtLinkLocale
+                    to="/sign-in"
+                    class="hide-noscript hide-error"
+                    v-if="!user"
+                    v-thtml="$t('common.nav.signIn')"
+                />
+                <div class="avy-wrapper">
+                    <ProfileAvatar
+                        class="avy hide-noscript hide-error"
+                        v-if="user"
+                        @click="navExpanded = !navExpanded"
+                        :profile-id="user.id"
+                    />
+                    <div
+                      v-if="user"
+                      :class="{'acc-drop': true, show: navExpanded}">
+                        <NuxtLinkLocale
+                            :to="`/profiles/${user?.id}`"
+                            v-if="user"
+                            v-thtml="$t('common.nav.profile')"
+                        />
+                        <NuxtLinkLocale
+                            to="/account/settings"
+                            v-show="user"
+                            v-thtml="$t('common.nav.settings')"
+                        ></NuxtLinkLocale>
+                        <button
+                            v-show="user"
+                            @click="signOut">
+                            {{ $t('common.nav.signOut') }}
+                        </button>
+                    </div>
+                </div>
+            </ClientOnly>
         </nav>
         <nav :class="{ mobile: true, expand: navExpanded }">
             <div class="row">
@@ -101,12 +124,18 @@ onMounted(async function() {
                     v-show="!user"
                     v-thtml="$t('common.nav.signIn')"
                 />
-                <!-- FIXME: link goes to undefined -->
+                <ClientOnly>
+                    <NuxtLinkLocale
+                        :to="`/profiles/${user?.id}`"
+                        v-show="user"
+                        v-thtml="$t('common.nav.profile')"
+                    />
+                </ClientOnly>
                 <NuxtLinkLocale
-                    :to="`/profile/${user?.id}`"
+                    to="/account/settings"
                     v-show="user"
-                    v-thtml="$t('common.nav.profile')"
-                />
+                    v-thtml="$t('common.nav.settings')"
+                ></NuxtLinkLocale>
                 <button
                   type="button"
                   v-show="user"
@@ -235,6 +264,62 @@ header {
                 border: 0.15em dashed colors.$primary-color-dark;
             }
         }
+    }
+
+    .avy-wrapper {
+        position: relative;
+    }
+
+    .acc-drop {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        min-width: fit-content;
+        gap: 0.25em;
+        top: calc(100% + 1em);
+        right: -1em;
+        left: -16ch;
+        z-index: 2;
+        background-color: colors.$secondary-color-darker;
+        border-radius: 1em;
+        padding: 0.75em;
+        opacity: 0;
+        transform: translateY(-1em);
+        transition: opacity 250ms, transform 250ms;
+
+        a, button {
+            box-sizing: border-box;
+            width: 100%;
+            text-align: start;
+            color: white;
+            margin: 0;
+            padding: 0.25em 0.5em;
+            font-weight: light;
+            text-decoration: none;
+            border: 0.1em solid transparent;
+            border-radius: 0.5em;
+            background-color: transparent;
+            cursor: pointer;
+            font-family: 'techmino-proportional';
+            font-size: 1em;
+            -webkit-user-drag: none;
+            transition: background-color 200ms, border-color 200ms;
+
+            &:hover {
+                background-color: #fff2;
+                border-color: #fff4;
+            }
+
+            &:active {
+                background-color: #fff4;
+                border-color: #fff6;
+            }
+        }
+    }
+
+    .acc-drop.show {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     nav.mobile {
@@ -377,6 +462,10 @@ header {
         :deep(*) {
             font-size: 1em;
         }
+    }
+
+    .desktop .avy {
+        cursor: pointer;
     }
 }
 </style>
