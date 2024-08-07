@@ -41,6 +41,7 @@ function setLanguage(event: Event) {
 .page {
     width: fit-content;
     margin-inline: auto;
+    padding-block: 2em;
 
     form {
         display: flex;

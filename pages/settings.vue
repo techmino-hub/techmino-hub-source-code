@@ -65,6 +65,7 @@ onMounted(init);
                 {{ $t('settings.save') }}
             </button>
         </form>
+        <p class="center-text hide-noscript">{{ $t('settings.note') }}</p>
         <noscript>
             <h1>{{ $t('settings.noscriptWarn') }}</h1>
         </noscript>

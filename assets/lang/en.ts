@@ -40,9 +40,10 @@ Created with ❤ by [the Techmino community](https://github.com/techmino-hub/tec
   },
 
   settings: {
-    tabTitle: "Settings - Techmino Hub",
-    title: "Settings",
+    tabTitle: "Site Settings - Techmino Hub",
+    title: "Site Settings",
     loading: "Loading...",
+    note: "These settings are stored locally in your browser.",
     settings: {
       bgEnabled: "Enable background",
       bgSpeed: "Background animation speed"
@@ -3057,6 +3058,19 @@ We do not expect there to be any cookies used on this site, but just to make sur
       Verifier: "Verifier",
       Administrator: "Administrator"
     }
+  },
+  account: {
+    tabTitle: "Account - Techmino Hub",
+    title: "Account Settings",
+    noscriptWarn: "You cannot change your account settings with JavaScript disabled.",
+    loading: "Loading...",
+    loggedOut: "You need to be logged in to change your account settings.",
+    stateBanned: "You cannot change your account settings while banned.",
+    stateUnverified: "You cannot change your account settings before you're verified.",
+    setAvatar: "Set Avatar",
+    setBio: "Set Bio",
+    username: "Username",
+    bio: "Bio",
   },
   submission: {
     tabTitle: "Submission for {mode} - Techmino Hub",
