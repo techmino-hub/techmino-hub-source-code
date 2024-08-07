@@ -106,6 +106,7 @@
 </template>
 
 <script lang="ts" setup>
+import type { User } from '@supabase/supabase-js';
 import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
 import { getModeI18nString } from '~/assets/scripts/modes';
 import { AccountState, Role, type Profile, type Submission, type SubmissionWithReplay } from '~/assets/types/database';
@@ -117,7 +118,7 @@ const id = route.params.id;
 
 const copyBlocked = ref(false);
 const copyText = ref(i18n.t('submission.copyReplay'));
-const user = await database.getUserRef();
+const user: Ref<User | null> = ref(null);
 const profile: Ref<Profile | null> = ref(null);
 
 const { data } = await useFetch('/api/fetch-submission', {
@@ -150,6 +151,8 @@ function copyReplay() {
 const isModActionPanelVisible = ref(false);
 
 onMounted(async () => {
+    user.value = (await database.supabase.auth.getUser()).data.user;
+
     if(!user.value) {
         isModActionPanelVisible.value = false;
         return;
