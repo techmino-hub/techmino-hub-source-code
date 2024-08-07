@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { langNameMap } from '~/assets/types/lang';
-const { locale: curLocale, availableLocales, setLocale, setLocaleCookie } = useI18n();
-const localePath = useLocalePath();
+const { locale: curLocale, availableLocales, setLocale } = useI18n();
 
 function setLanguage(event: Event) {
     const language: string = (event.target as HTMLFormElement).language.value;
@@ -27,7 +26,7 @@ function setLanguage(event: Event) {
         <noscript>
             <menu>
                 <li v-for="locale in availableLocales">
-                    <NuxtLink :to="localePath('/language', locale)">
+                    <NuxtLinkLocale to="/language" :locale="locale">
                         {{ langNameMap[locale] ?? locale }}
                     </NuxtLink>
                 </li>
