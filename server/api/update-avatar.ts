@@ -97,26 +97,6 @@ export default defineEventHandler(async (event) => {
     }
 
     const blob = dataUrlToBlob(avatar);
-    const arr = dataUrlToUInt8Array(avatar);
-
-    const tf = await import("@tensorflow/tfjs-node");
-    tf.enableProdMode();
-    const tensor = tf.node.decodeImage(arr, 3);
-    
-    const model = await (await import("nsfwjs")).load("/data/nsfwjs/mobilenet_v2/model.json");
-    
-    const prediction = (await model.classify(tensor))
-        .reduce((a, b) =>
-            a.probability > b.probability ? a : b
-        );
-
-    if(!["Neutral", "Drawing"].includes(prediction.className)) {
-        throw createError({
-            statusCode: 400,
-            statusMessage: `Invalid parameter 'avatar': NSFW content detected (${prediction.className} - ${prediction.probability}% confidence). Please try another image.`
-        });
-    }
-
     const file = new File([blob], `${user}.png`, { type: 'image/png' });
 
     if(file.size > 512 * 1024) {

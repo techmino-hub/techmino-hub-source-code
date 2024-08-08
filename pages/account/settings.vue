@@ -154,6 +154,13 @@ async function submit() {
 
     if(avatarSet.value) {
         try {
+            const session = (await database.supabase.auth.getSession()).data.session;
+            if(!session) {
+                console.error("No session found. Are you logged in?");
+                alert(i18n.t('account.errAvy'));
+                return;
+            }
+
             fetch('/api/update-avatar', {
                 method: 'POST',
                 headers: {
@@ -163,10 +170,10 @@ async function submit() {
                     user: user.value.id,
                     avatar: imgPath.value,
                     // scary!
-                    access_token: (await database.supabase.auth.getSession()).access_token,
+                    access_token: session.access_token,
                     refresh_token:
-                        (await database.supabase.auth.getSession()).provider_refresh_token ||
-                        (await database.supabase.auth.getSession()).refresh_token,
+                        session.provider_refresh_token ||
+                        session.refresh_token,
                 }),
             });
         } catch (e) {
