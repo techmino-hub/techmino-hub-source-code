@@ -104,6 +104,7 @@ function handleFileChange(event: Event) {
         const reader = new FileReader();
         reader.onload = (e) => {
             imgPath.value = e.target?.result as string;
+            
         };
         reader.readAsDataURL(file);
     }
@@ -113,7 +114,6 @@ function submit() {
     if(!user.value || !profile.value) return;
 
     if(avatar.value) {
-        database.updateAvatar(user.value.id, avatar.value);
     }
 }
 </script>
