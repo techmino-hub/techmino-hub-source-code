@@ -3074,6 +3074,7 @@ We do not expect there to be any cookies used on this site, but just to make sur
     bioPlaceholder: "Write a short bio about yourself...",
     errNotLoaded: "You set your avatar a little too early. Please try again after the page has fully loaded.",
     errAvy: "An error occurred while uploading your avatar. More details can be found in the console.",
+    avyTooSmall: "To help users stay safe, we require avatars to be at least 32 KB in size.",
     avyTooBig: "Your avatar is too big. Please upload an image that is 512 KB or smaller.",
     errProfile: "An error occurred while updating your profile. More details can be found in the console.",
     nsfwWarn: "We detected inappropriate content in your avatar. This is against the rules. Please change it into something more appropriate.",

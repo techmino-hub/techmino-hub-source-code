@@ -115,6 +115,11 @@ function handleFileChange(event: Event) {
             return;
         }
 
+        if(file.size < 32 * 1024) {
+            alert(i18n.t('account.avyTooSmall'));
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = async (e) => {
             const link = e.target?.result as string;
