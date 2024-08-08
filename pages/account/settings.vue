@@ -53,8 +53,9 @@
                 </div>
             </div>
             <button
-              type="submit"
-              @submit.prevent="submit">
+              class="web-btn"
+              type="button"
+              @click="submit">
                 {{ $t('account.save') }}
             </button>
         </form>
@@ -81,7 +82,7 @@ const imgPath = ref<string>('');
 
 const fileInput = ref<HTMLInputElement | null>(null);
 
-const avatar = ref<File | null>(null);
+const avatarSet = ref<boolean>(false);
 const username = ref<string>('');
 const bio = ref<string>('');
 
@@ -108,6 +109,12 @@ function handleFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
     if(target.files && target.files[0]) {
         const file = target.files[0];
+
+        if(file.size > 512 * 1024) {
+            alert(i18n.t('account.avyTooBig'));
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = async (e) => {
             const link = e.target?.result as string;
@@ -135,17 +142,49 @@ function handleFileChange(event: Event) {
                 return;
             }
 
+            avatarSet.value = true;
             imgPath.value = link;
-            avatar.value = file;
         };
         reader.readAsDataURL(file);
     }
 }
 
-function submit() {
+async function submit() {
     if(!user.value || !profile.value) return;
 
-    if(avatar.value) {
+    if(avatarSet.value) {
+        try {
+            fetch('/api/update-avatar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user: user.value.id,
+                    avatar: imgPath.value,
+                    // scary!
+                    access_token: (await database.supabase.auth.getSession()).access_token,
+                    refresh_token:
+                        (await database.supabase.auth.getSession()).provider_refresh_token ||
+                        (await database.supabase.auth.getSession()).refresh_token,
+                }),
+            });
+        } catch (e) {
+            console.error(e);
+            alert(i18n.t('account.errAvy'));
+            return;
+        }
+    }
+
+    try {
+        await database.editProfile(user.value.id, {
+            username: username.value,
+            bio: bio.value,
+        });
+    } catch (e) {
+        console.error(e);
+        alert(i18n.t('account.errProfile'));
+        return;
     }
 }
 </script>
