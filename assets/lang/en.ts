@@ -3071,6 +3071,8 @@ We do not expect there to be any cookies used on this site, but just to make sur
     username: "Username",
     bio: "Bio",
     bioPlaceholder: "Write a short bio about yourself...",
+    errNotLoaded: "You set your avatar a little too early. Please try again after the page has fully loaded.",
+    nsfwWarn: "We detected inappropriate content in your avatar. This is against the rules. Please change it into something more appropriate.",
   },
   submission: {
     tabTitle: "Submission for {mode} - Techmino Hub",
