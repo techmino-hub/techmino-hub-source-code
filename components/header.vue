@@ -70,7 +70,7 @@ onMounted(async function() {
                         />
                         <NuxtLinkLocale
                             to="/account/settings"
-                            v-thtml="$t('common.nav.settings')"
+                            v-thtml="$t('common.nav.account')"
                         ></NuxtLinkLocale>
                         <button @click="signOut">
                             {{ $t('common.nav.signOut') }}

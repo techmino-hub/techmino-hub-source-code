@@ -15,6 +15,7 @@ export default {
       signIn: "Sign In",
       signOut: "Sign Out",
       settings: "Settings",
+      account: "Your Account",
       rules: "Site Rules",
       privacy: "Privacy Policy",
       close: "Close",
