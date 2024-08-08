@@ -12,7 +12,7 @@
         <div v-else-if="profile.account_state !== AccountState.Normal">
             {{ $t(`account.state${profile.account_state}`) }}
         </div>
-        <div v-else class="content">
+        <form v-else class="content">
             <div class="inputs">
                 <div class="avy-changer">
                     <label for="avatar">{{ $t('account.changeAvy') }}</label>
@@ -53,11 +53,12 @@
                 </div>
             </div>
             <button
+              class="web-btn"
               type="button"
               @click="submit">
                 {{ $t('account.save') }}
             </button>
-        </div>
+        </form>
     </ClientOnly>
     <noscript>
         {{ $t('account.noscriptWarn') }}
@@ -68,8 +69,12 @@
 <script lang="ts" setup>
 import { type User } from '@supabase/supabase-js';
 import { AccountState, type Profile } from '~/assets/types/database';
+import * as nsfwjs from 'nsfwjs';
 
 const database = useDatabase();
+const i18n = useI18n();
+let nsfwModel: nsfwjs.NSFWJS | null = null;
+
 const user = ref<User | null>(null);
 const profile = ref<Profile | null>(null);
 const loading = ref<boolean>(true);
@@ -77,7 +82,7 @@ const imgPath = ref<string>('');
 
 const fileInput = ref<HTMLInputElement | null>(null);
 
-const avatar = ref<File | null>(null);
+const avatarSet = ref<boolean>(false);
 const username = ref<string>('');
 const bio = ref<string>('');
 
@@ -93,27 +98,100 @@ onMounted(async function() {
         bio.value = profile.value.bio;
     }
 
+    nsfwModel = await nsfwjs.load("/data/nsfwjs/mobilenet_v2/model.json");
+
     loading.value = false;
 });
+
+const SAFE_CLASSES = [ "Neutral", "Drawing" ];
 
 function handleFileChange(event: Event) {
     const target = event.target as HTMLInputElement;
     if(target.files && target.files[0]) {
         const file = target.files[0];
-        avatar.value = file;
+
+        if(file.size > 512 * 1024) {
+            alert(i18n.t('account.avyTooBig'));
+            return;
+        }
+
         const reader = new FileReader();
-        reader.onload = (e) => {
-            imgPath.value = e.target?.result as string;
-            
+        reader.onload = async (e) => {
+            const link = e.target?.result as string;
+
+            const img = new Image();
+            img.src = link;
+
+            // wait for image to load
+            await new Promise((resolve) => {
+                img.onload = resolve;
+            });
+
+            if(!nsfwModel) {
+                alert(i18n.t('account.errNotLoaded'));
+                return;
+            }
+
+            const predictions = await nsfwModel.classify(img);
+            const prediction = predictions.reduce((prev, current) => {
+                return current.probability > prev.probability ? current : prev;
+            });
+
+            if(!SAFE_CLASSES.includes(prediction.className)) {
+                alert(i18n.t('account.nsfwWarn'));
+                return;
+            }
+
+            avatarSet.value = true;
+            imgPath.value = link;
         };
         reader.readAsDataURL(file);
     }
 }
 
-function submit() {
+async function submit() {
     if(!user.value || !profile.value) return;
 
-    if(avatar.value) {
+    if(avatarSet.value) {
+        try {
+            const session = (await database.supabase.auth.getSession()).data.session;
+            if(!session) {
+                console.error("No session found. Are you logged in?");
+                alert(i18n.t('account.errAvy'));
+                return;
+            }
+
+            fetch('/api/update-avatar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user: user.value.id,
+                    avatar: imgPath.value,
+                    // scary!
+                    access_token: session.access_token,
+                    refresh_token:
+                        session.provider_refresh_token ||
+                        session.refresh_token,
+                }),
+            });
+        } catch (e) {
+            console.error(e);
+            alert(i18n.t('account.errAvy'));
+            return;
+        }
+    }
+
+    try {
+        await database.editProfile(user.value.id, {
+            username: username.value,
+            bio: bio.value,
+        });
+    } catch (e) {
+        console.error(e);
+        alert(i18n.t('account.errProfile'));
+        return;
     }
 }
 </script>

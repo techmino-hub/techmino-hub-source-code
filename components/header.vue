@@ -54,29 +54,25 @@ onMounted(async function() {
                     v-if="!user"
                     v-thtml="$t('common.nav.signIn')"
                 />
-                <div class="avy-wrapper">
+                <div class="avy-wrapper" v-if="user">
                     <ProfileAvatar
                         class="avy hide-noscript hide-error"
-                        v-if="user"
                         @click="navExpanded = !navExpanded"
                         :profile-id="user.id"
                     />
-                    <div
-                      v-if="user"
-                      :class="{'acc-drop': true, show: navExpanded}">
+                    <div :class="{
+                      'acc-drop': true,
+                      show: navExpanded
+                    }">
                         <NuxtLinkLocale
                             :to="`/profiles/${user?.id}`"
-                            v-if="user"
                             v-thtml="$t('common.nav.profile')"
                         />
                         <NuxtLinkLocale
                             to="/account/settings"
-                            v-show="user"
                             v-thtml="$t('common.nav.settings')"
                         ></NuxtLinkLocale>
-                        <button
-                            v-show="user"
-                            @click="signOut">
+                        <button @click="signOut">
                             {{ $t('common.nav.signOut') }}
                         </button>
                     </div>
