@@ -3067,10 +3067,10 @@ We do not expect there to be any cookies used on this site, but just to make sur
     loggedOut: "You need to be logged in to change your account settings.",
     stateBanned: "You cannot change your account settings while banned.",
     stateUnverified: "You cannot change your account settings before you're verified.",
-    setAvatar: "Set Avatar",
-    setBio: "Set Bio",
+    changeAvy: "Change avatar",
     username: "Username",
     bio: "Bio",
+    bioPlaceholder: "Write a short bio about yourself...",
   },
   submission: {
     tabTitle: "Submission for {mode} - Techmino Hub",

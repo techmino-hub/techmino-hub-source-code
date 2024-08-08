@@ -275,19 +275,6 @@ export class DBWrapper {
     }
 
     /** @throws {PostgrestError} */
-    async updateAvatar(userId: string, newAvatar: File) {
-        const { data, error } = await this.supabase
-            .storage
-            .from('avatars')
-            .upload(userId, newAvatar, {
-                upsert: true
-            });
-        
-        if(error) throw error;
-        return data;
-    }
-
-    /** @throws {PostgrestError} */
     async deleteAvatar(userId: string) {
         const { error } = await this.supabase
             .storage
