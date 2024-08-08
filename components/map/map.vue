@@ -183,7 +183,6 @@ import { SubmissionValidity } from '~/assets/types/database';
 import RECORD_SCHEMAS from '~/assets/data/record-schemas';
 
 const i18n = useI18n();
-const localePath = useLocalePath();
 
 const MOVE_SPEED_MULT = 0.462;
 const ZOOM_SPEED_MULT = 0.00262;

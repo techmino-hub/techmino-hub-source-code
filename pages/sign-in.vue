@@ -26,9 +26,6 @@
 import { type Provider } from '@supabase/supabase-js';
 import { useSupabase } from '~/composables/database';
 
-const localePath = useLocalePath();
-const router = useRouter();
-
 const supabase = useSupabase();
 
 const { data } = await supabase.auth.getUser();

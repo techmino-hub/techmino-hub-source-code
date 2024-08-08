@@ -14,8 +14,6 @@ let currentMap: string = 'vanilla';
     }
 }
 
-const localePath = useLocalePath();
-
 definePageMeta({
     layout: 'bg-only'
 })
@@ -26,7 +24,7 @@ definePageMeta({
         <Title>{{ $t('map.tabTitleFS') }}</Title>
         <Map :map="currentMap" class="map hide-noscript-important" :fullscreen="true" />
         <noscript>
-            <NuxtLink class="block-style center-text" :to="localePath('/map-lite')">{{ $t('map.htmlVersion') }}</NuxtLink>
+            <NuxtLinkLocale class="block-style center-text" to="/map-lite">{{ $t('map.htmlVersion') }}</NuxtLinkLocale>
         </noscript>
     </div>
 </template>

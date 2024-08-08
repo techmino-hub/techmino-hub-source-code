@@ -15,13 +15,12 @@ const props = defineProps({
     }
 });
 
-const localePath = useLocalePath();
 const localizedName = getModeI18nString(props.mode.name, useI18n().t);
 </script>
 
 <template>
-    <NuxtLink
-      :to="localePath(`/map-lite/${mode.name}`)"
+    <NuxtLinkLocale
+      :to="`/map-lite/${mode.name}`"
       :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]}`"
       :style="{
         left: mode.x - mode.size + 'px',
@@ -63,7 +62,7 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
         >
 
         <label>{{ localizedName }}</label>
-    </NuxtLink>
+    </NuxtLinkLocale>
 </template>
 
 <style scoped lang="scss">
@@ -82,6 +81,7 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
     --border-color: #{colors.$mode-border};
     user-select: none;
     overflow: visible;
+    transition: transform 100ms;
 
     &.rank-B { --bg-color: #{colors.$mode-bg-b}; }
     &.rank-A { --bg-color: #{colors.$mode-bg-a}; }
@@ -156,6 +156,5 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
         margin: auto;
     }
 
-    transition: transform 100ms;
 }
 </style>
