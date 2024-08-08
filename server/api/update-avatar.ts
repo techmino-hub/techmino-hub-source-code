@@ -1,5 +1,3 @@
-import * as nsfwjs from 'nsfwjs';
-import * as tf from '@tensorflow/tfjs-node';
 import { useSupabase } from '~/composables/database';
 
 /**
@@ -100,10 +98,12 @@ export default defineEventHandler(async (event) => {
 
     const blob = dataUrlToBlob(avatar);
     const arr = dataUrlToUInt8Array(avatar);
+
+    const tf = await import("@tensorflow/tfjs-node");
     tf.enableProdMode();
     const tensor = tf.node.decodeImage(arr, 3);
     
-    const model = await nsfwjs.load("/data/nsfwjs/mobilenet_v2/model.json");
+    const model = await (await import("nsfwjs")).load("/data/nsfwjs/mobilenet_v2/model.json");
     
     const prediction = (await model.classify(tensor))
         .reduce((a, b) =>
