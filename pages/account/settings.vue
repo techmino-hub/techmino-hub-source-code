@@ -68,6 +68,7 @@
 <script lang="ts" setup>
 import { type User } from '@supabase/supabase-js';
 import { AccountState, type Profile } from '~/assets/types/database';
+import * as nsfwjs from 'nsfwjs';
 
 const database = useDatabase();
 const user = ref<User | null>(null);

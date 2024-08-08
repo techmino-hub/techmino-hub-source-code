@@ -19,6 +19,7 @@
     "buffer": "^6.0.3",
     "chart.js": "^4.4.3",
     "markdown-it": "^14.1.0",
+    "nsfwjs": "^4.1.0",
     "nuxt": "^3.12.3",
     "pako": "^2.1.0",
     "sanitize-html": "^2.13.0",
