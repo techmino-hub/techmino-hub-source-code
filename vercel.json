@@ -1,0 +1,7 @@
+{
+    "functions": {
+        "server/api/update-avatar.*s": {
+            "excludeFiles": "node_modules/**"
+        }
+    }
+}
