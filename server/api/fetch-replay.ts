@@ -23,14 +23,14 @@ export default defineEventHandler(async(event) => {
     if(!query.id) {
         throw createError({
             statusCode: 400,
-            message: "Missing required parameter 'id' of type string"
+            statusMessage: "Missing required parameter 'id' of type string"
         });
     }
 
     if(typeof id !== 'string') {
         throw createError({
             statusCode: 400,
-            message: "Invalid parameter 'id': Expected type string"
+            statusMessage: "Invalid parameter 'id': Expected type string"
         });
     }
 
@@ -41,7 +41,7 @@ export default defineEventHandler(async(event) => {
     if(!replay) {
         throw createError({
             statusCode: 404,
-            message: "Submission not found"
+            statusMessage: "Submission not found"
         });
     }
 

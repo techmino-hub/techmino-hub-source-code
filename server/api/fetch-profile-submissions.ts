@@ -26,14 +26,14 @@ export default defineEventHandler(async (event) => {
     if (!id) {
         throw createError({
             statusCode: 400,
-            message: "Missing required parameter 'id' of type string"
+            statusMessage: "Missing required parameter 'id' of type string"
         });
     }
 
     if (typeof id !== 'string') {
         throw createError({
             statusCode: 400,
-            message: "Invalid parameter 'id': Expected type string"
+            statusMessage: "Invalid parameter 'id': Expected type string"
         });
     }
 
@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
         if (typeof reverseQuery !== 'boolean') {
             throw createError({
                 statusCode: 400,
-                message: "Invalid parameter 'reverse': Expected type boolean"
+                statusMessage: "Invalid parameter 'reverse': Expected type boolean"
             });
         }
 
@@ -60,14 +60,14 @@ export default defineEventHandler(async (event) => {
         if (typeof limitQuery !== 'number') {
             throw createError({
                 statusCode: 400,
-                message: "Invalid parameter 'limit': Expected type number"
+                statusMessage: "Invalid parameter 'limit': Expected type number"
             });
         }
 
         if(limitQuery > 100) {
             throw createError({
                 statusCode: 400,
-                message: "Invalid parameter 'limit': Must be less than or equal to 100"
+                statusMessage: "Invalid parameter 'limit': Must be less than or equal to 100"
             });
         }
 
@@ -82,14 +82,14 @@ export default defineEventHandler(async (event) => {
         if (typeof offsetQuery !== 'number') {
             throw createError({
                 statusCode: 400,
-                message: "Invalid parameter 'offset': Expected type number"
+                statusMessage: "Invalid parameter 'offset': Expected type number"
             });
         }
 
         if (offsetQuery < 0) {
             throw createError({
                 statusCode: 400,
-                message: "Invalid parameter 'offset': Must be greater than or equal to 0"
+                statusMessage: "Invalid parameter 'offset': Must be greater than or equal to 0"
             });
         }
 

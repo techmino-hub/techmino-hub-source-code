@@ -21,16 +21,28 @@ export default defineEventHandler(async (event) => {
     let id = query.id;
 
     if(!id) {
-        throw new Error("Missing required parameter 'id' of type string");
+        throw createError({
+            statusCode: 400,
+            statusMessage: "Missing required parameter 'id' of type string"
+        })
     }
     if(typeof id !== 'string') {
-        throw new Error("Invalid parameter 'id': Expected type string");
+        throw createError({
+            statusCode: 400,
+            statusMessage: "Invalid parameter 'id': Expected type string"
+        });
     }
     if(id.length > 256) {
-        throw new Error("Invalid parameter 'id': Exceeds maximum length of 256 characters");
+        throw createError({
+            statusCode: 400,
+            statusMessage: "Invalid parameter 'id': Exceeds maximum length of 256 characters"
+        });
     }
     if(id.includes('..') || id.includes('/') || id.includes('%')) {
-        throw new Error("Invalid parameter 'id': Cannot contain '..', '/', or '%'");
+        throw createError({
+            statusCode: 400,
+            statusMessage: "Invalid parameter 'id': Cannot contain '..', '/', or '%'"
+        });
     }
     if(!id.endsWith('.html')) {
         id += '.html';
@@ -42,13 +54,22 @@ export default defineEventHandler(async (event) => {
         const localeQuery = query.locale;
 
         if(typeof localeQuery !== 'string') {
-            throw new Error("Invalid parameter 'locale': Expected type string");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'locale': Expected type string"
+            });
         }
         if(localeQuery.length > 32) {
-            throw new Error("Invalid parameter 'locale': Exceeds maximum length of 32 characters");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'locale': Exceeds maximum length of 32 characters"
+            });
         }
         if(localeQuery.includes('..') || localeQuery.includes('/') || localeQuery.includes('%')) {
-            throw new Error("Invalid parameter 'locale': Cannot contain '..', '/', or '%'");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'locale': Cannot contain '..', '/', or '%'"
+            });
         }
 
         locale = localeQuery;
@@ -57,7 +78,10 @@ export default defineEventHandler(async (event) => {
     const filePath = resolve(`public/data/articles/${locale}/${id}`);
 
     if(!await fs.access(filePath).then(() => true).catch(() => false)) {
-        throw new Error(`Article '${id}' on locale '${locale}' not found`);
+        throw createError({
+            statusCode: 404,
+            statusMessage: `Article '${id}' on locale '${locale}' not found`
+        });
     }
 
     return {

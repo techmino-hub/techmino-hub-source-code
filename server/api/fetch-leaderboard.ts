@@ -1,6 +1,7 @@
 import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
 import { SubmissionValidity } from '~/assets/types/database';
 import { useDatabase } from '~/composables/database';
+import { type PostgrestError } from '@supabase/supabase-js';
 
 /**
  * @api {get} /api/fetch-leaderboard Fetch leaderboard
@@ -28,15 +29,24 @@ export default defineEventHandler(async (event) => {
     let gameMode = query.gameMode;
 
     if(!gameMode) {
-        throw new Error("Missing required parameter 'gameMode' of type string");
+        throw createError({
+            statusCode: 400,
+            statusMessage: "Missing required parameter 'gameMode' of type string"
+        });
     }
     
     if(typeof gameMode !== 'string') {
-        throw new Error("Invalid parameter 'gameMode': Expected type string");
+        throw createError({
+            statusCode: 400,
+            statusMessage: "Invalid parameter 'gameMode': Expected type string"
+        });
     }
     
     if(!RECORD_SCHEMAS[gameMode]) {
-        throw new Error(`Invalid game mode '${gameMode}'`);
+        throw createError({
+            statusCode: 400,
+            statusMessage: `Invalid game mode '${gameMode}'`
+        });
     }
 
     let validity = SubmissionValidity.Verified;
@@ -45,10 +55,16 @@ export default defineEventHandler(async (event) => {
         const validityQuery = query.validity;
 
         if(typeof validityQuery !== 'string') {
-            throw new Error("Invalid parameter 'validity': Expected type string");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'validity': Expected type string"
+            });
         }
         if(!(validityQuery in SubmissionValidity)) {
-            throw new Error("Invalid parameter 'validity': Does not match enum 'SubmissionValidity'");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'validity': Does not match enum 'SubmissionValidity'"
+            });
         }
         
         validity = SubmissionValidity[validityQuery as keyof typeof SubmissionValidity];
@@ -60,11 +76,17 @@ export default defineEventHandler(async (event) => {
         const limitQuery = query.limit;
 
         if(typeof limitQuery !== 'number') {
-            throw new Error("Invalid parameter 'limit': Expected type number");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'limit': Expected type number"
+            });
         }
 
         if(limit < 1 || limit > 100) {
-            throw new Error("Invalid parameter 'limit': Must be between 1 and 100");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'limit': Must be between 1 and 100"
+            });
         }
 
         limit = limitQuery;
@@ -76,11 +98,17 @@ export default defineEventHandler(async (event) => {
         const offsetQuery = query.offset;
 
         if(typeof offsetQuery !== 'number') {
-            throw new Error("Invalid parameter 'offset': Expected type number");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'offset': Expected type number"
+            });
         }
 
         if(offset < 0) {
-            throw new Error("Invalid parameter 'offset': Must be greater than or equal to 0");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'offset': Must be greater than or equal to 0"
+            });
         }
 
         offset = offsetQuery;
@@ -92,7 +120,10 @@ export default defineEventHandler(async (event) => {
         const reverseQuery = query.reverse;
 
         if(typeof reverseQuery !== 'boolean') {
-            throw new Error("Invalid parameter 'reverse': Expected type boolean");
+            throw createError({
+                statusCode: 400,
+                statusMessage: "Invalid parameter 'reverse': Expected type boolean"
+            });
         }
 
         reverse = reverseQuery;
@@ -100,19 +131,44 @@ export default defineEventHandler(async (event) => {
 
     const database = useDatabase();
 
-    const result = await database.getSubmissionsByGameMode(
-        gameMode,
-        validity,
-        limit,
-        offset,
-        RECORD_SCHEMAS[gameMode].order,
-    );
+    try {
+        const result = await database.getSubmissionsByGameMode(
+            gameMode,
+            validity,
+            limit,
+            offset,
+            RECORD_SCHEMAS[gameMode].order,
+        );
+        
+        if(reverse) {
+            result.reverse();
+        }
+    
+        return {
+            entries: result,
+        };
+    } catch(e) {
+        let message = "Unknown error";
+        let statusCode = 500;
 
-    if(reverse) {
-        result.reverse();
+        if(
+            typeof e === "object" &&
+            e !== null
+        ) {
+            if('message' in e && typeof e.message === "string") {
+                message = e.message;
+            }
+
+            if('code' in e && typeof e.code === "number") {
+                statusCode = e.code;
+            }
+        } else if(typeof e === "string") {
+            message = e;
+        }
+
+        throw createError({
+            statusCode,
+            statusMessage: `Failed to fetch leaderboard: ${message}`,
+        });
     }
-
-    return {
-        entries: result,
-    };
 });
