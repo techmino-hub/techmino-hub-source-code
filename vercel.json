@@ -1,6 +1,6 @@
 {
     "functions": {
-        "/server/api/**.ts": {
+        "server/api/**.ts": {
             "excludeFiles": "node_modules/**"
         }
     }
