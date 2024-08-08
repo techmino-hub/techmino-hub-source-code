@@ -1,6 +1,6 @@
 {
     "functions": {
-        "server/api/update-avatar.*s": {
+        "api/**": {
             "excludeFiles": "node_modules/**"
         }
     }
