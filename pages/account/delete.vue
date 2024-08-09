@@ -8,7 +8,7 @@
         <p
             v-if="!deleted"
             class="hide-noscript"
-            v-thtml="$t('accountDelete.desc', { username: profile?.username })"
+            v-html="$t('accountDelete.desc', { username: profile?.username })"
         ></p>
         <div v-if="!deleted" class="card hide-noscript">
             <p>
