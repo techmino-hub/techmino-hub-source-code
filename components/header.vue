@@ -269,6 +269,7 @@ header {
     .acc-drop {
         position: absolute;
         display: flex;
+        pointer-events: none;
         flex-direction: column;
         min-width: fit-content;
         gap: 0.25em;
@@ -316,6 +317,7 @@ header {
     .acc-drop.show {
         opacity: 1;
         transform: translateY(0);
+        pointer-events: auto;
     }
 
     nav.mobile {
