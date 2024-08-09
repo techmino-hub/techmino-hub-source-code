@@ -59,6 +59,9 @@
                 {{ $t('account.save') }}
             </button>
         </form>
+        <NuxtLinkLocale class="delete" v-if="user" to="/account/delete">
+            {{ $t('account.deleteLink') }}
+        </NuxtLinkLocale>
     </ClientOnly>
     <noscript>
         {{ $t('account.noscriptWarn') }}
@@ -329,6 +332,32 @@ input[type="text"], textarea {
 
     @media (max-width: 450px) {
         max-width: none;
+    }
+}
+
+.delete {
+    display: flex;
+    flex-direction: row;
+    margin-block: 2em;
+    padding-block: 0.5em;
+    padding-inline: 2ch;
+    color: red;
+    border: 0.2em solid transparent;
+    border-radius: 0.5em;
+    box-shadow: 0 0 0 transparent;
+    transition: text-shadow 300ms 200ms, box-shadow 600ms, border-color 400ms, background-color 250ms;
+
+    &:hover {
+        border-color: red;
+        background-color: #F002;
+        box-shadow: 0 0 1em red;
+    }
+
+    &:active {
+        background-color: red;
+        color: black;
+        box-shadow: 0 0 3em red;
+        text-shadow: 0 0 0.2ch black;
     }
 }
 </style>

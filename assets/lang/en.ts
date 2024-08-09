@@ -3079,6 +3079,21 @@ We do not expect there to be any cookies used on this site, but just to make sur
     errProfile: "An error occurred while updating your profile. More details can be found in the console.",
     nsfwWarn: "We detected inappropriate content in your avatar. This is against the rules. Please change it into something more appropriate.",
     save: "Save changes",
+    deleteLink: "I want to delete my account."
+  },
+  accountDelete: {
+    tabTitle: "Account Deletion - Techmino Hub",
+    title: "Account Deletion",
+    desc: `md_You are about to __delete your Techmino Hub account ({username}).__  
+Are you SURE you want to do this?  
+After you delete it, __there is no going back.__`,
+    instruction: "To confirm account deletion, please retype the following phrase exactly:",
+    confirmPhrase: "Yes, do as I say!",
+    placeholder: "Type it here...",
+    cancel: "Nevermind, go back",
+    confirm: "DELETE ACCOUNT",
+    success: "Your Techmino Hub account has been successfully deleted.",
+    noscriptWarn: "You cannot delete your account with JavaScript disabled.",
   },
   submission: {
     tabTitle: "Submission for {mode} - Techmino Hub",
