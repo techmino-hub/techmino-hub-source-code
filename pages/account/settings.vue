@@ -143,6 +143,7 @@ function handleFileChange(event: Event) {
             });
 
             if(!SAFE_CLASSES.includes(prediction.className)) {
+                console.warn(`NSFW detection triggered: ${prediction.className} (${prediction.probability * 100}% confidence)`);
                 alert(i18n.t('account.nsfwWarn'));
                 return;
             }

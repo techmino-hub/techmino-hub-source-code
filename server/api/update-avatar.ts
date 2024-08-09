@@ -5,7 +5,8 @@ import { useSupabase } from '~/composables/database';
  * @apiName UpdateAvatar
  * @apiVersion 1.0.0
  * @apiDescription
- * Updates a user's avatar.
+ * Updates a user's avatar.  
+ * The parameters must be passed in using the body.
  * 
  * @apiParam {String} user The UUID of the user to update.
  * @apiParam {String} avatar The URL-encoded data URL of the new avatar.
@@ -16,6 +17,13 @@ export default defineEventHandler(async (event) => {
     const supabase = useSupabase();
 
     const body = await readBody(event);
+
+    if(typeof body !== 'object') {
+        throw createError({
+            statusCode: 400,
+            statusMessage: "Body should be an object"
+        });
+    }
 
     const { user, avatar, access_token, refresh_token } = body;
 
@@ -97,9 +105,8 @@ export default defineEventHandler(async (event) => {
     }
 
     const blob = dataUrlToBlob(avatar);
-    const file = new File([blob], `${user}.png`, { type: 'image/png' });
 
-    if(file.size > 512 * 1024) {
+    if(blob.size > 512 * 1024) {
         throw createError({
             statusCode: 400,
             statusMessage: `File size too large: ${file.size} bytes exceeds maximum of 524288 bytes`
@@ -109,7 +116,7 @@ export default defineEventHandler(async (event) => {
     const { error } = await supabase
         .storage
         .from("avatars")
-        .upload(user, file);
+        .upload(user, blob, { upsert: true });
     
     if(error) {
         throw createError({
@@ -126,7 +133,13 @@ function dataUrlToBlob(dataUrl: string): Blob {
     const byteString = atob(dataUrl.split(',')[1]);
     const mimeString = dataUrl.split(',')[0].split(':')[1].split(';')[0];
     const buf = new ArrayBuffer(byteString.length);
-    return new Blob([buf], { type: mimeString });
+    const uInt8Array = new Uint8Array(buf);
+    
+    for(let i = 0; i < byteString.length; i++) {
+        uInt8Array[i] = byteString.charCodeAt(i);
+    }
+    
+    return new Blob([uInt8Array], { type: mimeString });
 }
 
 function dataUrlToUInt8Array(dataUrl: string): Uint8Array {
