@@ -5,35 +5,41 @@
         <noscript>
         {{ $t('accountDelete.noscriptWarn') }}
         </noscript>
-        <p
-            v-if="!deleted"
-            class="hide-noscript"
-            v-html="$t('accountDelete.desc', { username: profile?.username })"
-        ></p>
-        <div v-if="!deleted" class="card hide-noscript">
-            <p>
-                {{ $t('accountDelete.instruction') }}
-            </p>
-            <p class="phrase">
-                {{ $t('accountDelete.confirmPhrase') }}
-            </p>
-            <input
-                type="text"
-                v-model="confirmInput"
-                :placeholder="$t('accountDelete.placeholder')"
-            />
-            <NuxtLinkLocale
-                v-if="!phraseTyped"
-                class="cancel"
-                to="/"
-                v-t="'accountDelete.cancel'"
-            />
-            <button
-                v-if="phraseTyped"
-                type="button"
-                v-t="'accountDelete.confirm'"
-                @click="deleteAccount"
-            ></button>
+        <p v-if="loading" class="hide-noscript">
+            {{ $t('accountDelete.loading') }}
+        </p>
+        <p v-else-if="!user || !profile">
+            {{ $t('accountDelete.notSignedIn') }}
+        </p>
+        <div v-else-if="!deleted">
+            <p
+                v-html="$t('accountDelete.desc', { username: profile?.username })"
+            ></p>
+            <div class="card">
+                <p>
+                    {{ $t('accountDelete.instruction') }}
+                </p>
+                <p class="phrase">
+                    {{ $t('accountDelete.confirmPhrase') }}
+                </p>
+                <input
+                    type="text"
+                    v-model="confirmInput"
+                    :placeholder="$t('accountDelete.placeholder')"
+                />
+                <NuxtLinkLocale
+                    v-if="!phraseTyped"
+                    class="cancel"
+                    to="/"
+                    v-t="'accountDelete.cancel'"
+                />
+                <button
+                    v-if="phraseTyped"
+                    type="button"
+                    v-t="'accountDelete.confirm'"
+                    @click="deleteAccount"
+                ></button>
+            </div>
         </div>
         <p v-if="deleted" class="hide-noscript">
             {{ $t('accountDelete.success') }}
@@ -52,6 +58,7 @@ const confirmPhrase = i18n.t('accountDelete.confirmPhrase');
 
 const user = ref<User | null>(null);
 const profile = ref<Profile | null>(null);
+const loading = ref(true);
 
 const confirmInput = ref('');
 
@@ -87,9 +94,11 @@ async function deleteAccount() {
 onMounted(async function() {
     user.value = (await database.supabase.auth.getUser()).data.user;
 
-    if(!user.value) return;
+    if(user.value) {
+        profile.value = await database.getProfileById(user.value.id);
+    }
 
-    profile.value = await database.getProfileById(user.value.id);
+    loading.value = false;
 });
 </script>
 
@@ -97,7 +106,11 @@ onMounted(async function() {
 .page-outer {
     background-color: #100C;
     color: red;
-    padding: 1em 2em;
+    padding: 2em;
+}
+
+h1 {
+    margin-block-start: 0;
 }
 
 .card {

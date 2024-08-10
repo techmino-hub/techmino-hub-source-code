@@ -3084,6 +3084,8 @@ We do not expect there to be any cookies used on this site, but just to make sur
   accountDelete: {
     tabTitle: "Account Deletion - Techmino Hub",
     title: "Account Deletion",
+    loading: "Loading...",
+    notSignedIn: "You need to log into your account before you can delete it.",
     desc: `md_You are about to __delete your Techmino Hub account ({username}).__  
 Are you SURE you want to do this?  
 After you delete it, __there is no going back.__`,
