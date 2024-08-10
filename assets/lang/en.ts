@@ -3134,6 +3134,7 @@ After you delete it, __there is no going back.__`,
       fingerprint: "Replay input fingerprint: {0}",
       fingerprintDesc: "Input fingerprints are determined by the mean and standard deviation of the lengths of each input type.",
       noCanvas: "Your browser does not support canvases.",
+      controls: "Ctrl+scroll or pinch to zoom, drag to pan",
       inputGraph: {
         title: "Input Length Graph",
         label: {

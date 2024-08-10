@@ -81,8 +81,6 @@ br {
 }
 
 .graph-outer {
-    width: fit-content;
-    margin-inline: auto;
     margin-block-end: 2em;
     border: 0.1em solid colors.$secondary-color;
     border-radius: 2em;

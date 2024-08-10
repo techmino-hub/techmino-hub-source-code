@@ -65,6 +65,10 @@ onMounted(function() {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: "x",
+            },
             plugins: {
                 legend: { display: false }
             },
@@ -87,8 +91,8 @@ onMounted(function() {
 
 <style lang="scss" scoped>
 canvas {
-    min-width: 50em;
+    max-width: 100vw;
     height: 100%;
-    min-height: 10em;
+    min-height: 20em;
 }
 </style>
