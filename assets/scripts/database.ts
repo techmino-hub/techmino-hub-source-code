@@ -139,16 +139,12 @@ export class DBWrapper {
 
     /** @throws {PostgrestError | Error} */
     async getSubmissionWithReplayById(id: string) {
-        const { data, error } = await this.supabase
-            .from(Table.Submissions)
-            .select('*, replays(replay_data)')
-            .eq('id', id);
-        
-        if(error) throw error;
-        if(data && data.length > 0) {
-            return data[0] as SubmissionWithReplay;
-        }
-        throw new Error('Submission not found');
+        const [sub, rep] = await Promise.all([
+            this.getSubmissionById(id),
+            this.getReplayBySubmissionId(id)
+        ]);
+
+        return { ...sub, replay_data: rep.replay_data } as SubmissionWithReplay;
     }
 
     /** @throws {PostgrestError} */
