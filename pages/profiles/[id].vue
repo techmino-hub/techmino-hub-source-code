@@ -32,13 +32,56 @@
                 :user-id="profile.id"
             />
         </section>
+        <section v-if="amVerifier" class="actions">
+            <h2>
+                {{ $t('profile.actions.title') }}
+            </h2>
+            <div>
+                <label for="acc-state">
+                    {{ $t('profile.actions.setState') }}
+                </label>
+                <div>
+                    <select name="accState" id="acc-state" v-model="stateSelect">
+                        <option v-for="state in Object.values(AccountState)" :key="state" :value="state">
+                            {{ $t(`profile.state.${state}`) }}
+                        </option>
+                    </select>
+                    <button class="web-btn" type="button" @click="setState">
+                        {{ $t('profile.actions.set')}}
+                    </button>
+                </div>
+            </div>
+            <div v-if="amAdmin">
+                <label for="role">
+                    {{ $t('profile.actions.setRole') }}
+                </label>
+                <div>
+                    <select name="role" id="role" v-model="roleSelect">
+                        <option v-for="role in Object.values(Role)" :key="role" :value="role">
+                            {{ $t(`profile.role.${role}`) }}
+                        </option>
+                    </select>
+                    <button class="web-btn" type="button" @click="setRole">
+                        {{ $t('profile.actions.set')}}
+                    </button>
+                </div>
+            </div>
+        </section>
     </div>
 </template>
 
 <script lang="ts" setup>
-import type { AccountState, Role } from '~/assets/types/database';
+import { type User } from '@supabase/supabase-js';
+import { AccountState, type Profile, Role } from '~/assets/types/database';
 
 const route = useRoute();
+const database = useDatabase();
+
+const user = ref<User | null>(null);
+const myProfile = ref<Profile | null>(null);
+
+const amAdmin = ref(false);
+const amVerifier = ref(false);
 
 const id = route.params.id;
 
@@ -56,6 +99,36 @@ if(!data.value) {
 }
 
 const profile = data.value.profile;
+
+const stateSelect = ref<AccountState>(profile.account_state as AccountState);
+const roleSelect = ref<Role>(profile.role as Role);
+
+onMounted(async function() {
+    user.value = (await database.supabase.auth.getUser()).data.user;
+
+    if(!user.value) return;
+
+    myProfile.value = await database.getProfileById(user.value.id);
+
+    if(myProfile.value.account_state !== AccountState.Normal) return;
+
+    amAdmin.value = myProfile.value.role === Role.Admin;
+    amVerifier.value = [Role.Admin, Role.Verifier].includes(myProfile.value.role as Role);
+
+    console.debug(stateSelect.value); // DEBUG
+});
+
+function setState() {
+    database.editProfile(profile.id, {
+        account_state: stateSelect.value
+    });
+}
+
+function setRole() {
+    database.editProfile(profile.id, {
+        role: roleSelect.value
+    });
+}
 </script>
 
 <style scoped lang="scss">
@@ -99,5 +172,51 @@ h1 {
     margin-block: 0;
     padding-block-end: 0.25em;
     border-block-end: 0.026em solid colors.$pf-page-name-underline-color;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin-inline: auto;
+    padding: 1em 2em;
+    gap: 1em;
+    border: 0.1em solid colors.$tertiary-color;
+    border-radius: 0.5em;
+    background-color: colors.$tertiary-color-alpha10;
+
+    h2 {
+        margin-block: 0;
+    }
+
+    > div {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5ch;
+        row-gap: 1em;
+
+        > div {
+            display: flex;
+            flex-direction: row;
+            gap: 1ch;
+        }
+    }
+
+    select {
+        font-family: 'techmino-proportional';
+        background-color: black;
+        color: white;
+        border: 0.15em solid colors.$primary-color;
+        border-radius: 0.5em;
+        padding: 0.25em 0.5em;
+        font-size: 1em;
+    }
+
+    button {
+        margin-block: 0;
+    }
 }
 </style>
