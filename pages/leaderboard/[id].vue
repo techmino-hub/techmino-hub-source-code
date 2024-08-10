@@ -124,7 +124,7 @@ const profile: Ref<Profile | null> = ref(null);
 const { data } = await useFetch('/api/fetch-submission', {
     query: {
         id,
-        withReplay: true
+        with_replay: true
     }
 });
 

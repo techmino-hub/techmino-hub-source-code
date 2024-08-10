@@ -12,7 +12,7 @@ import {
     type SubmissionWithReplay,
     type ReplayData,
     Table,
-    SubmissionValidity
+    SubmissionValidity,
 } from '~/assets/types/database';
 import type { TableOrder } from '../types/record';
 
@@ -138,13 +138,37 @@ export class DBWrapper {
     }
 
     /** @throws {PostgrestError | Error} */
-    async getSubmissionWithReplayById(id: string) {
-        const [sub, rep] = await Promise.all([
-            this.getSubmissionById(id),
-            this.getReplayBySubmissionId(id)
-        ]);
+    async getSubmissionWithReplayById(id: string): Promise<Submission | SubmissionWithReplay> {
+        let submission: Partial<SubmissionWithReplay> = {};
 
-        return { ...sub, replay_data: rep.replay_data } as SubmissionWithReplay;
+        const submissionPromise = this.supabase
+            .from(Table.Submissions)
+            .select()
+            .eq('id', id)
+            .then(({ data, error }) => {
+                if(error) throw error;
+                if(data && data.length > 0) {
+                    // insert data into submission, don't overwrite in case replayPromise finishes first
+                    submission = { ...submission, ...data[0] };
+                } else {
+                    throw new Error('Submission not found');
+                }
+            });
+        
+        const replayPromise = this.supabase
+            .from(Table.Replays)
+            .select()
+            .eq('submission_id', id)
+            .then(({ data, error }) => {
+                if(error) throw error;
+                if(data && data.length > 0) {
+                    submission.replay_data = data[0].replay_data;
+                }
+            });
+        
+        await Promise.all([submissionPromise, replayPromise]);
+
+        return submission as Submission | SubmissionWithReplay;
     }
 
     /** @throws {PostgrestError} */
