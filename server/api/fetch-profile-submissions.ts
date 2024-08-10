@@ -55,13 +55,28 @@ export default defineEventHandler(async (event) => {
     let limit = 10;
 
     if (query.limit) {
-        const limitQuery = query.limit;
+        let limitQuery = query.limit;
 
         if (typeof limitQuery !== 'number') {
-            throw createError({
-                statusCode: 400,
-                statusMessage: "Invalid parameter 'limit': Expected type number"
-            });
+            if(typeof limitQuery !== 'string') {
+                throw createError({
+                    statusCode: 400,
+                    statusMessage: "Invalid parameter 'limit': Expected type number"
+                });
+            }
+
+            if(typeof limitQuery === 'string') {
+                let casted = parseInt(limitQuery);
+
+                if(!isFinite(casted)) {
+                    throw createError({
+                        statusCode: 400,
+                        statusMessage: "Invalid parameter 'limit': Expected type number"
+                    });
+                }
+
+                limitQuery = casted;
+            }
         }
 
         if(limitQuery > 100) {
@@ -77,14 +92,30 @@ export default defineEventHandler(async (event) => {
     let offset = 0;
 
     if (query.offset) {
-        const offsetQuery = query.offset;
+        let offsetQuery = query.offset;
 
         if (typeof offsetQuery !== 'number') {
-            throw createError({
-                statusCode: 400,
-                statusMessage: "Invalid parameter 'offset': Expected type number"
-            });
+            if(typeof offsetQuery !== 'string') {
+                throw createError({
+                    statusCode: 400,
+                    statusMessage: "Invalid parameter 'offset': Expected type number"
+                });
+            }
+
+            if(typeof offsetQuery === 'string') {
+                let casted = parseInt(offsetQuery);
+
+                if(!isFinite(casted)) {
+                    throw createError({
+                        statusCode: 400,
+                        statusMessage: "Invalid parameter 'offset': Expected type number"
+                    });
+                }
+
+                offsetQuery = casted;
+            }
         }
+
 
         if (offsetQuery < 0) {
             throw createError({
