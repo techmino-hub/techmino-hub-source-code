@@ -73,13 +73,26 @@ export default defineEventHandler(async (event) => {
     let limit = 10;
 
     if(query.limit) {
-        const limitQuery = query.limit;
+        let limitQuery = query.limit;
 
         if(typeof limitQuery !== 'number') {
-            throw createError({
-                statusCode: 400,
-                statusMessage: "Invalid parameter 'limit': Expected type number"
-            });
+            if(typeof limitQuery !== 'string') {
+                throw createError({
+                    statusCode: 400,
+                    statusMessage: "Invalid parameter 'limit': Expected type number"
+                });
+            } else {
+                const casted = parseInt(limitQuery);
+
+                if(!isFinite(casted)) {
+                    throw createError({
+                        statusCode: 400,
+                        statusMessage: "Invalid parameter 'limit': Expected type number"
+                    });
+                }
+
+                limitQuery = casted;
+            }
         }
 
         if(limit < 1 || limit > 100) {
@@ -95,13 +108,26 @@ export default defineEventHandler(async (event) => {
     let offset = 0;
 
     if(query.offset) {
-        const offsetQuery = query.offset;
+        let offsetQuery = query.offset;
 
         if(typeof offsetQuery !== 'number') {
-            throw createError({
-                statusCode: 400,
-                statusMessage: "Invalid parameter 'offset': Expected type number"
-            });
+            if(typeof offsetQuery !== 'string') {
+                throw createError({
+                    statusCode: 400,
+                    statusMessage: "Invalid parameter 'offset': Expected type number"
+                });
+            } else {
+                const casted = parseInt(offsetQuery);
+
+                if(!isFinite(casted)) {
+                    throw createError({
+                        statusCode: 400,
+                        statusMessage: "Invalid parameter 'offset': Expected type number"
+                    });
+                }
+
+                offsetQuery = casted;
+            }
         }
 
         if(offset < 0) {
@@ -117,16 +143,33 @@ export default defineEventHandler(async (event) => {
     let reverse = false;
 
     if(query.reverse) {
-        const reverseQuery = query.reverse;
+        let reverseQuery = query.reverse;
 
-        if(typeof reverseQuery !== 'boolean') {
-            throw createError({
-                statusCode: 400,
-                statusMessage: "Invalid parameter 'reverse': Expected type boolean"
-            });
+        if(typeof reverseQuery === 'boolean') {
+            reverse = reverseQuery;
+        } else if(typeof reverseQuery === 'string') {
+            if(reverseQuery === "true") {
+                reverse = true;
+            } else if(reverseQuery === "false") {
+                reverse = false;
+            } else {
+                throw createError({
+                    statusCode: 400,
+                    statusMessage: "Invalid parameter 'reverse': Expected type boolean"
+                });
+            }
+        } else if(typeof reverseQuery === "number") {
+            if(reverseQuery === 1) {
+                reverse = true;
+            } else if(reverseQuery === 0) {
+                reverse = false;
+            } else {
+                throw createError({
+                    statusCode: 400,
+                    statusMessage: "Invalid parameter 'reverse': Expected type boolean"
+                });
+            }
         }
-
-        reverse = reverseQuery;
     }
 
     const database = useDatabase();
