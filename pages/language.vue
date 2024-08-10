@@ -10,6 +10,7 @@ function setLanguage(event: Event) {
 
 <template>
     <div class="page">
+        <Title>{{ $t('lang.tabTitle') }}</Title>
         <h1>{{ $t('lang.title') }}</h1>
         <form @submit.prevent="setLanguage" class="hide-noscript-important">
             <select name="language">
@@ -32,6 +33,16 @@ function setLanguage(event: Event) {
                 </li>
             </menu>
         </noscript>
+        <i18n-t
+          keypath="lang.note"
+          scope="global"
+          tag="p">
+            <NuxtLink
+              class="block-style"
+              to="https://github.com/techmino-hub/techmino-hub-source-code/wiki/Contributing-to-Translations">
+                {{ $t('lang.contribute') }}
+            </NuxtLink>
+        </i18n-t>
     </div>
 </template>
 
@@ -39,17 +50,19 @@ function setLanguage(event: Event) {
 @use '~/assets/scss/colors';
 
 .page {
-    width: fit-content;
-    margin-inline: auto;
-    padding-block: 2em;
+    padding: 1em 2em;
+
+    h1, p {
+        display: block;
+        text-align: center;
+    }
 
     form {
         display: flex;
-        max-width: 15em;
         flex-direction: column;
+        max-width: 15em;
         margin-inline: auto;
-        margin-top: 1em;
-        gap: 0.5em;
+        margin-block: 2em;
 
         select {
             height: 2.5em;

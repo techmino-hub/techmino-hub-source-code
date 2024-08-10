@@ -37,7 +37,9 @@ Created with ❤ by [the Techmino community](https://github.com/techmino-hub/tec
   lang: {
     tabTitle: "Language Settings - Techmino Hub",
     title: "Choose your preferred language",
-    setLang: "Set language"
+    note: "Translations are provided by the community and may not be 100% accurate. {0}",
+    contribute: "Contributions are welcome.",
+    setLang: "Set language",
   },
 
   settings: {

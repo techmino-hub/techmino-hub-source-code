@@ -47,9 +47,9 @@ const copyError = () => {
                 <hr>
                 <div class="error-bottom">
                     <menu class="error-buttons">
-                        <NuxtLink @click="handleError" to="/" class="home">
+                        <NuxtLinkLocale @click="handleError" to="/" class="home">
                             Go back to home
-                        </NuxtLink>
+                        </NuxtLinkLocale>
                         <button @click="copyError" class="copy hide-noscript" id="copy-err-button">
                             Copy error info
                         </button>
