@@ -3048,6 +3048,7 @@ We do not expect there to be any cookies used on this site, but just to make sur
   profile: {
     tabTitle: "{username}'s Profile - Techmino Hub",
     avy: "Avatar",
+    edit: "Edit profile",
     section: {
       latestSubmissions: "Latest Submissions"
     },

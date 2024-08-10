@@ -21,6 +21,11 @@
                 <p>
                     {{ profile.bio }}
                 </p>
+                <NuxtLinkLocale
+                  v-if="myProfile && myProfile.id === profile.id"
+                  to="/account/settings">
+                    {{ $t('profile.edit') }}
+                </NuxtLinkLocale>
             </div>
         </section>
         <section>
@@ -164,6 +169,11 @@ function setRole() {
         flex-direction: column;
         width: stretch;
         gap: 0.5em;
+    }
+
+    a {
+        display: inline;
+        width: fit-content;
     }
 }
 
