@@ -3,7 +3,7 @@
     <NuxtLinkLocale class="link" :to="`/profiles/${profile.id}`">
         {{ profile.username }}
     </NuxtLinkLocale>
-    <div class="popup">
+    <div class="popup" v-if="withCard">
         <ProfileCard :profile="profile" :link="false" />
     </div>
   </div>
@@ -21,6 +21,10 @@ const props = defineProps({
     profile: {
         type: Object as PropType<Profile | string>,
         required: true,
+    },
+    withCard: {
+        type: Boolean,
+        default: true
     }
 });
 
@@ -64,11 +68,13 @@ if (typeof props.profile === 'string') {
         opacity: 0;
         transition: 250ms opacity;
         transition-delay: 150ms;
+        pointer-events: none;
     }
 
     &:has(a.link:hover) .popup {
         opacity: 1;
         transition-delay: 600ms;
+        pointer-events: auto;
     }
 }
 </style>
