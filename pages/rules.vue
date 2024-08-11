@@ -1,4 +1,5 @@
 <template>
+  <Title>{{ $t('rulesTabTitle') }}</Title>
   <div class="page-outer" v-html="$t('rules')"></div>
 </template>
 

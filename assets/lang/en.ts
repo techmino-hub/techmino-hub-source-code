@@ -3179,6 +3179,7 @@ After you delete it, __there is no going back.__`,
       deleteSuccess: "Successfully deleted submission",
     }
   },
+  rulesTabTitle: "Rules - Techmino Hub",
   rules: `md_
 # Site Rules
 By making an account on this site, you agree to the rules below.
@@ -3209,6 +3210,7 @@ If you find a loophole in the rules, please report it to us. Do not exploit it.
 If you violate any of these rules, we may take appropriate action depending on the severity.  
 We reserve the right to change these rules at any time.  
 If you have any questions, contact us on the [official Techmino Discord server](https://discord.gg/f9pUvkh) or on the [GitHub discussion page](https://github.com/techmino-hub/techmino-hub-source-code/discussions).`,
+  privacyTabTitle: "Privacy Policy - Techmino Hub",
   privacy: `md_
 # Privacy Policy
 **We will never sell your personal data to third parties.**  

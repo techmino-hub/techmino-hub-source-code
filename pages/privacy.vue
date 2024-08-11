@@ -1,4 +1,5 @@
 <template>
+  <Title>{{ $t('privacyTabTitle') }}</Title>
   <div class="page-outer" v-html="$t('privacy')"></div>
 </template>
 
