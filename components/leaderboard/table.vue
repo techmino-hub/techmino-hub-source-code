@@ -62,6 +62,7 @@
                     </td>
                     <td>
                         <NuxtLinkLocale
+                          class="block-style"
                           :to="`/leaderboard/${submission.id}`">
                             {{ getChar('key.right') }}
                         </NuxtLinkLocale>
