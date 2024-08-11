@@ -1,7 +1,7 @@
 <template>
     <div v-show="shouldShow" class="actions hide-noscript">
         <h2>{{ $t('submission.actions.title') }}</h2>
-        <div class="row" v-show="isVerifier">
+        <div class="row" v-show="isVerifier && !isOwner">
             <select name="" v-model="validity">
                 <option v-for="validity in Object.values(SubmissionValidity)" :value="validity">
                     {{ $t(`leaderboard.validity.${validity}`) }}
@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { PostgrestError } from '@supabase/supabase-js';
-import { AccountState, Role, type Submission, type SubmissionWithReplay, SubmissionValidity } from '~/assets/types/database';
+import type { PostgrestError, User } from '@supabase/supabase-js';
+import { AccountState, Role, type Submission, type SubmissionWithReplay, SubmissionValidity, type Profile } from '~/assets/types/database';
 
 const props = defineProps({
     submission: {
@@ -32,33 +32,22 @@ const router = useRouter();
 const i18n = useI18n();
 
 const database = useDatabase();
-const user = await database.supabase.auth.getUser();
-const profile =
-    ('id' in user && typeof user.id === 'string') ?
-    await database.getProfileById(user.id) :
-    null;
-const shouldShow = (
-    'id' in user &&
-    typeof user.id === 'string' &&
-    (
-        user.id === props.submission.submitted_by ||
-        (
-            profile &&
-            profile.account_state === AccountState.Normal &&
-            profile.role in [Role.Admin, Role.Verifier]
-        )
-    )
-);
-const isOwner = (
-    'id' in user &&
-    typeof user.id === 'string' &&
-    user.id === props.submission.submitted_by
-);
-const isVerifier = (
-    profile &&
-    profile.account_state === AccountState.Normal &&
-    profile.role in [Role.Admin, Role.Verifier]
-);
+
+const user = ref<User | null>(null);
+const profile = ref<Profile | null>(null);
+
+const shouldShow = computed(() => (isOwner.value || isVerifier.value));
+
+const isOwner = computed(() => (
+    user.value !== null &&
+    user.value.id === props.submission.submitted_by
+));
+
+const isVerifier = computed(() => (
+    profile.value !== null &&
+    profile.value.account_state === AccountState.Normal &&
+    [Role.Admin, Role.Verifier].includes(profile.value.role as Role)
+));
 
 const validity = ref(props.submission.validity);
 const deleteText = ref(i18n.t('submission.actions.delete'));
@@ -105,6 +94,16 @@ async function setValidity() {
         );
     }
 }
+
+onMounted(async function() {
+    user.value = (await database.supabase.auth.getUser()).data?.user;
+
+    if(!user.value) {
+        return;
+    }
+
+    profile.value = await database.getProfileById(user.value.id);
+});
 </script>
 
 <style lang="scss" scoped>
