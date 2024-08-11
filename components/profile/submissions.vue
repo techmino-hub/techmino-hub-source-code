@@ -27,7 +27,10 @@
                   v-for="(submission, index) in submissions.slice(0, limit)"
                   :key="submission.id">
                     <td>
-                        {{ submission.game_mode }}
+                        <NuxtLinkLocale
+                          :to="`/map-lite/${submission.game_mode}`">
+                            {{ getModeI18nString(submission.game_mode, $t) }}
+                        </NuxtLinkLocale>
                     </td>
                     <td>
                         {{ new Date(submission.replay_date).toLocaleString() }}
@@ -74,6 +77,7 @@
 
 <script lang="ts" setup>
 import { getChar } from '~/assets/scripts/chars';
+import { getModeI18nString } from '~/assets/scripts/modes';
 import type { Submission } from '~/assets/types/database';
 
 const props = defineProps({

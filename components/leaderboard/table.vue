@@ -46,8 +46,13 @@
                             :profile="submission.submitted_by"
                         />
                     </td>
-                    <td v-for="column in recordSchema.entries" :key="column.name">
-                        {{ localeScore(submission.score, column.name) }}
+                    <td v-for="[index, column] in Object.entries(recordSchema.entries)" :key="column.name">
+                        {{
+                            localeScore(
+                                submission.score ? submission.score[index] : null,
+                                column.name
+                            )
+                        }}
                     </td>
                     <td>
                         {{ new Date(submission.replay_date).toLocaleString() }}
@@ -133,17 +138,17 @@ watchEffect(async () => {
 });
 
 function localeScore(score: any, column: string) {
-    if(!score || !score[column]) {
+    if(!score) {
         return i18n.t('leaderboard.null');
     }
 
     if(!i18n.te(`leaderboard.scoreDisp.${column}`)) {
-        return score[column];
+        return score;
     }
 
     return i18n.t(
         `leaderboard.scoreDisp.${column}`,
-        { value: score[column] }
+        { value: score }
     );
 }
 </script>

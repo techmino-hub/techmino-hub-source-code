@@ -51,6 +51,8 @@ const props = defineProps({
     gap: 1em;
     border: 0.15em solid colors.$secondary-color;
     background-color: colors.$pf-card-bg-color;
+    color: white;
+    text-align: start;
 
     .avy {
         flex-grow: 0;

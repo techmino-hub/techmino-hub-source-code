@@ -2906,6 +2906,7 @@ We do not expect there to be any cookies used on this site, but just to make sur
     tabTitle: "Leaderboards - Techmino Hub",
     title: "Leaderboards",
     noSubmissions: "No submissions found.",
+    submit: "Submit a run",
     loading: "Loading...",
     null: "N/A",
     entryNumber: "Displaying entries {start} to {end}",

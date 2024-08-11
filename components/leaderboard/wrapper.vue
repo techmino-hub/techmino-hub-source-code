@@ -46,6 +46,9 @@
                 </option>
             </select>
         </div>
+        <NuxtLinkLocale to="/leaderboard/submit" v-if="showSubmitLink">
+            {{ $t('leaderboard.submit') }}
+        </NuxtLinkLocale>
     </div>
     <LeaderboardTable
         :gameMode="gameMode"
@@ -123,6 +126,10 @@ const props = defineProps({
     offset: {
         type: Number,
         required: false
+    },
+    showSubmitLink: {
+        type: Boolean,
+        default: false
     },
     redirectToFull: {
         type: Boolean,

@@ -58,6 +58,7 @@
         :init-limit="initLimit"
         :init-offset="initOffset"
         :on-full-page="true"
+        :show-submit-link="true"
     />
 </div>
 </template>
