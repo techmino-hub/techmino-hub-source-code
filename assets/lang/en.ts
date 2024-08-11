@@ -3179,6 +3179,22 @@ After you delete it, __there is no going back.__`,
       deleteSuccess: "Successfully deleted submission",
     }
   },
+  submit: {
+    tabTitle: "Run Submission - Techmino Hub",
+    title: "Submit your run",
+    scoreDesc: "If you can, please enter the information from the in-game leaderboards, and not from the replay stats.",
+    noscriptWarn: "You cannot submit your run with JavaScript disabled.",
+    loading: "Loading...",
+    loggedOut: "You need to log in before you can submit your run.",
+    badState: {
+      Banned: "You may not submit runs because you are banned.",
+      Unverified: "You may not submit runs until you are manually verified by verifiers."
+    },
+    gameMode: "Game mode",
+    replay: "Replay",
+    importReplay: "Import",
+    invalidReplay: "Invalid replay",
+  },
   rulesTabTitle: "Rules - Techmino Hub",
   rules: `md_
 # Site Rules
