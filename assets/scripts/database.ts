@@ -204,11 +204,13 @@ export class DBWrapper {
 
     /** @throws {PostgrestError} */
     async createSubmission(newSubmission: Submission) {
-        const { error } = await this.supabase
+        const { data, error } = await this.supabase
             .from(Table.Submissions)
-            .insert(newSubmission);
+            .insert(newSubmission)
+            .select();
 
         if(error) throw error;
+        return data[0] as Submission;
     }
 
     /** @throws {PostgrestError} */
@@ -252,11 +254,13 @@ export class DBWrapper {
 
     /** @throws {PostgrestError} */
     async createReplay(submissionId: string, replayData: string) {
-        const { error } = await this.supabase
+        const { data, error } = await this.supabase
             .from(Table.Replays)
-            .insert({ submission_id: submissionId, replay_data: replayData });
+            .insert({ submission_id: submissionId, replay_data: replayData })
+            .select();
 
         if(error) throw error;
+        return data[0] as ReplayData;
     }
 
     /** @throws {PostgrestError} */
