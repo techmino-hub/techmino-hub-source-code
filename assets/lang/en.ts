@@ -3031,7 +3031,21 @@ We do not expect there to be any cookies used on this site, but just to make sur
 
           return `${years}y ${days}d ${hours}:${paddedMins}′${paddedSecs}″`;
         }
-      }
+      },
+      date: ({ named }) => {
+        return new Date(named('value') as string).toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+      },
+      submitDate: ({ named }) => {
+        return new Date(named('value') as string).toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+      },
     },
     filters: {
       gameMode: "Game mode",
@@ -3178,6 +3192,32 @@ After you delete it, __there is no going back.__`,
       deleteFailed: "Failed to delete submission: {error}",
       deleteSuccess: "Successfully deleted submission",
     }
+  },
+  submit: {
+    tabTitle: "Run Submission - Techmino Hub",
+    title: "Submit your run",
+    scoreDesc: "If you can, please enter the information below from the in-game leaderboards, and not from the replay stats.",
+    noscriptWarn: "You cannot submit your run with JavaScript disabled.",
+    loading: "Loading...",
+    loggedOut: "You need to log in before you can submit your run.",
+    badState: {
+      Banned: "You may not submit runs because you are banned.",
+      Unverified: "You may not submit runs until you are manually verified by verifiers."
+    },
+    field: {
+      time: "Time in seconds",
+    },
+    gameMode: "Game mode",
+    importReplay: "Import from replay",
+    invalidReplay: "Invalid replay",
+    replayDate: "When was the run played? (UTC)",
+    imported: "Imported successfully",
+    proof: "If you have any additional proof for your submission, enter them below. It can take the form of a video, a screenshot, or anything else that can help verify your run. This will be required if you don't provide a replay.",
+    errUnknown: "Unknown error",
+    errorIncomplete: "Failed to create submission. Are you sure you filled out everything correctly?",
+    errorSub: "Error uploading submission: {error}",
+    errorRep: "Error uploading replay: {error}",
+    submit: "Submit",
   },
   rulesTabTitle: "Rules - Techmino Hub",
   rules: `md_
