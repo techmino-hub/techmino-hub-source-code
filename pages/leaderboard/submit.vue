@@ -27,7 +27,7 @@
                 <p class="err" v-show="repMsg.length > 0">{{ repMsg }}</p>
                 <div class="row">
                     <label for="gameMode">{{ $t('submit.gameMode') }}</label>
-                    <select name="gameMode" id="gameMode" v-model="selMode">
+                    <select name="gameMode" id="gameMode" v-model="selMode" required="true">
                         <option
                           v-for="[mode, recordSchema] in Object.entries(RECORD_SCHEMAS)"
                           :key="mode"
@@ -48,7 +48,6 @@
                         {{ getFieldI18nString(entry.name) }}
                     </label>
                     <input
-                        :type="entry.type"
                         :name="entry.name"
                         :id="entry.name"
                         v-model="score[index]"
@@ -74,10 +73,11 @@
                     class="row"
                     name="proof"
                     id="proof"
+                    maxlength="255"
                     v-model.lazy="proof"
                     :required="!hasReplay"
                 ></textarea>
-                <button v-show="selMode" type="submit" :disabled="uploadBlocked">
+                <button v-show="selMode" class="web-btn" type="submit" :disabled="uploadBlocked">
                     {{ $t('submit.submit') }}
                 </button>
                 <p class="err" v-if="errMsg.length > 0">{{ errMsg }}</p>
@@ -284,16 +284,27 @@ h1 {
     border-block-end: 0.026em solid colors.$sb-underline-color;
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin-inline: auto;
+}
+
 .row {
     display: flex;
     flex-direction: row;
-    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5ch;
+    row-gap: 0.5em;
     margin-block: 0.5em;
     align-items: center;
 }
 
 p {
-    max-width: 40ch;
+    max-width: 50ch;
     text-wrap: pretty;
 }
 
@@ -307,7 +318,57 @@ select {
     font-size: 1em;
 }
 
+input {
+    font-family: 'techmino-monospace';
+    background-color: black;
+    color: white;
+    border: 0.1em solid colors.$primary-color;
+    padding: 0.5em 1ch;
+    border-radius: 0.5em;
+    transition: border-color 250ms, box-shadow 150ms;
+
+    &:hover {
+        border-color: colors.$btn-hover-border-color;
+        box-shadow: 0 0 0.5ch colors.$btn-hover-box-shadow-color;
+    }
+
+    &:focus {
+        border-color: colors.$btn-active-border-color;
+        box-shadow: 0 0 1ch colors.$btn-active-box-shadow-color;
+    }
+}
+
+input[readonly] {
+    border-color: colors.$error-color;
+    box-shadow: none !important;
+    cursor: not-allowed;
+}
+
+textarea {
+    min-width: 50ch;
+    width: stretch;
+    height: 10em;
+    resize: none;
+    background-color: black;
+    color: white;
+    border: 0.15em solid colors.$primary-color;
+    border-radius: 1em;
+    padding: 0.75em 1ch;
+    transition: border-color 250ms, box-shadow 150ms;
+
+    &:hover {
+        border-color: colors.$btn-hover-border-color;
+        box-shadow: 0 0 1ch colors.$btn-hover-box-shadow-color;
+    }
+
+    &:focus {
+        border-color: colors.$btn-active-border-color;
+        box-shadow: 0 0 2ch colors.$btn-active-box-shadow-color;
+    }
+}
+
 .err {
     color: red;
+    margin-block-start: 0;
 }
 </style>
