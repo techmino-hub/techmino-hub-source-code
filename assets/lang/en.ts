@@ -3031,7 +3031,21 @@ We do not expect there to be any cookies used on this site, but just to make sur
 
           return `${years}y ${days}d ${hours}:${paddedMins}′${paddedSecs}″`;
         }
-      }
+      },
+      date: ({ named }) => {
+        return new Date(named('value') as string).toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+      },
+      submitDate: ({ named }) => {
+        return new Date(named('value') as string).toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric"
+        });
+      },
     },
     filters: {
       gameMode: "Game mode",
@@ -3182,7 +3196,7 @@ After you delete it, __there is no going back.__`,
   submit: {
     tabTitle: "Run Submission - Techmino Hub",
     title: "Submit your run",
-    scoreDesc: "If you can, please enter the information from the in-game leaderboards, and not from the replay stats.",
+    scoreDesc: "If you can, please enter the information below from the in-game leaderboards, and not from the replay stats.",
     noscriptWarn: "You cannot submit your run with JavaScript disabled.",
     loading: "Loading...",
     loggedOut: "You need to log in before you can submit your run.",
@@ -3191,9 +3205,11 @@ After you delete it, __there is no going back.__`,
       Unverified: "You may not submit runs until you are manually verified by verifiers."
     },
     gameMode: "Game mode",
-    replay: "Replay",
-    importReplay: "Import",
+    importReplay: "Import from replay",
     invalidReplay: "Invalid replay",
+    replayDate: "When was the run played? (UTC)",
+    imported: "Imported successfully",
+    proof: "If you have any additional proof for your submission, enter them below. It can take the form of a video, a screenshot, or anything else that can help verify your run.",
   },
   rulesTabTitle: "Rules - Techmino Hub",
   rules: `md_
