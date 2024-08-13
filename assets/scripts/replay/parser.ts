@@ -1,140 +1,64 @@
 import pako from 'pako';
 import { Buffer } from 'buffer';
-import { InputEventType, type GameReplayData } from '~/assets/types/replay';
+import { type GameInputEvent, InputEventType, type GameReplayData } from '~/assets/types/replay';
 
-/**
- * Decompresses a replay.  
- * It can take either the binary contents of a `.rep` file,
- * or the base64-encoded string you get by exporting a replay from the game.
- * 
- * @param compressed
- * The compressed replay data. Can either be a Buffer or a base64-encoded string.
- * 
- * @returns
- * A tuple containing the decompressed replay data as two Buffers.  
- * The first Buffer contains the metadata as a JSON, and the second Buffer contains the input data.
- */
-export async function decompressReplay(compressed: Buffer): Promise<[Buffer, Buffer]> {
-    try {
-        const str = pako.inflate(compressed).toString();
-
-        const splitIdx = str.indexOf(",10,");
-
-        const sliced = [
-            str.slice(0, splitIdx),
-            str.slice(splitIdx + 4)
-        ];
-
-        const result =
-            sliced.map((line: string) =>
-                line.split(",").map(Number)
-            )
-            .map((arr: number[]) => Buffer.from(arr));
-
-        return [result[0], result[1] ?? Buffer.alloc(0)];
-    } catch (err) {
-        return Promise.reject(err);
-    }
+function decodeVLQ(data: string, position: number): [number, number] {
+    let ret = 0;
+    let byte: number;
+    do {
+        byte = data.charCodeAt(position);
+        position++;
+        ret = ret * 128 + (byte & 127);
+    } while(byte >= 128);
+    return [ret, position];
 }
 
-/**
- * Parses the raw input data from a replay using VLQ.  
- * @param rep The input data buffer.
- * @returns An array of raw input data.
- */
-async function getRawInputs(rep: Buffer): Promise<number[]> {
-    const decodeVLQ = (buffer: Buffer, startPos: number): [number, number] => {
-        let value = 0;
-        let position = startPos;
-        let byteValue: number;
+function pumpRecording(data: string) {
+    let position = 1;
+    const events = [] as GameInputEvent[];
 
-        do {
-            byteValue = buffer[position];
-            value = value * 128 + (byteValue & 0x7F); // Mask the MSB
-            position += 1;
-        } while (byteValue >= 128 && position < buffer.length);
-
-        return [value, position];
-    };
-
-    let result: number[] = [];
-    let currentFrame = 0;
-    let position = 0;
-
-    while (position < rep.length) {
-        let [frameCode, newPosition] = decodeVLQ(rep, position);
-        currentFrame += frameCode + 1;
-        result.push(currentFrame);
-        position = newPosition;
-
-        if (position < rep.length) {
-            let [eventCode, newPosition] = decodeVLQ(rep, position);
-            result.push(eventCode);
-            position = newPosition;
-        }
-    }
-
-    return result;
-}
-
-function isKeyValid(key: number): boolean {
-    const smallestFiveBits = key & 0b11111;
-    return smallestFiveBits >= 1 && smallestFiveBits <= 20;
-}
-
-/**
- * Extracts the replay metadata and input data from the replay buffers, into a structured format.
- * @param replayBuf The decompressed replay data.
- * @returns The replay data.
- */
-export async function parseReplay(replayBuf: [Buffer, Buffer]): Promise<GameReplayData> {
-    let replayData: Partial<GameReplayData> = {inputs: []};
-
-    const rawInputPromise = getRawInputs(replayBuf[1]);
-
-    try {
-        const jsonObj = JSON.parse(replayBuf[0].toString());
-        Object.assign(replayData, jsonObj);
-    } catch (exception) {
-        console.warn("Failed to parse replay metadata", exception);
-    }
-
-    const rawInputs = await rawInputPromise;
-    
-    if (rawInputs.length % 2 !== 0) rawInputs.pop();
-
-    for (let i = 0; i < rawInputs.length; i += 2) {
-        const frame = rawInputs[i];
-        const eventKey = rawInputs[i + 1];
+    let curFrame = 0;
+    while (position <= data.length) {
+        let dt: number, eventKey: number;
         
-        if(eventKey >= frame || !isKeyValid(eventKey)) {
-            continue;
-        }
+        [dt, position] = decodeVLQ(data, position);
+        curFrame += dt;
 
-        (replayData as GameReplayData).inputs.push({
-            frame: frame,
+        [eventKey, position] = decodeVLQ(data, position);
+
+        events.push({
+            frame: curFrame,
             type: eventKey > 32 ? InputEventType.Release : InputEventType.Press,
             key: eventKey % 32
         });
     }
+    return events;
+}
+
+export async function parseReplayFromBuffer(replayBuf: Buffer): Promise<GameReplayData> {
+    const arr = pako.inflate(replayBuf);
+
+    const firstNewline = arr.indexOf(10);
+
+    const metadata = arr.slice(0, firstNewline);
+    const data = arr.slice(firstNewline + 1);
+
+    const metadataStr = Buffer.from(metadata).toString();
+    const replayData = JSON.parse(metadataStr) as Partial<GameReplayData>;
+    
+    replayData.inputs = pumpRecording(Buffer.from(data).toString());
 
     return replayData as GameReplayData;
 }
 
-/**
- * Decompresses and parses a replay from a base64-encoded string.
- * @param replayStr The base64-encoded replay string.
- * @returns The replay data.
- */
 export async function parseReplayFromRepString(replayStr: string): Promise<GameReplayData> {
     const repBuf = Buffer.from(replayStr, "base64");
-    const decompressed = await decompressReplay(repBuf);
-    return await parseReplay(decompressed);
+    return await parseReplayFromBuffer(repBuf);
 }
 
 if(window) {
-    (window as any).TechminoReplayParser = {
-        decompressReplay,
-        parseReplay
-    };
+    (window as Record<string, any>).TechminoReplayParser = {
+        parseReplayFromBuffer,
+        parseReplayFromRepString
+    }
 }

@@ -16,7 +16,7 @@ import { useDatabase } from '~/composables/database';
  * It will return a "Submission" object if `with_replay` is `false`,  
  * otherwise it will return a "SubmissionWithReplay" object.
  * See types "Submission" and "SubmissionWithReplay": `/assets/types/database.ts`
- * See how to decompress the replay data: `/assets/scripts/replay/parser.ts`
+ * See how to parse the replay data: `/assets/scripts/replay/parser.ts`
  */
 
 export default defineEventHandler(async(event) => {

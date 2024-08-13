@@ -12,7 +12,7 @@ import { useDatabase } from '~/composables/database';
  * @apiSuccess {ReplayData} replay
  * The submission's replay data.
  * See type "ReplayData": `/assets/types/database.ts`
- * See how to decompress the replay data: `/assets/scripts/replay/parser.ts`
+ * See how to parse the replay data: `/assets/scripts/replay/parser.ts`
  */
 
 export default defineEventHandler(async(event) => {
