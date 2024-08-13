@@ -2,23 +2,23 @@ import pako from 'pako';
 import { Buffer } from 'buffer';
 import { type GameInputEvent, InputEventType, type GameReplayData } from '~/assets/types/replay';
 
-function decodeVLQ(data: string, position: number): [number, number] {
+function decodeVLQ(data: Uint8Array, position: number): [number, number] {
     let ret = 0;
-    let byte: number;
+    let byte = 0;
     do {
-        byte = data.charCodeAt(position);
+        byte = data[position];
         position++;
         ret = ret * 128 + (byte & 127);
     } while(byte >= 128);
     return [ret, position];
 }
 
-function pumpRecording(data: string) {
-    let position = 1;
+function pumpRecording(data: Uint8Array): GameInputEvent[] {
+    let position = 0;
     const events = [] as GameInputEvent[];
 
     let curFrame = 0;
-    while (position <= data.length) {
+    while (position < data.length) {
         let dt: number, eventKey: number;
         
         [dt, position] = decodeVLQ(data, position);
@@ -46,17 +46,17 @@ export async function parseReplayFromBuffer(replayBuf: Buffer): Promise<GameRepl
     const metadataStr = Buffer.from(metadata).toString();
     const replayData = JSON.parse(metadataStr) as Partial<GameReplayData>;
     
-    replayData.inputs = pumpRecording(Buffer.from(data).toString());
+    replayData.inputs = pumpRecording(Buffer.from(data));
 
     return replayData as GameReplayData;
 }
 
 export async function parseReplayFromRepString(replayStr: string): Promise<GameReplayData> {
-    const repBuf = Buffer.from(replayStr, "base64");
+    const repBuf = Buffer.from(replayStr.trim(), "base64");
     return await parseReplayFromBuffer(repBuf);
 }
 
-if(window) {
+if(typeof window !== 'undefined') {
     (window as Record<string, any>).TechminoReplayParser = {
         parseReplayFromBuffer,
         parseReplayFromRepString
