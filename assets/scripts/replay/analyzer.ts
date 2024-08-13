@@ -74,7 +74,7 @@ export function getReplayKeyDurationStats(
     let timeOfPreviousPress: { [key in InputKey]: number } = {} as any;
 
     for(const key of Object.values(InputKey) as InputKey[]) {
-        timeOfPreviousPress[key] = 0;
+        timeOfPreviousPress[key] = Infinity;
     }
 
     for(const input of replayData.inputs) {
@@ -389,7 +389,9 @@ export function getUsedKeys(replayData: GameReplayData) {
     let usedKeys = new Set<InputKey>();
 
     for(const input of replayData.inputs) {
-        usedKeys.add(input.key);
+        if(input.type === InputEventType.Press) {
+            usedKeys.add(input.key);
+        }
     }
 
     return Array.from(usedKeys).sort((a, b) => a - b);
