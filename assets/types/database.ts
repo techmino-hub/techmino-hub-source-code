@@ -96,7 +96,7 @@ export type Submission = {
 /**
  * The ReplayData type represents the replay data of a run, as stored in the database.  
  * The replay data is stored as a compressed base-64 string,
- * which you can parse using {@link /assets/scripts/replay/parser.ts}.  
+ * which you can parse using [techmino-replay-parser](https://www.npmjs.com/package/techmino-replay-parser).  
  * This should be what you get from querying from the `public.replays` table.  
  */
 export type ReplayData = {
@@ -108,7 +108,7 @@ export type ReplayData = {
 
     /**
      * The compressed base-64 version of the replay data.  
-     * You should parse it first using {@link /assets/scripts/replay/parser.ts}
+     * You should parse it first using [techmino-replay-parser](https://www.npmjs.com/package/techmino-replay-parser)
      * before performing any operations on it.  
      * Postgres type: text
      */

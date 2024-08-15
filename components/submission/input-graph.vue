@@ -11,7 +11,7 @@
 
 <script lang="ts" setup>
 import type { KeyDurationStats } from '~/assets/scripts/replay/analyzer';
-import { InputKey } from '~/assets/types/replay';
+import { InputKey } from 'techmino-replay-parser';
 import { Chart, registerables } from "chart.js";
 import { BoxPlotChart } from '@sgratzl/chartjs-chart-boxplot';
 import { type ChartDataset } from 'chart.js';

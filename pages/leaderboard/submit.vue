@@ -91,7 +91,7 @@ import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
 import { getModeI18nString } from '~/assets/scripts/modes';
 import type { User } from '@supabase/supabase-js';
 import { AccountState, SubmissionValidity, type Profile, type Submission } from '~/assets/types/database';
-import { parseReplayFromRepString } from '~/assets/scripts/replay/parser';
+import { parseReplayFromRepString } from 'techmino-replay-parser';
 
 const database = useDatabase();
 const i18n = useI18n();

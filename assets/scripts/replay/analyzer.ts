@@ -1,4 +1,4 @@
-import { type GameReplayData, InputEventType, InputKey } from "~/assets/types/replay";
+import { type GameReplayData, InputEventType, InputKey } from "techmino-replay-parser";
 
 /**
  * Represents the distribution of keypress durations in a replay.

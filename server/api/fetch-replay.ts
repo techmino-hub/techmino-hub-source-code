@@ -12,7 +12,7 @@ import { useDatabase } from '~/composables/database';
  * @apiSuccess {ReplayData} replay
  * The submission's replay data.
  * See type "ReplayData": `/assets/types/database.ts`
- * See how to parse the replay data: `/assets/scripts/replay/parser.ts`
+ * See how to parse the replay data: [NPM: techmino-replay-parser](https://www.npmjs.com/package/techmino-replay-parser)
  */
 
 export default defineEventHandler(async(event) => {

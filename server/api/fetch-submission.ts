@@ -16,7 +16,7 @@ import { useDatabase } from '~/composables/database';
  * It will return a "Submission" object if `with_replay` is `false`,  
  * otherwise it will return a "SubmissionWithReplay" object.
  * See types "Submission" and "SubmissionWithReplay": `/assets/types/database.ts`
- * See how to parse the replay data: `/assets/scripts/replay/parser.ts`
+ * See how to parse the replay data: [NPM: techmino-replay-parser](https://www.npmjs.com/package/techmino-replay-parser)
  */
 
 export default defineEventHandler(async(event) => {

@@ -26,7 +26,7 @@
 
 <script lang="ts" setup>
 import { getInputFingerprint, getReplayKeyDurationStats } from '~/assets/scripts/replay/analyzer';
-import { parseReplayFromRepString } from '~/assets/scripts/replay/parser';
+import { parseReplayFromRepString } from 'techmino-replay-parser';
 
 const props = defineProps({
     replayData: {

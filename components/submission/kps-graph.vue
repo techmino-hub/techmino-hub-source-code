@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { getUsedKeys, getReplayLength, getReplayLocalKps } from '~/assets/scripts/replay/analyzer';
-import { type GameReplayData } from '~/assets/types/replay';
+import { type GameReplayData } from 'techmino-replay-parser';
 import { Chart, registerables, type ChartOptions } from "chart.js";
 import { type ChartDataset } from 'chart.js';
 
