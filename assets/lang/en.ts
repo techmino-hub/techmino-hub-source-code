@@ -3207,6 +3207,65 @@ After you delete it, __there is no going back.__`,
     field: {
       time: "Time in seconds",
     },
+    transform: {
+      /**
+       * Transform user input into a specified format.
+       * For example, if the user inputs a grade of "TM+", 
+       * it should be converted into a grade index of 40.
+       * If the input is invalid, `null` should be returned.
+       */
+      masterGGrade: ({ named }) => {
+        let val = (named('value') as string)
+          .toLowerCase()
+          .replace(/\s+/g, '');
+
+          
+        // Numeric grades (pre-S1)
+        if(!isNaN(parseInt(val, 10))) {
+          const num = parseInt(val, 10);
+          
+          return (-1 * num) + 9;
+        }
+        
+        const map = new Map([
+          ["s1", 10], ["s2", 11], ["s3", 12], ["s4", 13], ["s5", 14],
+          ["s6", 15], ["s7", 16], ["s8", 17], ["s9", 18],
+          
+          ["m1", 19], ["m2", 20], ["m3", 21], ["m4", 22], ["m5", 23],
+          ["m6", 24], ["m7", 25], ["m8", 26], ["m9", 27],
+          
+          ["m", 28], ["mk", 29], ["mv", 30], ["mo", 31],
+          
+          ["mm-", 32], ["mm", 33], ["mm+", 34],
+          ["gm-", 35], ["gm", 36], ["gm+", 37],
+          ["tm-", 38], ["tm", 39], ["tm+", 40],
+          
+          ["master", 28], ["masterk", 29], ["masterv", 30], ["mastero", 31],
+          ["masterm-", 32], ["masterm", 33], ["masterm+", 34],
+          ["grandmaster-", 35], ["grandmaster", 36], ["grandmaster+", 37],
+          ["techmaster-", 38], ["techmaster", 39], ["techmaster+", 40]
+        ]);
+
+        if(map.has(val)) {
+          return map.get(val);
+        }
+
+        if(val.startsWith("tm+") || val.startsWith("techmaster+")) {
+          if(val.startsWith("tm+")) {
+            val = val.replace("tm+", "");
+          } else {
+            val = val.replace("techmaster+", "");
+          }
+
+          if(!isNaN(parseInt(val))) {
+            const num = parseInt(val);
+            return 39 + num;
+          }
+        }
+
+        return null;
+      },
+    },
     gameMode: "Game mode",
     importReplay: "Import from replay",
     invalidReplay: "Invalid replay",
