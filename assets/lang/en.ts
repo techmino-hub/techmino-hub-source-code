@@ -3227,16 +3227,11 @@ After you delete it, __there is no going back.__`,
         let val = (named('value') as string)
           .toLowerCase()
           .replace(/\s+/g, '');
-
-          
-        // Numeric grades (pre-S1)
-        if(!isNaN(parseInt(val, 10))) {
-          const num = parseInt(val, 10);
-          
-          return (-1 * num) + 9;
-        }
         
         const map = new Map([
+          ["10", 0], ["9", 1], ["8", 2], ["7", 3], ["6", 4],
+          ["5",  5], ["4", 6], ["3", 7], ["2", 8], ["1", 9],
+
           ["s1", 10], ["s2", 11], ["s3", 12], ["s4", 13], ["s5", 14],
           ["s6", 15], ["s7", 16], ["s8", 17], ["s9", 18],
           
@@ -3256,7 +3251,7 @@ After you delete it, __there is no going back.__`,
         ]);
 
         if(map.has(val)) {
-          return map.get(val);
+          return map.get(val)?.toString() ?? "0";
         }
 
         if(val.startsWith("tm+") || val.startsWith("techmaster+")) {
@@ -3268,7 +3263,7 @@ After you delete it, __there is no going back.__`,
 
           if(!isNaN(parseInt(val))) {
             const num = parseInt(val);
-            return 39 + num;
+            return (39 + num).toString();
           }
         }
 
@@ -3277,6 +3272,7 @@ After you delete it, __there is no going back.__`,
     },
     gameMode: "Game mode",
     importReplay: "Import from replay",
+    placeholder: "Input here...",
     invalidInput: "Invalid input",
     invalidReplay: "Invalid replay",
     replayDate: "When was the run played? (UTC)",

@@ -4,7 +4,13 @@
             type="number"
             class="hours"
             v-model.lazy="hours"
-            placeholder="000"
+            placeholder="0"
+            :style="{
+                width: Math.max(
+                    2,
+                    hours.toString().length
+                ) + 'ch'
+            }"
             :required="required"
             :readonly="readonly"
             @change="onChange"
@@ -61,7 +67,6 @@ const props = defineProps({
 });
 
 const emits = defineEmits(['change']);
-const model = defineModel<number>({ default: 0 });
 
 const hours = ref(0);
 const minutes = ref(0);
@@ -88,13 +93,14 @@ function onChange() {
         minutes.value %= 60;
     }
 
-    model.value =
+    const totalSecs =
         hours.value * 3600 +
         minutes.value * 60 +
         seconds.value +
         ms.value * 0.001;
-
-    emits('change', model.value);
+    
+    
+    emits('change', totalSecs);
 }
 </script>
 
@@ -150,7 +156,7 @@ input {
     }
 
     &.hours {
-        width: 3ch;
+        width: 1ch;
     }
     &.minutes {
         width: 2ch;

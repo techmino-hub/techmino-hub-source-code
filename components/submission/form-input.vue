@@ -1,11 +1,13 @@
 <template>
     <div class="sub-form-inp">
         <input
+            :class="{ err: errMessage }"
             :type="props.type"
             :required="props.required"
             :id="props.id"
             :name="props.name"
             :readonly="props.readonly"
+            :placeholder="$t('submit.placeholder')"
             @change="onChange"
         >
         <p
@@ -25,6 +27,10 @@ const props = defineProps({
     type: {
         type: String as PropType<InputHTMLAttributes['type']>,
         default: 'text'
+    },
+    convertToNumber: {
+        type: Boolean,
+        default: false
     },
     id: {
         type: String,
@@ -47,7 +53,7 @@ const props = defineProps({
         default: ''
     },
     transformer: {
-        type: [Function] as PropType<((value: string) => string | number | null)>,
+        type: [Function] as PropType<((value: string) => string | null)>,
         default: (s: string) => s,
     },
     message: {
@@ -57,25 +63,37 @@ const props = defineProps({
 });
 
 const errMessage = ref<string | null>(null);
-const message = ref(errMessage.value || props.message);
+const message = computed(() => errMessage.value || props.message);
 
-const model = defineModel<string | number>({ default: '' });
-const emits = defineEmits(['update', 'change']);
+const emits = defineEmits(['change']);
 
 function onChange(e: Event) {
     const target = e.target as HTMLInputElement;
-
+    
     const preVal = target.value;
+    
+    try {
+        let postVal: string | number | null = props.transformer(preVal);
+        
+        if(postVal === null) {
+            errMessage.value = i18n.t('submit.invalidInput');
+            return;
+        }
 
-    const postVal = props.transformer(preVal);
+        if(props.convertToNumber || props.type === "number") {
+            if(isNaN(postVal as any)) {
+                errMessage.value = i18n.t('submit.invalidInput');
+                return;
+            }
+            postVal = Number(postVal);
+        }
+        
+        errMessage.value = '';
 
-    if(postVal === null) {
+        emits('change', postVal);
+    } catch (e) {
         errMessage.value = i18n.t('submit.invalidInput');
-        return;
     }
-
-    model.value = postVal;
-    errMessage.value = '';
 }
 </script>
 
@@ -105,6 +123,11 @@ input {
         border-color: colors.$btn-active-border-color;
         box-shadow: 0 0 1ch colors.$btn-active-box-shadow-color;
     }
+
+    &.err {
+        border-color: colors.$error-color;
+        box-shadow: none;
+    }
 }
 
 input[readonly] {
@@ -112,7 +135,12 @@ input[readonly] {
     box-shadow: none !important;
     cursor: not-allowed;
 }
-.err {
-    color: red;
+
+p {
+    margin: 0;
+
+    &.err {
+        color: red;
+    }
 }
 </style>
