@@ -19,7 +19,7 @@ const props = defineProps({
      * If an ID is provided, the Profile object will be fetched from the database.
      */
     profile: {
-        type: Object as PropType<Profile | string>,
+        type: [Object, String] as PropType<Profile | string>,
         required: true,
     },
     withCard: {

@@ -21,6 +21,7 @@
                         name="replay"
                         id="replay"
                         v-model.lazy="replayTrim"
+                        :placeholder="$t('submit.placeholder')"
                         @change="processReplay"
                     />
                 </div>
@@ -47,11 +48,48 @@
                     <label :for="entry.name">
                         {{ getFieldI18nString(entry.name) }}
                     </label>
-                    <input
+                    <SubmissionFormInput
+                        v-if="entry.name !== 'time'"
+                        :type="
+                            $te(`submit.transform.${entry.name}`) ?
+                            'text' :
+                            entry.type
+                        "
+                        :convert-to-number="
+                            $te(`submit.transform.${entry.name}`)
+                        "
                         :name="entry.name"
                         :id="entry.name"
-                        v-model="score[index]"
                         required="true"
+                        :transformer="
+                            $te(`submit.transform.${entry.name}`) ?
+                            (
+                                (s: string) => $t(
+                                    `submit.transform.${entry.name}`, {
+                                        value: s
+                                    }
+                                )
+                            ) : ((s: string) => s)
+                        "
+                        :message="
+                            $te(`submit.transform.${entry.name}`) && score[index] ?
+                            (
+                                $t('submit.parsedAs', {
+                                    value: $t(`leaderboard.scoreDisp.${entry.name}`, {
+                                        value: score[index]
+                                    })
+                                })
+                            )
+                            : ''
+                        "
+                        @change="(v) => { score[index] = v }"
+                    />
+                    <SubmissionDurationInput
+                        v-else
+                        :id="entry.name"
+                        :name="entry.name"
+                        required="true"
+                        @change="(v) => { score[index] = v }"
                     />
                 </div>
                 <div class="row">
@@ -75,6 +113,7 @@
                     id="proof"
                     maxlength="255"
                     v-model.lazy="proof"
+                    :placeholder="$t('submit.placeholder')"
                     :required="!hasReplay"
                 ></textarea>
                 <button v-show="selMode" class="web-btn" type="submit" :disabled="uploadBlocked">
@@ -120,7 +159,7 @@ const repDateStr = computed({
         }
     }
 });
-const score: Record<string, Ref<unknown>> = {};
+const score: Ref<Record<string, string | number>> = ref({});
 const proof = ref<string | null>(null);
 const hasReplay = ref(false);
 const repMsg = ref("");
@@ -172,14 +211,14 @@ function getSubmission(): Submission | null {
     if(!RECORD_SCHEMAS[selMode.value]) return null;
     partial.score = {};
     for(const [index, entry] of Object.entries(RECORD_SCHEMAS[selMode.value].entries)) {
-        if(score[index] === undefined || score[index] === null) return null;
+        if(score.value[index] === undefined || score.value[index] === null) return null;
 
 
         if(entry.type === 'number') {
-            if(isNaN(Number(score[index]))) return null;
+            if(isNaN(Number(score.value[index]))) return null;
         }
 
-        partial.score[index] = score[index];
+        partial.score[index] = score.value[index];
     }
 
     partial.upload_date = new Date().toISOString();
@@ -225,7 +264,7 @@ async function uploadSubmission() {
 
         submissionUploaded = true;
 
-        if(replay.value && replay.value.length > 0) {
+        if(hasReplay.value && replay.value && replay.value.length > 0) {
             await database.createReplay(id, replay.value);
         }
     } catch(e) {

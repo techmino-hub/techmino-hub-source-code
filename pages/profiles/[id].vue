@@ -119,8 +119,6 @@ onMounted(async function() {
 
     amAdmin.value = myProfile.value.role === Role.Admin;
     amVerifier.value = [Role.Admin, Role.Verifier].includes(myProfile.value.role as Role);
-
-    console.debug(stateSelect.value); // DEBUG
 });
 
 function setState() {

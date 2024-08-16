@@ -452,8 +452,6 @@ function onKeyDown(ev: KeyboardEvent) {
 
     keyDownSet.add(ev.code);
 
-    // console.debug('keydown', ev.code);
-
     if(startUpdate) {
         prevTimestamp = performance.now();
         update(prevTimestamp);
