@@ -51,12 +51,12 @@
                     <SubmissionFormInput
                         v-if="entry.name !== 'time'"
                         :type="
-                            entry.name.toLowerCase().includes('grade') ?
+                            $te(`submit.transform.${entry.name}`) ?
                             'text' :
                             entry.type
                         "
                         :convert-to-number="
-                            entry.name.toLowerCase().includes('grade')
+                            $te(`submit.transform.${entry.name}`)
                         "
                         :name="entry.name"
                         :id="entry.name"
@@ -71,6 +71,17 @@
                                 )
                             ) : ((s: string) => s)
                         "
+                        :message="
+                            $te(`submit.transform.${entry.name}`) && score[index] ?
+                            (
+                                $t('submit.parsedAs', {
+                                    value: $t(`leaderboard.scoreDisp.${entry.name}`, {
+                                        value: score[index]
+                                    })
+                                })
+                            )
+                            : ''
+                        "
                         @change="(v) => { score[index] = v }"
                     />
                     <SubmissionDurationInput
@@ -78,7 +89,7 @@
                         :id="entry.name"
                         :name="entry.name"
                         required="true"
-                        @change="(v) => { score[index] = v; }"
+                        @change="(v) => { score[index] = v }"
                     />
                 </div>
                 <div class="row">
@@ -102,6 +113,7 @@
                     id="proof"
                     maxlength="255"
                     v-model.lazy="proof"
+                    :placeholder="$t('submit.placeholder')"
                     :required="!hasReplay"
                 ></textarea>
                 <button v-show="selMode" class="web-btn" type="submit" :disabled="uploadBlocked">
@@ -147,7 +159,7 @@ const repDateStr = computed({
         }
     }
 });
-const score: Record<string, string | number> = {};
+const score: Ref<Record<string, string | number>> = ref({});
 const proof = ref<string | null>(null);
 const hasReplay = ref(false);
 const repMsg = ref("");
@@ -199,14 +211,14 @@ function getSubmission(): Submission | null {
     if(!RECORD_SCHEMAS[selMode.value]) return null;
     partial.score = {};
     for(const [index, entry] of Object.entries(RECORD_SCHEMAS[selMode.value].entries)) {
-        if(score[index] === undefined || score[index] === null) return null;
+        if(score.value[index] === undefined || score.value[index] === null) return null;
 
 
         if(entry.type === 'number') {
-            if(isNaN(Number(score[index]))) return null;
+            if(isNaN(Number(score.value[index]))) return null;
         }
 
-        partial.score[index] = score[index];
+        partial.score[index] = score.value[index];
     }
 
     partial.upload_date = new Date().toISOString();

@@ -2983,7 +2983,7 @@ We do not expect there to be any cookies used on this site, but just to make sur
             "MM-", "MM", "MM+",
             "GM-", "GM", "GM+",
             "TM-", "TM", "TM+"
-          ][idx - 27];
+          ][idx - 28];
         } else {
           return "TM+" + (idx - 39);
         }
@@ -3273,6 +3273,7 @@ After you delete it, __there is no going back.__`,
     gameMode: "Game mode",
     importReplay: "Import from replay",
     placeholder: "Input here...",
+    parsedAs: "Parsed as {value}",
     invalidInput: "Invalid input",
     invalidReplay: "Invalid replay",
     replayDate: "When was the run played? (UTC)",

@@ -3,7 +3,7 @@
         <input
             type="number"
             class="hours"
-            v-model.lazy="hours"
+            v-model.lazy="hoursStr"
             placeholder="0"
             :style="{
                 width: Math.max(
@@ -19,7 +19,7 @@
         <input
             type="number"
             class="minutes"
-            v-model.lazy="minutes"
+            v-model.lazy="minutesStr"
             maxlength="2"
             placeholder="00"
             :required="required"
@@ -30,7 +30,7 @@
         <input
             type="number"
             class="seconds"
-            v-model.lazy="seconds"
+            v-model.lazy="secondsStr"
             maxlength="2"
             placeholder="00"
             :required="required"
@@ -41,7 +41,7 @@
         <input
             type="number"
             class="ms"
-            v-model.lazy="ms"
+            v-model.lazy="msStr"
             maxlength="3"
             placeholder="000"
             :required="required"
@@ -67,6 +67,23 @@ const props = defineProps({
 });
 
 const emits = defineEmits(['change']);
+
+const hoursStr = computed({
+    get: () => hours.value.toString(),
+    set: (val: string) => hours.value = parseInt(val) || 0
+});
+const minutesStr = computed({
+    get: () => minutes.value.toString().padStart(2, '0'),
+    set: (val: string) => minutes.value = parseInt(val) || 0
+});
+const secondsStr = computed({
+    get: () => seconds.value.toString().padStart(2, '0'),
+    set: (val: string) => seconds.value = parseInt(val) || 0
+});
+const msStr = computed({
+    get: () => ms.value.toString().padStart(3, '0'),
+    set: (val: string) => ms.value = parseInt(val) || 0
+});
 
 const hours = ref(0);
 const minutes = ref(0);
