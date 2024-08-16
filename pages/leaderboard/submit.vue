@@ -47,10 +47,18 @@
                     <label :for="entry.name">
                         {{ getFieldI18nString(entry.name) }}
                     </label>
-                    <input
+                    <SubmissionFormInput
+                        v-if="entry.name !== 'time'"
                         :name="entry.name"
                         :id="entry.name"
                         v-model="score[index]"
+                        required="true"
+                    />
+                    <SubmissionDurationInput
+                        v-else
+                        :id="entry.name"
+                        :name="entry.name"
+                        v-model="(score[index] as number)"
                         required="true"
                     />
                 </div>
@@ -120,7 +128,7 @@ const repDateStr = computed({
         }
     }
 });
-const score: Record<string, Ref<unknown>> = {};
+const score: Record<string, string | number> = {};
 const proof = ref<string | null>(null);
 const hasReplay = ref(false);
 const repMsg = ref("");

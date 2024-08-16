@@ -24,6 +24,15 @@ export default {
       text: `md_**Techmino Hub** - {commit}  
 Created with ❤ by [the Techmino community](https://github.com/techmino-hub/techmino-hub-source-code)`,
       lang: "Language"
+    },
+    separator: {
+      decimal: ".",
+      thousand: " "
+    },
+    time: {
+      'hour': ":",
+      'minute': "′",
+      'second': "″",
     }
   },
 
@@ -3268,6 +3277,7 @@ After you delete it, __there is no going back.__`,
     },
     gameMode: "Game mode",
     importReplay: "Import from replay",
+    invalidInput: "Invalid input",
     invalidReplay: "Invalid replay",
     replayDate: "When was the run played? (UTC)",
     imported: "Imported successfully",
