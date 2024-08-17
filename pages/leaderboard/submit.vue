@@ -101,13 +101,14 @@
                         v-model.lazy="repDateStr"
                         :readonly="hasReplay"
                         required="true"
+                        min="2019-06-26T00:00"
+                        :max="new Date().toISOString().slice(0, 16)"
                     />
                 </div>
-                <p v-show="selMode">
+                <p>
                     <label for="proof">{{ $t('submit.proof') }}</label>
                 </p>
                 <textarea
-                    v-show="selMode"
                     class="row"
                     name="proof"
                     id="proof"
@@ -153,7 +154,10 @@ const repDateStr = computed({
     get: () => repDate.value?.toISOString().slice(0, 16),
     set: (value: string | undefined) => {
         if(value) {
-            repDate.value = new Date(value);
+            repDate.value = new Date(
+                new Date(value).getTime()
+                - new Date().getTimezoneOffset() * 60000
+            );
         } else {
             repDate.value = null;
         }
