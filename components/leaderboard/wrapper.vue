@@ -223,7 +223,7 @@ function getPageUrl(place: "prev" | "next") {
 </script>
 
 <style scoped lang="scss">
-@use '~/assets/scss/index';
+@use '~/assets/scss/global';
 @use '~/assets/scss/colors';
 
 .lb-wrapper {

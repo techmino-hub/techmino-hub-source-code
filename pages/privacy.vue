@@ -4,7 +4,7 @@
 </template>
 
 <style lang="scss">
-@use '~/assets/scss/index';
+@use '~/assets/scss/global';
 
 .page-outer {
     padding: 1em 2em;

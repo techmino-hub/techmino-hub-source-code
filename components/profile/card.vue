@@ -39,7 +39,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 @use '~/assets/scss/colors';
-@use '~/assets/scss/index';
+@use '~/assets/scss/global';
 
 .profile-card {
     display: flex;

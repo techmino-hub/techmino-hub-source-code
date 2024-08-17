@@ -73,7 +73,7 @@ const copyError = () => {
 <style scoped lang="scss">
 @use "~/assets/scss/main";
 @use "~/assets/scss/colors" as colors;
-@use "~/assets/scss/index";
+@use "~/assets/scss/global";
 
 main {
     padding: 1em 2em;
