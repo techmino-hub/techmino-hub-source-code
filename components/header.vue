@@ -47,6 +47,11 @@ onMounted(async function() {
                 class="hide-error"
                 v-thtml="$t('common.nav.map')"
             />
+            <NuxtLinkLocale
+                to="/leaderboard"
+                class="hide-error"
+                v-thtml="$t('common.nav.leaderboard')"
+            />
             <ClientOnly>
                 <NuxtLinkLocale
                     to="/sign-in"
@@ -112,6 +117,10 @@ onMounted(async function() {
                     to="/map"
                     v-thtml="$t('common.nav.map')"
                 />
+                <NuxtLinkLocale
+                    to="/leaderboard"
+                    v-thtml="$t('common.nav.leaderboard')"
+                />
             </section>
             <section class="hide-noscript">
                 <em>{{ $t('common.nav.section.account') }}</em>
@@ -144,8 +153,9 @@ onMounted(async function() {
 </template>
 
 <style scoped lang="scss">
-@use "~/assets/scss/main.scss";
-@use "~/assets/scss/colors.scss";
+@use "~/assets/scss/main";
+@use "~/assets/scss/colors";
+@use "~/assets/scss/consts";
 
 header {
     display: flex;
@@ -155,16 +165,13 @@ header {
     padding: 0.5em 1.5em;
     border-bottom: 0.15em dotted colors.$secondary-color;
 
-    @media (min-width: 700px) {
-        border-start-start-radius: 0.5em;
-        border-start-end-radius: 0.5em;
-
+    @media (min-width: #{consts.$header-collapse-width}) {
         button.hamburger, nav.mobile {
             display: none;
         }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: #{consts.$header-collapse-width}) {
         nav.desktop {
             display: none !important;
         }
@@ -191,7 +198,7 @@ header {
             text-shadow: 0.2em 0.2em 0 rgb(0, 80, 0);
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: #{consts.$header-collapse-width}) {
             h1 {
                 margin-block: 0.5em;
             }
@@ -222,14 +229,6 @@ header {
         padding: 0 1em;
         font-size: 1.2em;
         gap: 1em;
-
-        @media (max-width: 700px) {
-            width: fit-content;
-            padding: 0.2em 0.5em;
-            gap: 0.5em;
-            row-gap: 0.5em;
-            font-size: 1.3em;
-        }
 
         > a {
             position: relative;

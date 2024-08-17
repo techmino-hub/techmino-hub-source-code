@@ -28,6 +28,8 @@ const commitHash =
 </template>
 
 <style lang="scss">
+@use '~/assets/scss/consts';
+
 footer {
     display: flex;
     flex-direction: row;
@@ -37,11 +39,6 @@ footer {
     padding: 0.5em 1.5em;
     border-top: 0.15em dotted grey;
     color: rgb(180,180,180);
-
-    @media (min-width: 700px) {
-        border-end-start-radius: 0.5em;
-        border-end-end-radius: 0.5em;
-    }
 
     @media (prefers-contrast: more) {
         color: white;

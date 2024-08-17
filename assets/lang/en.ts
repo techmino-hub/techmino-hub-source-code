@@ -11,6 +11,7 @@ export default {
       home: "Home",
       faq: "FAQ",
       map: "Map",
+      leaderboard: "Leaderboards",
       profile: "View Profile",
       signIn: "Sign In",
       signOut: "Sign Out",
