@@ -10,8 +10,11 @@ const props = defineProps({
     },
     rank: {
         type: Number as PropType<Rank>,
-        required: false,
         default: Rank.Q
+    },
+    map: {
+        type: String,
+        default: "vanilla"
     }
 });
 
@@ -20,7 +23,7 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
 
 <template>
     <NuxtLinkLocale
-      :to="`/map-lite/${mode.name}`"
+      :to="`/map-lite/${mode.name}?map=${map}`"
       :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]}`"
       :style="{
         left: mode.x - mode.size + 'px',

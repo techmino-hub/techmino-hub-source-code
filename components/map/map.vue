@@ -112,8 +112,8 @@
                             </li>
                             <li
                               v-if="$te(`modes.${lastSelectedMode.name}.versionInfo`)">
-                                <h4 v-t="'map.info.difficulty'"></h4>
-                                <p v-html="$t(`modes.${lastSelectedMode.name}.difficulty`)"></p>
+                                <h4 v-t="'map.info.version'"></h4>
+                                <p v-html="$t(`modes.${lastSelectedMode.name}.versionInfo`)"></p>
                             </li>
                             <li>
                                 <a :href="lastSelectedMode.source"

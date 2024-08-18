@@ -12,7 +12,8 @@
                 "lockout",
                 "stack_wtf",
                 "scanner_l"
-            ]
+            ],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/sprint_10l.lua"
         },
         "sprint_40l_math": {
             "name": "sprint_40l_math",
@@ -21,7 +22,8 @@
             "size": 40,
             "shape": 1,
             "icon": "sprint2",
-            "unlock": ["wtf"]
+            "unlock": ["wtf"],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/sprint_40l.lua"
         },
         "wtf": {
             "name": "wtf",
@@ -30,7 +32,18 @@
             "size": 40,
             "shape": 1,
             "icon": "master_ex",
-            "unlock": []
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/wtf.lua"
+        },
+        "wtfv2": {
+            "name": "wtfv2",
+            "x": 0,
+            "y": -900,
+            "size": 40,
+            "shape": 1,
+            "icon": "master_ex",
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/wtfv2.lua"
         },
         "lockout": {
             "name": "lockout",
@@ -42,7 +55,8 @@
             "unlock": [
                 "construct_invsg",
                 "round_wtf"
-            ]
+            ],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/lockout.lua"
         },
         "construct_invsg": {
             "name": "construct_invsg",
@@ -51,7 +65,8 @@
             "size": 40,
             "shape": 1,
             "icon": "secret_grade",
-            "unlock": []
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/secret_grade.lua"
         },
         "round_wtf": {
             "name": "round_wtf",
@@ -60,7 +75,8 @@
             "size": 40,
             "shape": 1,
             "icon": "round",
-            "unlock": []
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/round_u.lua"
         },
         "scanner_l": {
             "name": "scanner_l",
@@ -72,7 +88,8 @@
             "unlock": [
                 "solo_wtf",
                 "backfire_wtf"
-            ]
+            ],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/scanner_l.lua"
         },
         "solo_wtf": {
             "name": "solo_wtf",
@@ -81,7 +98,8 @@
             "size": 40,
             "shape": 1,
             "icon": "solo",
-            "unlock": []
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/solo_u.lua"
         },
         "backfire_wtf": {
             "name": "backfire_wtf",
@@ -90,7 +108,8 @@
             "size": 40,
             "shape": 1,
             "icon": "backfire",
-            "unlock": []
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/backfire_u.lua"
         },
         "stack_wtf": {
             "name": "stack_wtf",
@@ -99,9 +118,8 @@
             "size": 40,
             "shape": 1,
             "icon": "mess",
-            "unlock": [
-                "rhythm_u"
-            ]
+            "unlock": ["rhythm_u"],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/stack_WTF.lua"
         },
         "rhythm_u": {
             "name": "rhythm_u",
@@ -110,7 +128,8 @@
             "size": 40,
             "shape": 1,
             "icon": "rhythm",
-            "unlock": []
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/rhythm_u.lua"
         },
         "confusion": {
             "name": "confusion",
@@ -119,7 +138,8 @@
             "size": 40,
             "shape": 1,
             "icon": "confusion",
-            "unlock": []
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/confusion.lua"
         },
         "cascade": {
             "name": "cascade",
@@ -128,12 +148,13 @@
             "size": 40,
             "shape": 1,
             "icon": "tech",
-            "unlock": []
+            "unlock": [],
+            "source": "https://github.com/MelloBoo44/Techmino-WTF/blob/main/parts/modes/cascade.lua"
         }
     },
     "starting_mode": "sprint_10l",
-    "min_x": -600,
-    "max_x": 600,
-    "min_y": -600,
-    "max_y": 600
+    "min_x": -626,
+    "max_x": 626,
+    "min_y": -926,
+    "max_y": 626
 }

@@ -3,7 +3,7 @@
         <Title>{{ $t('mapLite.tabTitleModeDetail', { modeName }) }}</Title>
         <h1>
             <NuxtLinkLocale
-              to="/map-lite"
+              :to="`/map-lite?map=${currentMap}`"
               class="block-style"
                 >{{ $t('mapLite.backToMap') }}</NuxtLinkLocale>
             <span>{{ modeName }}</span>
@@ -22,8 +22,8 @@
                     </li>
                     <li
                         v-if="$te(`modes.${modeCodeName}.versionInfo`)">
-                        <h4>{{ $t('map.info.difficulty') }}</h4>
-                        <span v-html="$t(`modes.${modeCodeName}.difficulty`)"></span>
+                        <h4>{{ $t('map.info.version') }}</h4>
+                        <span v-html="$t(`modes.${modeCodeName}.versionInfo`)"></span>
                     </li>
                     <li>
                         <a :href="mode.source"

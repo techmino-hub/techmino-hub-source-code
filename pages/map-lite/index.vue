@@ -16,6 +16,7 @@
                     v-for="mode in Object.values(mapData.modes)"
                     :key="mode.name"
                     :mode="mode"
+                    :map="currentMap"
                 />
             </div>
         </div>
