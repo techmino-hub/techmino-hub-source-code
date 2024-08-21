@@ -3216,6 +3216,7 @@ After you delete it, __there is no going back.__`,
     },
     field: {
       time: "Time in seconds",
+      isTAS: "This is a Tool-Assisted Speedrun",
     },
     transform: {
       /**

@@ -105,6 +105,16 @@
                         :max="new Date().toISOString().slice(0, 16)"
                     />
                 </div>
+                <div class="row">
+                    <label for="isTAS">{{ $t('submit.isTAS') }}</label>
+                    <input
+                        type="checkbox"
+                        name="isTAS"
+                        id="isTAS"
+                        v-model="isTAS"
+                        :readonly="forcedTAS"
+                    >
+                </div>
                 <p>
                     <label for="proof">{{ $t('submit.proof') }}</label>
                 </p>
@@ -165,6 +175,8 @@ const repDateStr = computed({
 });
 const score: Ref<Record<string, string | number>> = ref({});
 const proof = ref<string | null>(null);
+const isTAS = ref(false);
+const forcedTAS = ref(false);
 const hasReplay = ref(false);
 const repMsg = ref("");
 const errMsg = ref("");
@@ -184,6 +196,8 @@ async function processReplay() {
 
         selMode.value = replayData.mode;
         repDateStr.value = replayData.date;
+        isTAS.value = replayData.tasUsed ?? false;
+        forcedTAS.value = replayData.tasForced ?? false;
     } catch {
         repMsg.value = i18n.t('submit.invalidReplay');
         hasReplay.value = false;
@@ -234,7 +248,11 @@ function getSubmission(): Submission | null {
     if(!user.value) return null;
     partial.submitted_by = user.value.id;
 
-    partial.validity = SubmissionValidity.Unverified;
+    if(isTAS.value) {
+        partial.validity = SubmissionValidity.ToolAssisted;
+    } else {
+        partial.validity = SubmissionValidity.Unverified;
+    }
 
     if(!hasReplay.value && (!proof.value || proof.value.length === 0)) {
         return null;
