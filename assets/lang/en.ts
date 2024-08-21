@@ -3216,7 +3216,6 @@ After you delete it, __there is no going back.__`,
     },
     field: {
       time: "Time in seconds",
-      isTAS: "This is a Tool-Assisted Speedrun",
     },
     transform: {
       /**
@@ -3281,6 +3280,7 @@ After you delete it, __there is no going back.__`,
     replayDate: "When was the run played? (UTC)",
     imported: "Imported successfully",
     proof: "If you have any additional proof for your submission, enter them below. It can take the form of a video, a screenshot, or anything else that can help verify your run. This will be required if you don't provide a replay.",
+    isTAS: "This is a Tool-Assisted Speedrun",
     errUnknown: "Unknown error",
     errorIncomplete: "Failed to create submission. Are you sure you filled out everything correctly?",
     errorSub: "Error uploading submission: {error}",
