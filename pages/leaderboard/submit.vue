@@ -113,6 +113,7 @@
                         id="isTAS"
                         v-model="isTAS"
                         :readonly="forcedTAS"
+                        :disabled="forcedTAS"
                     >
                 </div>
                 <p>
@@ -175,7 +176,18 @@ const repDateStr = computed({
 });
 const score: Ref<Record<string, string | number>> = ref({});
 const proof = ref<string | null>(null);
-const isTAS = ref(false);
+const isTAS = computed({
+    get: () => _isTAS.value || forcedTAS.value,
+    set: (value: boolean) => {
+        _isTAS.value = (
+            forcedTAS.value ?
+            true :
+            value
+        );
+        console.debug(_isTAS.value); // DEBUG
+    }
+});
+const _isTAS = ref(false);
 const forcedTAS = ref(false);
 const hasReplay = ref(false);
 const repMsg = ref("");
@@ -197,7 +209,7 @@ async function processReplay() {
         selMode.value = replayData.mode;
         repDateStr.value = replayData.date;
         isTAS.value = replayData.tasUsed ?? false;
-        forcedTAS.value = replayData.tasForced ?? false;
+        forcedTAS.value = replayData.tasUsed ?? false;
     } catch {
         repMsg.value = i18n.t('submit.invalidReplay');
         hasReplay.value = false;
