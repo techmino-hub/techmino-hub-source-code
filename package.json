@@ -26,6 +26,7 @@
     "pako": "^2.1.0",
     "sanitize-html": "^2.13.0",
     "techmino-replay-parser": "^1.0.2",
+    "vercel": "^37.0.0",
     "vue": "^3.4.36",
     "vue-chartjs": "^5.3.1",
     "vue-router": "^4.4.3"

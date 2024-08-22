@@ -27,3 +27,4 @@ logs
 # Visual Studio Code
 .vscode/*
 !.vscode/tasks.json
+.vercel
