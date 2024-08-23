@@ -40,8 +40,8 @@ Created with ❤ by [the Techmino community](https://github.com/techmino-hub/tec
   home: {
     tabTitle: "Techmino Hub - Home",
     title: "Welcome to Techmino Hub!",
-    article: `md_Now recreated in Nuxt.js, Techmino Hub is an unofficial website for Techmino.  
-    This page is a work in progress, more things will come soon!`
+    article: `md_Techmino Hub is an unofficial website for Techmino.  
+We have a lot of information about Techmino, and host a leaderboard where players can submit runs.`
   },
 
   lang: {
