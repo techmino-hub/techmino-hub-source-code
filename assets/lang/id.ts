@@ -367,47 +367,52 @@ Anda masih bisa menggunakan tombol virtual di layar.`,
         credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'cant-install-macos': {
-        question: "Why can't I install Techmino on macOS?",
-        answer: `md_This is because Techmino isn’t on the Mac App Store.  
-To fix this issue, go to System Preferences → Security & Privacy.  
-Click on the lock icon on the lower-left corner and enter your password (or use Touch ID).  
-Then, select “App Store and identified developers” under the “Allow apps downloaded from” menu.  
-Reopen the app and you are all set.`,
-        credit: "C29H25N3O5"
+        question: "Mengapa saya tidak dapat menginstal Techmino pada macOS?",
+        answer: `md_Ini karena Techmino tidak tersedia di Mac App Store.  
+Untuk memperbaiki masalah ini, buka System Preferences → Security & Privacy.  
+Klik ikon kunci di bagian kiri-bawah dan masukkan kata sandi Anda (atau gunakan Touch ID).  
+Lalu, pilih “App Store and identified developers” di bawah menu “Allow apps downloaded from”.  
+Terakhir, buka kembali Techmino.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'simplistic-mode': {
-        question: "My main menu only has big buttons for Sprint and Marathon. (simplistic mode)",
-        answer: `md_You probably have enabled “Simplistic Mode.”  
-In this mode, only a few essentials modes and functions are available.  
-Simply go to the settings and uncheck the “Simplistic Mode” to fix it.`,
-        credit: "C29H25N3O5"
+        question: "Main menu saya hanya memiliki tombol besar untuk Balapan dan Maraton. (mode simplistik)",
+        answer: `md_Mungkin Anda telah mengaktifkan “Simplistic Mode.”  
+Dalam mode ini, hanya beberapa mode dan fungsi penting yang tersedia.  
+Cukup pergi ke pengaturan dan matikan “Simplistic Mode” untuk memperbaikinya.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'thinkz': {
-        question: "I see an icon that is like the \"thinking\" emoji, but with a Z tetromino. What is this?",
-        answer: `md_It means “Tetris”!
-Due to possible risk of receiving DMCAs from TTC, we have decided
-to replace all instances of the word “Tetris” in the game with 󰀕.`,
-        credit: "C29H25N3O5"
+        question: "Saya melihat ikon yang mirip dengan emoji \"berpikir\", tetapi dengan tetromino Z. Apa maksudnya?",
+        answer: `md_Ikon ini berarti "Tetris"!
+Karena kemungkinan risiko menerima DMCA dari *The Tetris Company*, kami telah memutuskan
+untuk mengganti semua kata-kata "Tetris" dalam permainan dengan 󰀕.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'purple-screen-of-death': {
-        question: "I got a purple screen of death, what does that mean?",
-        answer: `md_It's the same as a blue screen crash. It may occasionally appear as a small easter egg.`,
-        credit: "C29H25N3O5"
+        question: "Saya mendapatkan layar eror ungu, apa artinya?",
+        answer: `md_Itu sama dengan layar *bluescreen*/crash, bedanya hanya dalam warnanya. Ini kadang-kadang muncul karena *Easter egg*.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'download-soundtrack': {
-        question: "How can I download the in-game soundtracks?",
-        answer: `md_The Techmino OST is now available on SoundCloud!  
-You can download the full soundtracks [here](https://soundcloud.com/michael-gu-102967376/sets/techmino-the-ost-v2) free of charge (with a CC BY 3.0 License).`,
-        credit: "C29H25N3O5"
+        question: "Bagaimana cara mendownload soundtrack Techmino?",
+        answer: `md_OST Techmino sekarang tersedia di SoundCloud!
+Anda dapat mengunduh seluruh soundtrack [di sini](https://soundcloud.com/michael-gu-102967376/sets/techmino-the-ost-v2) gratis (dengan Lisensi CC BY 3.0).`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'rank-reqs': {
-        question: "How can I view the rank requirements for each mode?",
-        answer: `md_We list the rank requirements for each mode in [our map](/map)!  
-It's usually pretty accurate - especially since game updates have slowed down recently.  
-If you want to look at the game's source code to find the requirements, here's how you can do it:  
-First, go to Techmino's [GitHub repo](https://github.com/26F-Studio/Techmino),
-then navigate to \`/parts/modes\` to find the mode file (\`.lua\`) you want to open.  
-After that, look for a piece of the code that looks like this (this will going to be different for each mode; this example uses \`sprint_40l.lua\`):
+        question: "Bagaimana cara melihat persyaratan peringkat untuk setiap mode?",
+        answer: `md_Kami menyediakan persyaratan peringkat untuk setiap mode di [peta kami](/map)!
+Halaman itu biasanya cukup akurat - terutama karena Techmino sekarang-sekarang ini jarang mendapatkan pembaruan.  
+Jika Anda ingin melihat kode sumber Techmino untuk mendapatkan persyaratannya, berikut adalah caranya:
+
+Pertama, buka repositori Techmino di [GitHub](https://github.com/26F-Studio/Techmino).
+
+Kedua, Buka folder \`parts\`, lalu buka folder \`modes\`. Akan ada berbagai file mode di sini.  
+Biasanya, nama file mode akan mirip dengan nama mode dalam bahasa Inggris.  
+Jadi, untuk mendapatkan file mode untuk mode "Balapan 10L" *("Sprint 10L")*, buka file \`sprint_10l.lua\`.
+
+Lalu, pada file mode, cari bagian kode yang mirip dengan ini (ini akan berbeda untuk setiap mode; contoh ini menggunakan \`sprint_40l.lua\`):
 \`\`\`
 if P.stat.row<40 then return end
 local T=P.stat.time
@@ -420,183 +425,180 @@ return
     0
 end,
 \`\`\`
-The first line means that if \`P.stat.row\` is less than 40 (which means that you didn’t finish the 40L sprint), your grade is not recorded.  
-The variable’s name that goes after \`local\` is the category of the requirement (in this example, time (in seconds)).  
-The \`5\`, \`4\`, \`3\`, \`2\`, and \`1\` correspond to \`X\`, \`U\`, \`S\`, \`A\`, and \`B\` grades in the game.  
-\`0\` also means your grade is not recorded (in this example, when your time exceeds 183 seconds).`,
-        credit: "C29H25N3O5 (map section by NOT_A_ROBOT)"
+
+Makna baris pertama adalah jika \`P.stat.row\` kurang dari 40 (yang berarti Anda tidak menyelesaikan balapan 40L), peringkat Anda tidak dicatat.  
+Nama variabel yang ada setelah \`local\` adalah kategori persyaratannya (dalam contoh ini, waktu (dalam detik)).  
+Angka \`5\`, \`4\`, \`3\`, \`2\`, dan \`1\` sesuai dengan peringkat \`X\`, \`U\`, \`S\`, \`A\`, dan \`B\` dalam permainan.
+Angka \`0\` juga berarti peringkat Anda tidak dicatat (dalam contoh ini, ketika waktu Anda melebihi 183 detik).`,
+
+        credit: "C29H25N3O5 (map & terjemahan: NOT_A_ROBOT)"
       },
       'o-spins': {
-        question: "How can I perform O-Spins?",
+        question: "Bagaimana cara melakukan O-spin?",
         answer: `md_
-There are two kinds of O-spins: transformative O-spins and translational O-spins.  
-Transformative O-spins are only possible with TRS, while translational O-spins are possible with TRS, BiRS, and ASC; 
-so make sure you have the correct rotation system.  
+Ada dua jenis O-spin: O-spin transformatif dan O-spin translasional.  
+O-spin transformatif hanya bisa dilakukan menggunakan TRS, namun O-spin translasional bisa dilakukan menggunakan TRS, BiRS, dan ASC.
 
-To perform a transformative O-spin, move the O block in an appropriate “hole”, then use the following rotations to do the trick:
+Untuk melakukan O-spin transformatif, pindahkan blok O ke “lubang” yang sesuai, lalu gunakan rotasi berikut untuk melakukan trik tersebut:
 
-O → Z: LRL  
-O → S: RLR  
-O → J: LLR  
-O → L: RRL  
-O → T: LLL & RRR  
-O → I: FFF  
+O → Z: LRL
+O → S: RLR
+O → J: LLR
+O → L: RRL
+O → T: LLL & RRR
+O → I: FFF
 
-Note: L = counterclockwise, R = clockwise, F = 180° rotation
+Catatan: L = rotasi berlawanan arah jarum jam, R = rotasi searah jarum jam, F = rotasi 180°
 
-Here is a useful GIF demonstrating this:  
+Berikut adalah GIF yang berguna untuk demonstrasi ini:
 
 ![image](img/faq/trs-tf-ospin.gif)
 
-To perform a translational O-spin, you can use the fact that some rotation systems have kicks,
-and use that to put the O-piece in a hole.
+Untuk melakukan O-spin translasional, Anda dapat menggunakan fakta bahwa beberapa sistem rotasi memiliki kick,
+dan gunakan itu untuk meletakkan blok O di lubang.
 
-A notable oddity is BiRS, where you have to hold the correct arrow keys (move left/right/soft drop)
-to try to "bias" the kick in that direction, and then trying to rotate the O-piece.  
-More info is available in the in-game Zictionary.
+Uniknya, pada BiRS, Anda harus menahan tombol panah yang benar (bergerak ke kiri/kanan/bawah)
+untuk mencoba "menggeser" kick ke arah tersebut, lalu mencoba memutar blok O.  
+Informasi lebih lanjut tersedia di Zictionary dalam Techmino.
 
-Here's a demonstration of translational O-spins:  
+Berikut adalah demonstrasi O-spin translasional:
 
 ![image](img/faq/birs-tl-ospin.gif)
 `,
-        credit: "C29H25N3O5"
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'snapshot-version': {
-        question: "How can I download the latest snapshot (dev) version of Techmino?",
+        question: "Bagaimana cara mengunduh versi snapshot (dev) terbaru dari Techmino?",
         answer: `md_
-If you really want to test out the latest features of Techmino, the [GitHub CI](https://github.com/26F-Studio/Techmino/actions)
-would generate a snapshot version of the app for every commit.  
-Note that the snapshot versions might be unstable and contain many bugs,
-and that you need to be logged in to your GitHub account to download the artifacts (game builds).  
-If you want to test them out on iOS devices, you need to install the the artifacts (game builds) manually.`,
-        credit: "C29H25N3O5"
+Jika Anda benar-benar ingin mencoba fitur terbaru Techmino, [GitHub CI](https://github.com/26F-Studio/Techmino/actions)
+akan menghasilkan versi snapshot aplikasi untuk setiap commit.  
+Perlu diingat bahwa versi snapshot mungkin tidak stabil dan mengandung banyak bug,
+dan Anda perlu masuk ke akun GitHub Anda untuk mengunduh artifact (build permainan).  
+Jika Anda ingin mencobanya di perangkat iOS, Anda perlu menginstal artifact (build permainan) secara manual.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'linux-arm': {
-        question: "I am using an ARM version of Linux. Why can’t I play Techmino on my device?",
+        question: "Saya menggunakan distribusi Linux ARM. Mengapa saya tidak bisa memainkan Techmino di perangkat saya?",
         answer: `md_
-Unfortunately, the ARM distros of Linux are not yet supported by LÖVE, so you cannot do that.
-If you really want to play it on your device, we recommend you to use box64/box86 with Wine
-to run the Windows distro of the game.
-Note that you cannot open .AppImage files using box64/86 directly.
+Sayangnya, distribusi Linux ARM belum didukung oleh LÖVE, sehingga Anda tidak dapat melakukannya.  
+Jika Anda benar-benar ingin memainkannya di perangkat Anda, kami sarankan Anda menggunakan box64/box86 dengan Wine
+untuk menjalankan versi Windows dari Techmino.  
+Catatan: Anda tidak dapat membuka file .AppImage menggunakan box64/86 secara langsung.
 `,
-        credit: "C29H25N3O5"
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'm1-mac': {
-        question: "I am using an M1 Mac. Can I play Techmino on my device?",
-        answer: `md_Yes! LÖVE supports M1 Macs.  
-If you are using older versions that don’t support M1, just use Rosetta 2
-(which is built within the system so you don’t have to do anything).`,
-        credit: "C29H25N3O5"
+        question: "Apakah Techmino dapat dimainkan di M1 Mac saya?",
+        answer: `md_Ya! LÖVE mendukung M1 Mac.  
+Jika Anda menggunakan versi lama yang tidak mendukung M1, cukup gunakan Rosetta 2
+(yang terintegrasi dalam sistem sehingga Anda tidak perlu melakukan apa pun).`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'data-transfer': {
-        question: "How can I transfer my data from one device to another?",
+        question: "Bagaimana cara mentransfer data saya dari satu perangkat ke perangkat lain?",
         answer: `md_
-Simply go to Statistics &gt; Data Management, and you will see these buttons.
-Then you can copy and paste the data using your clipboard.
-![Screenshot of the Data Management scene in Techmino](/img/faq/data-management.png)`,
-        credit: "C29H25N3O5"
+Cukup pergi ke Statistik → Manajemen Data, dan Anda akan melihat tombol-tombol ini.  
+Kemudian Anda dapat menyalin dan menempelkan data menggunakan clipboard Anda.  
+![Screenshot dari layar Manajemen Data di Techmino](/img/faq/data-management.png)`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'custom-skin': {
-        question: "How do I make and import my own block skin?",
-        answer: `md_Here's an example block skin for reference:
-![Example skin](/img/faq/example-skin.png)  
-- The block skin is a \`.png\` file with a dimension of at least 240 × 90.
-- The image is divided into a 3 ×8 array of blocks, with each block having a dimension of 30× 30.
+        question: "Bagaimana cara membuat dan mengimpor skin blok saya sendiri?",
+        answer: `md_Berikut adalah contoh skin untuk referensi:
+![Contoh skin](/img/faq/example-skin.png)
+- Skin adalah file \`.png\` dengan dimensi minimal 240 × 90 pixel.
+- Gambar dibagi menjadi rangkaian 3 ×8 blok, dengan setiap blok memiliki dimensi 30× 30 pixel.
 
-To import your skin into the game:  
-1. Make your block skin and export it into a \`.png\` file.
-2. Move your skin to \`./media/image/skin/\`.
-3. Add the following code to \`./main.lua\` at around line 315, after \`SKIN.load\`
-  (**REMEMBER** to replace \`<SKIN_FILE_NAME>\` with the filename of the skin, and \`Skin name\` with the skin's name):  
-  \`'{'name="<Skin name>",path=\\'media/image/skin/<SKIN_FILE_NAME>.png\\''},\`
-4. Start the game. You will find your skin appearing in the block skin list.  
-
-TIPS:
-- \`<Skin name>\` allows almost any character, so you can set your skin's name something like: \`Diệt Slime suốt 300 năm, tôi level MAX lúc nào chẳng hay\`.
-- \`<Skin name>\` should only contain ~15 characters max! So don't use the example above or if you don't want to see your skin's name go out of selector's box`,
-        credit: "C29H25N3O5 (reworded by NOT_A_ROBOT and SweetSea)"
+Untuk mengimpor skin Anda ke dalam Techmino:
+1. Buat skin blok Anda dan ekspor ke dalam file \`.png\`.
+2. Pindahkan skin Anda ke \`./media/image/skin/\`.
+3. Tambahkan kode berikut ke \`./main.lua\` sekitar baris 315, setelah \`SKIN.load\`
+  (jangan lupa untuk mengganti \`<NAMA_FILE_SKIN>\` dengan nama file skin, dan \`Nama skin\` dengan nama skin):
+  \`'{'name="<Nama skin>", path=\\'media/image/skin/<NAMA_FILE_SKIN>.png\\''},\`
+4. Bukakah Techmino. Anda akan menemukan skin Anda muncul di daftar skin.`,
+        credit: "C29H25N3O5 & SweetSea (terjemahan oleh NOT_A_ROBOT)"
       },
       'tg-unverified-dev': {
-        question: "Techmino Galaxy macOS error: Techmino_Galaxy.app cannot be opened because the developer cannot be verified.",
+        question: "Error pada Techmino Galaxy versi macOS: Techmino_Galaxy.app cannot be opened because the developer cannot be verified.",
         answer: `md_
-![A popup stating the aforementioned error](/img/faq/mac-unverified-developer.png)
-This is because the Gatekeeper on macOS won’t let the user open any app that is not signed or notarized on default.  
-However, there is an easy way to bypass this:  
-Control–click Techmino (Galaxy).app and select “Open” from the pop-up menu, then select “Open” from the window.`,
-        credit: "C29H25N3O5"
+![Sebuah popup yang menunjukkan error tersebut](/img/faq/mac-unverified-developer.png)
+Ini karena Gatekeeper pada macOS tidak akan membiarkan pengguna membuka aplikasi apa pun yang tidak ditandatangani atau tidak dinotarisasikan secara default.  
+Namun, ada cara mudah untuk melewatinya:  
+Control–klik Techmino (Galaxy).app dan pilih “Buka” dari menu pop-up, lalu pilih “Buka” dari window.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'macos-damage-computer': {
-        question: "Techmino macOS error: Techmino.app will damage your computer. You should move it to the Trash.",
-        answer: `md_![A popup stating the aforementioned error](/img/faq/macos-big-sur-alert-malicious-app.jpg)  
-If you get this message, option-click Techmino (Galaxy).app, select “Get Info” from the menu, then check the “Override Malware Protection” checkbox.  
-You should now be able to open it.
+        question: "Error pada Techmino versi macOS: Techmino.app will damage your computer. You should move it to the Trash.",
+        answer: `md_![Sebuah popup yang menunjukkan error tersebut](/img/faq/macos-big-sur-alert-malicious-app.jpg)
+Jika Anda mendapatkan pesan ini, option-klik Techmino (Galaxy).app, pilih “Get Info” dari menu, lalu centang kotak “Override Malware Protection”.  
+Anda seharusnya sekarang dapat membukanya.
 
-Techmino is not malware and will not damage your computer.  
-As far as we know, this issue only appears on the dev and snapshot versions that are not signed.`,
-        credit: "C29H25N3O5"
+Techmino bukan malware dan tidak akan merusak komputer Anda.  
+Sejauh yang kami ketahui, masalah ini hanya muncul pada versi dev dan snapshot yang tidak ditandatangani.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'ios-portrait-mode': {
-        question: "Why Techmino is displayed in portrait mode on iOS (especially on iPhone)?",
-        answer: `md_Apparently, this is a bug that happens in iOS.  
-The “Portrait” mode in settings seems to do nothing on iOS.  
-Therefore, the only solution is to enter Techmino in landscape mode:  
-1. Swipe up from the bottom of the screen or double-tap the home button to enter App Switcher, then swipe up to quit Techmino.
-2. Disable the rotation lock if you haven’t already.
-3. Rotate your device to landscape mode. It is okay if the contents on the home screen don’t seem to be rotated to landscape view — this is normal as long as you hold the device in a landscape manner.
-4. Enter Techmino. Everything should be okay now.
+        question: "Mengapa Techmino ditampilkan dalam mode potret di iOS (terutama di iPhone)?",
+        answer: `md_Ini adalah bug yang terjadi di iOS.  
+Mode "Potret” di pengaturan sepertinya tidak berfungsi di iOS.  
+Oleh karena itu, satu-satunya solusi adalah masuk ke Techmino dalam mode lanskap:
+1. Geser ke atas dari bagian bawah layar atau ketuk dua kali tombol home untuk masuk ke App Switcher, lalu geser ke atas untuk keluar dari Techmino.
+2. Nonaktifkan kunci rotasi.
+3. Putar perangkat Anda ke mode lanskap. Tidak apa-apa jika konten di layar beranda tidak terlihat diputar ke tampilan lanskap — ini normal selama Anda memegang perangkat dalam posisi lanskap.
+4. Buka Techmino. Semuanya seharusnya berjalan dengan baik sekarang.
 
-Note that if you “swipe quit” the app again, you may need to repeat the procedure above.`,
-        credit: "C29H25N3O5"
+Jika anda “swipe quit” aplikasi lagi, anda mungkin perlu mengulangi prosedur di atas.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'tg-touch-controls': {
-        question: "How do I configure touch screen controls in Techmino Galaxy?",
-        answer: `md_Touch screen controls work slightly differently from the original Techmino, and you need to visit two screens to fully set up touch controls.  
-1. Turn on the "Enable touch controls" switch and click the "Touch controls..." button.
-2. On this screen, you can add, remove, move, and resize buttons, but they don't have actions assigned to them yet.
-3. Go back, and enter "Key mappings...".
-4. On this screen, click an action, then click a button to assign the button an action.`,
-        credit: "C29H25N3O5"
+        question: "Bagaimana cara mengatur kontrol layar sentuh di Techmino Galaxy?",
+        answer: `md_Kontrol layar sentuh pada Techmino Galaxy bekerja sedikit berbeda dari Techmino, dan Anda perlu mengunjungi dua layar untuk sepenuhnya mengatur kontrol sentuh.  
+1. Aktifkan tombol "Enable touch controls" dan klik tombol "Touch controls...".
+2. Di layar ini, Anda dapat menambahkan, menghapus, memindahkan, dan mengubah ukuran tombol, tetapi mereka belum memiliki tindakan yang ditugaskan kepada mereka.
+3. Kembali, dan masuk ke "Key mappings...".
+4. Di layar ini, klik sebuah tindakan, lalu klik sebuah tombol untuk menugaskan tindakan ke tombol tersebut.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'tg-interior': {
-        question: "The Techmino Galaxy UI looks different from some other people's screenshots! Are there only three modes (Dig Practice, 40 Lines and Marathon)?",
-        answer: `md_The other interface, along with other modes, are unlockable! Poke around.`,
-        credit: "C29H25N3O5"
+        question: "UI Techmino Galaxy saya berbeda dari tangkapan layar orang lain! Apakah hanya ada tiga mode (Latihan Dig, 40 Baris, dan Maraton)?",
+        answer: `md_UI yang lain, bersama dengan mode-mode yang lain, dapat di-unlock dengan bermain dengan cukup baik.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'tg-unlockall-music': {
-        question: "In Techmino Galaxy, how do I unlock all the music tracks?",
-        answer: `md_In the music room, turn off the BGM volume on the bottom right, stop the music in bottom middle, and spam click "full band" on the bottom left.  
-Alternatively, press alt+\` (backtick) to unlock them temporarily.`,
-        credit: "nekonaomii"
+        question: "Bagaimana cara meng-unlock semua lagu di Techmino Galaxy?",
+        answer: `md_Di ruang musik, matikan volume BGM di kanan bawah, hentikan musik di tengah bawah, dan spam klik "full band" di kiri bawah.  
+Atau, tekan alt+\` (backtick) untuk membukanya sementara.`,
+        credit: "nekonaomii (terjemahan oleh NOT_A_ROBOT)"
       },
       'tg-terminal': {
-        question: "In Techmino Galaxy, how do I access the Zenitha console?",
-        answer: `md_After you unlock the Exterior, go back to the Interior and spam-click the now-disabled Settings button.`,
-        credit: "nekonaomii"
+        question: "Bagaimana cara mengakses konsol Zenitha di Techmino Galaxy?",
+        answer: `md_Setelah Anda meng-unlock Exterior, kembali ke Interior dan klik tombol Pengaturan yang sekarang dinonaktifkan.`,
+        credit: "nekonaomii (terjemahan oleh NOT_A_ROBOT)"
       },
       'tech-league': {
-        question: "When will Tech League (ranked matchmaking) come out?",
-        answer: `md_Probably never.  
-According to MrZ:
+        question: "Kapan Tech League (ranked VS) akan dirilis?",
+        answer: `md_Kemungkinan besar: tidak akan pernah.
+Menurut MrZ:
 
-> … I don't plan to do [Tech League right now]…  
-> The previous system is not good as expected, if I want to do it I will rather add it to Techmino Galaxy…  
-> When I finish that, [I] will change the old button to an ad [for Techmino Galaxy’s “League”].
+> … Saya tidak berencana untuk melakukan [Tech League sekarang]…
+> Sistem sebelumnya tidak bagus seperti yang diharapkan, jika saya ingin melakukannya saya lebih kemungkinan menambahkannya ke Techmino Galaxy…
+> Ketika saya selesai dengan itu, [saya] akan mengubah tombol lama menjadi iklan [untuk “Liga” Techmino Galaxy].
 
-Key takeaway: Tech League will be implemented in Techmino Galaxy in the future.  
-It will not be implemented in the “Classic” Techmino.`,
-        credit: "C29H25N3O5"
+Pokoknya: Tech League mungkin akan diimplementasikan di Techmino Galaxy di masa depan.
+Tech League tidak akan diimplementasikan di Techmino “Klasik”.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'atk-table': {
-        question: "How should I calculate the attack in Techmino?",
-        answer: `md_Please use this table as a reference:  
-![Techmino's attack table](/img/faq/techmino-attack-table.jpg)`,
-        credit: "C29H25N3O5"
+        question: "Bagaimana cara menghitung serangan di Techmino?",
+        answer: `md_Gunakan tabel ini sebagai referensi:
+![Tabel serangan Techmino](/img/faq/techmino-attack-table.jpg)`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'b3b-calc': {
-        question: "How is B2B2B calculated in Techmino?",
-        answer: `md_Use this table to calculate B2B2B meter (on the left of the playfield):  
-![Techmino B2B2B table](/img/faq/b2b2b-calculator.png)`,
-        credit: "nekonaomii"
+        question: "Bagaimana cara menghitung B2B2B di Techmino?",
+        answer: `md_Gunakan tabel ini untuk menghitung meter B2B2B (di sebelah kiri lapangan permainan):
+![Tabel B2B2B Techmino](/img/faq/b2b2b-calculator.png)`,
+        credit: "nekonaomii (terjemahan oleh NOT_A_ROBOT)"
       }
     }
   },
