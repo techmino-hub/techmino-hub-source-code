@@ -170,202 +170,201 @@ Untuk menjalankan Techmino di perangkat iOS atau iPadOS (iPhone, iPad, iPod Touc
         credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'no-ipa': {
-        question: "I want to play Techmino on iOS or iPadOS without jailbreaking, but I don't see an .ipa download on the latest release.",
+        question: "Saya ingin memainkan Techmino pada iOS atau iPadOS tanpa jailbreak, tetapi saya tidak melihat file .ipa pada rilis terbaru.",
         answer:
-          `md_If you want to install a version of Techmino that has no \`.ipa\` builds, you can follow these steps:
-1. Get the \`.ipa\` files from [the GitHub releases page](https://github.com/26F-Studio/Techmino/releases). Find any version with a valid \`.ipa\` file, then download “Techmino_iOS.ipa”.
-2. Change the extension of the \`.ipa\` file to \`.zip\`. Extract the \`.zip\` file.
-3. Go to \`./Payload\`. If you are using Microsoft Windows, you will see a folder named \`Techmino.app\`, in which case, open that folder and skip to step 5.
-4. If you are using macOS, you will see an application file named \`Techmino.app\`. Control-click on it, then click on “Show package content” in the context menu.
-5. Locate \`game.love\`. Replace this file with the \`.love\` file you intend to install.
-6. Compress the Techmino iOS file into a \`.zip\` file again. Please choose the “no compression” option in your archive app when creating this zip file.
-7. Change the extension of the new \`.zip\` file back into \`.ipa\`.
-8. Follow the instructions of the previous FAQ entry.  
-Note that builds that are too far back in time may use a different build of LÖVE and may not work properly with this method.`,
-        credit: "C29H25N3O5"
+          `md_Jika Anda ingin menginstal versi Techmino yang tidak memiliki file \`.ipa\`, Anda dapat mengikuti langkah-langkah berikut:
+1. Dapatkan file \`.ipa\` dari [halaman rilis GitHub](https://github.com/26F-Studio/Techmino/releases). Cari versi dengan file \`.ipa\` yang valid, lalu unduh “Techmino_iOS.ipa”.
+2. Ubah ekstensi file \`.ipa\` menjadi \`.zip\`. Ekstrak file \`.zip\` tersebut.
+3. Buka folder \`./Payload\`. Jika Anda menggunakan Microsoft Windows, Anda akan melihat folder bernama \`Techmino.app\`, dalam hal ini, buka folder tersebut dan lanjutkan ke langkah 5.
+4. Jika Anda menggunakan macOS, Anda akan melihat file aplikasi bernama \`Techmino.app\`. Klik kanan pada file tersebut, lalu klik “Show package content” di menu klik-kanan.
+5. Cari file \`game.love\`. Ganti file ini dengan file \`.love\` yang ingin Anda instal.
+6. Kompres file Techmino iOS ke dalam file \`.zip\` lagi. Pilih opsi “tanpa kompresi” di aplikasi arsip Anda saat membuat file zip ini.
+7. Ubah ekstensi file \`.zip\` kembali menjadi \`.ipa\`.
+8. Ikuti instruksi dari entri FAQ sebelumnya.
+Catatan: Build yang terlalu lama mungkin menggunakan build LÖVE yang berbeda dan mungkin tidak berfungsi dengan baik dengan metode ini.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'cc-error': {
-        question: "Why am I getting errors related to the Cold Clear bot? How do I fix it?",
+        question: "Mengapa saya mendapatkan error terkait dengan AI Cold Clear? Bagaimana cara memperbaikinya?",
         answer:
-          `md_This issue is usually — but not always — caused by missing files that are required to load the ColdClear bot.
-Below is a list of ColdClear's files on different platforms:
-| Platform    | Files                                   | Note                                                                                            |
-|-------------|-----------------------------------------|-------------------------------------------------------------------------------------------------|
-| Windows     | \`CCloader.dll\`, \`cold_clear.dll\`    |                                                                                                 |
-| Linux       | \`lib/CCloader.so\`                     |                                                                                                 |
-| MacOS       | \`CCloader.dylib\`                      | Needs further investigation.                                                                    |
-| Android x86 | \`libAndroid/armeabi_v7a/CCloader.so\`  |                                                                                                 |
-| Android x64 | \`libAndroid/arm64_v8a/CCloader.so\`    |                                                                                                 |
-| iOS         | \`llibCCloader.a\`, \`libcold_clear.a\` | Needs further investigation. It's probable that 2 files are required to build CCloader for iOS. |
+          `md_Masalah ini biasanya — tetapi tidak selalu — disebabkan karena file yang diperlukan untuk memuat bot ColdClear tidak ditemukan.
+Berikut adalah daftar file ColdClear pada platform yang berbeda:
+| Platform    | File                                    | Catatan                                                                                                |
+|-------------|-----------------------------------------|--------------------------------------------------------------------------------------------------------|
+| Windows     | \`CCloader.dll\`, \`cold_clear.dll\`    |                                                                                                        |
+| Linux       | \`lib/CCloader.so\`                     |                                                                                                        |
+| MacOS       | \`CCloader.dylib\`                      | Memerlukan investigasi lebih lanjut.                                                                   |
+| Android x86 | \`libAndroid/armeabi_v7a/CCloader.so\`  |                                                                                                        |
+| Android x64 | \`libAndroid/arm64_v8a/CCloader.so\`    |                                                                                                        |
+| iOS         | \`llibCCloader.a\`, \`libcold_clear.a\` | Memerlukan investigasi lebih lanjut. Kemungkinan 2 file diperlukan untuk membangun CCloader untuk iOS. |
 
-Below are instructions on how to fix this issue.
-1. Grab the ColdClear wrapper [here](https://github.com/26F-Studio/cold_clear_ai_love2d_wrapper/releases). Get the file that matches your operating system.
-2. Download [Techmino's source code](https://github.com/26F-Studio/Techmino). (click the green Code button and click Download ZIP)
-3. Extract the downloaded files to seperate folders (Techmino source code to a folder, CCloader files to another folder)
-4. Copy the necessary files from the CCloader folder into Techmino's source code, based on the path in the above table.
-5. Build Techmino. Instructions can be found [here](https://love2d.org/wiki/Game_Distribution).`,
-        credit: "SweetSea"
+Berikut adalah instruksi untuk memperbaiki masalah ini.
+1. Dapatkan wrapper ColdClear [di sini](https://github.com/26F-Studio/cold_clear_ai_love2d_wrapper/releases). Dapatkan file yang sesuai dengan sistem operasi Anda.
+2. Unduh [kode sumber Techmino](https://github.com/26F-Studio/Techmino). (klik tombol Code hijau dan klik Download ZIP)
+3. Ekstrak file yang diunduh ke folder terpisah (kode sumber Techmino ke folder, file CCloader ke folder lain)
+4. Salin file yang diperlukan dari folder CCloader ke kode sumber Techmino, berdasarkan jalur di tabel di atas.
+5. Bangun Techmino. Instruksi dapat ditemukan [di sini](https://love2d.org/wiki/Game_Distribution).`,
+        credit: "SweetSea (terjemahan oleh NOT_A_ROBOT)"
       },
       'remake': {
-        question: "I heard Techmino is being remade. What's going on?",
+        question: "Saya mendengar Techmino sedang dibuat ulang.",
         answer:
-          `md_On 15 Jan, 2022, MrZ (the main dev of Techmino) opened an issue named “REMAKE NOW” on the GitHub page.  
-According to MrZ himself, the current Techmino contains too many bugs that he needs to remake the whole game from scratch in order to resolve them.  
-Although it's still far from complete, you can view the source code [here](https://github.com/26F-Studio/Techmino_Galaxy).`,
-        credit: "C29H25N3O5"
+          `md_Pada 15 Januari 2022, MrZ (developer utama Techmino) membuka isu bernama "REMAKE NOW" di halaman GitHub.  
+Menurut MrZ sendiri, Techmino saat ini mengandung terlalu banyak bug sehingga dia perlu membuat ulang seluruh permainan dari awal untuk memperbaikinya.  
+Meskipun masih jauh dari selesai, Anda dapat melihat kode sumbernya [di sini](https://github.com/26F-Studio/Techmino_Galaxy).`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'how-to-play-tg': {
-        question: "How can I play Techmino Galaxy (the remake)?",
+        question: "Bagaimana cara menginstal Techmino Galaxy?",
         answer:
-          `md_**Do understand that Techmino Galaxy is still rather early in development, and does not necessarily give the best experience.**
+          `md_Peringatan: **Techmino Galaxy masih dalam tahap pengembangan awal, dan mungkin tidak memberikan pengalaman terbaik.**
 
-The easiest way to obtain Techmino Galaxy is through GitHub Actions. You *will* need a GitHub account to download the game this way.  
-Below are steps to download Techmino Galaxy through GitHub Actions:  
-1. Go to [Techmino Galaxy's Actions page](https://github.com/26F-Studio/Techmino_Galaxy/actions).
-2. Select the latest (topmost) build with a green checkmark (indicating the build was successful). You can do so by clicking on the title text.
-3. Scroll down to the "Artifacts" section and download your desired platform's version.
-4. Extract the downloaded file and run the executable.
+Cara termudah untuk mendapatkan Techmino Galaxy adalah melalui GitHub Actions. Anda *akan* memerlukan akun GitHub untuk mengunduh permainan ini.  
+Berikut adalah langkah-langkah untuk mengunduh Techmino Galaxy melalui GitHub Actions:
+1. Buka [halaman Actions Techmino Galaxy](https://github.com/26F-Studio/Techmino_Galaxy/actions).
+2. Pilih versi terbaru (paling atas) dengan tanda centang hijau (menunjukkan build berhasil). Anda dapat melakukannya dengan mengklik teks judul.
+3. Scroll ke bawah ke bagian "Artifacts" dan unduh versi platform yang diinginkan.
+4. Ekstrak file yang diunduh dan jalankan file executablenya.
 
-Alternatively, you can obtain the source code and run it through the LÖVE binary.
-This *does not* require a GitHub account, but is slightly more complicated.  
-To do this, follow these instructions:  
-1. [Get the latest version of LÖVE](https://love2d.org/).
-2. Download the repository from GitHub. This can be done in two ways:
-   - In [the repository](https://github.com/26F-Studio/Techmino_Galaxy), click the green "Code" button and select "Download ZIP".
-   - If you have Git installed, you can use \`git clone\` to clone the repository.
-3. In the downloaded repository, check if the Zenitha folder is empty. If it is, download [the Zenitha repository](https://github.com/26F-Studio/Zenitha) using the same method as above, and extract it into the Zenitha folder.
-4. Run the game by dragging the entire \`Techmino_Galaxy\` folder onto the LÖVE executable. (On Windows, this is \`love.exe\`.)
+Metode yang lain adalah dengan mendapatkan kode sumber dan menjalankannya melalui binary LÖVE.
+Ini *tidak* memerlukan akun GitHub, tetapi sedikit lebih rumit.
+Untuk melakukannya, ikuti instruksi berikut:
+1. [Dapatkan versi terbaru LÖVE](https://love2d.org/).
+2. Unduh repositori dari GitHub. Ini dapat dilakukan dengan dua cara:
+   - Di [repositori](https://github.com/26F-Studio/Techmino_Galaxy), klik tombol "Code" yang hijau dan pilih "Download ZIP".
+   - Jika Anda sudah menginstal Git, Anda dapat menggunakan \`git clone\` untuk mengunduh repositori.
+3. Di repositori yang diunduh, cek apakah folder Zenitha kosong. Jika iya, unduh [repositori Zenitha](https://github.com/26F-Studio/Zenitha) menggunakan metode yang sama seperti di atas, dan ekstrak ke dalam folder Zenitha.
+4. Jalankan permainan dengan menyeret seluruh folder \`Techmino_Galaxy\` ke executable LÖVE. (Di Windows, ini adalah \`love.exe\`.)
 
-If you often update the game, consider following [this guide made by SweetSea](https://github.com/26F-Studio/Techmino_Galaxy/discussions/26).  
-Note: MrZ does not recommend talking about Techmino Galaxy's contents, especially things that can still change a lot, in public places.  
-Unless you have an otherwise good reason, you should respect his recommendation. Thank you!`,
-        credit: "C29H25N3O5"
+Jika Anda sering memperbarui permainan, pertimbangkan untuk mengikuti [panduan ini yang dibuat oleh SweetSea](https://github.com/26F-Studio/Techmino_Galaxy/discussions/26).  
+Catatan: MrZ tidak merekomendasikan membicarakan konten Techmino Galaxy, terutama hal-hal yang masih bisa berubah banyak, di tempat umum.
+Kecuali Anda memiliki alasan yang baik, Anda sebaiknya menghormati rekomendasinya. Terima kasih!`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'sprint-only': {
-        question: "Why does this game only have Sprint?",
-        answer: `md_You need to play it in order to unlock the other modes.  
-Lines coming out from mode icons indicate whether this mode can unlock other modes.  
-To unlock subsequent modes, you need to reach at least B rank on the mode — this would be 1m 2s for Sprint 10L, or 3m 3s for Sprint 40L.`,
-        credit: "User670"
+        question: "Mengapa permainan ini hanya memiliki mode Balapan?",
+        answer: `md_Anda perlu memainkannya untuk meng-unlock mode lain.
+Garis yang keluar dari ikon mode menunjukkan apakah mode ini dapat membuka mode lain.
+Untuk meng-unlock mode berikutnya, Anda perlu mencapai setidaknya peringkat B pada mode tersebut — jadi 1 menit 2 detik untuk Balapan 10L, atau 3 menit 3 detik untuk Balapan 40L.`,
+        credit: "User670 (terjemahan oleh NOT_A_ROBOT)"
       },
       'unlockall': {
-        question: "But I don't want to have to unlock all the modes!",
-        answer: `md_There's a cheat code to unlock all the modes in the game.  
-Here are the instructions:  
-1. Go to the main menu.
-2. Open the terminal by pressing on the Techmino logo 4 times.
-3. Type in \`unlockall\` and press Enter. Follow the instructions that the command gives you.`,
+        question: "Tetapi saya tidak ingin meng-unlock semua mode!",
+        answer: `md_Terdapat cheat code untuk meng-unlock semua mode dalam Techmino:
+1. Buka main menu.
+2. Buka terminal dengan menekan logo Techmino 4 kali.
+3. Ketik \`unlockall\` dan tekan Enter. Ikuti instruksi yang diberikan oleh perintah tersebut.`,
         credit: "NOT_A_ROBOT"
       },
       'is-guideline': {
-        question: "Is this Guideline?",
-        answer: `md_Close, but no.  
-Some important differences from Guideline are:
-- It defaults to a custom rotation system based on SRS but has more kicks and O-spin.
-- The game has allspin.
-- The game uses a different attack table.`,
-        credit: "User670"
+        question: "Apakah Techmino mengikuti Guideline?",
+        answer: `md_Techmino hampir mengikuti Guideline, tetapi ada beberapa perbedaan:
+- Techmino menggunakan sistem rotasi kustom berdasarkan SRS tetapi memiliki lebih banyak *kick* dan *O-spin*.
+- Techmino memiliki sistem *allspin*, tidak hanya *T-spin*.
+- Techmino menggunakan tabel serangan yang berbeda dari Guideline.`,
+        credit: "User670 (terjemahan oleh NOT_A_ROBOT)"
       },
       'ai-list': {
-        question: "What are the AI players?",
-        answer: `md_The game uses two AIs: ColdClear and 9Stacker.  
-- [Cold Clear is developed by MinusKelvin](https://github.com/MinusKelvin/cold-clear). It is capable of performing T-Spins, Back-to-Backs and Perfect Clears. It is reported to be laggy on low-end devices when playing Battle Royale modes.  
-- 9Stacker is a more "stupid" algorithm, capable of only finesse and hard dropping.`,
-        credit: "User670"
+        question: "Apa saja AI yang digunakan dalam permainan?",
+        answer: `md_Permainan ini menggunakan dua AI: ColdClear dan 9Stacker.
+- [ColdClear dikembangkan oleh MinusKelvin](https://github.com/MinusKelvin/cold-clear). AI ini dapat melakukan T-Spin, Back-to-Back, dan Perfect Clear. ColdClear mungkin terasa lag pada perangkat spesifikasi rendah saat bermain mode Battle Royale.
+- 9Stacker adalah algoritma yang lebih sederhana, dan hanya mampu melakukan finesse dan hard drop.`,
+        credit: "User670 (terjemahan oleh NOT_A_ROBOT)"
       },
       'controller-support': {
-        question: "Does this game support controllers?",
-        answer: `md_Yes! Feel free to adjust button mappings in Settings → Key Settings.`,
-        credit: "User670"
+        question: "Apakah Techmino kompatibel dengan controller?",
+        answer: `md_Ya! Anda dapat mengatur mapping tombol di Pengaturan → Ubah Tindakan Tombol.`,
+        credit: "User670 (terjemahan oleh NOT_A_ROBOT)"
       },
       'how-to-multiplayer': {
-        question: "How do I play multiplayer? / I can't sign up for an account!",
-        answer: `md_Unfortunately, as of December 2023, the server is down.
-The server maintainer, Particle_G, has not been active for quite a while.
-It's recommended that you treat this game as a single-player game until this problem is resolved.`,
+        question: "Bagaimana cara bermain multiplayer? / Saya tidak bisa mendaftar akun!",
+        answer: `md_Sayangnya, pada Desember 2023, server sedang down.
+Pemelihara server, Particle_G, sudah tidak aktif cukup lama.
+Anda disarankan untuk memperlakukan permainan ini sebagai permainan single-player sampai masalah ini teratasi.`,
         credit: "NOT_A_ROBOT"
       },
       'change-language': {
-        question: "How do I change the game's language?",
-        answer: `md_In the main menu, click the button with a globe icon. That's the select language button.`,
-        credit: "User670"
+        question: "Bagaimana cara mengubah bahasa permainan?",
+        answer: `md_Pada main menu, klik tombol dengan ikon globe. Itu adalah tombol pemilihan bahasa.`,
+        credit: "User670 (terjemahan oleh NOT_A_ROBOT)"
       },
       'voice-actors': {
-        question: "Who are the voice actors for the voice packs? What are the voice languages?",
+        question: "Siapa saja aktor suara untuk paket suara? Apa saja bahasa yang mereka gunakan?",
         answer: `md_
-1. [Miya](https://space.bilibili.com/846180) is a virtual live streamer who used to play a lot of block stacking games.
-  Voice language: Japanese (line clears); Japanese, Chinese and Cat (others)
-2. Mono is an artist, however her online profile had been wiped clean.
-  Voice language: Japanese
-3. Xiaoya is a fellow block stacker player. She introduces herself as "Xia Xiaoya, a brand new type of duck."
-  Voice language: English (line clears); Chinese (others)
-4. [Flore](https://space.bilibili.com/1223403016) is a fellow block stacker player, featured in [this article](https://github.com/User670/temp/blob/master/those_who_play_tetris.md).
-  Voice language: English (line clears), various languages (others)
-5. [Miku](https://en.wikipedia.org/wiki/Hatsune_Miku) is a voice bank for the Japanese voice synthesizer Vocaloid.
-  Voice language: Japanese
-6. [Zundamon](https://vocalsynth.fandom.com/wiki/Zundamon) is a voice bank for various voice synthesizer programs.
-  Voice language: Japanese
-
-While MrZ does not have a voice pack, there used to be a "Welcome to Tech" voice clip that was recorded by MrZ himself.`,
+1. [Miya](https://space.bilibili.com/846180) adalah seorang virtual live streamer yang dulunya sering memainkan permainan penumpukan blok.
+  Bahasa suara: Jepang (line clears); Jepang, Cina, dan Kucing (lainnya)
+2. Mono adalah seorang seniman, namun profil online-nya telah dihapus.
+  Bahasa suara: Jepang
+3. Xiaoya adalah seorang pemain penumpukan blok. Dia memperkenalkan dirinya sebagai "Xia Xiaoya, jenis bebek yang baru."
+  Bahasa suara: Inggris (line clears); Cina (lainnya)
+4. [Flore](https://space.bilibili.com/1223403016) adalah seorang pemain penumpukan blok, yang ditampilkan dalam [artikel ini](https://github.com/User670/temp/blob/master/those_who_play_tetris.md).
+  Bahasa suara: Inggris (line clears), berbagai bahasa (lainnya)
+5. [Neuro](https://en.wikipedia.org/wiki/Neuro-sama) adalah chatbot dengan gaya VTuber yang mengadakan streaming di saluran Twitch.
+  Bahasa suara: Jepang
+6. [Miku](https://en.wikipedia.org/wiki/Hatsune_Miku) adalah bank suara untuk sintesis suara Jepang bernama Vocaloid.
+  Bahasa suara: Jepang
+7. [Zundamon](https://vocalsynth.fandom.com/wiki/Zundamon) adalah bank suara untuk berbagai program sintesis suara.
+  Bahasa suara: Jepang`,
         credit: "User670"
       },
       'mod-assets': {
-        question: "How do I extract, view, or replace the game's assets and code?",
+        question: "Bagaimana cara mengekstrak, melihat, atau mengganti aset dan kode Techmino?",
         answer: `md_
-The Techmino.exe file (Windows) or game.love file (anything else) are valid zip archives.  
-Using a software like 7-Zip, you can view, extract or replace any file(s) in it, including assets and Lua scripts.  
-Alternatively, you can check out the game's [source code on GitHub](https://github.com/26F-Studio/Techmino).`,
-        credit: "User670"
+File Techmino.exe (Windows) atau file game.love (platform lain) adalah arsip zip yang valid.  
+Dengan menggunakan perangkat lunak seperti 7-Zip, Anda dapat melihat, mengekstrak, atau mengganti file apa pun di dalamnya, termasuk aset dan skrip Lua.  
+Anda juga dapat melihat [kode sumber Techmino di GitHub](https://github.com/26F-Studio/Techmino).`,
+        credit: "User670 (terjemahan oleh NOT_A_ROBOT)"
       },
       'anti-addiction': {
-        question: "Anti-addiction system?",
-        answer: `md_The game has an anti-addiction system that prevents playing for too long.  
-It only takes into effect if you're playing the game in Chinese with a Sprint 10L time of over 10s,
-a Sprint 40L time of over 32.6s, and you have been playing for 4 hours.  
-The timer resets at midnight.  
-Although this feature isn't required because the game hasn't been registered in China,
-it's still a pretty cool Easter egg.`,
+        question: "Apakah Techmino memiliki sistem anti-kecanduan?",
+        answer: `md_Permainan ini memiliki sistem anti-kecanduan yang mencegah bermain terlalu lama.
+Sistem ini hanya berlaku jika Anda bermain dalam bahasa Cina dengan waktu Sprint 10L lebih dari 10 detik,
+waktu Sprint 40L lebih dari 32,6 detik, dan Anda telah bermain selama 4 jam.  
+Penghitung waktu akan direset pada tengah malam.  
+Meskipun fitur ini tidak diperlukan karena permainan belum terdaftar di China, ini merupakan salah satu Easter egg di dalam Techmino.`,
         credit: "NOT_A_ROBOT"
       },
       'can-record': {
-        question: "Can I upload a video of Techmino, or livestream me playing it?",
+        question: "Bolehkah saya mengunggah video Techmino, atau menyiarkan langsung saya memainkannya?",
         answer: `md_
-Previously we demanded that you ask for permission before doing so,
-but the legality of such requirement has been questioned.
+Sebelumnya kami menuntut Anda untuk meminta izin sebelum melakukannya,
+tetapi legalitas persyaratan semacam itu telah dipertanyakan.
 
-*However*, we do beg you that, if you decide to share any screenshots,
-videos or live streams of Techmino, please keep them within the Tetris community.  
-We do not want too much publicity for the time being.`,
-        credit: "User670"
+*Namun*, kami memohon Anda bahwa, jika Anda memutuskan untuk berbagi screenshot,
+video atau siaran langsung dengan Techmino, tolong hanya melakukannya di komunitas Tetris.  
+Kami tidak ingin terlalu banyak publisitas untuk saat ini.`,
+        credit: "User670 (terjemahan oleh NOT_A_ROBOT)"
       },
       'mrz-voice-pack': {
-        question: "MrZ voice pack when?",
-        answer: "md_Probably never.",
-        credit: "NOT_A_ROBOT (information from User670)"
+        question: "Kapankah MrZ akan mendapatkan paket suara?",
+        answer: "md_Kemungkinan besar: tidak akan pernah.",
+        credit: "NOT_A_ROBOT (informasi dari User670)"
       },
       'crash-no-bluescreen': {
-        question: "My game crashed/closed without a bluescreen!",
-        answer: `md_If the crash happened while an AI player is loaded (eg, in a VS mode game or on the title screen),
-it is likely an issue of Cold Clear, the bot AI we use.  
-**We can't do much about it.**  
-You can still try to ask around about the crash, especially when it happens without an AI on screen.`,
-        credit: "User670"
+        question: "Permainan saya tiba-tiba tertutup tanpa ada pesan eror!",
+        answer: `md_Jika permainan tertutup tanpa pesan eror, ini mungkin disebabkan oleh Cold Clear, bot AI yang digunakan dalam permainan.
+
+**Kami tidak bisa melakukan banyak hal untuk memperbaikinya.**  
+
+Anda masih bisa mencoba bertanya kepada orang lain tentang masalah ini, terutama jika ini terjadi tanpa AI di layar.`,
+        credit: "User670 (terjemahan oleh NOT_A_ROBOT)"
       },
       'access-terminal': {
-        question: "How do I access the in-game console/terminal?",
-        answer: `md_You can do it by clicking or pressing the “TECHMINO” icon on the home page
-or pressing the “C” key on your keyboard several times.  
-Note that [external keyboards may not work correctly on iOS and iPadOS](https://github.com/26F-Studio/Techmino/issues/330).`,
-        credit: "C29H25N3O5"
+        question: "Bagaimana cara mengakses konsol/terminal dalam permainan?",
+        answer: `md_Anda dapat melakukannya dengan mengklik atau menekan ikon “TECHMINO” di main menu
+atau dengan menekan tombol “C” pada keyboard Anda beberapa kali.
+
+Catatan: [keyboard eksternal mungkin tidak berfungsi dengan benar di iOS dan iPadOS](https://github.com/26F-Studio/Techmino/issues/330).`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'ext-kbd-not-working': {
-        question: "My external keyboard isn’t working with Techmino!",
-        answer: `md_Try plugging and unplugging your keyboard, or reconnecting your keyboard if you are using a Bluetooth keyboard.  
-This kind of issue typically only happens on mobile devices.  
-For iOS and iPadOS users, that is an issue we cannot fix for now.  
-This might be related to the iOS distro of LÖVE or how iOS recognises external keyboards.  
-At the same time, you can still use the on-screen virtual keys.`,
-        credit: "C29H25N3O5"
+        question: "Keyboard eksternal saya tidak berfungsi dengan Techmino!",
+        answer: `md_Coba colok dan lepas keyboard Anda, atau sambungkan kembali keyboard Anda jika Anda menggunakan keyboard Bluetooth.  
+Masalah semacam ini biasanya hanya terjadi pada perangkat seluler.  
+Untuk pengguna iOS dan iPadOS, itu adalah masalah yang kami tidak dapat memperbaiki untuk saat ini.  
+Ini mungkin terkait dengan distribusi LÖVE iOS atau bagaimana iOS mengenali keyboard eksternal.  
+Anda masih bisa menggunakan tombol virtual di layar.`,
+        credit: "C29H25N3O5 (terjemahan oleh NOT_A_ROBOT)"
       },
       'cant-install-macos': {
         question: "Why can't I install Techmino on macOS?",

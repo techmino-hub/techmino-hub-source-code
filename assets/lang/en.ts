@@ -301,9 +301,11 @@ It's recommended that you treat this game as a single-player game until this pro
   Voice language: English (line clears); Chinese (others)
 4. [Flore](https://space.bilibili.com/1223403016) is a fellow block stacker player, featured in [this article](https://github.com/User670/temp/blob/master/those_who_play_tetris.md).
   Voice language: English (line clears), various languages (others)
-5. [Miku](https://en.wikipedia.org/wiki/Hatsune_Miku) is a voice bank for the Japanese voice synthesizer Vocaloid.
+5. [Neuro](https://en.wikipedia/wiki/Neuro-sama) is a chatbot styled after a female VTuber that hosts livestreams on Twitch.
   Voice language: Japanese
-6. [Zundamon](https://vocalsynth.fandom.com/wiki/Zundamon) is a voice bank for various voice synthesizer programs.
+6. [Miku](https://en.wikipedia.org/wiki/Hatsune_Miku) is a voice bank for the Japanese voice synthesizer Vocaloid.
+  Voice language: Japanese
+7. [Zundamon](https://vocalsynth.fandom.com/wiki/Zundamon) is a voice bank for various voice synthesizer programs.
   Voice language: Japanese
 
 While MrZ does not have a voice pack, there used to be a "Welcome to Tech" voice clip that was recorded by MrZ himself.`,
