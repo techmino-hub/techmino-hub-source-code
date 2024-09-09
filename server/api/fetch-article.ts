@@ -75,16 +75,68 @@ export default defineEventHandler(async (event) => {
         locale = localeQuery;
     }
 
-    const filePath = resolve(`public/data/articles/${locale}/${id}`);
+    // const filePath = resolve(`public/data/articles/${locale}/${id}`);
 
-    if(!await fs.access(filePath).then(() => true).catch(() => false)) {
+    // if(!await fs.access(filePath).then(() => true).catch(() => false)) {
+    //     throw createError({
+    //         statusCode: 404,
+    //         statusMessage: `Article '${id}' on locale '${locale}' not found`
+    //     });
+    // }
+
+    // return {
+    //     content: await fs.readFile(filePath, 'utf-8')
+    // };
+
+    // const path = `http://techmino-hub.vercel.app/data/articles/${locale}/${id}`;
+    
+    let path: string;
+
+    if(typeof process.env.VERCEL_URL === 'string') {
+        path = `https://${process.env.VERCEL_URL}/data/articles/${locale}/${id}`;
+    } else if(typeof process.env.URL === 'string') {
+        path = `http://${process.env.URL}/data/articles/${locale}/${id}`;
+    } else if(event.headers.has('host')) {
+        let host = event.headers.get('host')!;
+
+        if(!host.includes(':')) {
+            if(process.dev) {
+                host += ':3000'; // port for development
+            } else {
+                host += ':443'; // HTTPS port
+            }
+        }
+
+        path = `http://${host}/data/articles/${locale}/${id}`;
+    } else {
         throw createError({
-            statusCode: 404,
-            statusMessage: `Article '${id}' on locale '${locale}' not found`
+            statusCode: 500,
+            statusMessage: "Failed to determine the base URL. Try setting the 'VERCEL_URL' or 'URL' environment variable into something like 'example.com'."
         });
     }
 
+    let text = "";
+
+    try {
+        let res = await fetch(path);
+
+        if(!res.ok) {
+            throw createError({
+                statusCode: res.status,
+                statusMessage: res.statusText
+            });
+        }
+
+        text = await res.text();
+    } catch (err) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: `Article '${id}' on locale '${locale}' not found`,
+            message: err as string | undefined
+        });
+    }
+    
     return {
-        content: await fs.readFile(filePath, 'utf-8')
+        content: text
     };
 });

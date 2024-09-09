@@ -10,31 +10,6 @@
         </h1>
 
         <div class="main-wrapper">
-            <main>
-                <ul class="mode-info-list">
-                    <li v-if="$te(`modes.${modeCodeName}.difficulty`)">
-                        <h4>{{ $t('map.info.difficulty') }}</h4>
-                        <span v-html="$t(`modes.${modeCodeName}.difficulty`)"></span>
-                    </li>
-                    <li v-if="$te(`modes.${modeCodeName}.length`)">
-                        <h4>{{ $t('map.info.length') }}</h4>
-                        <span v-html="$t(`modes.${modeCodeName}.length`)"></span>
-                    </li>
-                    <li
-                        v-if="$te(`modes.${modeCodeName}.versionInfo`)">
-                        <h4>{{ $t('map.info.version') }}</h4>
-                        <span v-html="$t(`modes.${modeCodeName}.versionInfo`)"></span>
-                    </li>
-                    <li>
-                        <a :href="mode.source"
-                          target="_blank"
-                          rel="noopener noreferrer">
-                            {{ $t('map.info.source') }}
-                        </a>
-                    </li>
-                </ul>
-                <article v-html="articleHTML"></article>
-            </main>
             <aside>
                 <i18n-t
                   v-if="$te(`modes.${modeCodeName}.featuredVideo`)"
@@ -71,6 +46,31 @@
                     />
                 </i18n-t>
             </aside>
+            <main>
+                <ul class="mode-info-list">
+                    <li v-if="$te(`modes.${modeCodeName}.difficulty`)">
+                        <h4>{{ $t('map.info.difficulty') }}</h4>
+                        <span v-html="$t(`modes.${modeCodeName}.difficulty`)"></span>
+                    </li>
+                    <li v-if="$te(`modes.${modeCodeName}.length`)">
+                        <h4>{{ $t('map.info.length') }}</h4>
+                        <span v-html="$t(`modes.${modeCodeName}.length`)"></span>
+                    </li>
+                    <li
+                        v-if="$te(`modes.${modeCodeName}.versionInfo`)">
+                        <h4>{{ $t('map.info.version') }}</h4>
+                        <span v-html="$t(`modes.${modeCodeName}.versionInfo`)"></span>
+                    </li>
+                    <li>
+                        <a :href="mode.source"
+                          target="_blank"
+                          rel="noopener noreferrer">
+                            {{ $t('map.info.source') }}
+                        </a>
+                    </li>
+                </ul>
+                <article v-html="articleHTML"></article>
+            </main>
         </div>
     </div>
 </template>
@@ -153,6 +153,7 @@ await useFetch('/api/fetch-article', {
 
 <style scoped lang="scss">
 @use '~/assets/scss/colors';
+@use '~/assets/scss/consts';
 
 .page-outer {
     padding: 1em 2em;
@@ -206,21 +207,27 @@ h1 {
 
 .main-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 2em;
 
-    @media (min-width: 768px) {
-        flex-direction: row;
-        gap: 1em;
+    @media (min-width: #{consts.$map-info-wrap-width}) {
+        display: block;
 
         main {
-            flex-basis: 60%;
-            padding-inline: 1em;
+            min-width: 0;
         }
 
         aside {
-            flex-basis: 40%;
-            padding-inline: 1em;
+            min-width: min-content;
+            width: fit-content;
+            height: fit-content;
+            float: right;
+            clear: right;
+            padding-inline: 3ch;
+            margin-inline-start: 3ch;
+
+            border: 0.1em solid grey;
+            border-radius: 1em;
         }
     }
 }
