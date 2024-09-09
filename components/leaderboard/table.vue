@@ -159,6 +159,7 @@ function localeScore(score: any, column: string) {
 
 .lb-outer {
     position: relative;
+    overflow: auto;
 }
 
 table {

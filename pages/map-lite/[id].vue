@@ -197,7 +197,7 @@ h1 {
     .rank-reqs {
         font-size: 1em;
         margin-top: 1em;
-        margin-inline: auto;
+        width: stretch;
     }
 }
 
@@ -219,15 +219,20 @@ h1 {
 
         aside {
             min-width: min-content;
-            width: fit-content;
+            width: 30vw;
+            max-width: fit-content;
+            position: relative; // this fixes float removing interactability... for some reason (???)
             height: fit-content;
             float: right;
             clear: right;
+            z-index: 100000000000;
             padding-inline: 3ch;
             margin-inline-start: 3ch;
 
             border: 0.1em solid grey;
             border-radius: 1em;
+
+            pointer-events: all;
         }
     }
 }
