@@ -157,8 +157,14 @@ function localeScore(score: any, column: string) {
 <style scoped lang="scss">
 @use '~/assets/scss/colors';
 
+.lb-outer {
+    position: relative;
+    overflow: auto;
+}
+
 table {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     overflow: auto;
     text-align: center;

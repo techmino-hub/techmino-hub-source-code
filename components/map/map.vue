@@ -101,6 +101,43 @@
                 </header>
                 <div class="bottom">
                     <main>
+                        <aside>
+                            <i18n-t
+                              v-if="$te(`modes.${lastSelectedMode.name}.featuredVideo`) && isPanelExpanded"
+                              keypath="map.featuredVideo"
+                              scope="global"
+                              tag="h3"
+                              class="video-outer">
+                                <div class="video-wrapper">
+                                    <iframe
+                                        :src="$t(`modes.${lastSelectedMode.name}.featuredVideo`)"
+                                        loading="lazy"
+                                        frameborder="0"
+                                    ></iframe>
+                                </div>
+                            </i18n-t>
+                            <i18n-t
+                              keypath="map.rankReqs"
+                              scope="global"
+                              tag="h3"
+                              class="center-text">
+                                <MapModeRanks :mode="lastSelectedMode" />
+                            </i18n-t>
+                            <i18n-t
+                              v-if="RECORD_SCHEMAS[lastSelectedMode.name] && isPanelExpanded"
+                              keypath="map.leaderboard"
+                              scope="global"
+                              tag="h3"
+                              class="center-text">
+                                <LeaderboardWrapper
+                                    class="lb-wrapper"
+                                    :gameMode="lastSelectedMode.name"
+                                    :validity="SubmissionValidity.Verified"
+                                    :limit="5"
+                                    :redirectToFull="true"
+                                />
+                            </i18n-t>
+                        </aside>
                         <ul class="mode-info-list">
                             <li v-if="$te(`modes.${lastSelectedMode.name}.difficulty`)">
                                 <h4 v-t="'map.info.difficulty'"></h4>
@@ -126,43 +163,6 @@
 
                         </article>
                     </main>
-                    <aside>
-                        <i18n-t
-                          v-if="$te(`modes.${lastSelectedMode.name}.featuredVideo`) && isPanelExpanded"
-                          keypath="map.featuredVideo"
-                          scope="global"
-                          tag="h3"
-                          class="video-outer">
-                            <div class="video-wrapper">
-                                <iframe
-                                    :src="$t(`modes.${lastSelectedMode.name}.featuredVideo`)"
-                                    loading="lazy"
-                                    frameborder="0"
-                                ></iframe>
-                            </div>
-                        </i18n-t>
-                        <i18n-t
-                          keypath="map.rankReqs"
-                          scope="global"
-                          tag="h3"
-                          class="center-text">
-                            <MapModeRanks :mode="lastSelectedMode" />
-                        </i18n-t>
-                        <i18n-t
-                          v-if="RECORD_SCHEMAS[lastSelectedMode.name] && isPanelExpanded"
-                          keypath="map.leaderboard"
-                          scope="global"
-                          tag="h3"
-                          class="center-text">
-                            <LeaderboardWrapper
-                                class="lb-wrapper"
-                                :gameMode="lastSelectedMode.name"
-                                :validity="SubmissionValidity.Verified"
-                                :limit="5"
-                                :redirectToFull="true"
-                            />
-                        </i18n-t>
-                    </aside>
                 </div>
             </div>
         </aside>
@@ -730,6 +730,7 @@ onMounted(mountedHook);
 
 <style scoped lang="scss">
 @use '~/assets/scss/colors';
+@use '~/assets/scss/consts';
 
 .map-outer {
     position: relative;
@@ -975,6 +976,7 @@ onMounted(mountedHook);
     }
     > .wide {
         position: relative;
+        font-size: 1rem;
 
         > header {
             position: absolute;
@@ -999,21 +1001,52 @@ onMounted(mountedHook);
 
             h1 {
                 margin-block: 0.25em;
+                text-align: end;
             }
         }
 
         > .bottom {
             position: absolute;
-            inset: 6em 1.862em 1.5em 1.862em;
+            inset: 6em 1.862em 0 1.862em;
             display: flex;
+            flex-direction: row-reverse;
             overflow-y: auto;
             padding-inline-end: 1em;
 
+            @media (min-width: #{consts.$map-info-wrap-width}) {
+                flex-direction: row;
+                justify-content: space-between;
+                min-height: 0;
+            }
+
+            @media (max-width: #{consts.$map-info-wrap-width}) {
+                display: block;
+
+                .rank-reqs {
+                    width: stretch;
+                }
+            }
+
+            main:after {
+                content: '.';
+                padding-block: 2em;
+                visibility: hidden;
+            }
+
             main {
-                display: flex;
-                flex-direction: column;
                 padding-top: 1em;
                 height: fit-content;
+
+                @media (min-width: #{consts.$map-info-wrap-width}) {
+                    display: block;
+                    width: 100%;
+                }
+
+                @media (max-width: #{consts.$map-info-wrap-width}) {
+                    display: flex;
+                    flex-direction: column;
+                    flex-shrink: 0;
+                }
 
                 .mode-info-list {
                     display: flex;
@@ -1100,6 +1133,23 @@ onMounted(mountedHook);
             aside {
                 height: fit-content;
 
+                @media (min-width: #{consts.$map-info-wrap-width}) {
+                    min-width: min-content;
+                    width: 30%;
+                    max-width: fit-content;
+                    float: right;
+                    clear: right;
+                    padding: 4ch;
+                    margin-inline-start: 4ch;
+                    overflow-y: auto;
+                    border: 0.1em solid grey;
+                    border-radius: 1em;
+                }
+
+                @media (max-width: #{consts.$map-info-wrap-width}) {
+                    width: stretch;
+                }
+
                 .video-outer {
                     text-align: center;
                     
@@ -1126,37 +1176,6 @@ onMounted(mountedHook);
                 .lb-wrapper {
                     margin-block-start: 1em;
                     font-size: 0.8em;
-                }
-            }
-
-            @media (min-aspect-ratio: 4/3) {
-                flex-direction: row;
-                justify-content: space-between;
-                min-height: 0;
-
-                main {
-                    width: 57.5%;
-                    overflow-y: auto;
-                }
-
-                aside {
-                    width: 37.5%;
-                    padding: 1em 0;
-                    overflow-y: auto;
-                }
-            }
-            @media (max-aspect-ratio: 4/3) {
-                flex-direction: column-reverse;
-                overflow-y: auto;
-
-                main {
-                    flex-shrink: 0;
-                    overflow-y: hidden;
-                }
-
-                .rank-reqs {
-                    max-width: 50%;
-                    margin-inline: auto;
                 }
             }
         }
