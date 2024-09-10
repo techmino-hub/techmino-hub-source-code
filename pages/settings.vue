@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { InputTypeHTMLAttribute } from 'vue';
+
 const settings = ref([
     {
         name: "bgEnabled",
@@ -11,11 +13,29 @@ const settings = ref([
         value: 1,
         min: 0,
         max: 2,
-        step: 0.1
+        step: 0.1,
+        display: (value: number) => `${(value * 100).toFixed(0)}%`
+    },
+    {
+        name: "mainPanelBlur",
+        type: "range",
+        value: 0,
+        min: 0,
+        max: 10,
+        step: 0.1,
+        display: (value: number) => `${value} px`
     }
-]);
+]) as Ref<{
+    name: string;
+    type: InputTypeHTMLAttribute;
+    value: boolean | number;
+    min?: number;
+    max?: number;
+    step?: number;
+    display?: ((value: boolean | number) => string);
+}[]>;
 
-function submitForm() {
+function saveSettings() {
     for(let setting of settings.value) {
         localStorage.setItem(setting.name, setting.value.toString());
     }
@@ -42,19 +62,25 @@ onMounted(init);
 </script>
 
 <template>
-    <div>
+    <div class="page-outer">
         <Title>{{ $t('settings.tabTitle') }}</Title>
         <h1 class="hide-noscript">{{ $t('settings.title') }}</h1>
         <p class="loading hide-noscript" id="loading-text">{{ $t('settings.loading') }}</p>
-        <form @submit.prevent="submitForm" class="hide-important" id="form">
+        <form @submit.prevent="saveSettings" class="hide-important" id="form">
             <div v-for="setting of settings" :key="setting.name"
-              :class="`setting${ setting.type === 'checkbox' ? ' inline' : '' }`">
+              :class="{
+                setting: true,
+                inline: setting.type === 'checkbox'
+              }">
                 <span>
                     <label :for="setting.name">
                         {{ $t(`settings.settings.${setting.name}`) }}
                     </label>
-                    <span v-if="setting.name === 'bgSpeed'">
+                    <!-- <span v-if="setting.name === 'bgSpeed'">
                         {{ (setting.value as number * 100).toFixed(0) }}%
+                    </span> -->
+                    <span v-if="setting.display">
+                        {{ setting.display(setting.value) }}
                     </span>
                 </span>
                 <input :type="setting.type" :id="setting.name"
@@ -76,6 +102,9 @@ onMounted(init);
 @use '~/assets/scss/main';
 @use '~/assets/scss/colors';
 
+.page-outer {
+    padding-block: 0.5em;
+}
 h1, #loading-text {
     text-align: center;
 }

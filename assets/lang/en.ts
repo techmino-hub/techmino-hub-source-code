@@ -59,7 +59,8 @@ We have a lot of information about Techmino, and host a leaderboard where player
     note: "These settings are stored locally in your browser.",
     settings: {
       bgEnabled: "Enable background",
-      bgSpeed: "Background animation speed"
+      bgSpeed: "BG anim. speed",
+      mainPanelBlur: "BG Blur"
     },
     save: "Save",
     noscriptWarn: "You cannot change your settings with JavaScript disabled."
