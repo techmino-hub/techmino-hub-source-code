@@ -1,52 +1,54 @@
 <template>
     <div class="pf-sub">
-        <table v-show="!loading">
-            <thead>
-                <tr>
-                    <th>
-                        {{ $t('leaderboard.header.mode') }}
-                    </th>
-                    <th>
-                        {{ $t('leaderboard.header.date') }}
-                    </th>
-                    <th>
-                        {{ $t('leaderboard.header.submitDate') }}
-                    </th>
-                    <th>
-                        {{ $t('leaderboard.header.details') }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="no-records" v-if="submissions.length < 1">
-                    <td colspan="99999">
-                        {{ $t('leaderboard.noSubmissions') }}
-                    </td>
-                </tr>
-                <tr
-                  v-for="(submission, index) in submissions.slice(0, limit)"
-                  :key="submission.id">
-                    <td>
-                        <NuxtLinkLocale
-                          :to="`/map-lite/${submission.game_mode}`">
-                            {{ getModeI18nString(submission.game_mode, $t) }}
-                        </NuxtLinkLocale>
-                    </td>
-                    <td>
-                        {{ new Date(submission.replay_date).toLocaleString() }}
-                    </td>
-                    <td>
-                        {{ new Date(submission.upload_date).toLocaleString() }}
-                    </td>
-                    <td>
-                        <NuxtLinkLocale
-                          :to="`/leaderboard/${submission.id}`">
-                            {{ getChar('key.right') }}
-                        </NuxtLinkLocale>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-wrapper">
+            <table v-show="!loading">
+                <thead>
+                    <tr>
+                        <th>
+                            {{ $t('leaderboard.header.mode') }}
+                        </th>
+                        <th>
+                            {{ $t('leaderboard.header.date') }}
+                        </th>
+                        <th>
+                            {{ $t('leaderboard.header.submitDate') }}
+                        </th>
+                        <th>
+                            {{ $t('leaderboard.header.details') }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="no-records" v-if="submissions.length < 1">
+                        <td colspan="99999">
+                            {{ $t('leaderboard.noSubmissions') }}
+                        </td>
+                    </tr>
+                    <tr
+                      v-for="(submission, index) in submissions.slice(0, limit)"
+                      :key="submission.id">
+                        <td>
+                            <NuxtLinkLocale
+                              :to="`/map-lite/${submission.game_mode}`">
+                                {{ getModeI18nString(submission.game_mode, $t) }}
+                            </NuxtLinkLocale>
+                        </td>
+                        <td>
+                            {{ new Date(submission.replay_date).toLocaleString() }}
+                        </td>
+                        <td>
+                            {{ new Date(submission.upload_date).toLocaleString() }}
+                        </td>
+                        <td>
+                            <NuxtLinkLocale
+                              :to="`/leaderboard/${submission.id}`">
+                                {{ getChar('key.right') }}
+                            </NuxtLinkLocale>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div class="offset-info">
             <button
               class="prev hide-noscript"
@@ -126,6 +128,11 @@ emit('load', submissions.value);
 <style scoped lang="scss">
 @use '~/assets/scss/colors';
 
+.table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -181,6 +188,10 @@ table {
 
     > * {
         margin-inline: auto;
+    }
+
+    span {
+        text-align: center;
     }
 
     button, a {

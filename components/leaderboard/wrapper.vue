@@ -55,6 +55,8 @@
         :validity="validity"
         :limit="limit"
         :offset="offset"
+        :show-submit-date="showSubmitDate"
+        :show-replay-date="showReplayDate"
         @load="onSubmissionsLoad"
     />
     <div class="offset-info" v-if="!props.offset && !redirectToFull">
@@ -126,6 +128,14 @@ const props = defineProps({
     offset: {
         type: Number,
         required: false
+    },
+    showSubmitDate: {
+        type: Boolean,
+        default: true
+    },
+    showReplayDate: {
+        type: Boolean,
+        default: true
     },
     showSubmitLink: {
         type: Boolean,
@@ -262,6 +272,10 @@ function getPageUrl(place: "prev" | "next") {
 
         > * {
             margin-inline: auto;
+        }
+
+        span {
+            text-align: center;
         }
 
         button, a {

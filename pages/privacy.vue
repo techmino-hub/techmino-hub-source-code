@@ -3,7 +3,7 @@
   <div class="page-outer" v-html="$t('privacy')"></div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '~/assets/scss/global';
 
 .page-outer {

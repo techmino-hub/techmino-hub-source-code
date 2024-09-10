@@ -34,7 +34,7 @@ const props = defineProps({
     </details>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '~/assets/scss/colors';
 details.question {
     border: 0.1em solid colors.$primary-color;
@@ -44,6 +44,10 @@ details.question {
     font-size: 1.25em;
     background-color: #00330022;
     color: white;
+
+    @media (prefers-contrast: more) {
+        background-color: black;
+    }
 
     &[open] > summary {
         border-bottom: 0.1em dotted colors.$primary-color-alpha75;
@@ -66,6 +70,10 @@ details.question {
         cursor: pointer;
         flex-grow: 1;
         text-align: left;
+
+        @media (prefers-contrast: more) {
+            background-color: black;
+        }
 
         h3 {
             display: inline;

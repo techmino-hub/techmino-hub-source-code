@@ -1,5 +1,5 @@
 <template>
-    <canvas id="background" title=" "></canvas>
+    <canvas id="background" aria-hidden></canvas>
 </template>
 
 <script lang="ts">
@@ -140,7 +140,7 @@ canvas#background {
     top: 0;
     left: 0;
     z-index: -1;
-    width: 100%;
-    height: 100%;
+    width: 100%; width: 100vw; width: 100lvw;
+    height: 100%; height: 100vh; height: 100lvh;
 }
 </style>

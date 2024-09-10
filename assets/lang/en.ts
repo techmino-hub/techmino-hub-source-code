@@ -2920,8 +2920,8 @@ We do not expect there to be any cookies used on this site, but just to make sur
     loading: "Loading...",
     null: "N/A",
     entryNumber: "Displaying entries {start} to {end}",
-    pagePrev: "󰄚 Previous",
-    pageNext: "Next 󰄛",
+    pagePrev: "󰄚",
+    pageNext: "󰄛",
     pageFull: "See more...",
     go: "Go",
     header: {

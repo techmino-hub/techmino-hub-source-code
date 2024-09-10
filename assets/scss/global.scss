@@ -16,6 +16,10 @@ body {
         border: 0.1em solid white;
         border-radius: 0.5rem;
         margin: 20px;
+
+        // TODO: Ask if blur is good on this
+        // backdrop-filter: blur(3px);
+        // -webkit-backdrop-filter: blur(3px);
         
         @media (max-width: #{consts.$panel-collapse-width}) {
             margin: 0;
@@ -30,6 +34,10 @@ body {
 
         > main {
             background-color: rgba(0, 0, 0, 0.6);
+
+            @media (prefers-reduced-transparency: reduce) {
+                background-color: rgba(0, 0, 0, 0.9);
+            }
 
             a.block-style {
                 color: colors.$primary-color;

@@ -12,10 +12,10 @@
                     <th v-for="column in recordSchema.entries" :key="column.name">
                         {{ $t(`leaderboard.header.${column.name}`) }}
                     </th>
-                    <th>
+                    <th v-if="showReplayDate">
                         {{ $t('leaderboard.header.date') }}
                     </th>
-                    <th>
+                    <th v-if="showSubmitDate">
                         {{ $t('leaderboard.header.submitDate') }}
                     </th>
                     <th>
@@ -54,10 +54,10 @@
                             )
                         }}
                     </td>
-                    <td>
+                    <td v-if="showReplayDate">
                         {{ new Date(submission.replay_date).toLocaleString() }}
                     </td>
-                    <td>
+                    <td v-if="showSubmitDate">
                         {{ new Date(submission.upload_date).toLocaleString() }}
                     </td>
                     <td>
@@ -98,6 +98,14 @@ const props = defineProps({
     offset: {
         type: Number,
         default: 0
+    },
+    showReplayDate: {
+        type: Boolean,
+        default: true
+    },
+    showSubmitDate: {
+        type: Boolean,
+        default: true
     }
 });
 

@@ -27,7 +27,7 @@ const commitHash =
   </footer>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @use '~/assets/scss/consts';
 
 footer {
@@ -44,7 +44,11 @@ footer {
         color: white;
     }
 
-    a {
+    @media (prefers-reduced-transparency: reduce) {
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    a, :deep(a) {
         color: rgb(180,180,180);
         transition: color 200ms;
         &:hover {

@@ -165,6 +165,10 @@ header {
     padding: 0.5em 1.5em;
     border-bottom: 0.15em dotted colors.$secondary-color;
 
+    @media (prefers-reduced-transparency: reduce) {
+        background-color: colors.$secondary-color-dark;
+    }
+
     @media (min-width: #{consts.$header-collapse-width}) {
         button.hamburger, nav.mobile {
             display: none;
@@ -283,6 +287,10 @@ header {
         transform: translateY(-1em);
         transition: opacity 250ms, transform 250ms;
 
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+
         a, button {
             box-sizing: border-box;
             width: 100%;
@@ -340,6 +348,10 @@ header {
         
         transform: translateX(0);
         transition: transform 250ms;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
 
         &.expand {
             transform: translateX(-100%);
