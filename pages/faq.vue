@@ -30,6 +30,7 @@ function filter(tag: Tag, mode: FilterMode) {
 <template>
     <div class="faq-outer">
         <Title>{{ $t('faq.tabTitle') }}</Title>
+        <Meta property="og:title" :content="$t('faq.tabTitle')" />
         <h1 class="center-text">{{ $t('faq.title') }}</h1>
         <main class="entries" id="faq">
             <FaqTagFilter @filter="filter" />

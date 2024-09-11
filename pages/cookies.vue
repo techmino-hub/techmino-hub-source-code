@@ -34,6 +34,7 @@ export default {
 <template>
     <div class="outer-cookies">
         <Title>{{ $t('cookies.tabTitle') }}</Title>
+        <Meta property="og:title" :content="$t('cookies.tabTitle')" />
         <h1>{{ $t('cookies.title') }}</h1>
         <div v-html="$t('cookies.description')"></div>
         <hr>

@@ -11,6 +11,7 @@ function setLanguage(event: Event) {
 <template>
     <div class="page">
         <Title>{{ $t('lang.tabTitle') }}</Title>
+        <Meta property="og:title" :content="$t('lang.tabTitle')" />
         <h1>{{ $t('lang.title') }}</h1>
         <form @submit.prevent="setLanguage" class="hide-noscript-important">
             <select name="language">

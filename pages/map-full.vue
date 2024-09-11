@@ -22,6 +22,7 @@ definePageMeta({
 <template>
     <div class="map-page">
         <Title>{{ $t('map.tabTitleFS') }}</Title>
+        <Meta property="og:title" :content="$t('map.tabTitleFS')" />
         <Map :map="currentMap" class="map hide-noscript-important" :fullscreen="true" />
         <noscript>
             <NuxtLinkLocale class="block-style center-text" to="/map-lite">{{ $t('map.htmlVersion') }}</NuxtLinkLocale>

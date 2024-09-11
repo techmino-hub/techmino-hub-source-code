@@ -1,6 +1,7 @@
 <template>
     <div class="page-outer">
         <Title>{{ $t('accountDelete.tabTitle') }}</Title>
+        <Meta property="og:title" :content="$t('accountDelete.tabTitle')" />
         <h1>{{ $t('accountDelete.title') }}</h1>
         <noscript>
         {{ $t('accountDelete.noscriptWarn') }}

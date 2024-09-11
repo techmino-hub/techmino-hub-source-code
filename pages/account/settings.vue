@@ -1,6 +1,7 @@
 <template>
   <div class="page">
     <Title>{{ $t('account.tabTitle') }}</Title>
+    <Meta property="og:title" :content="$t('account.tabTitle')" />
     <h1>{{ $t('account.title') }}</h1>
     <ClientOnly>
         <div v-if="loading">

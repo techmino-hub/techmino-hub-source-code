@@ -64,6 +64,7 @@ onMounted(init);
 <template>
     <div class="page-outer">
         <Title>{{ $t('settings.tabTitle') }}</Title>
+        <Meta property="og:title" :content="$t('settings.tabTitle')" />
         <h1 class="hide-noscript">{{ $t('settings.title') }}</h1>
         <p class="loading hide-noscript" id="loading-text">{{ $t('settings.loading') }}</p>
         <form @submit.prevent="saveSettings" class="hide-important" id="form">

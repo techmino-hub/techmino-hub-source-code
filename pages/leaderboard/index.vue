@@ -3,6 +3,7 @@
     <Title>
         {{ $t('leaderboard.tabTitle') }}
     </Title>
+    <Meta property="og:title" :content="$t('leaderboard.tabTitle')" />
     <h1 class="center-text">
         {{ $t('leaderboard.title') }}
     </h1>

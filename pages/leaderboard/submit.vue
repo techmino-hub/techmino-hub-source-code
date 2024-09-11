@@ -1,6 +1,7 @@
 <template>
     <div class="page-outer">
         <Title>{{ $t('submit.tabTitle') }}</Title>
+        <Meta property="og:title" :content="$t('submit.tabTitle')" />
         <h1>{{ $t('submit.title') }}</h1>
         <noscript>{{ $t('submit.noscriptWarn') }}</noscript>
         <ClientOnly>

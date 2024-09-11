@@ -3,6 +3,7 @@
         <Title>
             {{ $t('mapLite.tabTitle')}}
         </Title>
+        <Meta property="og:title" :content="$t('mapLite.tabTitle')" />
         <div
           v-if="mapData"
           class="map-elements"

@@ -1,6 +1,7 @@
 <template>
 <div class="page-outer">
     <Title>{{ $t('signIn.tabTitle') }}</Title>
+    <Meta property="og:title" :content="$t('signIn.tabTitle')" />
     <h1 v-t="'signIn.title'"></h1>
     <i18n-t keypath="signIn.ruleNote" scope="global" tag="p" class="tos-note hide-noscript">
         <NuxtLinkLocale class="glow-style" to="/rules" v-t="'signIn.ruleNoteRule'" />

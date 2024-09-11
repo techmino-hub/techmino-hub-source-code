@@ -1,6 +1,7 @@
 <template>
     <div class="page-outer">
         <Title>{{ $t('mapLite.tabTitleModeDetail', { modeName }) }}</Title>
+        <Meta property="og:title" :content="$t('mapLite.tabTitleModeDetail', { modeName })" />
         <h1>
             <NuxtLinkLocale
               :to="`/map-lite?map=${currentMap}`"

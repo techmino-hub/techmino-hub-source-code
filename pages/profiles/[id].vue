@@ -5,6 +5,9 @@
                 username: profile.username
             }) }}
         </Title>
+        <Meta property="og:title" :content="$t('profile.tabTitle', {
+            username: profile.username
+        })" />
         <section class="top">
             <ProfileAvatar
                 :profile-id="profile.id"

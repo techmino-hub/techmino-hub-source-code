@@ -1,5 +1,6 @@
 <template>
   <Title>{{ $t('rulesTabTitle') }}</Title>
+  <Meta property="og:title" :content="$t('rulesTabTitle')" />
   <div class="page-outer" v-html="$t('rules')"></div>
 </template>
 

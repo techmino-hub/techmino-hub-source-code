@@ -18,6 +18,7 @@ let currentMap: string = 'vanilla';
 <template>
     <div class="map-page">
         <Title>{{ $t('map.tabTitle') }}</Title>
+        <Meta property="og:title" :content="$t('map.tabTitle')" />
         <h1 class="center-text">{{ $t('map.title') }}</h1>
         <p class="center-text hide-noscript">{{ $t('map.details', { currentMap: currentMap }) }}</p>
         <NuxtLinkLocale
