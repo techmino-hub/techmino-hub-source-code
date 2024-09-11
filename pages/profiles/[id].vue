@@ -91,7 +91,7 @@ const myProfile = ref<Profile | null>(null);
 const amAdmin = ref(false);
 const amVerifier = ref(false);
 
-const id = route.params.id;
+const id = route.params.id as string;
 
 const { data, error } = await useFetch('/api/fetch-profile', {
     method: 'GET',
@@ -110,6 +110,35 @@ const profile = data.value.profile;
 
 const stateSelect = ref<AccountState>(profile.account_state as AccountState);
 const roleSelect = ref<Role>(profile.role as Role);
+
+{
+    const { data } = await useFetch('/api/check-avatar', {
+        method: 'GET',
+        params: { id }
+    });
+
+    if(data) {
+        useHead({
+            meta: [
+                {
+                    property: 'og:image',
+                    content: database.getAvatarUrlByUserId(id)
+                }
+            ]
+        });
+    }
+
+    if(profile.bio.trim().length > 0) {
+        useHead({
+            meta: [
+                {
+                    name: 'description',
+                    content: `"${profile.bio}"`
+                }
+            ]
+        });
+    }
+}
 
 onMounted(async function() {
     user.value = (await database.supabase.auth.getUser()).data.user;
