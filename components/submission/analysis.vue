@@ -19,8 +19,13 @@
         </i18n-t>
         <i>{{ $t('submission.analysis.fingerprintDesc') }}</i>
         <br>
-        <SubmissionInputGraph :stats="keyDurationStats" />
-        <SubmissionKpsGraph :replay="parsedReplay" />
+        <SubmissionInputGraph
+            :stats="keyDurationStats"
+            :max="3 * Math.max(parsedReplay.setting.das ?? 8, parsedReplay.setting.sddas ?? 4)"
+        />
+        <SubmissionKpsGraph
+            :replay="parsedReplay"
+        />
     </div>
 </template>
 
@@ -65,8 +70,15 @@ const inputFingerprint = getInputFingerprint(keyDurationStats);
     textarea {
         display: inline;
         flex-grow: 1;
-        height: 2em;
-        padding-block: 0;
+        font-size: 1em;
+        height: 1.5em;
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        // unfortunately scrollbar-gutter doesn't affect horizontal scrollbars
+        // so we have to use 1em of padding
+        padding-block: 0 1em;
+        
         text-wrap: nowrap;
         white-space: nowrap;
         resize: none;
