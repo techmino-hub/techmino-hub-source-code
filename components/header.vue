@@ -23,67 +23,69 @@ onMounted(async function() {
 
 <template>
     <header>
-        <NuxtLinkLocale to="/">
-            <h1 v-html="$t('common.appName')"></h1>
-        </NuxtLinkLocale>
-        <button class="hamburger" @click="navExpanded = !navExpanded">
-            <div aria-hidden="true"></div>
-            <div aria-hidden="true"></div>
-            <div aria-hidden="true"></div>
-        </button>
-        <nav class="desktop">
-            <NuxtLinkLocale
-                to="/"
-                class="hide-no-error"
-                v-thtml="$t('common.nav.home')"
-            />
-            <NuxtLinkLocale
-                to="/faq"
-                class="hide-error"
-                v-thtml="$t('common.nav.faq')"
-            />
-            <NuxtLinkLocale
-                to="/map"
-                class="hide-error"
-                v-thtml="$t('common.nav.map')"
-            />
-            <NuxtLinkLocale
-                to="/leaderboard"
-                class="hide-error"
-                v-thtml="$t('common.nav.leaderboard')"
-            />
-            <ClientOnly>
+        <div class="header-inner">
+            <NuxtLinkLocale to="/">
+                <h1 v-html="$t('common.appName')"></h1>
+            </NuxtLinkLocale>
+            <button class="hamburger" @click="navExpanded = !navExpanded">
+                <div aria-hidden="true"></div>
+                <div aria-hidden="true"></div>
+                <div aria-hidden="true"></div>
+            </button>
+            <nav class="desktop">
                 <NuxtLinkLocale
-                    to="/sign-in"
-                    class="hide-noscript hide-error"
-                    v-if="!user"
-                    v-thtml="$t('common.nav.signIn')"
+                    to="/"
+                    class="hide-no-error"
+                    v-thtml="$t('common.nav.home')"
                 />
-                <div class="avy-wrapper" v-if="user">
-                    <ProfileAvatar
-                        class="avy hide-noscript hide-error"
-                        @click="navExpanded = !navExpanded"
-                        :profile-id="user.id"
+                <NuxtLinkLocale
+                    to="/faq"
+                    class="hide-error"
+                    v-thtml="$t('common.nav.faq')"
+                />
+                <NuxtLinkLocale
+                    to="/map"
+                    class="hide-error"
+                    v-thtml="$t('common.nav.map')"
+                />
+                <NuxtLinkLocale
+                    to="/leaderboard"
+                    class="hide-error"
+                    v-thtml="$t('common.nav.leaderboard')"
+                />
+                <ClientOnly>
+                    <NuxtLinkLocale
+                        to="/sign-in"
+                        class="hide-noscript hide-error"
+                        v-if="!user"
+                        v-thtml="$t('common.nav.signIn')"
                     />
-                    <div :class="{
-                      'acc-drop': true,
-                      show: navExpanded
-                    }">
-                        <NuxtLinkLocale
-                            :to="`/profiles/${user?.id}`"
-                            v-thtml="$t('common.nav.profile')"
+                    <div class="avy-wrapper" v-if="user">
+                        <ProfileAvatar
+                            class="avy hide-noscript hide-error"
+                            @click="navExpanded = !navExpanded"
+                            :profile-id="user.id"
                         />
-                        <NuxtLinkLocale
-                            to="/account/settings"
-                            v-thtml="$t('common.nav.account')"
-                        ></NuxtLinkLocale>
-                        <button @click="signOut">
-                            {{ $t('common.nav.signOut') }}
-                        </button>
+                        <div :class="{
+                          'acc-drop': true,
+                          show: navExpanded
+                        }">
+                            <NuxtLinkLocale
+                                :to="`/profiles/${user?.id}`"
+                                v-thtml="$t('common.nav.profile')"
+                            />
+                            <NuxtLinkLocale
+                                to="/account/settings"
+                                v-thtml="$t('common.nav.account')"
+                            ></NuxtLinkLocale>
+                            <button @click="signOut">
+                                {{ $t('common.nav.signOut') }}
+                            </button>
+                        </div>
                     </div>
-                </div>
-            </ClientOnly>
-        </nav>
+                </ClientOnly>
+            </nav>
+        </div>
         <nav :class="{ mobile: true, expand: navExpanded }">
             <div class="row">
                 <button class="close" @click="navExpanded = !navExpanded">
@@ -157,7 +159,23 @@ onMounted(async function() {
 @use "~/assets/scss/colors";
 @use "~/assets/scss/consts";
 
-header {
+@media (min-width: #{consts.$header-collapse-width}) {
+    button.hamburger, nav.mobile {
+        display: none !important;
+    }
+}
+
+@media (max-width: #{consts.$header-collapse-width}) {
+    nav.desktop {
+        display: none !important;
+    }
+
+    button.hamburger, nav.mobile {
+        display: flex;
+    }
+}
+
+.header-inner {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -165,27 +183,14 @@ header {
     padding: 0.5em 1.5em;
     border-bottom: 0.15em dotted colors.$secondary-color;
 
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+
     @media (prefers-reduced-transparency: reduce) {
         background-color: colors.$secondary-color-dark;
     }
 
-    @media (min-width: #{consts.$header-collapse-width}) {
-        button.hamburger, nav.mobile {
-            display: none;
-        }
-    }
-
-    @media (max-width: #{consts.$header-collapse-width}) {
-        nav.desktop {
-            display: none !important;
-        }
-
-        button.hamburger, nav.mobile {
-            display: flex;
-        }
-    }
-
-    > a {
+    a {
         text-decoration: none;
         color: white;
         font-weight: bold;
@@ -327,108 +332,6 @@ header {
         pointer-events: auto;
     }
 
-    nav.mobile {
-        flex-direction: column;
-        justify-content: start;
-        text-align: start;
-
-        position: fixed;
-        top: 0; left: 100vw;
-        padding: 0.5em 1em;
-        gap: 1em;
-        
-        box-sizing: border-box;
-        min-width: min-content;
-        width: 62.6vw;
-        height: 100vh;
-        z-index: 2;
-        
-        overflow: auto;  
-        background-color: colors.$secondary-color-darker;
-        
-        transform: translateX(0);
-        transition: transform 250ms;
-
-        @media (prefers-reduced-motion: reduce) {
-            transition: none;
-        }
-
-        &.expand {
-            transform: translateX(-100%);
-        }
-
-        .row {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-
-            button {
-                width: 2em;
-                height: 2em;
-                box-sizing: border-box;
-                font-family: 'techmino-proportional';
-                background-color: transparent;
-                color: white;
-                font-size: 1.1em;
-                border: 0.05em solid transparent;
-                border-radius: 50%;
-                cursor: pointer;
-                user-select: none;
-                transition: background-color 200ms, border-color 200ms;
-
-                &:hover {
-                    background-color: #fff2;
-                    border-color: #fff4;
-                }
-
-                &:active {
-                    background-color: #fff4;
-                    border-color: #fff6;
-                }
-            }
-        }
-
-        section {
-            display: flex;
-            flex-direction: column;
-        }
-
-        em {
-            font-weight: bold;
-            border-block-end: 0.025em solid currentColor;
-            margin-block-end: 0.5em;
-        }
-
-        a, button {
-            box-sizing: border-box;
-            width: 100%;
-            text-align: start;
-            color: white;
-            margin: 0;
-            padding: 0.25em 0.5em;
-            font-weight: light;
-            text-decoration: none;
-            border: 0.1em solid transparent;
-            border-radius: 0.5em;
-            background-color: transparent;
-            cursor: pointer;
-            font-family: 'techmino-proportional';
-            font-size: 1em;
-            -webkit-user-drag: none;
-            transition: background-color 200ms, border-color 200ms;
-
-            &:hover {
-                border-color: #fff2;
-            }
-
-            &:active {
-                background-color: #fff1;
-                border-color: #fff4;
-            }
-        }
-    }
-
     button.hamburger {
         $thickness: 0.125em;
 
@@ -461,20 +364,130 @@ header {
             border-radius: $thickness;
         }
     }
+}
 
-    .avy {
-        position: relative;
-        width: 2em;
-        height: 2em;
-        border-radius: 50%;
+.avy {
+    position: relative;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
 
-        :deep(*) {
-            font-size: 1em;
+    :deep(*) {
+        font-size: 1em;
+    }
+}
+
+.desktop .avy {
+    cursor: pointer;
+}
+
+nav.mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: start;
+
+    position: fixed;
+    top: 0; left: 100vw;
+    padding: 0.5em 1em;
+    gap: 1em;
+    
+    box-sizing: border-box;
+    min-width: min-content;
+    width: 62.6vw;
+    height: 100vh;
+    z-index: 2;
+    
+    overflow: auto;
+    background-color: colors.$secondary-color-darker;
+
+    @supports (backdrop-filter: blur(0)) {
+        background-color: darken(colors.$secondary-color-alpha50, 36.2%);
+
+        backdrop-filter: blur(16.2px);
+        -webkit-backdrop-filter: blur(16.2px);
+    }
+    
+    transform: translateX(0);
+    transition: transform 250ms;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+
+    &.expand {
+        transform: translateX(-100%);
+    }
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+            width: 2em;
+            height: 2em;
+            box-sizing: border-box;
+            font-family: 'techmino-proportional';
+            background-color: transparent;
+            color: white;
+            font-size: 1.1em;
+            border: 0.05em solid transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 200ms, border-color 200ms;
+
+            &:hover {
+                background-color: #fff2;
+                border-color: #fff4;
+            }
+
+            &:active {
+                background-color: #fff4;
+                border-color: #fff6;
+            }
         }
     }
 
-    .desktop .avy {
+    section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    em {
+        font-weight: bold;
+        border-block-end: 0.025em solid currentColor;
+        margin-block-end: 0.5em;
+    }
+
+    a, button {
+        box-sizing: border-box;
+        width: 100%;
+        text-align: start;
+        color: white;
+        margin: 0;
+        padding: 0.25em 0.5em;
+        font-weight: light;
+        text-decoration: none;
+        border: 0.1em solid transparent;
+        border-radius: 0.5em;
+        background-color: transparent;
         cursor: pointer;
+        font-family: 'techmino-proportional';
+        font-size: 1em;
+        -webkit-user-drag: none;
+        transition: background-color 200ms, border-color 200ms;
+
+        &:hover {
+            border-color: #fff2;
+        }
+
+        &:active {
+            background-color: #fff1;
+            border-color: #fff4;
+        }
     }
 }
 </style>

@@ -40,6 +40,9 @@ footer {
     border-top: 0.15em dotted grey;
     color: rgb(180,180,180);
 
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+
     @media (prefers-contrast: more) {
         color: white;
     }

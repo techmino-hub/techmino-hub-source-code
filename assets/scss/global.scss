@@ -16,6 +16,8 @@ body {
         border: 0.1em solid white;
         border-radius: 0.5rem;
         margin: 20px;
+
+        --blur: 0px;
         
         @media (max-width: #{consts.$panel-collapse-width}) {
             margin: 0;
@@ -30,6 +32,9 @@ body {
 
         > main {
             background-color: rgba(0, 0, 0, 0.6);
+
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
 
             @media (prefers-reduced-transparency: reduce) {
                 background-color: rgba(0, 0, 0, 0.9);

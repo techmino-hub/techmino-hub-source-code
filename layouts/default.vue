@@ -1,10 +1,9 @@
 <template>
     <div class="outer">
         <Background />
-        <div class="main-panel" :style="{
-            'backdrop-filter': `blur(${blur}px)`,
-            '-webkit-backdrop-filter': `blur(${blur}px)`
-        }">
+        <div
+          class="main-panel"
+          :style="`--blur: ${blur}px;`">
             <Header />
             <main>
                 <slot />
@@ -16,6 +15,7 @@
 
 <script setup lang="ts">
 const blur = ref(0);
+
 onMounted(function() {
     const blurValue = localStorage.getItem('mainPanelBlur');
 
