@@ -28,5 +28,5 @@
 </template>
 
 <script setup lang="ts">
-const websiteUrl = process.env.VERCEL_URL ?? process.env.URL ?? '';
+const websiteUrl = process.env.VERCEL_URL ?? process.env.URL ?? 'techmino-hub.vercel.app';
 </script>

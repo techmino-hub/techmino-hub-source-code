@@ -127,17 +127,6 @@ const roleSelect = ref<Role>(profile.role as Role);
             ]
         });
     }
-
-    if(profile.bio.trim().length > 0) {
-        useHead({
-            meta: [
-                {
-                    name: 'og:description',
-                    content: `"${profile.bio}"`
-                }
-            ]
-        });
-    }
 }
 
 onMounted(async function() {
