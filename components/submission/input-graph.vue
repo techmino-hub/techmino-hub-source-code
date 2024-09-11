@@ -13,13 +13,17 @@
 import type { KeyDurationStats } from '~/assets/scripts/replay/analyzer';
 import { InputKey } from 'techmino-replay-parser';
 import { Chart, registerables } from "chart.js";
-import { BoxPlotChart } from '@sgratzl/chartjs-chart-boxplot';
+import { ViolinChart } from '@sgratzl/chartjs-chart-boxplot';
 import { type ChartDataset } from 'chart.js';
 
 const props = defineProps({
     stats: {
         type: Object as PropType<KeyDurationStats>,
         required: true
+    },
+    max: {
+        type: Number,
+        default: 12
     }
 });
 
@@ -36,15 +40,14 @@ for(const key of Object.values(InputKey)) {
 
 const labels = filteredKeys.map(key => i18n.t(`submission.analysis.inputGraph.label.${key}`));
 
-const dataset: ChartDataset<"boxplot"> = {
-    data: filteredKeys.map(key => ({
-        min: props.stats[key].min,
-        q1: props.stats[key].percentile25,
-        median: props.stats[key].median,
-        q3: props.stats[key].percentile75,
-        max: props.stats[key].max,
-        mean: props.stats[key].totalDuration / props.stats[key].presses
-    }))
+const dataset: ChartDataset<"violin"> = {
+    data: filteredKeys.map(key => (
+        Object.entries(props.stats[key].durations)
+            .map(([duration, instances]) => (
+                new Array(instances).fill(Number(duration))
+            ))
+            .flat()
+    ))
 };
 
 Chart.register(...registerables);
@@ -57,7 +60,7 @@ onMounted(function() {
     const ctx = inputCanvas.value.getContext('2d');
     if(ctx === null) return;
 
-    new BoxPlotChart(ctx, {
+    new ViolinChart(ctx, {
         data: {
             labels,
             datasets: [dataset]
@@ -81,7 +84,8 @@ onMounted(function() {
                 y: {
                     ticks: {
                         color: 'white'
-                    }
+                    },
+                    max: props.max
                 }
             }
         }
