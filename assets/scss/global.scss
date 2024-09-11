@@ -16,10 +16,6 @@ body {
         border: 0.1em solid white;
         border-radius: 0.5rem;
         margin: 20px;
-
-        // TODO: Ask if blur is good on this
-        // backdrop-filter: blur(3px);
-        // -webkit-backdrop-filter: blur(3px);
         
         @media (max-width: #{consts.$panel-collapse-width}) {
             margin: 0;
