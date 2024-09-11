@@ -3,6 +3,9 @@
         <Title>{{ $t('submission.tabTitle', {
             mode: getModeI18nString(submission.game_mode, $t)
         }) }}</Title>
+        <Meta property="og:title" :content="$t('submission.tabTitle', {
+            mode: getModeI18nString(submission.game_mode, $t)
+        })" />
         <h1>
             {{ $t('submission.title')}}
         </h1>
