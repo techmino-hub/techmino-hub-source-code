@@ -22,10 +22,25 @@ export default defineNuxtConfig({
   app: {
     head: {
       meta: [
-        { name: 'darkreader-lock', content: '' },
+        {
+          name: 'darkreader-lock',
+          content: ''
+        },
         {
           name: 'google-site-verification',
           content: process.env.GOOGLE_SITE_VERIFICATION ?? ''
+        },
+        {
+          property: 'og:image',
+          content: '/favicon.png'
+        },
+        {
+          property: 'twitter:image',
+          content: '/favicon.png'
+        },
+        {
+          property: 'og:type',
+          content: 'website'
         }
       ],
       noscript: [{
