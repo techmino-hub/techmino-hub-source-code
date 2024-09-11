@@ -75,9 +75,36 @@ export default defineEventHandler(async (event) => {
         locale = localeQuery;
     }
 
-    const filePath = resolve(`public/data/articles/${locale}/${id}`);
+    let path: string;
 
-    return await fs.access(filePath)
-        .then(() => true)
-        .catch(() => false);
+    if(typeof process.env.VERCEL_URL === 'string') {
+        path = `https://${process.env.VERCEL_URL}/data/articles/${locale}/${id}`;
+    } else if(typeof process.env.URL === 'string') {
+        path = `http://${process.env.URL}/data/articles/${locale}/${id}`;
+    } else if(event.headers.has('host')) {
+        let host = event.headers.get('host')!;
+
+        if(!host.includes(':')) {
+            if(process.dev) {
+                host += ':3000'; // port for development
+            } else {
+                host += ':443'; // HTTPS port
+            }
+        }
+
+        path = `http://${host}/data/articles/${locale}/${id}`;
+    } else {
+        throw createError({
+            statusCode: 500,
+            statusMessage: "Failed to determine the base URL. Try setting the 'VERCEL_URL' or 'URL' environment variable into something like 'example.com'."
+        });
+    }
+
+    try {
+        const res = await fetch(path);
+
+        return res.ok;
+    } finally {
+        return false;
+    }
 });

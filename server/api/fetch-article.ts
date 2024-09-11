@@ -74,21 +74,6 @@ export default defineEventHandler(async (event) => {
 
         locale = localeQuery;
     }
-
-    // const filePath = resolve(`public/data/articles/${locale}/${id}`);
-
-    // if(!await fs.access(filePath).then(() => true).catch(() => false)) {
-    //     throw createError({
-    //         statusCode: 404,
-    //         statusMessage: `Article '${id}' on locale '${locale}' not found`
-    //     });
-    // }
-
-    // return {
-    //     content: await fs.readFile(filePath, 'utf-8')
-    // };
-
-    // const path = `http://techmino-hub.vercel.app/data/articles/${locale}/${id}`;
     
     let path: string;
 
