@@ -132,7 +132,7 @@ const roleSelect = ref<Role>(profile.role as Role);
         useHead({
             meta: [
                 {
-                    name: 'description',
+                    name: 'og:description',
                     content: `"${profile.bio}"`
                 }
             ]
