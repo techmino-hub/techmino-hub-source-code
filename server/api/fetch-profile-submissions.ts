@@ -1,8 +1,8 @@
 import { useDatabase } from '~/composables/database';
 
 /**
- * @api {get} /api/fetch-user-submissions Fetch latest user submissions
- * @apiName FetchUserSubmissions
+ * @api {get} /api/fetch-profile-submissions Fetch latest user submissions
+ * @apiName FetchProfileSubmissions
  * @apiVersion 1.0.0
  * @apiDescription
  * Fetches a user's latest submissions.
