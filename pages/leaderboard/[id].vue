@@ -123,6 +123,7 @@ const copyBlocked = ref(false);
 const copyText = ref(i18n.t('submission.copyReplay'));
 const user: Ref<User | null> = ref(null);
 const profile: Ref<Profile | null> = ref(null);
+const isModActionPanelVisible = ref(false);
 
 const { data } = await useFetch('/api/fetch-submission', {
     query: {
@@ -135,6 +136,35 @@ const submission = data.value?.data as Submission | SubmissionWithReplay;
 
 if(!submission) {
     throw new Error('Submission not found');
+}
+
+if(submission.score) {
+    let scoreStrs: string[] = [];
+
+    for(let [index, entry] of Object.entries(RECORD_SCHEMAS[submission.game_mode].entries)) {
+        scoreStrs.push(
+            i18n.t(`leaderboard.header.${entry.name}`) +
+            ": " +
+            (
+                i18n.te(`leaderboard.scoreDisp.${entry.name}`) ?
+                    i18n.t(`leaderboard.scoreDisp.${entry.name}`, {
+                        value: submission.score[index]
+                    })
+                    : submission.score[index]
+            )
+        );
+    }
+
+    const scoreStr = scoreStrs.join('\n');
+
+    useHead({
+        meta: [
+            {
+                property: 'og:description',
+                content: scoreStr
+            }
+        ]
+    });
 }
 
 function copyReplay() {
@@ -150,8 +180,6 @@ function copyReplay() {
         }, 1500);
     }
 }
-
-const isModActionPanelVisible = ref(false);
 
 onMounted(async () => {
     user.value = (await database.supabase.auth.getUser()).data.user;
