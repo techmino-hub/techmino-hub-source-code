@@ -101,7 +101,9 @@ export default defineEventHandler(async (event) => {
     }
 
     try {
-        const res = await fetch(path);
+        const res = await fetch(path, {
+            method: 'HEAD'
+        });
 
         return res.ok;
     } finally {
