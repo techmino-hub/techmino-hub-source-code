@@ -37,6 +37,10 @@ Created with ❤ by [the Techmino community](https://github.com/techmino-hub/tec
     }
   },
 
+  embed: {
+    description: "Techmino Hub: An unofficial Techmino fan page"
+  },
+
   home: {
     tabTitle: "Techmino Hub - Home",
     title: "Welcome to Techmino Hub!",
