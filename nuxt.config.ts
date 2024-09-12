@@ -50,6 +50,9 @@ export default defineNuxtConfig({
           .hide-noscript-important {display: none !important}
           .invis-noscript {visibility: hidden}
           .invis-noscript-important {visibility: hidden !important}
+          :root {
+            --no-script: 1;
+          }
         </style>`
       }]
     }

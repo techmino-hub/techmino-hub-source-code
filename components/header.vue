@@ -66,6 +66,10 @@ onMounted(async function() {
                             @click="navExpanded = !navExpanded"
                             :profile-id="user.id"
                         />
+                    </div>
+                </ClientOnly>
+            </nav>
+        </div>
                         <div :class="{
                           'acc-drop': true,
                           show: navExpanded
@@ -82,10 +86,6 @@ onMounted(async function() {
                                 {{ $t('common.nav.signOut') }}
                             </button>
                         </div>
-                    </div>
-                </ClientOnly>
-            </nav>
-        </div>
         <nav :class="{ mobile: true, expand: navExpanded }">
             <div class="row">
                 <button class="close" @click="navExpanded = !navExpanded">
@@ -175,6 +175,10 @@ onMounted(async function() {
     }
 }
 
+header {
+    position: relative;
+}
+
 .header-inner {
     display: flex;
     flex-direction: row;
@@ -190,7 +194,7 @@ onMounted(async function() {
         background-color: colors.$secondary-color-dark;
     }
 
-    a {
+    > a {
         text-decoration: none;
         color: white;
         font-weight: bold;
@@ -274,64 +278,6 @@ onMounted(async function() {
         position: relative;
     }
 
-    .acc-drop {
-        position: absolute;
-        display: flex;
-        pointer-events: none;
-        flex-direction: column;
-        min-width: fit-content;
-        gap: 0.25em;
-        top: calc(100% + 1em);
-        right: -1em;
-        left: -16ch;
-        z-index: 2;
-        background-color: colors.$secondary-color-darker;
-        border-radius: 1em;
-        padding: 0.75em;
-        opacity: 0;
-        transform: translateY(-1em);
-        transition: opacity 250ms, transform 250ms;
-
-        @media (prefers-reduced-motion: reduce) {
-            transition: none;
-        }
-
-        a, button {
-            box-sizing: border-box;
-            width: 100%;
-            text-align: start;
-            color: white;
-            margin: 0;
-            padding: 0.25em 0.5em;
-            font-weight: light;
-            text-decoration: none;
-            border: 0.1em solid transparent;
-            border-radius: 0.5em;
-            background-color: transparent;
-            cursor: pointer;
-            font-family: 'techmino-proportional';
-            font-size: 1em;
-            -webkit-user-drag: none;
-            transition: background-color 200ms, border-color 200ms;
-
-            &:hover {
-                background-color: #fff2;
-                border-color: #fff4;
-            }
-
-            &:active {
-                background-color: #fff4;
-                border-color: #fff6;
-            }
-        }
-    }
-
-    .acc-drop.show {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-    }
-
     button.hamburger {
         $thickness: 0.125em;
 
@@ -381,6 +327,73 @@ onMounted(async function() {
     cursor: pointer;
 }
 
+.acc-drop {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.1em;
+    min-width: fit-content;
+    width: stretch;
+    max-width: 16ch;
+    gap: 0.25em;
+    top: calc(100% - 1em);
+    right: 2ch;
+    z-index: 2;
+    background-color: colors.$secondary-color-darker;
+    border: 0.1em solid colors.$secondary-color-dark;
+    border-radius: 1em;
+    padding: 0.75em;
+    opacity: 0;
+    transform: translateY(-1em);
+    transition: opacity 250ms, transform 250ms;
+    pointer-events: none;
+
+    @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
+        background-color: darken(colors.$secondary-color-alpha75, 40%);
+        backdrop-filter: blur(16.2px);
+        -webkit-backdrop-filter: blur(16.2px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+
+    &.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+    }
+
+    a, button {
+        box-sizing: border-box;
+        width: 100%;
+        text-align: start;
+        color: white;
+        margin: 0;
+        padding: 0.25em 0.5em;
+        font-weight: light;
+        text-decoration: none;
+        border: 0.1em solid transparent;
+        border-radius: 0.5em;
+        background-color: transparent;
+        cursor: pointer;
+        font-family: 'techmino-proportional';
+        font-size: 1em;
+        -webkit-user-drag: none;
+        transition: background-color 200ms, border-color 200ms;
+
+        &:hover {
+            background-color: #fff2;
+            border-color: #fff4;
+        }
+
+        &:active {
+            background-color: #fff4;
+            border-color: #fff6;
+        }
+    }
+}
+
 nav.mobile {
     display: flex;
     flex-direction: column;
@@ -401,7 +414,7 @@ nav.mobile {
     overflow: auto;
     background-color: colors.$secondary-color-darker;
 
-    @supports (backdrop-filter: blur(0)) {
+    @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
         background-color: darken(colors.$secondary-color-alpha50, 36.2%);
 
         backdrop-filter: blur(16.2px);
