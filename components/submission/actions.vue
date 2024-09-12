@@ -117,7 +117,7 @@ onMounted(async function() {
     text-align: center;
     padding: 1em 2em;
     margin-block-start: 2em;
-    gap: 0.5em;
+    gap: 1ch;
     border: 0.15em solid colors.$tertiary-color;
     border-radius: 1em;
     background-color: colors.$tertiary-color-alpha25;
@@ -126,6 +126,11 @@ onMounted(async function() {
         display: flex;
         flex-direction: row;
         gap: 1ch;
+        flex-wrap: wrap;
+
+        > * {
+            flex-grow: 1;
+        }
     }
 }
 
