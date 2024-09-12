@@ -36,6 +36,8 @@ const props = defineProps({
 
 <style scoped lang="scss">
 @use '~/assets/scss/colors';
+@use "~/assets/scss/consts";
+
 details.question {
     border: 0.1em solid colors.$primary-color;
     border-radius: 0.5em;
@@ -130,14 +132,20 @@ details.question {
     }
 
     > article {
+        position: relative;
         display: flex;
         flex-direction: column;
         padding: 1em 1.5em 0.5em;
 
+        @media (max-width: #{consts.$faq-collapse-width}) {
+            padding-inline: 1ch;
+            padding-block-start: 0.25em;
+        }
+
         > blockquote {
             margin: 0;
             
-            a {
+            :deep(a) {
                 color: colors.$btn-border-color;
                 transition: 200ms;
 
@@ -152,32 +160,33 @@ details.question {
                 }
             }
 
-            table, td, tr, th {
+            :deep(table), :deep(td), :deep(tr), :deep(th) {
                 border: 0.08em solid white;
                 border-collapse: collapse;
             }
 
-            td, th {
+            :deep(td), :deep(th) {
                 padding: 0.25em 0.5em;
             }
 
-            img {
+            :deep(img) {
                 display: block;
-                width: fit-content;
+                width: 100%;
                 max-width: 30em;
                 margin-inline: auto;
                 margin-block: 1em;
                 border: 0.1em dashed colors.$primary-color-alpha25;
             }
 
-            code {
-                font-family: 'techmino-monospace', 'JetBrains Mono', 'Source Code Pro', monospace;
-                background-color: black;
+            :deep(code) {
+                font-family: 'JetBrains Mono', 'Source Code Pro', monospace;
+                background-color: #212228;
                 border-radius: 0.5em;
                 padding: 0.1em 0.2em;
+                font-size: 0.92em;
             }
 
-            pre code {
+            :deep(pre code) {
                 display: block;
                 padding: 0.25em 0.5em;
                 width: fit-content;

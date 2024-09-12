@@ -46,9 +46,14 @@ function filter(tag: Tag, mode: FilterMode) {
 
 <style scoped lang="scss">
 @use "~/assets/scss/colors";
+@use "~/assets/scss/consts";
 
 .faq-outer {
     padding: 1em 2em;
+
+    @media (max-width: #{consts.$faq-collapse-width}) {
+        padding-inline: 1em;
+    }
 
     .entries {
         display: flex;
