@@ -1,5 +1,5 @@
 <template>
-    <div class="page-outer">
+    <div class="page-outer" :aria-busy="loading">
         <Title>{{ $t('submit.tabTitle') }}</Title>
         <Meta property="og:title" :content="$t('submit.tabTitle')" />
         <h1>{{ $t('submit.title') }}</h1>

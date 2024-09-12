@@ -54,6 +54,7 @@ function init() {
         }
     }
 
+    // TODO: Use refs to remove this. Don't forget aria-busy
     document?.getElementById("loading-text")?.classList.add("hide-important");
     document?.getElementById("form")?.classList.remove("hide-important");
 }

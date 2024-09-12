@@ -1,5 +1,5 @@
 <template>
-    <div class="lb-outer">
+    <div class="lb-outer" :aria-busy="loading">
         <table v-show="!loading">
             <thead>
                 <tr>

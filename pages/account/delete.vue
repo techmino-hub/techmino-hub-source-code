@@ -1,5 +1,5 @@
 <template>
-    <div class="page-outer">
+    <div class="page-outer" :aria-busy="loading">
         <Title>{{ $t('accountDelete.tabTitle') }}</Title>
         <Meta property="og:title" :content="$t('accountDelete.tabTitle')" />
         <h1>{{ $t('accountDelete.title') }}</h1>

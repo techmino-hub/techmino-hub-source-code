@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" :aria-busy="loading">
     <Title>{{ $t('account.tabTitle') }}</Title>
     <Meta property="og:title" :content="$t('account.tabTitle')" />
     <h1>{{ $t('account.title') }}</h1>
@@ -19,6 +19,7 @@
                     <label for="avatar">{{ $t('account.changeAvy') }}</label>
                     <div
                       class="avy"
+                      role="button"
                       @click="fileInput?.click()">
                         <img :src="imgPath" :alt="$t('profile.avy')" />
                         <div class="overlay">

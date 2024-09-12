@@ -65,6 +65,7 @@ onMounted(async function() {
                             class="avy hide-noscript hide-error"
                             @click="navExpanded = !navExpanded"
                             :profile-id="user.id"
+                            role="button"
                         />
                     </div>
                 </ClientOnly>

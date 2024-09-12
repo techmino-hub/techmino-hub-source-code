@@ -1,5 +1,5 @@
 <template>
-    <div class="pf-sub">
+    <div class="pf-sub" :aria-busy="loading">
         <div class="table-wrapper">
             <table v-show="!loading">
                 <thead>
