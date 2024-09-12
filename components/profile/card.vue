@@ -46,6 +46,7 @@ const props = defineProps({
     flex-direction: row;
     justify-content: stretch;
     width: 30em;
+    max-width: calc(100vw - 3ch);
     height: 10em;
     padding: 0.5em;
     gap: 1em;

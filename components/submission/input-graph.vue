@@ -95,7 +95,8 @@ onMounted(function() {
 
 <style lang="scss" scoped>
 canvas {
-    max-width: 100vw;
+    min-width: stretch;
+    max-width: calc(100% - 4em);
     height: 100%;
     min-height: 20em;
 }

@@ -46,18 +46,28 @@ const inputFingerprint = getInputFingerprint(keyDurationStats);
 </script>
 
 <style lang="scss" scoped>
-@use '~/assets/scss/colors.scss' as colors;
+@use '~/assets/scss/colors';
+@use '~/assets/scss/consts';
 
 .analysis {
+    position: relative;
     display: flex;
     flex-direction: column;
+    max-width: 100vw;
     flex-grow: 1;
     text-align: center;
-    padding: 0em 2em;
+    padding-inline: 1em;
     margin-block-start: 2em;
     border: 0.15em solid colors.$secondary-color;
     border-radius: 1em;
     background-color: colors.$secondary-color-alpha25;
+
+    @media (max-width: #{consts.$submission-analysis-collapse-width}) {
+        padding-inline: 0;
+        border-radius: 0;
+        border: 0 none transparent;
+        background-color: transparent;
+    }
 }
 
 .parsed {
@@ -66,6 +76,7 @@ const inputFingerprint = getInputFingerprint(keyDurationStats);
     gap: 1em;
     margin-block-end: 1em;
     align-items: center;
+    text-align: start;
 
     textarea {
         display: inline;

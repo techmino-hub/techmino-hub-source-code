@@ -1,10 +1,10 @@
 <template>
   <div class="profile-link-outer">
-    <NuxtLinkLocale class="link" :to="`/profiles/${profile.id}`">
+    <NuxtLinkLocale class="link" :to="`/profiles/${profile.id}`" @mouseover="loadProfileCard">
         {{ profile.username }}
     </NuxtLinkLocale>
-    <div class="popup" v-if="withCard">
-        <ProfileCard :profile="profile" :link="false" />
+    <div class="popup" v-if="withCard" ref="popup">
+        <ProfileCard v-if="loadCard" :profile="profile" :link="false" />
     </div>
   </div>
 </template>
@@ -49,6 +49,14 @@ if (typeof props.profile === 'string') {
 } else {
     profile = props.profile;
 }
+
+
+const popup = ref<HTMLDivElement | null>(null);
+const loadCard = ref(false);
+
+function loadProfileCard() {
+    loadCard.value = true;
+}
 </script>
 
 <style scoped lang="scss">
@@ -57,6 +65,10 @@ if (typeof props.profile === 'string') {
 .profile-link-outer {
     display: inline-block;
     position: relative;
+
+    @media (max-width: 33em) {
+        position: static;
+    }
 
     a.link {
         color: colors.$tertiary-color;
@@ -69,6 +81,17 @@ if (typeof props.profile === 'string') {
         transition: 250ms opacity;
         transition-delay: 150ms;
         pointer-events: none;
+        z-index: 1;
+
+        @media (max-width: 33em) {
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            left: 0;
+            right: 0;
+            bottom: unset;
+        }
     }
 
     &:has(a.link:hover) .popup {

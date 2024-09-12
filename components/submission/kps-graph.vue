@@ -138,8 +138,8 @@ onMounted(async function() {
 
 <style lang="scss" scoped>
 canvas {
-    max-width: 100vw;
     min-width: stretch;
+    max-width: calc(100% - 4em);
     min-height: 20em;
 }
 </style>
