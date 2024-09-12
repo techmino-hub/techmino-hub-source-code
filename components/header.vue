@@ -71,22 +71,23 @@ onMounted(async function() {
                 </ClientOnly>
             </nav>
         </div>
-                        <div :class="{
-                          'acc-drop': true,
-                          show: navExpanded
-                        }">
-                            <NuxtLinkLocale
-                                :to="`/profiles/${user?.id}`"
-                                v-thtml="$t('common.nav.profile')"
-                            />
-                            <NuxtLinkLocale
-                                to="/account/settings"
-                                v-thtml="$t('common.nav.account')"
-                            ></NuxtLinkLocale>
-                            <button @click="signOut">
-                                {{ $t('common.nav.signOut') }}
-                            </button>
-                        </div>
+        <div :class="{
+          'acc-drop': true,
+          'hide-mobile': true,
+          show: navExpanded
+        }">
+            <NuxtLinkLocale
+                :to="`/profiles/${user?.id}`"
+                v-thtml="$t('common.nav.profile')"
+            />
+            <NuxtLinkLocale
+                to="/account/settings"
+                v-thtml="$t('common.nav.account')"
+            ></NuxtLinkLocale>
+            <button @click="signOut">
+                {{ $t('common.nav.signOut') }}
+            </button>
+        </div>
         <nav :class="{ mobile: true, expand: navExpanded }">
             <div class="row">
                 <button class="close" @click="navExpanded = !navExpanded">
@@ -167,7 +168,7 @@ onMounted(async function() {
 }
 
 @media (max-width: #{consts.$header-collapse-width}) {
-    nav.desktop {
+    nav.desktop, .hide-mobile {
         display: none !important;
     }
 
