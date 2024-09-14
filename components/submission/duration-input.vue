@@ -1,7 +1,7 @@
 <template>
     <div class="duration-inp">
         <input
-            type="number"
+            type="text"
             class="hours"
             v-model.lazy="hoursStr"
             placeholder="0"
@@ -13,39 +13,43 @@
             }"
             :required="required"
             :readonly="readonly"
+            pattern="[0-9]*"
             @change="onChange"
         >
         <span>{{ $t('common.time.hour') }}</span>
         <input
-            type="number"
+            type="text"
             class="minutes"
             v-model.lazy="minutesStr"
             maxlength="2"
             placeholder="00"
             :required="required"
             :readonly="readonly"
+            pattern="^[0-5]?[0-9]$"
             @change="onChange"
         >
         <span>{{ $t('common.time.minute') }}</span>
         <input
-            type="number"
+            type="text"
             class="seconds"
             v-model.lazy="secondsStr"
             maxlength="2"
             placeholder="00"
             :required="required"
             :readonly="readonly"
+            pattern="^[0-5]?[0-9]$"
             @change="onChange"
         >
         <span>{{ $t('common.separator.decimal') }}</span>
         <input
-            type="number"
+            type="text"
             class="ms"
             v-model.lazy="msStr"
             maxlength="3"
             placeholder="000"
             :required="required"
             :readonly="readonly"
+            pattern="^[0-9]{0,3}$"
             @change="onChange"
         >
         <span>{{ $t('common.time.second') }}</span>
