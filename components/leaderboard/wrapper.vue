@@ -100,7 +100,7 @@
         </noscript>
     </div>
     <div class="redirect" v-else-if="redirectToFull">
-        <NuxtLinkLocale :to="redirectLink">
+        <NuxtLinkLocale class="block-style" :to="redirectLink">
             {{ $t('leaderboard.pageFull') }}
         </NuxtLinkLocale>
     </div>

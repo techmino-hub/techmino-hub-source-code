@@ -1176,6 +1176,19 @@ onMounted(mountedHook);
                 .lb-wrapper {
                     margin-block-start: 1em;
                     font-size: 0.8em;
+
+                    :deep(a) {
+                        color: colors.$primary-color;
+                        transition-duration: 200ms;
+                        border-radius: 0.5em;
+                        padding: 0.25em 0.4em;
+                        &:hover {
+                            background-color: colors.$primary-color-alpha25;
+                        }
+                        &:active {
+                            background-color: colors.$primary-color-alpha50;
+                        }
+                    }
                 }
             }
         }
