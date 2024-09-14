@@ -44,6 +44,8 @@
                         :validity="SubmissionValidity.Verified"
                         :limit="5"
                         :redirectToFull="true"
+                        :showReplayDate="false"
+                        :showSubmitDate="false"
                     />
                 </i18n-t>
             </aside>
@@ -210,6 +212,8 @@ h1 {
     display: flex;
     flex-direction: column-reverse;
     gap: 2em;
+    min-height: fit-content;
+    overflow: hidden;
 
     @media (min-width: #{consts.$map-info-wrap-width}) {
         display: block;
@@ -226,7 +230,6 @@ h1 {
             height: fit-content;
             float: right;
             clear: right;
-            z-index: 100000000000;
             padding-inline: 3ch;
             margin-inline-start: 3ch;
 
