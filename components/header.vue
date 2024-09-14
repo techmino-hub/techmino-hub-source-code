@@ -416,15 +416,15 @@ nav.mobile {
     overflow: auto;
     background-color: colors.$secondary-color-darker;
 
+    transform: translateX(0);
+    transition: transform 250ms;
+
     @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
         background-color: darken(colors.$secondary-color-alpha50, 36.2%);
 
         backdrop-filter: blur(16.2px);
         -webkit-backdrop-filter: blur(16.2px);
     }
-    
-    transform: translateX(0);
-    transition: transform 250ms;
 
     @media (prefers-reduced-motion: reduce) {
         transition: none;
