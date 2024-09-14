@@ -46,7 +46,7 @@
                 </option>
             </select>
         </div>
-        <NuxtLinkLocale to="/leaderboard/submit" v-if="showSubmitLink">
+        <NuxtLinkLocale class="web-btn" to="/leaderboard/submit" v-if="showSubmitLink">
             {{ $t('leaderboard.submit') }}
         </NuxtLinkLocale>
     </div>
@@ -240,6 +240,7 @@ function getPageUrl(place: "prev" | "next") {
     .filters {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         margin-bottom: 1rem;
         flex-wrap: wrap;
         gap: 2em;
@@ -260,6 +261,11 @@ function getPageUrl(place: "prev" | "next") {
                 padding: 0.25em 0.5em;
                 font-size: 1em;
             }
+        }
+
+        a {
+            margin: 0;
+            text-decoration: none;
         }
     }
 
