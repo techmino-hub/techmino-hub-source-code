@@ -1,12 +1,6 @@
 import { promises as fs } from 'fs';
 import { resolve } from 'path';
 
-function logIfDev(message: string) {
-    if(process.dev) {
-        console.log(message);
-    }
-}
-
 /**
  * @api {get} /api/check-article Check if an article exists
  * @apiName CheckArticle
@@ -106,31 +100,13 @@ export default defineEventHandler(async (event) => {
         });
     }
 
-    logIfDev(
-        "API call (/api/check-article.ts)\n" +
-        `Args: id='${id}', locale='${locale}'\n` +
-        `Resolved path: ${path}`
-    );
-
     try {
         const res = await fetch(path, {
             method: 'HEAD'
         });
 
-        logIfDev(
-            "API result (/api/check-article.ts)\n" +
-            `With resolved path: ${path}\n` +
-            `Status: ${res.status} / ${res.statusText}`
-        );
-
         return res.ok;
     } catch {
-        logIfDev(
-            "API result (/api/check-article.ts)\n" +
-            `With resolved path: ${path}\n` +
-            `Fetch failed`
-        );
-
         return false;
     }
 });

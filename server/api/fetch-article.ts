@@ -1,12 +1,6 @@
 import { promises as fs } from 'fs';
 import { resolve } from 'path';
 
-function logIfDev(message: string) {
-    if(process.dev) {
-        console.log(message);
-    }
-}
-
 /**
  * @api {get} /api/fetch-article Fetch an article
  * @apiName FetchArticle
@@ -106,22 +100,10 @@ export default defineEventHandler(async (event) => {
         });
     }
 
-    logIfDev(
-        "API call (/api/fetch-article.ts)\n" +
-        `Args: id='${id}', locale='${locale}'\n` +
-        `Resolved path: ${path}`
-    );
-
     let text = "";
 
     try {
         let res = await fetch(path);
-
-        logIfDev(
-            "API result (/api/fetch-article.ts)\n" +
-            `With resolved path: ${path}\n` +
-            `Status: ${res.status} / ${res.statusText}`
-        );
 
         if(!res.ok) {
             throw createError({
@@ -132,15 +114,9 @@ export default defineEventHandler(async (event) => {
 
         text = await res.text();
     } catch (err) {
-        logIfDev(
-            "API result (/api/fetch-article.ts)\n" +
-            `With resolved path: ${path}\n` +
-            `Fetch failed`
-        );
-
         throw createError({
             statusCode: 404,
-            statusMessage: `Article '${id}' on locale '${locale}' not found`,
+            statusMessage: `Failed to fetch article '${id}' on locale '${locale}' (did a network error occur?)`,
             message: err as string | undefined
         });
     }
