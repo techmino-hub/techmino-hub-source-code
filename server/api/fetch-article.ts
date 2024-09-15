@@ -100,6 +100,14 @@ export default defineEventHandler(async (event) => {
         });
     }
 
+    if(process.dev) {
+        console.log(
+            "API call (/api/check-article.ts)\n" +
+            `Args: id='${id}', locale='${locale}'\n` +
+            `Resolved path: ${path}`
+        );
+    }
+
     let text = "";
 
     try {
