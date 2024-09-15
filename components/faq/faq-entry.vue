@@ -8,12 +8,22 @@ const props = defineProps({
         required: true
     }
 });
+
+const open = ref(false);
+
+onMounted(function() {
+    const hash = window.location.hash;
+    if (hash === `#${props.entry.id}`) {
+        open.value = true;
+    }
+});
 </script>
 
 <template>
     <details
       :id="entry.id"
       :class="`question ${entry.tags.join(' ')}`"
+      :open="open"
       name="faq">
         <summary>
             <h3>{{ $t(`faq.entries.${entry.id}.question`) }}</h3>
