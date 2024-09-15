@@ -96,7 +96,7 @@ export default defineEventHandler(async (event) => {
     } else {
         throw createError({
             statusCode: 500,
-            statusMessage: "Failed to determine the base URL. Try setting the 'VERCEL_URL' or 'URL' environment variable into something like 'example.com'."
+            statusMessage: "Failed to determine the base URL. If you are the webmaster, try setting the 'VERCEL_URL' or 'URL' environment variable into something like 'example.com'."
         });
     }
 

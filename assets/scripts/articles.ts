@@ -3,6 +3,7 @@ import sanitizeHtml from 'sanitize-html';
 
 /**
  * Gets an article as an HTML string.
+ * Note: only works in client-side.
  * @param name
  * The name of the article.
  * 
