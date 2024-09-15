@@ -29,4 +29,12 @@
 
 <script setup lang="ts">
 const websiteUrl = process.env.VERCEL_URL ?? process.env.URL ?? 'techmino-hub.vercel.app';
+
+const i18n = useI18n();
+
+useHead({
+  htmlAttrs: {
+    lang: i18n.locale,
+  },
+});
 </script>
