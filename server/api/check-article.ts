@@ -106,7 +106,7 @@ export default defineEventHandler(async (event) => {
         });
 
         return res.ok;
-    } finally {
+    } catch {
         return false;
     }
 });

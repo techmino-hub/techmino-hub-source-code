@@ -116,7 +116,7 @@ export default defineEventHandler(async (event) => {
     } catch (err) {
         throw createError({
             statusCode: 404,
-            statusMessage: `Article '${id}' on locale '${locale}' not found`,
+            statusMessage: `Failed to fetch article '${id}' on locale '${locale}' (did a network error occur?)`,
             message: err as string | undefined
         });
     }
