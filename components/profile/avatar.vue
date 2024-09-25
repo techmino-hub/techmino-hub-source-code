@@ -7,6 +7,7 @@
         />
         <img
             :src="avatarUrl"
+            v-if="!fallbackOnly"
             v-show="imageValid"
             loading="lazy"
             aria-hidden="true"
@@ -20,6 +21,10 @@ const props = defineProps({
     profileId: {
         type: String,
         required: true
+    },
+    fallbackOnly: {
+        type: Boolean,
+        default: false
     }
 });
 

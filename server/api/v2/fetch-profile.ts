@@ -1,5 +1,11 @@
 import { Table } from '~/assets/types/database';
+import { type Profile } from '~/assets/types/database';
 import { useSupabase } from '~/composables/database';
+
+function checkIfStringIsUuid(str: string) {
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    return uuidRegex.test(str);
+}
 
 /**
  * @api {get} /api/v2/fetch-profile Fetch Profile
@@ -17,7 +23,7 @@ export default defineEventHandler(async (event) => {
     const query = getQuery(event);
 
     let id = query.id;
-
+    
     if(typeof id !== 'string') {
         throw createError({
             statusCode: 400,
@@ -25,12 +31,17 @@ export default defineEventHandler(async (event) => {
         });
     }
 
+    const isUuid = checkIfStringIsUuid(id);
+
     const supabase = useSupabase();
 
     const { data: profile, error } = await supabase
         .from(Table.Profiles)
         .select("*")
-        .or(`id.eq.${id},username.eq.${id}`);
+        .eq(
+            (isUuid ? "id" : "username"),
+            id
+        );
 
     if(error) {
         throw createError({

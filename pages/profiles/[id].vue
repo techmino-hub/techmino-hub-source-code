@@ -11,6 +11,7 @@
         <section class="top">
             <ProfileAvatar
                 :profile-id="profile.id"
+                :fallback-only="hasAvy"
             />
             <div class="right">
                 <h1>
@@ -93,12 +94,13 @@ const amVerifier = ref(false);
 
 const id = route.params.id as string;
 
-const { data, error } = await useFetch('/api/v1/fetch-profile', {
+const { data, error } = await useFetch('/api/v2/fetch-profile', {
     method: 'GET',
-    params: { uuid: id }
+    params: { id }
 });
 
 if(error.value) {
+    console.error(error.value);
     throw new Error('Failed to fetch profile data');
 }
 
@@ -106,27 +108,25 @@ if(!data.value) {
     throw new Error('Profile not found');
 }
 
-const profile = data.value.profile;
+const profile = data.value;
 
 const stateSelect = ref<AccountState>(profile.account_state as AccountState);
 const roleSelect = ref<Role>(profile.role as Role);
 
-{
-    const { data } = await useFetch('/api/v1/check-avatar', {
-        method: 'GET',
-        params: { id }
-    });
+const { data: hasAvy } = await useFetch('/api/v1/check-avatar', {
+    method: 'GET',
+    params: { id: profile.id }
+});
 
-    if(data) {
-        useHead({
-            meta: [
-                {
-                    property: 'og:image',
-                    content: database.getAvatarUrlByUserId(id)
-                }
-            ]
-        });
-    }
+if(hasAvy) {
+    useHead({
+        meta: [
+            {
+                property: 'og:image',
+                content: database.getAvatarUrlByUserId(profile.id)
+            }
+        ]
+    });
 }
 
 onMounted(async function() {
