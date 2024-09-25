@@ -93,7 +93,7 @@ const amVerifier = ref(false);
 
 const id = route.params.id as string;
 
-const { data, error } = await useFetch('/api/fetch-profile', {
+const { data, error } = await useFetch('/api/v1/fetch-profile', {
     method: 'GET',
     params: { uuid: id }
 });
@@ -112,7 +112,7 @@ const stateSelect = ref<AccountState>(profile.account_state as AccountState);
 const roleSelect = ref<Role>(profile.role as Role);
 
 {
-    const { data } = await useFetch('/api/check-avatar', {
+    const { data } = await useFetch('/api/v1/check-avatar', {
         method: 'GET',
         params: { id }
     });

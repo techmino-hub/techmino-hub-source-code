@@ -1,17 +1,21 @@
+import { Submission, SubmissionWithReplay } from '~/assets/types/database';
 import { useDatabase } from '~/composables/database';
 
 /**
- * @api {get} /api/fetch-replay Fetch replay info
- * @apiName FetchReplay
+ * @api {get} /api/v1/fetch-submission Fetch submission info
+ * @apiName FetchSubmission
  * @apiVersion 1.0.0
  * @apiDescription
- * Fetches the base-64 compressed version of the replay associated with a submission.
+ * Fetches submission data.
  * 
  * @apiParam {String} id The submission's ID.
+ * @apiParam {Boolean} [with_replay=false] Whether or not to also fetch for replay data.
  * 
- * @apiSuccess {ReplayData} replay
- * The submission's replay data.
- * See type "ReplayData": `/assets/types/database.ts`
+ * @apiSuccess {Submission | SubmissionWithReplay} data
+ * The submission's data.  
+ * It will return a "Submission" object if `with_replay` is `false`,  
+ * otherwise it will return a "SubmissionWithReplay" object.
+ * See types "Submission" and "SubmissionWithReplay": `/assets/types/database.ts`
  * See how to parse the replay data: [NPM: techmino-replay-parser](https://www.npmjs.com/package/techmino-replay-parser)
  */
 
@@ -34,16 +38,27 @@ export default defineEventHandler(async(event) => {
         });
     }
 
+    let withReplay = false;
+
+    if(query.with_replay) {
+        withReplay = true;
+    }
+
     const db = useDatabase();
 
-    const replay = await db.getReplayBySubmissionId(id);
+    const data: Submission | SubmissionWithReplay = await (
+        withReplay
+            ? db.getSubmissionWithReplayById(id)
+            : db.getSubmissionById(id)
+    );
 
-    if(!replay) {
+
+    if(!data) {
         throw createError({
             statusCode: 404,
             statusMessage: "Submission not found"
         });
     }
 
-    return { replay };
+    return { data };
 });

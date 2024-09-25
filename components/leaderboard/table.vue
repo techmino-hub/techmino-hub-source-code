@@ -126,7 +126,7 @@ watchEffect(async () => {
 
     recordSchema.value = RECORD_SCHEMAS[props.gameMode];
     
-    const { data } = await useFetch('/api/fetch-leaderboard', {
+    const { data } = await useFetch('/api/v1/fetch-leaderboard', {
         query: {
             gameMode: props.gameMode,
             validity: props.validity,

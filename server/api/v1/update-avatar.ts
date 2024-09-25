@@ -1,7 +1,7 @@
 import { useSupabase } from '~/composables/database';
 
 /**
- * @api {post} /api/update-avatar Update a user's avatar
+ * @api {post} /api/v1/update-avatar Update a user's avatar
  * @apiName UpdateAvatar
  * @apiVersion 1.0.0
  * @apiDescription

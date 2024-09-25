@@ -103,7 +103,7 @@ const isLastPage = ref(true);
 watchEffect(async () => {
     loading.value = true;
 
-    const { data } = await useFetch('/api/fetch-profile-submissions', {
+    const { data } = await useFetch('/api/v1/fetch-profile-submissions', {
         query: {
             id: props.userId,
             limit: props.limit + 1,

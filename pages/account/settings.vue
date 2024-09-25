@@ -172,7 +172,7 @@ async function submit() {
                 return;
             }
 
-            fetch('/api/update-avatar', {
+            fetch('/api/v1/update-avatar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

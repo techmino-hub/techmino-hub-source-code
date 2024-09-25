@@ -142,7 +142,7 @@ const modeName = getModeI18nString(mode.name, i18n.t);
 
 const articleHTML = ref<string>(i18n.t('map.loadingArticle'));
 
-await useFetch('/api/fetch-article', {
+await useFetch('/api/v1/fetch-article', {
     method: 'GET',
     params: {
         id: `mode.${modeCodeName}`

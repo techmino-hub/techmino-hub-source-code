@@ -31,7 +31,7 @@ const props = defineProps({
 let profile: Profile;
 
 if (typeof props.profile === 'string') {
-    const { data, error } = await useFetch(`/api/fetch-profile`, {
+    const { data, error } = await useFetch(`/api/v1/fetch-profile`, {
         query: {
             uuid: props.profile
         }

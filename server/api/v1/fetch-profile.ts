@@ -3,7 +3,7 @@ import { type Profile } from '~/assets/types/database';
 import { useDatabase } from '~/composables/database';
 
 /**
- * @api {get} /api/fetch-profile Fetch Profile
+ * @api {get} /api/v1/fetch-profile Fetch Profile
  * @apiName FetchProfile
  * @apiVersion 1.0.0
  * @apiDescription

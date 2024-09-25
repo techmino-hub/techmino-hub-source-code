@@ -2,18 +2,18 @@ import { promises as fs } from 'fs';
 import { resolve } from 'path';
 
 /**
- * @api {get} /api/check-article Check if an article exists
- * @apiName CheckArticle
+ * @api {get} /api/v1/fetch-article Fetch an article
+ * @apiName FetchArticle
  * @apiGroup Article
  * @apiVersion 1.0.0
  * @apiDescription
- * Checks if a Techmino Hub article exists.
+ * Fetches an article hosted by Techmino Hub.  
  * The articles are stored in `/public/data/articles/(locale)/`.
  * 
  * @apiParam {String} id The slug/ID of the article to fetch.
  * @apiParam {String} [locale="en"] The locale of the article to fetch.
  * 
- * @apiSuccess {Boolean} exists Whether the article exists or not.
+ * @apiSuccess {String} content The HTML content of the article.
  */
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
 
         locale = localeQuery;
     }
-
+    
     let path: string;
 
     if(typeof process.env.VERCEL_URL === 'string') {
@@ -100,13 +100,28 @@ export default defineEventHandler(async (event) => {
         });
     }
 
-    try {
-        const res = await fetch(path, {
-            method: 'HEAD'
-        });
+    let text = "";
 
-        return res.ok;
-    } catch {
-        return false;
+    try {
+        let res = await fetch(path);
+
+        if(!res.ok) {
+            throw createError({
+                statusCode: res.status,
+                statusMessage: res.statusText
+            });
+        }
+
+        text = await res.text();
+    } catch (err) {
+        throw createError({
+            statusCode: 404,
+            statusMessage: `Failed to fetch article '${id}' on locale '${locale}' (did a network error occur?)`,
+            message: err as string | undefined
+        });
     }
+    
+    return {
+        content: text
+    };
 });

@@ -4,7 +4,7 @@ import { useDatabase } from '~/composables/database';
 import { type PostgrestError } from '@supabase/supabase-js';
 
 /**
- * @api {get} /api/fetch-leaderboard Fetch leaderboard
+ * @api {get} /api/v1/fetch-leaderboard Fetch leaderboard
  * @apiName FetchLeaderboard
  * @apiVersion 1.0.0
  * @apiDescription

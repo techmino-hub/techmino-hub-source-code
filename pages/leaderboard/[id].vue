@@ -125,7 +125,7 @@ const user: Ref<User | null> = ref(null);
 const profile: Ref<Profile | null> = ref(null);
 const isModActionPanelVisible = ref(false);
 
-const { data } = await useFetch('/api/fetch-submission', {
+const { data } = await useFetch('/api/v1/fetch-submission', {
     query: {
         id,
         with_replay: true

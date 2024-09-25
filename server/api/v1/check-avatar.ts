@@ -1,7 +1,7 @@
 import { useDatabase } from "~/composables/database";
 
 /**
- * @api {get} /api/check-avatar Check if a user has an avatar
+ * @api {get} /api/v1/check-avatar Check if a user has an avatar
  * @apiName CheckAvatar
  * @apiVersion 1.0.0
  * @apiDescription
