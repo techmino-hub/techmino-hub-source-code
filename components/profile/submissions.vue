@@ -133,6 +133,10 @@ emit('load', submissions.value);
     overflow-x: auto;
 }
 
+a {
+    color: colors.$tertiary-color;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
