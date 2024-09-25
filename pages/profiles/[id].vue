@@ -11,7 +11,7 @@
         <section class="top">
             <ProfileAvatar
                 :profile-id="profile.id"
-                :fallback-only="hasAvy"
+                :fallback-only="!hasAvy"
             />
             <div class="right">
                 <h1>
@@ -84,6 +84,7 @@ import { type User } from '@supabase/supabase-js';
 import { AccountState, type Profile, Role } from '~/assets/types/database';
 
 const route = useRoute();
+const router = useRouter();
 const database = useDatabase();
 
 const user = ref<User | null>(null);
@@ -130,6 +131,7 @@ if(hasAvy) {
 }
 
 onMounted(async function() {
+    router.push(`/profiles/${profile.id}`);
     user.value = (await database.supabase.auth.getUser()).data.user;
 
     if(!user.value) return;
