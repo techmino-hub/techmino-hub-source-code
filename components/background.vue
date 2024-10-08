@@ -1,139 +1,17 @@
 <template>
-    <canvas id="background" aria-hidden></canvas>
+    <div>
+        <canvas id="background" aria-hidden></canvas>
+        <img
+            src=""
+            onerror="document.body.appendChild((()=>{s=document.createElement('script');s.src='/scripts/background.min.js';s.async=true;return s})())"
+        >
+    </div>
 </template>
 
-<script lang="ts">
-const BG_TOGGLE_KEY = 'bgEnabled';
-const BG_SPEED_KEY = 'bgSpeed';
-const BG_ID = 'background';
-const STAR_COLOR = '#FFFFFFAF';
-
-let bgCanvas: HTMLCanvasElement;
-let bgContext: CanvasRenderingContext2D;
-let width: number; let height: number;
-
-let stars: Star[] = [];
-
-let lastTimestamp: number = performance.now();
-let speedMult: number;
-
-type Star = {
-    size: number;
-    x: number;
-    y: number;
-    dx: number;
-    dy: number;
-}
-
-let bgEnabled: boolean;
-
-function random(min: number, max: number): number {
-    return Math.random() * (min - max) + max;
-}
-
-function isBackgroundEnabled(): boolean {
-    let bgEnabled = localStorage.getItem(BG_TOGGLE_KEY);
-    if(bgEnabled === null) {
-        bgEnabled = "true";
-        localStorage.setItem(BG_TOGGLE_KEY, bgEnabled);
-    }
-    return bgEnabled === "true";
-}
-
-function getSpeedMult(): number {
-    let speed = localStorage.getItem(BG_SPEED_KEY);
-    if(speed === null) {
-        speed = "1";
-        localStorage.setItem(BG_SPEED_KEY, speed);
-    }
-    return parseFloat(speed);
-}
-
-function init() {
-    bgEnabled = isBackgroundEnabled();
-    if(!bgEnabled) return;
-
-    speedMult = getSpeedMult();
-
-    const canvas = document.getElementById(BG_ID);
-    if(canvas === null) return;
-
-    bgCanvas = canvas as HTMLCanvasElement;
-    bgContext = bgCanvas.getContext("2d")!;
-
-    width = bgCanvas.offsetWidth;
-    height = bgCanvas.offsetHeight;
-
-    onResize();
-    draw(performance.now());
-}
-
-function onResize() {
-    width = bgCanvas.offsetWidth;
-    height = bgCanvas.offsetHeight;
-
-    bgCanvas.width = width;
-    bgCanvas.height = height;
-
-    let starCount = Math.floor(width * height * 6e-4);
-    stars = new Array(starCount);
-
-    for (let i = 0; i < starCount; i++) {
-        let size = random(2.6, 4);
-        stars[i] = {
-            size: size,
-            x: random(-10, width + 10),
-            y: random(-10, height + 10),
-            dx: random(-0.001, 0.001) * size,
-            dy: random(-0.001, 0.001) * size
-        };
-    }
-}
-
-const WRAP_MARGIN = 1;
-function draw(timestamp: number) {
-    let dt = timestamp - lastTimestamp;
-    dt *= speedMult;
-    lastTimestamp = timestamp;
-
-    if(width !== bgCanvas.offsetWidth || height !== bgCanvas.offsetHeight) onResize();
-
-    bgContext.clearRect(0, 0, width, height);
-
-    // move stars
-    for (let i = 0; i < stars.length; i++) {
-        const star = stars[i];
-        star.x += (star.dx * dt)
-        star.y += (star.dy * dt)
-
-        if(star.x < -star.size - WRAP_MARGIN) {
-            star.x += width + star.size;
-        } else if(star.x > width + star.size + WRAP_MARGIN) {
-            star.x -= width + star.size;
-        }
-        if(star.y < -star.size - WRAP_MARGIN) {
-            star.y += height + star.size;
-        } else if(star.y > height + star.size + WRAP_MARGIN) {
-            star.y -= height + star.size;
-        }
-    }
-
-    // draw stars
-    bgContext.fillStyle = STAR_COLOR;
-    for (let i = 0; i < stars.length; i++) {
-        const star = stars[i];
-        bgContext.fillRect(star.x, star.y, star.size, star.size);
-    }
-
-    requestAnimationFrame(draw);
-}
-
-export default {
-    mounted() {
-        init();
-    }
-}
+<script>
+onMounted(function() { console.log("what"); });
 </script>
+
 <style scoped>
 canvas#background {
     position: fixed;
@@ -142,5 +20,8 @@ canvas#background {
     z-index: -1;
     width: 100%; width: 100vw; width: 100lvw;
     height: 100%; height: 100vh; height: 100lvh;
+}
+:has(#background) img {
+    display: none;
 }
 </style>
