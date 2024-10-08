@@ -98,14 +98,7 @@ onMounted(async function() {
                     v-if="user"
                     :profile-id="user.id"
                 />
-                <div v-if="!user">
-                    <!--
-                        I don't know why but v-else would break stuff here
-                        so I'm using v-if instead.
-
-                        Div intentionally left blank to keep the layout
-                    -->
-                </div>
+                <div v-if="!user"></div>
             </div>
             <section>
                 <em>{{ $t('common.nav.section.pages') }}</em>
