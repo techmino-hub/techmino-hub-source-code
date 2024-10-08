@@ -9,11 +9,6 @@ bun build assets/scripts/background.ts \
     --minify --target browser --no-bundle
 ```
 
-Bundle into a minified JS file using Deno:
-```terminal
-deno bundle assets/scripts/background.ts public/scripts/background.min.js
-```
-
 Bundle into a minified JS file using ESBuild:
 ```terminal
 esbuild assets/scripts/background.ts \
@@ -24,7 +19,6 @@ esbuild assets/scripts/background.ts \
 Bundle using all methods and pick the smallest file size (Bash):
 ```bash
 bun build assets/scripts/background.ts --outfile public/scripts/~background.bun.js --minify --target browser --no-bundle &&\
-deno bundle assets/scripts/background.ts public/scripts/~background.deno.js &&\
 esbuild assets/scripts/background.ts --bundle --minify --outfile=public/scripts/~background.esbuild.js &&\
 
 for file in public/scripts/~background.*.js; do
@@ -89,6 +83,8 @@ function init() {
     const canvas = document.getElementById(BG_ID);
     if(canvas === null) return;
 
+    canvas.classList.add('rendering');
+    console.log('init 1');
     bgCanvas = canvas as HTMLCanvasElement;
     bgContext = bgCanvas.getContext("2d")!;
 
