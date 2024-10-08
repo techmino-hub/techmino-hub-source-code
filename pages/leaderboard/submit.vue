@@ -144,9 +144,11 @@ import { getModeI18nString } from '~/assets/scripts/modes';
 import type { User } from '@supabase/supabase-js';
 import { AccountState, SubmissionValidity, type Profile, type Submission } from '~/assets/types/database';
 import { parseReplayFromRepString } from 'techmino-replay-parser';
+import type { LocationQuery, LocationQueryValue } from 'vue-router';
 
 const database = useDatabase();
 const i18n = useI18n();
+const route = useRoute();
 const router = useRouter();
 const localePath = useLocalePath();
 
@@ -332,6 +334,72 @@ async function uploadSubmission() {
     uploadBlocked.value = false;
 }
 
+const FORM_STATE_KEY = 'leaderboard_formState';
+
+type FormState = {
+    selMode: string | null,
+    repDateStr: string | undefined,
+    replay: string | null,
+    score: Record<string, string | number>,
+    proof: string | null,
+    isTAS: boolean,
+};
+
+function saveFormState(state?: FormState) {
+    if(!state) {
+        state = {
+            selMode: selMode.value,
+            repDateStr: repDateStr.value,
+            replay: replay.value,
+            score: score.value,
+            proof: proof.value,
+            isTAS: isTAS.value,
+        };
+    }
+
+    localStorage.setItem(FORM_STATE_KEY, JSON.stringify(state));
+}
+
+function loadFormState(state?: FormState) {
+    if(!state) {
+        state = JSON.parse(localStorage.getItem(FORM_STATE_KEY) ?? '{}');
+    }
+
+    if(!state) return;
+
+    selMode.value = state.selMode ?? null;
+    repDateStr.value = state.repDateStr ?? undefined;
+    replay.value = state.replay ?? null;
+    score.value = state.score ?? {};
+    proof.value = state.proof ?? null;
+    isTAS.value = state.isTAS ?? false;
+
+    if(replay.value) {
+        processReplay();
+    }
+}
+
+function getFirstQueryParam(key: string): LocationQueryValue {
+    const value = route.query[key];
+
+    if(Array.isArray(value)) {
+        return value[0];
+    } else {
+        return value;
+    }
+}
+
+function getAutofillState(): FormState {
+    return {
+        selMode: getFirstQueryParam('selMode') ?? null,
+        repDateStr: getFirstQueryParam('repDateStr') ?? undefined,
+        replay: getFirstQueryParam('replay') ?? null,
+        score: JSON.parse(getFirstQueryParam('score') ?? 'null') ?? {},
+        proof: getFirstQueryParam('proof') ?? null,
+        isTAS: getFirstQueryParam('isTAS') === 'true',
+    }
+}
+
 onMounted(async function() {
     user.value = (await database.supabase.auth.getUser()).data.user;
 
@@ -339,7 +407,14 @@ onMounted(async function() {
         profile.value = (await database.getProfileById(user.value.id));
     }
 
+    if(route.query.autofill) {
+        saveFormState(getAutofillState());
+    }
+
+    loadFormState();
     loading.value = false;
+
+    setInterval(saveFormState, 15000);
 });
 </script>
 
