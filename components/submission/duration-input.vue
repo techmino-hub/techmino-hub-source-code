@@ -68,6 +68,10 @@ const props = defineProps({
         type: [Boolean, String] as PropType<boolean | "true" | "false">,
         default: false
     },
+    value: {
+        type: Number,
+        default: 0
+    }
 });
 
 const emits = defineEmits(['change']);
@@ -123,6 +127,18 @@ function onChange() {
     
     emits('change', totalSecs);
 }
+
+watchEffect(() => {
+    let totalSecs = props.value;
+    if (totalSecs < 0) totalSecs = 0;
+
+    hours.value = Math.floor(totalSecs / 3600);
+    totalSecs %= 3600;
+    minutes.value = Math.floor(totalSecs / 60);
+    totalSecs %= 60;
+    seconds.value = Math.floor(totalSecs);
+    ms.value = Math.round((totalSecs - seconds.value) * 1000);
+})
 </script>
 
 <style lang="scss" scoped>

@@ -8,6 +8,7 @@
             :name="props.name"
             :readonly="props.readonly"
             :placeholder="$t('submit.placeholder')"
+            :value="props.value"
             @change="onChange"
         >
         <p
@@ -59,6 +60,10 @@ const props = defineProps({
     message: {
         type: String,
         default: ''
+    },
+    value: {
+        type: [String, Number],
+        required: false
     }
 });
 

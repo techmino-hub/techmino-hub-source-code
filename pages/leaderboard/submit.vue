@@ -83,6 +83,7 @@
                             )
                             : ''
                         "
+                        :value="score[index]"
                         @change="(v) => { score[index] = v }"
                     />
                     <SubmissionDurationInput
@@ -90,6 +91,7 @@
                         :id="entry.name"
                         :name="entry.name"
                         required="true"
+                        :value="(score[index] as number)"
                         @change="(v) => { score[index] = v }"
                     />
                 </div>
