@@ -40,16 +40,8 @@ export default defineEventHandler(async (event) => {
     let order: "NewestFirst" | "OldestFirst" = "NewestFirst";
 
     if (query.reverse) {
-        const reverseQuery = query.reverse;
 
-        if (typeof reverseQuery !== 'boolean') {
-            throw createError({
-                statusCode: 400,
-                statusMessage: "Invalid parameter 'reverse': Expected type boolean"
-            });
-        }
-
-        order = reverseQuery ? "OldestFirst" : "NewestFirst";
+        order = "OldestFirst";
     }
 
     let limit = 10;

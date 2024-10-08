@@ -1,17 +1,21 @@
 <template>
-    <div class="pf-sub" :aria-busy="loading">
-        <p class="loading-text" v-show="loading">
-            {{ $t('leaderboard.loading') }}
-        </p>
+    <div class="page-outer">
+        <Title>{{ $t('lbBacklog.tabTitle') }}</Title>
+        <Meta property="og:title" :content="$t('lbBacklog.tabTitle')" />
+        <h1>{{ $t('lbBacklog.title') }}</h1>
+        <p>{{ $t('lbBacklog.description') }}</p>
+        
         <div class="table-wrapper">
+            <p class="loading-text" v-show="loading">
+                {{ $t('leaderboard.loading') }}
+            </p>
             <table v-show="!loading">
                 <thead>
                     <tr>
+                        <th>{{ $t('leaderboard.header.lbRank' )}}</th>
+                        <th>{{ $t('leaderboard.header.player' )}}</th>
                         <th>
                             {{ $t('leaderboard.header.mode') }}
-                        </th>
-                        <th>
-                            {{ $t('leaderboard.header.date') }}
                         </th>
                         <th>
                             {{ $t('leaderboard.header.submitDate') }}
@@ -30,14 +34,18 @@
                     <tr
                       v-for="(submission, index) in submissions.slice(0, limit)"
                       :key="submission.id">
+                        <td>{{ index + offset }}</td>
+                        <td>
+                            <LazyProfileLink
+                                :profile="submission.submitted_by"
+                                :with-card="false"
+                            />
+                        </td>
                         <td>
                             <NuxtLinkLocale
                               :to="`/map-lite/${submission.game_mode}`">
                                 {{ getModeI18nString(submission.game_mode, $t) }}
                             </NuxtLinkLocale>
-                        </td>
-                        <td>
-                            {{ new Date(submission.replay_date).toLocaleString() }}
                         </td>
                         <td>
                             {{ new Date(submission.upload_date).toLocaleString() }}
@@ -60,6 +68,14 @@
               @click="offset = Math.max(offset - limit, 0)">
                 {{ $t('leaderboard.pagePrev') }}
             </button>
+            <noscript>
+                <NuxtLinkLocale
+                    :disabled="offset === 0"
+                    :aria-disabled="offset === 0"
+                    :to="offset !== 0 ? getPathToOffset(offset - limit) : undefined">
+                    {{ $t('leaderboard.pagePrev') }}
+                </NuxtLinkLocale>
+            </noscript>
             <span>
                 {{ $t('leaderboard.entryNumber', {
                     start: offset + 1,
@@ -73,60 +89,96 @@
               @click="offset += limit">
                 {{ $t('leaderboard.pageNext') }}
             </button>
+            <noscript>
+                <NuxtLinkLocale
+                    :disabled="isLastPage"
+                    :aria-disabled="isLastPage"
+                    :to="!isLastPage ? getPathToOffset(offset + limit) : undefined">
+                    {{ $t('leaderboard.pageNext') }}
+                </NuxtLinkLocale>
+            </noscript>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import type { LocationQueryValue } from 'vue-router';
 import { getChar } from '~/assets/scripts/chars';
 import { getModeI18nString } from '~/assets/scripts/modes';
-import type { Submission } from '~/assets/types/database';
+import { type Submission, SubmissionValidity, Table } from '~/assets/types/database';
 
-const props = defineProps({
-    userId: {
-        type: String,
-        required: true
-    },
-    limit: {
-        type: Number,
-        default: 10
-    }
-});
-
-const emit = defineEmits(['load']);
+const { params } = useRoute();
+const supabase = useSupabase();
 
 const loading = ref(true);
 const submissions: Ref<Submission[]> = ref([]);
 const offset = ref(0);
 const isLastPage = ref(true);
+const limit = ref(100);
+
+function getFirstParam(key: string): LocationQueryValue {
+    return typeof params[key] === 'object' ?
+        params[key][0] :
+        params[key];
+}
+
+if(params.offset) {
+    const param = getFirstParam('offset') as string;
     
+    const parsed = parseInt(param);
+
+    if(!isNaN(parsed)) {
+        offset.value = parsed;
+    }
+}
+
+if(params.limit) {
+    const param = getFirstParam('limit') as string;
+    
+    const parsed = parseInt(param);
+
+    if(!isNaN(parsed)) {
+        limit.value = parsed;
+    }
+}
+
+function getPathToOffset(offset: number): string {
+    offset = Math.max(offset, 0);
+    return `/leaderboard/backlog?limit=${limit.value}&offset=${offset}`;
+}
+
 watchEffect(async () => {
     loading.value = true;
 
-    const { data } = await useFetch('/api/v1/fetch-profile-submissions', {
-        query: {
-            id: props.userId,
-            limit: props.limit + 1,
-            offset
+    const { data, error } = await useFetch('/api/v1/fetch-submission-backlog', {
+        method: "GET",
+        params: {
+            offset: offset.value,
+            limit: limit.value
         }
     });
-
-    if(!data.value?.entries) {
+    
+    if(error.value) {
         submissions.value = [];
-    } else {
-        submissions.value = data.value.entries;
+        throw error.value;
     }
+    
+    if(data.value) {
+        const { entries, count } = data.value;
 
-    isLastPage.value = submissions.value.length <= props.limit;
+        isLastPage.value = offset.value + limit.value >= count;
+        submissions.value = entries;
+    }
 
     loading.value = false;
 });
-
-emit('load', submissions.value);
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @use '~/assets/scss/colors';
+.page-outer {
+    padding: 1em 2em;
+}
 
 .table-wrapper {
     max-width: 100%;

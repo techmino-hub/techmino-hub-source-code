@@ -3208,6 +3208,11 @@ After you delete it, __there is no going back.__`,
       deleteSuccess: "Successfully deleted submission",
     }
   },
+  lbBacklog: {
+    tabTitle: "Backlog - Techmino Hub",
+    title: "Unverified Submissions Backlog",
+    description: "This page is intended for verifiers to find unverified submissions to check.",
+  },
   submit: {
     tabTitle: "Run Submission - Techmino Hub",
     title: "Submit your run",
