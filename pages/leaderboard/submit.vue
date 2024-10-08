@@ -362,7 +362,22 @@ function saveFormState(state?: FormState) {
 
 function loadFormState(state?: FormState) {
     if(!state) {
-        state = JSON.parse(localStorage.getItem(FORM_STATE_KEY) ?? '{}');
+        const strState = localStorage.getItem(FORM_STATE_KEY) ?? "{}";
+
+        try {
+            state = JSON.parse(strState);
+        } catch(e) {
+            state = {
+                selMode: null,
+                repDateStr: undefined,
+                replay: null,
+                score: {},
+                proof: null,
+                isTAS: false,
+            };
+
+            console.error(`Failed to parse form state: ${e}\n\nString: ${strState}`);
+        }
     }
 
     if(!state) return;
