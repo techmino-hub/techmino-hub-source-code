@@ -31,7 +31,7 @@
                     <label for="gameMode">{{ $t('submit.gameMode') }}</label>
                     <select name="gameMode" id="gameMode" v-model="selMode" required="true">
                         <option
-                          v-for="[mode, recordSchema] in Object.entries(RECORD_SCHEMAS)"
+                          v-for="[mode, _] in Object.entries(RECORD_SCHEMAS)"
                           :key="mode"
                           :value="mode">
                             {{ getModeI18nString(mode, $t) }}
@@ -405,11 +405,22 @@ function getFirstQueryParam(key: string): LocationQueryValue {
 }
 
 function getAutofillState(): FormState {
+    let score = {};
+
+    if(route.query.score) {
+        try {
+            score = JSON.parse(getFirstQueryParam('score') ?? 'null');
+        } catch(e) {
+            score = {};
+            console.error(`Failed to parse score query param: ${e}\n\nString: ${getFirstQueryParam('score')}`);
+        }
+    }
+
     return {
+        score,
         selMode: getFirstQueryParam('selMode') ?? null,
         repDateStr: getFirstQueryParam('repDateStr') ?? undefined,
         replay: getFirstQueryParam('replay') ?? null,
-        score: JSON.parse(getFirstQueryParam('score') ?? 'null') ?? {},
         proof: getFirstQueryParam('proof') ?? null,
         isTAS: getFirstQueryParam('isTAS') === 'true',
     }
