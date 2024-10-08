@@ -2,13 +2,38 @@
 Originally part of /components/background.vue.
 Moved into separate script file so it can run before DOMContentLoaded, but *just* after the canvas element is created.
 
-Bundle into a minified JS file by running the below command:
-```bash
+Bundle into a minified JS file using Bun:
+```terminal
 bun build assets/scripts/background.ts \
     --outfile public/scripts/background.min.js \
-    --minify --target browser
-```*/
-{
+    --minify --target browser --no-bundle
+```
+
+Bundle into a minified JS file using Deno:
+```terminal
+deno bundle assets/scripts/background.ts public/scripts/background.min.js
+```
+
+Bundle into a minified JS file using ESBuild:
+```terminal
+esbuild assets/scripts/background.ts \
+    --bundle --minify \
+    --outfile=public/scripts/background.min.js
+```
+
+Bundle using all methods and pick the smallest file size (Bash):
+```bash
+bun build assets/scripts/background.ts --outfile public/scripts/~background.bun.js --minify --target browser --no-bundle &&\
+deno bundle assets/scripts/background.ts public/scripts/~background.deno.js &&\
+esbuild assets/scripts/background.ts --bundle --minify --outfile=public/scripts/~background.esbuild.js &&\
+
+for file in public/scripts/~background.*.js; do
+    size=$(stat -c %s $file)
+    echo "$size $file"
+done | sort -n | head -n 1 | cut -d ' ' -f 2 | xargs -I {} mv {} public/scripts/background.min.js &&\
+rm public/scripts/~background.*.js
+```
+*/
 const BG_TOGGLE_KEY = 'bgEnabled';
 const BG_SPEED_KEY = 'bgSpeed';
 const BG_ID = 'background';
@@ -135,4 +160,3 @@ function draw(timestamp: number) {
 }
 
 init();
-}
