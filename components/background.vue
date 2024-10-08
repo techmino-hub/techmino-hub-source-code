@@ -11,7 +11,7 @@
         <div v-html="`<script src='/scripts/background.min.js'async></script>`"></div>
         <img
             src="" aria-hidden="true"
-            onerror="d=document;if(!d.getElementById('background').classList.contains('rendering')){s=d.createElement('script');s.src='/scripts/background.min.js';s.async=true;d.body.appendChild(s);console.debug('init 2')}"
+            onerror="d=document;if(!d.getElementById('background').classList.contains('rendering')){s=d.createElement('script');s.src='/scripts/background.min.js';s.async=true;d.body.appendChild(s)}"
         >
     </div>
 </template>

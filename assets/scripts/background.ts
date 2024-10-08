@@ -84,7 +84,6 @@ function init() {
     if(canvas === null) return;
 
     canvas.classList.add('rendering');
-    console.log('init 1');
     bgCanvas = canvas as HTMLCanvasElement;
     bgContext = bgCanvas.getContext("2d")!;
 
