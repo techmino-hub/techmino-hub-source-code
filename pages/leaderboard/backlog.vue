@@ -12,10 +12,8 @@
             <table v-show="!loading">
                 <thead>
                     <tr>
-                        <th>
-                            {{ $t('leaderboard.header.lbRank') }}
-                        </th>
-                        <th>#</th>
+                        <th>{{ $t('leaderboard.header.lbRank' )}}</th>
+                        <th>{{ $t('leaderboard.header.player' )}}</th>
                         <th>
                             {{ $t('leaderboard.header.mode') }}
                         </th>
@@ -38,8 +36,9 @@
                       :key="submission.id">
                         <td>{{ index + offset }}</td>
                         <td>
-                            <ProfileLink
+                            <LazyProfileLink
                                 :profile="submission.submitted_by"
+                                :with-card="false"
                             />
                         </td>
                         <td>
@@ -69,6 +68,14 @@
               @click="offset = Math.max(offset - limit, 0)">
                 {{ $t('leaderboard.pagePrev') }}
             </button>
+            <noscript>
+                <NuxtLinkLocale
+                    :disabled="offset === 0"
+                    :aria-disabled="offset === 0"
+                    :to="offset !== 0 ? getPathToOffset(offset - limit) : undefined">
+                    {{ $t('leaderboard.pagePrev') }}
+                </NuxtLinkLocale>
+            </noscript>
             <span>
                 {{ $t('leaderboard.entryNumber', {
                     start: offset + 1,
@@ -82,22 +89,63 @@
               @click="offset += limit">
                 {{ $t('leaderboard.pageNext') }}
             </button>
+            <noscript>
+                <NuxtLinkLocale
+                    :disabled="isLastPage"
+                    :aria-disabled="isLastPage"
+                    :to="!isLastPage ? getPathToOffset(offset + limit) : undefined">
+                    {{ $t('leaderboard.pageNext') }}
+                </NuxtLinkLocale>
+            </noscript>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
+import type { LocationQueryValue } from 'vue-router';
 import { getChar } from '~/assets/scripts/chars';
 import { getModeI18nString } from '~/assets/scripts/modes';
 import { type Submission, SubmissionValidity, Table } from '~/assets/types/database';
 
+const { params } = useRoute();
+const supabase = useSupabase();
+
 const loading = ref(true);
 const submissions: Ref<Submission[]> = ref([]);
 const offset = ref(0);
-const isLastPage = ref(false);
+const isLastPage = ref(true);
 const limit = ref(100);
 
-const supabase = useSupabase();
+function getFirstParam(key: string): LocationQueryValue {
+    return typeof params[key] === 'object' ?
+        params[key][0] :
+        params[key];
+}
+
+if(params.offset) {
+    const param = getFirstParam('offset') as string;
+    
+    const parsed = parseInt(param);
+
+    if(!isNaN(parsed)) {
+        offset.value = parsed;
+    }
+}
+
+if(params.limit) {
+    const param = getFirstParam('limit') as string;
+    
+    const parsed = parseInt(param);
+
+    if(!isNaN(parsed)) {
+        limit.value = parsed;
+    }
+}
+
+function getPathToOffset(offset: number): string {
+    offset = Math.max(offset, 0);
+    return `/leaderboard/backlog?limit=${limit.value}&offset=${offset}`;
+}
 
 watchEffect(async () => {
     loading.value = true;
@@ -107,7 +155,7 @@ watchEffect(async () => {
         .select('*', { count: 'exact' })
         .eq('validity', SubmissionValidity.Unverified)
         .order('upload_date', { ascending: true })
-        .range(offset.value, offset.value + limit.value, {});
+        .range(offset.value, offset.value + limit.value);
     
     if(error) {
         console.error(error);
@@ -118,7 +166,7 @@ watchEffect(async () => {
     }
     
     submissions.value = data || [];
-    
+
     loading.value = false;
 });
 </script>
