@@ -150,22 +150,25 @@ function getPathToOffset(offset: number): string {
 watchEffect(async () => {
     loading.value = true;
 
-    // TODO: replace with API call for SSR compatibility
-    const { count, data, error } = await supabase.from(Table.Submissions)
-        .select('*', { count: 'exact' })
-        .eq('validity', SubmissionValidity.Unverified)
-        .order('upload_date', { ascending: true })
-        .range(offset.value, offset.value + limit.value);
+    const { data, error } = await useFetch('/api/v1/fetch-submission-backlog', {
+        method: "GET",
+        params: {
+            offset: offset.value,
+            limit: limit.value
+        }
+    });
     
-    if(error) {
-        console.error(error);
+    if(error.value) {
+        submissions.value = [];
+        throw error.value;
     }
+    
+    if(data.value) {
+        const { entries, count } = data.value;
 
-    if(count) {
         isLastPage.value = offset.value + limit.value >= count;
+        submissions.value = entries;
     }
-    
-    submissions.value = data || [];
 
     loading.value = false;
 });
