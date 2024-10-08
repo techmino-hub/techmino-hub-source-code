@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
         });
         
         return response.ok;
-    } finally {
-        return false;
-    }
+    } catch {}
+
+    return false;
 });
