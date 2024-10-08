@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { InputTypeHTMLAttribute } from 'vue';
 
+const loading = ref(true);
 const settings = ref([
     {
         name: "bgEnabled",
@@ -54,9 +55,7 @@ function init() {
         }
     }
 
-    // TODO: Use refs to remove this. Don't forget aria-busy
-    document?.getElementById("loading-text")?.classList.add("hide-important");
-    document?.getElementById("form")?.classList.remove("hide-important");
+    loading.value = false;
 }
 
 onMounted(init);
@@ -67,8 +66,8 @@ onMounted(init);
         <Title>{{ $t('settings.tabTitle') }}</Title>
         <Meta property="og:title" :content="$t('settings.tabTitle')" />
         <h1 class="hide-noscript">{{ $t('settings.title') }}</h1>
-        <p class="loading hide-noscript" id="loading-text">{{ $t('settings.loading') }}</p>
-        <form @submit.prevent="saveSettings" class="hide-important" id="form">
+        <p class="loading hide-noscript" v-if="loading">{{ $t('settings.loading') }}</p>
+        <form @submit.prevent="saveSettings" class="hide-important" v-if="!loading">
             <div v-for="setting of settings" :key="setting.name"
               :class="{
                 setting: true,
@@ -78,9 +77,6 @@ onMounted(init);
                     <label :for="setting.name">
                         {{ $t(`settings.settings.${setting.name}`) }}
                     </label>
-                    <!-- <span v-if="setting.name === 'bgSpeed'">
-                        {{ (setting.value as number * 100).toFixed(0) }}%
-                    </span> -->
                     <span v-if="setting.display">
                         {{ setting.display(setting.value) }}
                     </span>
