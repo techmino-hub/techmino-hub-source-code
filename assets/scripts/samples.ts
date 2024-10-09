@@ -72,7 +72,7 @@ export const SAMPLE_SUBMISSIONS: Submission[] = [
         },
         proof: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     },
-];
+] as const;
 
 export const SAMPLE_REPLAYS: ReplayData[] = [
     {
@@ -83,7 +83,7 @@ export const SAMPLE_REPLAYS: ReplayData[] = [
         submission_id: "00000000-0000-0000-0001-000000000001",
         replay_data: "eJydUktv00AQ9sw+avEr8OYhH1at7aYPcgMkTogiKAipQpWbmMRqGle2y0OIA/+cbzZxe0c57O74m/kek9/uflP+qlo3d+8uLq9fXn+4eHVx6bzrqmrp5nlRnGUneZHPvPtetV3dbIH8nB3mZ4czoPqy+9QJ8Fu56SrvlmVfAVBkRXGUvTjKT5/np/NZPj8+B/iuAfDqa7gIqrtv621/XWSbwNf39Xbl5r9dty5vqzdf3DyTgZ2bH3v3o2y3jyzdXdP0azfv2we81vVq/bq8G57LtrlfPPShe7VuOtxy78r+dj9xW/3s3zfdAL/ZNIvb4dHj23Cv14+Yb+UCeq8y/58/WO4WTVs9GUDo3XovqG4fibpl2bahuKi2vWwll7S+D2nUd91T1PC5Lw9NYkVKaLopV2/rbfU4+LZGfFe5P/N57o899jnzL7y8C3/q8wxHfuxPpHaCTztQqJ76cylk8r3w5/CyamssMjuchfUMWXfLsCvcPnzEcl/VOOBjU5VtkPnnz7O/OVsiRwlbNSWyOPWUSSXKmqlWPNLyZnaalWPUophZGUpp3xVNNPqU4URPImAJPQanJjKGowkl5GQGkdac8BjziaaUGHAIFzHHRkUpOxphfkxgU6neTxduMux4ssNqRY4pGtG+VzkT9HKM6alUeawwA2wpOsFN0Mx0wMM8pa2lsTYk0yYsPDZK1NTEmqPUyPwRyezYgBk+nYILdsgjjsRpyvuMODmwmmmqFLQTQRPtNUl26AUi6A6YQbdgngVNSuuExqIPapVKxP8uays5G9kCTXaZQGtKgScacSI9cciFJlp2g7eKNUVp2FsMNVOtKRUkj3VMUCD9O29GEnZGEsHOIVPbccTAusha+NYkSepw3/GS22kzFl3SgSyVZAkNZjL8E8TzgYUisNug0cQWmrSCz5HMxn8HrqELbJGjsfTokA8rtv8A+THLRA==" // gitleaks: ignore
     }
-];
+] as const;
 
 export const SAMPLE_SUBMISSIONS_WITH_REPLAYS: SubmissionWithReplay[] = [
     {
@@ -106,7 +106,7 @@ export const SAMPLE_SUBMISSIONS_WITH_REPLAYS: SubmissionWithReplay[] = [
         ...SAMPLE_SUBMISSIONS[4],
         replay_data: SAMPLE_REPLAYS[0].replay_data
     }
-];
+] as const;
 
 export const SAMPLE_PROFILES: Profile[] = [
     {
@@ -158,4 +158,4 @@ export const SAMPLE_PROFILES: Profile[] = [
         role: Role.Verifier,
         bio: "I'm a banned verifier!",
     },
-]
+] as const;

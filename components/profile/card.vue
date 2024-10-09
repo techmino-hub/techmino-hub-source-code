@@ -12,8 +12,8 @@
             </h1>
             <ProfileRole
                 class="pf-roles"
-                :account-state="(profile.account_state as AccountState)"
-                :role="(profile.role as Role)"
+                :account-state="profile.account_state"
+                :role="profile.role"
             />
             <p>
                 {{ profile.bio.slice(0, 100) }}

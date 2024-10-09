@@ -4,7 +4,7 @@ import { Tag } from '~/assets/types/faq';
 
 const props = defineProps({
     tag: {
-        type: String,
+        type: String as PropType<Tag>,
         required: true
     }
 });
@@ -22,7 +22,7 @@ const preTextMap: Record<Tag, string> = {
 
 <template>
     <span :class="tag">
-        {{ preTextMap[tag as Tag] + "  " + $t(`faq.tags.${tag}`) }}
+        {{ preTextMap[tag] + "  " + $t(`faq.tags.${tag}`) }}
     </span>
 </template>
 

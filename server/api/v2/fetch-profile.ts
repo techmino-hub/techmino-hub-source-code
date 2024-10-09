@@ -1,5 +1,4 @@
-import { Table } from '~/assets/types/database';
-import { type Profile } from '~/assets/types/database';
+import { Table, type Profile } from '~/assets/types/database';
 import { useSupabase } from '~/composables/database';
 
 function checkIfStringIsUuid(str: string) {
@@ -59,5 +58,5 @@ export default defineEventHandler(async (event) => {
         });
     }
 
-    return profile[0];
+    return profile[0] as Profile;
 })

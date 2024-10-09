@@ -100,7 +100,7 @@ export class DBWrapper {
     /** @throws {PostgrestError} */
     async getSubmissionsByGameMode(
         gameMode: string,
-        validity = SubmissionValidity.Verified,
+        validity: SubmissionValidity = SubmissionValidity.Verified,
         limit = 10,
         offset = 0,
         order = [] as TableOrder[]

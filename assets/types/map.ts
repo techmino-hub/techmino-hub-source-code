@@ -30,7 +30,7 @@ export function isMapDataValid(mapData: any, strict: boolean = false): mapData i
         min_y: 'number',
         max_y: 'number',
         starting_mode: 'string'
-    } as {[key: string]: string};
+    } as const;
 
     for(const key in schema) {
         if(!(key in mapData) || (typeof mapData[key]) !== schema[key]) {
@@ -89,7 +89,7 @@ export function isModeValid(mode: any): mode is Mode {
         y: 'number',
         icon: 'string',
         source: 'string'
-    } as {[key: string]: string};
+    } as const;
 
     for(const key in schema) {
         if(!(key in mode) || (typeof mode[key]) !== schema[key]) {

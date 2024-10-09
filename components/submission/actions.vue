@@ -46,7 +46,8 @@ const isOwner = computed(() => (
 const isVerifier = computed(() => (
     profile.value !== null &&
     profile.value.account_state === AccountState.Normal &&
-    [Role.Admin, Role.Verifier].includes(profile.value.role as Role)
+    ([Role.Admin, Role.Verifier] as [Role, Role])
+        .includes(profile.value.role)
 ));
 
 const validity = ref(props.submission.validity);

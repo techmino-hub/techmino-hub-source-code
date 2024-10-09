@@ -10,4 +10,4 @@ export const MD_STRING_PREFIX = "md_";
 export const langNameMap = {
     en: "English",
     id: "Bahasa Indonesia",
-} as { [index: string]: string | undefined };
+} as const;

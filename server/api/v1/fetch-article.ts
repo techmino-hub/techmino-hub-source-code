@@ -1,6 +1,3 @@
-import { promises as fs } from 'fs';
-import { resolve } from 'path';
-
 /**
  * @api {get} /api/v1/fetch-article Fetch an article
  * @apiName FetchArticle

@@ -17,7 +17,7 @@ onMounted(function() {
             }
 
             element.addEventListener('input', function() {
-                emits('filter', tag as Tag, mode as FilterMode);
+                emits('filter', tag, mode);
             });
         }
     }

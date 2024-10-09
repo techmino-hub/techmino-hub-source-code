@@ -19,8 +19,8 @@
                 </h1>
                 <ProfileRole
                     class="pf-roles"
-                    :account-state="(profile.account_state as AccountState)"
-                    :role="(profile.role as Role)"
+                    :account-state="(profile.account_state)"
+                    :role="(profile.role)"
                 />
                 <p>
                     {{ profile.bio }}
@@ -111,8 +111,8 @@ if(!data.value) {
 
 const profile = data.value;
 
-const stateSelect = ref<AccountState>(profile.account_state as AccountState);
-const roleSelect = ref<Role>(profile.role as Role);
+const stateSelect = ref(profile.account_state);
+const roleSelect = ref(profile.role);
 
 const { data: hasAvy } = await useFetch('/api/v1/check-avatar', {
     method: 'GET',
@@ -141,7 +141,7 @@ onMounted(async function() {
     if(myProfile.value.account_state !== AccountState.Normal) return;
 
     amAdmin.value = myProfile.value.role === Role.Admin;
-    amVerifier.value = [Role.Admin, Role.Verifier].includes(myProfile.value.role as Role);
+    amVerifier.value = ([Role.Admin, Role.Verifier] as Role[]).includes(myProfile.value.role);
 });
 
 function setState() {

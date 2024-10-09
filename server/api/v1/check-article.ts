@@ -1,6 +1,3 @@
-import { promises as fs } from 'fs';
-import { resolve } from 'path';
-
 /**
  * @api {get} /api/v1/check-article Check if an article exists
  * @apiName CheckArticle

@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { DBWrapper } from '~/assets/scripts/database';
 
-export const useSupabaseInfo = () => {
+export function useSupabaseInfo() {
     const runtimeConfig = useRuntimeConfig();
 
     return {
@@ -11,21 +11,21 @@ export const useSupabaseInfo = () => {
 }
 
 /** Creates an instance of the database wrapper. */
-export const useDatabase = () => {
+export function useDatabase() {
     const { url, key } = useSupabaseInfo();
 
     return new DBWrapper(url, key);
 };
 
 /** Creates an instance of Supabase. */
-export const useSupabase = () => {
+export function useSupabase() {
     const { url, key } = useSupabaseInfo();
 
     return createClient(url, key);
 }
 
 /** Creates an instance of Supabase, then get the current user. */
-export const useSupabaseUser = () => {
+export function useSupabaseUser() {
     const { url, key } = useSupabaseInfo();
 
     const supabase = createClient(url, key);

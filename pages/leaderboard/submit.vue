@@ -43,7 +43,10 @@
                 </p>
                 <div
                   v-if="selMode"
-                  v-for="[index, entry] in Object.entries(RECORD_SCHEMAS[selMode].entries)"
+                  v-for="
+                    [index, entry] in Object.entries(
+                        RECORD_SCHEMAS[selMode as keyof typeof RECORD_SCHEMAS]
+                            .entries)"
                   :key="index"
                   class="row">
                     <label :for="entry.name">
