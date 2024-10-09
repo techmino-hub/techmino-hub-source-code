@@ -105,7 +105,7 @@
 import type { LocationQueryValue } from 'vue-router';
 import { getChar } from '~/assets/scripts/chars';
 import { getModeI18nString } from '~/assets/scripts/modes';
-import { type Submission, SubmissionValidity, Table } from '~/assets/types/database';
+import { type Submission, SubmissionValidity, type SubmissionWithReplay, Table } from '~/assets/types/database';
 
 const { params } = useRoute();
 const supabase = useSupabase();
@@ -167,7 +167,7 @@ watchEffect(async () => {
         const { entries, count } = data.value;
 
         isLastPage.value = offset.value + limit.value >= count;
-        submissions.value = entries;
+        submissions.value = entries as Submission[];
     }
 
     loading.value = false;

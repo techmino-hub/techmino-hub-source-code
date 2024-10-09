@@ -1,4 +1,5 @@
-import { SubmissionValidity, Table } from '~/assets/types/database';
+import { PostgrestError } from '@supabase/supabase-js';
+import { Submission, SubmissionValidity, Table } from '~/assets/types/database';
 import { useSupabase } from '~/composables/database';
 
 /**
@@ -91,7 +92,11 @@ export default defineEventHandler(async (event) => {
         .select('*', { count: 'exact' })
         .eq('validity', SubmissionValidity.Unverified)
         .order('upload_date', { ascending: !reverse })
-        .range(offset, offset + limit);
+        .range(offset, offset + limit) as {
+            data: Submission[] | null,
+            error: PostgrestError | null,
+            count: number | null
+        };
 
     if(error) {
         const statusCode = parseInt(error.code) || 500;
