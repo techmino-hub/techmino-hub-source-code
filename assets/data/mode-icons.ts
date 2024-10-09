@@ -1,9 +1,10 @@
 import { type Mode } from "~/assets/types/map";
 
-export enum ModeIconType {
-    PNG = 'png',
-    SVG = 'svg'
-}
+export const ModeIconType = {
+    PNG: 'png',
+    SVG: 'svg'
+} as const;
+export type ModeIconType = typeof ModeIconType[keyof typeof ModeIconType];
 
 export const MODE_ICON_TYPE_MAP = {
     // How to generate:

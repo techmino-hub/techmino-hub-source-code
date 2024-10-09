@@ -126,68 +126,75 @@ export type SubmissionWithReplay = Submission & {
 /**
  * Represents the state of an account.
  */
-export enum AccountState {
+export const AccountState = {
     /** The account is in good standing. */
-    Normal = "Normal",
+    Normal: "Normal",
 
     /** The account is banned. */
-    Banned = "Banned",
+    Banned: "Banned",
 
     /** The account has not been verified yet, and thus has limited access. */
-    Unverified = "Unverified"
-}
+    Unverified: "Unverified"
+} as const;
+
+export type AccountState = typeof AccountState[keyof typeof AccountState];
 
 /**
  * Represents the role of a user.  
  * The role of a user dictates what they can do on the platform.
  */
-export enum Role {
+export const Role = {
     /** A regular user. */
-    User = "User",
+    User: "User",
 
     /** A trusted user that can verify submissions. */
-    Verifier = "Verifier",
+    Verifier: "Verifier",
 
     /** An administrator that can manage the platform. */
-    Admin = "Administrator"
-}
+    Admin: "Administrator"
+} as const;
+export type Role = typeof Role[keyof typeof Role];
 
 /** Represents the validity of a submission. */
-export enum SubmissionValidity {
+export const SubmissionValidity = {
     /** The submission has not been verified yet. */
-    Unverified = "Unverified",
+    Unverified: "Unverified",
 
     /** The submission has been checked by a verifier and seems valid. */
-    Verified = "Verified",
+    Verified: "Verified",
 
     /** The submission is suspicious and needs further investigation. */
-    Suspicious = "Suspicious",
+    Suspicious: "Suspicious",
 
     /** The submission has been rejected. */
-    Rejected = "Rejected",
+    Rejected: "Rejected",
 
     /** The submission is tool-assisted, and thus is not comparable to regular submissions. */
-    ToolAssisted = "Tool-assisted",
-}
+    ToolAssisted: "Tool-assisted",
+} as const;
+
+export type SubmissionValidity = typeof SubmissionValidity[keyof typeof SubmissionValidity];
 
 
 /** An enum of tables in the `public` schema. */
-export enum Table {
+export const Table = {
     /**
      * The `profiles` table which contains user profiles.  
      * Querying it should return a list of Profile objects.
      */
-    Profiles = "profiles",
+    Profiles: "profiles",
 
     /**
      * The `submissions` table which contains submission metadata.  
      * Querying it should return a list of Submission objects.
      */
-    Submissions = "submissions",
+    Submissions: "submissions",
 
     /**
      * The `replays` table which contains replay data.  
      * Querying it should return a list of ReplayData objects.
      */
-    Replays = "replays"
-}
+    Replays: "replays"
+} as const;
+
+export type Table = typeof Table[keyof typeof Table];

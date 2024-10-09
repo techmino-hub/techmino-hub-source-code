@@ -1,20 +1,23 @@
 /** Question tags for FAQ entries. All lowercase, no whitespaces. */
-export enum Tag {
-    Techmino = "techmino",
-    TechminoGalaxy = "galaxy",
-    Linux = "linux",
-    Apple = "apple",
-    Multiplayer = "multiplayer",
-    Error = "error",
-    Bot = "bot",
-}
+export const Tag = {
+    Techmino: "techmino",
+    TechminoGalaxy: "galaxy",
+    Linux: "linux",
+    Apple: "apple",
+    Multiplayer: "multiplayer",
+    Error: "error",
+    Bot: "bot",
+} as const;
 
+export type Tag = typeof Tag[keyof typeof Tag];
 
-export enum FilterMode {
-    exclude = 'exclude',
-    all = 'all',
-    include = 'include',
-}
+export const FilterMode = {
+    exclude: 'exclude',
+    all: 'all',
+    include: 'include',
+} as const;
+
+export type FilterMode = typeof FilterMode[keyof typeof FilterMode];
 
 /**
  * FAQ entry type.
