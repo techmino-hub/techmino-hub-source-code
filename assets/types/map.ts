@@ -32,7 +32,7 @@ export function isMapDataValid(mapData: any, strict: boolean = false): mapData i
         starting_mode: 'string'
     } as const;
 
-    for(const key in schema) {
+    for(const key of Object.keys(schema) as (keyof typeof schema)[]) {
         if(!(key in mapData) || (typeof mapData[key]) !== schema[key]) {
             return false;
         }
@@ -91,7 +91,7 @@ export function isModeValid(mode: any): mode is Mode {
         source: 'string'
     } as const;
 
-    for(const key in schema) {
+    for(const key of Object.keys(schema) as (keyof typeof schema)[]) {
         if(!(key in mode) || (typeof mode[key]) !== schema[key]) {
             return false;
         }

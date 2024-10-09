@@ -28,7 +28,7 @@
                     </i18n-t>
                     <i18n-t
                       v-if="submission.score"
-                      v-for="(entry, index) in RECORD_SCHEMAS[submission.game_mode].entries"
+                      v-for="(entry, index) in RECORD_SCHEMAS[submission.game_mode]!.entries"
                       keypath="submission.fields.score"
                       scope="global"
                       tag="li">
@@ -142,7 +142,7 @@ if(submission.score) {
     let scoreStrs: string[] = [];
 
     const recordSchemaEntries = Object.entries(
-        RECORD_SCHEMAS[submission.game_mode as keyof typeof RECORD_SCHEMAS]
+        RECORD_SCHEMAS[submission.game_mode as keyof typeof RECORD_SCHEMAS]!
             .entries
     );
 

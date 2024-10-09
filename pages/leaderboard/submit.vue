@@ -45,7 +45,7 @@
                   v-if="selMode"
                   v-for="
                     [index, entry] in Object.entries(
-                        RECORD_SCHEMAS[selMode as keyof typeof RECORD_SCHEMAS]
+                        RECORD_SCHEMAS[selMode as keyof typeof RECORD_SCHEMAS]!
                             .entries)"
                   :key="index"
                   class="row">
@@ -247,7 +247,7 @@ function getSubmission(): Submission | null {
 
     if(!RECORD_SCHEMAS[selMode.value]) return null;
     partial.score = {};
-    for(const [index, entry] of Object.entries(RECORD_SCHEMAS[selMode.value].entries)) {
+    for(const [index, entry] of Object.entries(RECORD_SCHEMAS[selMode.value]!.entries)) {
         if(score.value[index] === undefined || score.value[index] === null) return null;
 
 
