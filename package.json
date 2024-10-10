@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "deno lint --ignore=node_modules,./.*,*.min.*"
   },
   "dependencies": {
     "@nuxt/kit": "^3.13.1",
