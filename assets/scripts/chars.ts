@@ -1,9 +1,3 @@
-export type CharcodeMap = {
-    [index: string]: {
-        [index: string]: number | undefined
-    } | undefined
-}
-
 export const CHARCODE_MAP = {
     zChan: {
         none: 0xF0000,
@@ -246,10 +240,13 @@ export const CHARCODE_MAP = {
         psCreate: 0xF01A4,
         psOption: 0xF01A5,
     }
-} as CharcodeMap;
+} as const;
 
 export function getCharCode(index: string): number | undefined {
-    const [i, j] = index.split('.', 2);
+    const [i, j] = index.split('.', 2) as [
+        keyof typeof CHARCODE_MAP,
+        keyof typeof CHARCODE_MAP[keyof typeof CHARCODE_MAP]
+    ];
 
     const inner = CHARCODE_MAP[i];
 

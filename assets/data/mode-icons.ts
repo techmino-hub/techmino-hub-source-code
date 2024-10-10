@@ -1,9 +1,10 @@
 import { type Mode } from "~/assets/types/map";
 
-export enum ModeIconType {
-    PNG = 'png',
-    SVG = 'svg'
-}
+export const ModeIconType = {
+    PNG: 'png',
+    SVG: 'svg'
+} as const;
+export type ModeIconType = typeof ModeIconType[keyof typeof ModeIconType];
 
 export const MODE_ICON_TYPE_MAP = {
     // How to generate:
@@ -52,10 +53,10 @@ export const MODE_ICON_TYPE_MAP = {
     tsd: ModeIconType.SVG,
     ultra: ModeIconType.SVG,
     zen: ModeIconType.PNG,
-} as { [key: string]: ModeIconType };
+} as const;
 
 export function getModeIconPath(mode: Mode) {
-    const modeIcon = mode.icon;
+    const modeIcon = mode.icon as keyof typeof MODE_ICON_TYPE_MAP;
     const fileExtension = MODE_ICON_TYPE_MAP[modeIcon];
 
     if(!fileExtension) {

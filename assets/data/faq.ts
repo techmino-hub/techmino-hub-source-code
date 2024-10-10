@@ -189,4 +189,4 @@ export default {
         id: 'b3b-calc',
         tags: [Tag.Techmino]
     }
-} as { [index: string]: FAQEntry };
+} as const;

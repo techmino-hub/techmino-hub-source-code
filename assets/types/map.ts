@@ -30,9 +30,9 @@ export function isMapDataValid(mapData: any, strict: boolean = false): mapData i
         min_y: 'number',
         max_y: 'number',
         starting_mode: 'string'
-    } as {[key: string]: string};
+    } as const;
 
-    for(const key in schema) {
+    for(const key of Object.keys(schema) as (keyof typeof schema)[]) {
         if(!(key in mapData) || (typeof mapData[key]) !== schema[key]) {
             return false;
         }
@@ -89,9 +89,9 @@ export function isModeValid(mode: any): mode is Mode {
         y: 'number',
         icon: 'string',
         source: 'string'
-    } as {[key: string]: string};
+    } as const;
 
-    for(const key in schema) {
+    for(const key of Object.keys(schema) as (keyof typeof schema)[]) {
         if(!(key in mode) || (typeof mode[key]) !== schema[key]) {
             return false;
         }
@@ -100,17 +100,21 @@ export function isModeValid(mode: any): mode is Mode {
     return true;
 }
 
-export enum ModeShape {
-    square = 1,
-    diamond = 2,
-    octagon = 3
-}
+export const ModeShape = {
+    square: 1,
+    diamond: 2,
+    octagon: 3
+} as const;
 
-export enum Rank {
-    Q = 0,
-    B = 1,
-    A = 2,
-    S = 3,
-    U = 4,
-    X = 5
-}
+export type ModeShape = typeof ModeShape[keyof typeof ModeShape];
+
+export const Rank = {
+    Q: 0,
+    B: 1,
+    A: 2,
+    S: 3,
+    U: 4,
+    X: 5
+} as const;
+
+export type Rank = typeof Rank[keyof typeof Rank];

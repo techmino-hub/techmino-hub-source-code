@@ -1,5 +1,5 @@
 import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
-import { SubmissionValidity } from '~/assets/types/database';
+import { Submission, SubmissionValidity } from '~/assets/types/database';
 import { useDatabase } from '~/composables/database';
 import { type PostgrestError } from '@supabase/supabase-js';
 
@@ -42,14 +42,14 @@ export default defineEventHandler(async (event) => {
         });
     }
     
-    if(!RECORD_SCHEMAS[gameMode]) {
+    if(!(gameMode in RECORD_SCHEMAS)) {
         throw createError({
             statusCode: 400,
             statusMessage: `Invalid game mode '${gameMode}'`
         });
     }
 
-    let validity = SubmissionValidity.Verified;
+    let validity = SubmissionValidity.Verified as SubmissionValidity;
 
     if(query.validity) {
         const validityQuery = query.validity;
@@ -180,7 +180,7 @@ export default defineEventHandler(async (event) => {
             validity,
             limit,
             offset,
-            RECORD_SCHEMAS[gameMode].order,
+            RECORD_SCHEMAS[gameMode]!.order,
         );
         
         if(reverse) {

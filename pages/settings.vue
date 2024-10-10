@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import type { InputTypeHTMLAttribute } from 'vue';
 
+type Setting = {
+    name: string;
+    type: InputTypeHTMLAttribute;
+    value: boolean | number;
+    min?: number;
+    max?: number;
+    step?: number;
+    display?: ((value: boolean | number) => string);
+}
+
 const loading = ref(true);
 const settings = ref([
     {
@@ -26,15 +36,7 @@ const settings = ref([
         step: 0.1,
         display: (value: number) => `${value} px`
     }
-]) as Ref<{
-    name: string;
-    type: InputTypeHTMLAttribute;
-    value: boolean | number;
-    min?: number;
-    max?: number;
-    step?: number;
-    display?: ((value: boolean | number) => string);
-}[]>;
+]) as Ref<Setting[]>;
 
 function saveSettings() {
     for(let setting of settings.value) {

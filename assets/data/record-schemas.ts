@@ -1166,8 +1166,6 @@ export const RECORD_SCHEMAS = {
             }
         ]
     },
-} as {
-    [modeID: string]: RecordSchema
-};
+} as Record<string, RecordSchema | undefined>;
 
 export default RECORD_SCHEMAS;

@@ -43,8 +43,7 @@ function getEmptyKeyDurationStats(): KeyDurationStats {
     let partial: Partial<KeyDurationStats> = {};
 
     for(const key of Object.values(InputKey)) {
-        if(isNaN(Number(key))) continue;
-        partial[key as InputKey] = {
+        partial[key] = {
             durations: {},
             presses: 0,
             min: Infinity,
@@ -71,11 +70,16 @@ export function getReplayKeyDurationStats(
     replayData: GameReplayData
 ): KeyDurationStats {
     let keyDurationStats = getEmptyKeyDurationStats();
-    let timeOfPreviousPress: { [key in InputKey]: number } = {} as any;
 
-    for(const key of Object.values(InputKey) as InputKey[]) {
-        timeOfPreviousPress[key] = Infinity;
-    }
+    let timeOfPreviousPress: Record<InputKey, number> = (function() {
+        let partial: Partial<Record<InputKey, number>> = {};
+
+        for(const key of Object.values(InputKey)) {
+            partial[key] = Infinity;
+        }
+
+        return partial as Record<InputKey, number>;
+    })();
 
     for(const input of replayData.inputs) {
         const key = input.key;
@@ -96,9 +100,6 @@ export function getReplayKeyDurationStats(
 
     // Process inputs for additional statistics
     for(let key of Object.values(InputKey)) {
-        if(isNaN(Number(key))) continue; // filter out enum names
-        key = key as InputKey;
-
         // Calculate the 25th, 50th (median), and 75th percentiles
         {
             const durations = Object.keys(keyDurationStats[key].durations).map(Number);
@@ -218,9 +219,7 @@ export function getInputFingerprint(inputStats: KeyDurationStats): string {
     let fingerprint = "";
 
     for(const key of Object.values(InputKey)) {
-        if(isNaN(Number(key))) continue; // filter out enum names
-
-        const stats = inputStats[key as InputKey];
+        const stats = inputStats[key];
 
         if(stats.presses === 0) {
             fingerprint += "----";
@@ -257,7 +256,7 @@ export function getInputFingerprint(inputStats: KeyDurationStats): string {
 export function getFingerprintSimilarity(fingerprint1: string, fingerprint2: string): number {
     const similarities: number[] = [];
 
-    for(const key of Object.values(InputKey) as InputKey[]) {
+    for(const key of Object.values(InputKey)) {
         const index = key * 4;
 
         if(
