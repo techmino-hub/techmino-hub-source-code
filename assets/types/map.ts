@@ -118,3 +118,24 @@ export const Rank = {
 } as const;
 
 export type Rank = typeof Rank[keyof typeof Rank];
+
+
+export const modeShapeNames = (() => {
+    let names = new Map<ModeShape, string>();
+
+    for(let [key, value] of Object.entries(ModeShape)) {
+        names.set(value, key);
+    }
+
+    return names as Map<ModeShape, keyof typeof ModeShape>;
+})();
+
+export const rankNames = (() => {
+    let names = new Map<Rank, string>();
+
+    for(let [key, value] of Object.entries(Rank)) {
+        names.set(value, key);
+    }
+
+    return names as Map<Rank, keyof typeof Rank>;
+})();

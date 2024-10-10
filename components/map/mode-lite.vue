@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type Mode, ModeShape, Rank } from '~/assets/types/map';
+import { type Mode, ModeShape, modeShapeNames, Rank, rankNames } from '~/assets/types/map';
 import { getModeI18nString } from '~/assets/scripts/modes';
 import { getModeIconPath } from '~/assets/data/mode-icons';
 
@@ -24,7 +24,7 @@ const localizedName = getModeI18nString(props.mode.name, useI18n().t);
 <template>
     <NuxtLinkLocale
       :to="`/map-lite/${mode.name}?map=${map}`"
-      :class="`mode ${ModeShape[mode.shape]} rank-${Rank[rank]}`"
+      :class="`mode ${modeShapeNames.get(mode.shape)} rank-${rankNames.get(rank)}`"
       :style="{
         left: mode.x - mode.size + 'px',
         top: mode.y - mode.size + 'px',

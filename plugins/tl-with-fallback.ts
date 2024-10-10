@@ -1,3 +1,5 @@
+import { type TranslateOptions } from 'vue-i18n';
+
 /**
  * Translate with a key if it exists, otherwise fallback to another key.
  * 
@@ -17,7 +19,7 @@
 export function translateWithFallback(
     initKey: string,
     fallbackKey: string,
-    options?: any
+    options: Record<string, unknown> = {}
 ): string {
     const i18n = useI18n();
 
