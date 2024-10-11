@@ -659,7 +659,7 @@ function getModeAtCenter(): Mode | null {
         return dx + dy < maxManhDist;
     }
 
-    const isModeInCenter = (mode: Mode) => {
+    const isModeInCenter = (mode: Mode): boolean => {
         const x = mode.x; const y = mode.y;
 
         switch(mode.shape) {
@@ -670,7 +670,7 @@ function getModeAtCenter(): Mode | null {
             case ModeShape.diamond:
                 return isDiamondInCenter(x, y, mode.size);
             default:
-                return false;
+                return mode.shape as never; // Exhaustive check
         }
     }
 

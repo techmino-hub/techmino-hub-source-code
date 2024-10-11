@@ -24,6 +24,8 @@ function filter(tag: Tag, mode: FilterMode) {
         case FilterMode.all:
             faqElement.classList.remove(showClass, hideClass);
             break;
+        default:
+            return mode as never; // Exhaustive check
     }
 }
 </script>
