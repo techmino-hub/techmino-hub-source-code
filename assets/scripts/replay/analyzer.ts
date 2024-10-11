@@ -40,7 +40,7 @@ export type KeyDurationStats = {
 };
 
 function getEmptyKeyDurationStats(): KeyDurationStats {
-    let partial: Partial<KeyDurationStats> = {};
+    const partial: Partial<KeyDurationStats> = {};
 
     for(const key of Object.values(InputKey)) {
         partial[key] = {
@@ -69,10 +69,10 @@ function getEmptyKeyDurationStats(): KeyDurationStats {
 export function getReplayKeyDurationStats(
     replayData: GameReplayData
 ): KeyDurationStats {
-    let keyDurationStats = getEmptyKeyDurationStats();
+    const keyDurationStats = getEmptyKeyDurationStats();
 
-    let timeOfPreviousPress: Record<InputKey, number> = (function() {
-        let partial: Partial<Record<InputKey, number>> = {};
+    const timeOfPreviousPress: Record<InputKey, number> = (function() {
+        const partial: Partial<Record<InputKey, number>> = {};
 
         for(const key of Object.values(InputKey)) {
             partial[key] = Infinity;
@@ -99,7 +99,7 @@ export function getReplayKeyDurationStats(
     }
 
     // Process inputs for additional statistics
-    for(let key of Object.values(InputKey)) {
+    for(const key of Object.values(InputKey)) {
         // Calculate the 25th, 50th (median), and 75th percentiles
         {
             const durations = Object.keys(keyDurationStats[key].durations).map(Number);
@@ -116,7 +116,7 @@ export function getReplayKeyDurationStats(
 
             let percentile25Set = false;
             let medianSet = false;
-            let percentile75Set = false
+            let percentile75Set = false;
 
             for(const duration of durations) {
                 const durationInstances = keyDurationStats[key].durations[duration] ?? 0;
@@ -385,7 +385,7 @@ export function getReplayLocalKps(replayData: GameReplayData, filter?: InputKey,
  * @param replayData The replay data to analyze.
  */
 export function getUsedKeys(replayData: GameReplayData) {
-    let usedKeys = new Set<InputKey>();
+    const usedKeys = new Set<InputKey>();
 
     for(const input of replayData.inputs) {
         if(input.type === InputEventType.Press) {
@@ -402,7 +402,7 @@ export function getUsedKeys(replayData: GameReplayData) {
  * @param gameMode The game mode to get the KPS limit for.
  * @returns The KPS limit for the given game mode.
  */
-function getKpsLimit(gameMode: string) {
+export function getKpsLimit(gameMode: string) {
     const kpsLimits = {
         sprint123: 60,
         classic: 30,

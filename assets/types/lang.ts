@@ -1,6 +1,7 @@
 /** Language entry type. */
 export type LangEntry = {
-    [key: string]: string | string[] | ((...args: any) => string) | LangEntry
+    [key: string]:
+        string | string[] | ((...args: unknown[]) => string) | LangEntry
 };
 
 /** The prefix of a string if it should be processed in Markdown */

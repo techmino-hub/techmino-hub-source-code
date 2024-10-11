@@ -1,5 +1,3 @@
-import { createClient, SupabaseClient, type SupabaseClientOptions } from "@supabase/supabase-js";
-
 /**
  * The Profile type represents a user's profile.  
  * This should be what you get from querying from the `public.profiles` table.
@@ -60,7 +58,7 @@ export type Submission = {
      * It is different for each game mode, and can even be null.  
      * Postgres type: jsonb
      */
-    score: Record<string | number, any> | null;
+    score: Record<string | number, unknown> | null;
 
     /**
      * The timestamp when the submission was uploaded.  

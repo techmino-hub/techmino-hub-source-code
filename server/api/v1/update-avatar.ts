@@ -91,7 +91,7 @@ export default defineEventHandler(async (event) => {
     }
 
     if(access_token) {
-        const { data, error } = await supabase.auth.setSession({
+        const { error } = await supabase.auth.setSession({
             access_token,
             refresh_token
         });
@@ -140,14 +140,4 @@ function dataUrlToBlob(dataUrl: string): Blob {
     }
     
     return new Blob([uInt8Array], { type: mimeString });
-}
-
-function dataUrlToUInt8Array(dataUrl: string): Uint8Array {
-    const byteString = atob(dataUrl.split(',')[1]);
-    const buf = new ArrayBuffer(byteString.length);
-    const arr = new Uint8Array(buf);
-    for (let i = 0; i < byteString.length; i++) {
-        arr[i] = byteString.charCodeAt(i);
-    }
-    return arr;
 }

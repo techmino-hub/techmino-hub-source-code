@@ -1,7 +1,6 @@
 import { RECORD_SCHEMAS } from '~/assets/data/record-schemas';
-import { Submission, SubmissionValidity } from '~/assets/types/database';
+import { SubmissionValidity } from '~/assets/types/database';
 import { useDatabase } from '~/composables/database';
-import { type PostgrestError } from '@supabase/supabase-js';
 
 /**
  * @api {get} /api/v1/fetch-leaderboard Fetch leaderboard
@@ -26,7 +25,7 @@ import { type PostgrestError } from '@supabase/supabase-js';
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
 
-    let gameMode = query.gameMode;
+    const gameMode = query.gameMode;
 
     if(!gameMode) {
         throw createError({
@@ -143,7 +142,7 @@ export default defineEventHandler(async (event) => {
     let reverse = false;
 
     if(query.reverse) {
-        let reverseQuery = query.reverse;
+        const reverseQuery = query.reverse;
 
         if(typeof reverseQuery === 'boolean') {
             reverse = reverseQuery;

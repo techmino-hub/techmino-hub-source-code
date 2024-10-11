@@ -101,11 +101,11 @@ function onResize() {
     bgCanvas.width = width;
     bgCanvas.height = height;
 
-    let starCount = Math.floor(width * height * 6e-4);
+    const starCount = Math.floor(width * height * 6e-4);
     stars = new Array(starCount);
 
     for (let i = 0; i < starCount; i++) {
-        let size = random(2.6, 4);
+        const size = random(2.6, 4);
         stars[i] = {
             size: size,
             x: random(-10, width + 10),

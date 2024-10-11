@@ -100,7 +100,7 @@ export default defineEventHandler(async (event) => {
     let text = "";
 
     try {
-        let res = await fetch(path);
+        const res = await fetch(path);
 
         if(!res.ok) {
             throw createError({

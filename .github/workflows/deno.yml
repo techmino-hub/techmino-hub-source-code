@@ -27,4 +27,4 @@ jobs:
           deno-version: v1.x
 
       - name: Run linter
-        run: deno lint --ignore=node_modules,./.*,*.min.*
+        run: deno lint --ignore=node_modules,./.*,**/*.min.js

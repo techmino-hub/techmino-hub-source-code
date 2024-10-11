@@ -2,7 +2,6 @@ import { ref } from 'vue';
 import {
     createClient,
     SupabaseClient,
-    type PostgrestError,
     type SupabaseClientOptions,
     type User
 } from '@supabase/supabase-js';

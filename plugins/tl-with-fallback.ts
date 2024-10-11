@@ -1,5 +1,3 @@
-import { type TranslateOptions } from 'vue-i18n';
-
 /**
  * Translate with a key if it exists, otherwise fallback to another key.
  * 
@@ -30,7 +28,7 @@ export function translateWithFallback(
     }
 }
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(() => {
     const tf = translateWithFallback;
 
     return {

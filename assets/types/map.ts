@@ -8,6 +8,33 @@ export type MapData = {
     starting_mode: string
 }
 
+function isRecord(candidate: unknown): candidate is Record<string, unknown> {
+    return !!(typeof candidate === 'object' && candidate);
+}
+
+const mapDataSchema = {
+    modes: 'object',
+    min_x: 'number',
+    max_x: 'number',
+    min_y: 'number',
+    max_y: 'number',
+    starting_mode: 'string'
+} as const;
+
+function recordFollowsMapDataSchema(rec: Record<string, unknown>): rec is MapData {
+    for(const key of Object.keys(mapDataSchema) as (keyof typeof mapDataSchema)[]) {
+        if(!(key in rec) || (typeof rec[key]) !== mapDataSchema[key]) {
+            return false;
+        }
+
+        if(mapDataSchema[key] === 'object' && !isRecord(rec[key])) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 /**
  * Checks if the given map data is valid.
  * 
@@ -20,23 +47,9 @@ export type MapData = {
  * 
  * @returns Whether or not the map data is valid
  */
-export function isMapDataValid(mapData: any, strict: boolean = false): mapData is MapData {
-    if(!mapData || typeof mapData !== 'object') { return false; }
-    
-    const schema = {
-        modes: 'object',
-        min_x: 'number',
-        max_x: 'number',
-        min_y: 'number',
-        max_y: 'number',
-        starting_mode: 'string'
-    } as const;
-
-    for(const key of Object.keys(schema) as (keyof typeof schema)[]) {
-        if(!(key in mapData) || (typeof mapData[key]) !== schema[key]) {
-            return false;
-        }
-    }
+export function isMapDataValid(mapData: unknown, strict: boolean = false): mapData is MapData {
+    if(!isRecord(mapData)) return false;
+    if(!recordFollowsMapDataSchema(mapData)) return false;
 
     if(!mapData.modes[mapData.starting_mode]) {
         return false;
@@ -77,8 +90,9 @@ export type Mode = {
  * @param mode The candidate mode to be validated.
  * @returns Whether or not the mode is valid.
  */
-export function isModeValid(mode: any): mode is Mode {
-    if(!mode || typeof mode !== 'object') { return false; }
+// @ts-ignore | "`any` type is not allowed"
+export function isModeValid(mode: unknown): mode is Mode {
+    if(!isRecord(mode)) { return false; }
     
     const schema = {
         name: 'string',
@@ -121,9 +135,9 @@ export type Rank = typeof Rank[keyof typeof Rank];
 
 
 export const modeShapeNames = (() => {
-    let names = new Map<ModeShape, string>();
+    const names = new Map<ModeShape, string>();
 
-    for(let [key, value] of Object.entries(ModeShape)) {
+    for(const [key, value] of Object.entries(ModeShape)) {
         names.set(value, key);
     }
 
@@ -131,9 +145,9 @@ export const modeShapeNames = (() => {
 })();
 
 export const rankNames = (() => {
-    let names = new Map<Rank, string>();
+    const names = new Map<Rank, string>();
 
-    for(let [key, value] of Object.entries(Rank)) {
+    for(const [key, value] of Object.entries(Rank)) {
         names.set(value, key);
     }
 

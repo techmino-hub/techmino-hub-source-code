@@ -1,4 +1,4 @@
-import { type FAQEntry, Tag } from "../types/faq";
+import { Tag } from "../types/faq";
 
 export default {
     'what-is-techmino': {

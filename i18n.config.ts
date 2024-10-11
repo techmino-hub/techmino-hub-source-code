@@ -38,7 +38,7 @@ function processLangEntry(entries: LangEntry): LangEntry {
     const newEntries: LangEntry = {};
     
     for(const key in entries) {
-        let entry = entries[key];
+        const entry = entries[key];
         
         if(typeof entry === 'string') {
             newEntries[key] = renderString(entry);

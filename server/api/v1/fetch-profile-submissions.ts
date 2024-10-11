@@ -21,7 +21,7 @@ import { useDatabase } from '~/composables/database';
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
 
-    let id = query.id;
+    const id = query.id;
 
     if (!id) {
         throw createError({
@@ -58,7 +58,7 @@ export default defineEventHandler(async (event) => {
             }
 
             if(typeof limitQuery === 'string') {
-                let casted = parseInt(limitQuery);
+                const casted = parseInt(limitQuery);
 
                 if(!isFinite(casted)) {
                     throw createError({
@@ -95,7 +95,7 @@ export default defineEventHandler(async (event) => {
             }
 
             if(typeof offsetQuery === 'string') {
-                let casted = parseInt(offsetQuery);
+                const casted = parseInt(offsetQuery);
 
                 if(!isFinite(casted)) {
                     throw createError({

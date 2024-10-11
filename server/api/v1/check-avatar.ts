@@ -14,7 +14,7 @@ import { useDatabase } from "~/composables/database";
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
 
-    let id = query.id;
+    const id = query.id;
 
     if (!id) {
         throw createError({
@@ -47,7 +47,7 @@ export default defineEventHandler(async (event) => {
         });
         
         return response.ok;
-    } catch {}
-
-    return false;
+    } catch {
+        return false;
+    }
 });

@@ -18,8 +18,8 @@ import { useDatabase } from '~/composables/database';
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
 
-    let uuid = query.uuid;
-    let username = query.username;
+    const uuid = query.uuid;
+    const username = query.username;
 
     if(!uuid && !username) {
         throw createError({
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
             });
         }
 
-        let error = err as PostgrestError | Error;
+        const error = err as PostgrestError | Error;
 
         if(error.message.toLowerCase().includes("not found")) {
             throw createError({

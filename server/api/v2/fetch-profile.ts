@@ -21,7 +21,7 @@ function checkIfStringIsUuid(str: string) {
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
 
-    let id = query.id;
+    const id = query.id;
     
     if(typeof id !== 'string') {
         throw createError({
