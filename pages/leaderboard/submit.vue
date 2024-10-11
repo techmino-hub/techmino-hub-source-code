@@ -149,7 +149,7 @@ import { getModeI18nString } from '~/assets/scripts/modes';
 import type { User } from '@supabase/supabase-js';
 import { AccountState, SubmissionValidity, type Profile, type Submission } from '~/assets/types/database';
 import { parseReplayFromRepString } from 'techmino-replay-parser';
-import type { LocationQuery, LocationQueryValue } from 'vue-router';
+import type { LocationQueryValue } from 'vue-router';
 
 const database = useDatabase();
 const i18n = useI18n();
@@ -201,7 +201,7 @@ const repMsg = ref("");
 const errMsg = ref("");
 const uploadBlocked = ref(false);
 
-async function processReplay() {
+function processReplay() {
     if(!replay.value || replay.value.length === 0) {
         repMsg.value = "";
         hasReplay.value = false;
@@ -209,7 +209,7 @@ async function processReplay() {
     }
 
     try {
-        const replayData = await parseReplayFromRepString(replay.value);
+        const replayData = parseReplayFromRepString(replay.value);
 
         if(!RECORD_SCHEMAS[replayData.mode]) throw new Error('Invalid mode');
 

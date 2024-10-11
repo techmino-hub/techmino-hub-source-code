@@ -40,7 +40,7 @@ const props = defineProps({
     }
 });
 
-const parsedReplay = await parseReplayFromRepString(props.replayData);
+const parsedReplay = parseReplayFromRepString(props.replayData);
 const keyDurationStats = getReplayKeyDurationStats(parsedReplay);
 const inputFingerprint = getInputFingerprint(keyDurationStats);
 </script>
