@@ -12,29 +12,29 @@
     "lintless": "npm run lint > lint_output.log 2>&1 || less -R lint_output.log"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.13.2",
-    "@nuxtjs/i18n": "^8.5.5",
-    "@sgratzl/chartjs-chart-boxplot": "^4.4.2",
+    "@nuxt/kit": "^3.14.159",
+    "@nuxtjs/i18n": "^8.5.6",
+    "@sgratzl/chartjs-chart-boxplot": "^4.4.3",
     "@supabase/ssr": "^0.5.1",
-    "@supabase/supabase-js": "^2.45.4",
-    "@tensorflow/tfjs-node": "^4.21.0",
+    "@supabase/supabase-js": "^2.46.1",
+    "@tensorflow/tfjs-node": "^4.22.0",
     "@types/sanitize-html": "^2.13.0",
     "buffer": "^6.0.3",
-    "chart.js": "^4.4.4",
+    "chart.js": "^4.4.6",
     "chartjs-plugin-zoom": "^2.0.1",
     "markdown-it": "^14.1.0",
-    "nsfwjs": "^4.1.0",
-    "nuxt": "^3.13.2",
+    "nsfwjs": "^4.2.0",
+    "nuxt": "^3.14.159",
     "pako": "^2.1.0",
     "sanitize-html": "^2.13.1",
     "techmino-replay-parser": "^3.0.0",
-    "vue": "^3.5.11",
-    "vue-chartjs": "^5.3.1",
+    "vue": "^3.5.12",
+    "vue-chartjs": "^5.3.2",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
     "@types/markdown-it": "^14.1.2",
     "@types/pako": "^2.0.3",
-    "sass": "^1.79.5"
+    "sass": "^1.80.6"
   }
 }
