@@ -69,7 +69,7 @@ onMounted(init);
         <Meta property="og:title" :content="$t('settings.tabTitle')" />
         <h1 class="hide-noscript">{{ $t('settings.title') }}</h1>
         <p class="loading hide-noscript" v-if="loading">{{ $t('settings.loading') }}</p>
-        <form @submit.prevent="saveSettings" class="hide-important" v-if="!loading">
+        <form @submit.prevent="saveSettings" v-if="!loading">
             <div v-for="setting of settings" :key="setting.name"
               :class="{
                 setting: true,
