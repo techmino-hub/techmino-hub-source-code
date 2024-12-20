@@ -285,6 +285,11 @@ function getSubmission(): Submission | null {
 async function uploadSubmission() {
     if(uploadBlocked.value) return;
 
+    if(!hasReplay && (!proof || proof.trim().length == 0)) {
+        errMsg.value = i18n.t('submit.errorIncomplete');
+        return;
+    }
+
     uploadBlocked.value = true;
     errMsg.value = "";
 

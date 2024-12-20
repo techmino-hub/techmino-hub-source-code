@@ -128,7 +128,7 @@ function onChange() {
     emits('change', totalSecs);
 }
 
-watchEffect(() => {
+watch(() => props.value, () => {
     let totalSecs = props.value;
     if (totalSecs < 0) totalSecs = 0;
 
