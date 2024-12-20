@@ -344,7 +344,7 @@ header {
     pointer-events: none;
 
     @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
-        background-color: darken(colors.$secondary-color-alpha75, 40%);
+        background-color: color.adjust(colors.$secondary-color-alpha75, $lightness: -36.2%);
         backdrop-filter: blur(16.2px);
         -webkit-backdrop-filter: blur(16.2px);
     }
@@ -413,7 +413,7 @@ nav.mobile {
     transition: transform 250ms;
 
     @supports (backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0)) {
-        background-color: darken(colors.$secondary-color-alpha50, 36.2%);
+        background-color: color.adjust(colors.$secondary-color-alpha50, $lightness: -36.2%);
 
         backdrop-filter: blur(16.2px);
         -webkit-backdrop-filter: blur(16.2px);
