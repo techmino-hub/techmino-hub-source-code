@@ -12,7 +12,7 @@
     "lintless": "npm run lint > lint_output.log 2>&1 || less -R lint_output.log"
   },
   "dependencies": {
-    "@nuxt/kit": "^3.14.159",
+    "@nuxt/kit": "^3.14.1592",
     "@nuxtjs/i18n": "^8.5.6",
     "@sgratzl/chartjs-chart-boxplot": "^4.4.3",
     "@supabase/ssr": "^0.5.2",
@@ -24,7 +24,8 @@
     "chartjs-plugin-zoom": "^2.0.1",
     "markdown-it": "^14.1.0",
     "nsfwjs": "^4.2.0",
-    "nuxt": "^3.14.159",
+    "nuxt": "^3.14.1592",
+    "nuxt-security": "^2.1.5",
     "pako": "^2.1.0",
     "sanitize-html": "^2.13.1",
     "techmino-replay-parser": "^3.0.0",
