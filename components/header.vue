@@ -153,6 +153,7 @@ onMounted(async function() {
 @use "~/assets/scss/main";
 @use "~/assets/scss/colors";
 @use "~/assets/scss/consts";
+@use "sass:color";
 
 @media (min-width: #{consts.$header-collapse-width}) {
     button.hamburger, nav.mobile {
