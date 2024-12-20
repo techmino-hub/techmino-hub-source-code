@@ -131,7 +131,8 @@ if(hasAvy) {
 }
 
 onMounted(async function() {
-    router.push(`/profiles/${profile.id}`);
+    // router.push(`/profiles/${profile.id}`);
+    history.replaceState(null, "", `/profiles/${profile.id}`);
     user.value = (await database.supabase.auth.getUser()).data.user;
 
     if(!user.value) return;
