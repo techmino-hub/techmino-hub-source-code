@@ -198,7 +198,7 @@ Below is a list of ColdClear's files on different platforms:
 |-------------|-----------------------------------------|-------------------------------------------------------------------------------------------------|
 | Windows     | \`CCloader.dll\`, \`cold_clear.dll\`    |                                                                                                 |
 | Linux       | \`lib/CCloader.so\`                     |                                                                                                 |
-| MacOS       | \`CCloader.dylib\`                      | Needs further investigation.                                                                    |
+| MacOS       | \`CCloader.dylib\`                      |                                                                                                 |
 | Android x86 | \`libAndroid/armeabi_v7a/CCloader.so\`  |                                                                                                 |
 | Android x64 | \`libAndroid/arm64_v8a/CCloader.so\`    |                                                                                                 |
 | iOS         | \`llibCCloader.a\`, \`libcold_clear.a\` | Needs further investigation. It's probable that 2 files are required to build CCloader for iOS. |
@@ -208,8 +208,13 @@ Below are instructions on how to fix this issue.
 2. Download [Techmino's source code](https://github.com/26F-Studio/Techmino). (click the green Code button and click Download ZIP)
 3. Extract the downloaded files to seperate folders (Techmino source code to a folder, CCloader files to another folder)
 4. Copy the necessary files from the CCloader folder into Techmino's source code, based on the path in the above table.
-5. Build Techmino. Instructions can be found [here](https://love2d.org/wiki/Game_Distribution).`,
-        credit: "SweetSea"
+5. Build Techmino. Instructions can be found [here](https://love2d.org/wiki/Game_Distribution).
+
+Note: For MacOS users, instead of putting the \`CCloader.dylib\` file in the game's source code folder,
+put it in the \`Contents/Frameworks\` folder in \`love.app\`.  
+If that does not work, you can try putting it in \`/usr/lib/\` or \`/usr/local/lib/\`.  
+If you cannot see the \`/usr/\` folder, [here is a tutorial on how to access it](https://macpaw.com/how-to/access-usr-folder-mac).`,
+        credit: "SweetSea, NOT_A_ROBOT"
       },
       'remake': {
         question: "I heard Techmino is being remade. What's going on?",
