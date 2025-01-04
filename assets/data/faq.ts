@@ -188,5 +188,9 @@ export default {
     'b3b-calc': {
         id: 'b3b-calc',
         tags: [Tag.Techmino]
+    },
+    'srs_plus_srs_x': {
+        id: 'srs_plus_srs_x',
+        tags: [Tag.Techmino]
     }
 } as const;

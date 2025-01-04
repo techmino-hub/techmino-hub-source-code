@@ -608,6 +608,13 @@ It will not be implemented in the “Classic” Techmino.`,
         answer: `md_Use this table to calculate B2B2B meter (on the left of the playfield):  
 ![Techmino B2B2B table](/img/faq/b2b2b-calculator.png)`,
         credit: "nekonaomii"
+      },
+      'srs_plus_srs_x': {
+        question: "Why doesn't Techmino's SRS_plus match with TETR.IO's SRS+? Why doesn't Techmino's SRS-X match with Heboris' SRS-X?",
+        answer: `md_**Techmino \`SRS_plus\` is not TETR.IO SRS+**, it is symmetric but has an original kick table for 180-degree rotations, slighly less powerful than TRS.
+
+Similarly, **Techmino \`SRS_X\` is not Heboris UE SRS-X**, it's just SRS_plus and TRS glued together.`,
+        credit: "KonSola5"
       }
     }
   },
