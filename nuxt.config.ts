@@ -1,6 +1,7 @@
-if(!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
+if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY)
+{
   throw new Error(
-`Could not find Supabase URL or key in environment variables.
+    `Could not find Supabase URL or key in environment variables.
 Are you sure you set it up right?
 Tip: Check your .env file and refer to the README.
 Environment variable keys:
@@ -44,8 +45,8 @@ export default defineNuxtConfig({
         }
       ],
       noscript: [{
-        children: 
-        `<style>
+        children:
+          `<style>
           .hide-noscript {display: none}
           .hide-noscript-important {display: none !important}
           .invis-noscript {visibility: hidden}
@@ -61,7 +62,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/i18n'],
 
   i18n: {
-    vueI18n: './i18n.config.ts',
+    vueI18n: 'i18n.config.ts',
     locales: ['en', 'id'],
     defaultLocale: 'en',
     detectBrowserLanguage: {
