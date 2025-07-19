@@ -16,7 +16,7 @@
     "@nuxtjs/i18n": "^9.5.0",
     "@sgratzl/chartjs-chart-boxplot": "^4.4.3",
     "@supabase/ssr": "^0.5.2",
-    "@supabase/supabase-js": "^2.46.1",
+    "@supabase/supabase-js": "^2.52.0",
     "@tensorflow/tfjs-node": "^4.22.0",
     "@types/sanitize-html": "^2.13.0",
     "buffer": "^6.0.3",
