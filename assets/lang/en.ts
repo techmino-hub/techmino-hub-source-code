@@ -292,7 +292,9 @@ Some important differences from Guideline are:
         question: "How do I play multiplayer? / I can't sign up for an account!",
         answer: `md_Unfortunately, as of December 2023, the server is down.
 The server maintainer, Particle_G, has not been active for quite a while.
-It's recommended that you treat this game as a single-player game until this problem is resolved.`,
+It's recommended that you treat this game as a single-player game until this problem is resolved.
+
+As of December 2025, although the server is up, it's quite iffy at times and may not work reliably.`,
         credit: "NOT_A_ROBOT"
       },
       'change-language': {
