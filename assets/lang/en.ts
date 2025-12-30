@@ -806,7 +806,7 @@ It will not be implemented in the “Classic” Techmino.`,
       ],
       difficulty: "Tricky",
       length: "Medium (~6 min)",
-      featuredVideo: "https://www.youtube.com/embed/i31ku9TaV9w"
+      featuredVideo: "https://www.youtube.com/embed/6zhIH95HcPc"
     },
     construct_checker: {
       title: "Construct",
