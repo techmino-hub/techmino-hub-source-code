@@ -45,7 +45,14 @@ Created with ❤ by [the Techmino community](https://github.com/techmino-hub/tec
     tabTitle: "Techmino Hub - Home",
     title: "Welcome to Techmino Hub!",
     article: `md_Techmino Hub is an unofficial website for Techmino.  
-We have a lot of information about Techmino, and host a leaderboard where players can submit runs.`
+We have a lot of information about Techmino, and host a leaderboard where players can submit runs.
+
+## Upcoming: Leaderboard Going Down          
+Due to a combination of limited maintainer resources and upcoming Supabase breaking changes, **the leaderboards will no longer be accessible through the site after April 8th**. In the interest of preserving internet history, expect a public database dump after that date.
+
+Static pages, such as the FAQ and map, are not affected.
+
+See [issue #98 on GitHub](https://github.com/techmino-hub/techmino-hub-source-code/issues/98) for more details. As always, we are accepting new contributors/maintainers if you feel up to the task.`
   },
 
   lang: {
