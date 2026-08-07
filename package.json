@@ -24,7 +24,7 @@
     "chartjs-plugin-zoom": "^2.0.1",
     "markdown-it": "^14.2.0",
     "nsfwjs": "^4.2.0",
-    "nuxt": "^3.16.0",
+    "nuxt": "^3.21.10",
     "nuxt-security": "^2.1.5",
     "pako": "^2.1.0",
     "sanitize-html": "^2.17.5",
