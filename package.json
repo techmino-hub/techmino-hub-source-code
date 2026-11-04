@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@nuxt/kit": "^3.16.0",
-    "@nuxtjs/i18n": "^9.5.0",
+    "@nuxtjs/i18n": "^10.6.0",
     "@sgratzl/chartjs-chart-boxplot": "^4.4.3",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.52.0",
